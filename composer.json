@@ -1,0 +1,19 @@
+{
+	"name": "instachat/instachat",
+	"description": "Social network made in PHP.",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Ayfri"
+		},
+		{
+			"name": "Antawww"
+		},
+		{
+			"name": "Bahsiik"
+		}
+	],
+	"require": {
+	}
+}
