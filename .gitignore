@@ -1,0 +1,8 @@
+### Intellij
+
+.idea
+
+### Composer template
+
+composer.phar
+/vendor/
