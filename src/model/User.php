@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Model;
 
-use Application\Lib\Database\DatabaseConnection;
+use Database\DatabaseConnection;
 use DateTime;
 use PDO;
 use RuntimeException;
@@ -82,14 +82,14 @@ class User {
 }
 
 class UserRepository {
-	public DatabaseConnection $databaseConnection;
+	public PDO $databaseConnection;
 
 	public function __construct(DatabaseConnection $databaseConnection) {
-		$this->databaseConnection = $databaseConnection;
+		$this->databaseConnection = $databaseConnection->getConnection();
 	}
 
 	public function createUser(string $username, string $email, string $password, string $gender, DateTime $birth_date): bool {
-		$statement = $this->databaseConnection->getConnection()->prepare(
+		$statement = $this->databaseConnection->prepare(
 			'INSERT INTO users (birth_date, email, sexe, password, username) VALUES (:birth_date, :email, :sexe, :password, :username)'
 		);
 
@@ -105,7 +105,7 @@ class UserRepository {
 	}
 
 	public function deleteUserById(int $id): void {
-		$statement = $this->databaseConnection->getConnection()->prepare('DELETE FROM users WHERE id = :id');
+		$statement = $this->databaseConnection->prepare('DELETE FROM users WHERE id = :id');
 		$statement->execute(compact('id'));
 	}
 
@@ -114,21 +114,21 @@ class UserRepository {
 	 * @return array<User>
 	 */
 	public function getFriendsOfUser(int $id): array {
-		$statement = $this->databaseConnection->getConnection()->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
 		$statement->execute(compact('id'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		return $user === false ? throw new RuntimeException('User not found') : $user;
 	}
 
 	public function getUserById(int $id): User {
-		$statement = $this->databaseConnection->getConnection()->prepare('SELECT * FROM users WHERE id = :id');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
 		$statement->execute(compact('id'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		return $user === false ? throw new RuntimeException('User not found') : $user;
 	}
 
 	public function updateUser(User $user): bool {
-		$statement = $this->databaseConnection->getConnection()->prepare(
+		$statement = $this->databaseConnection->prepare(
 			'UPDATE users SET avatar = :avatar, background = :background, bio = :bio, birth_date = :birth_date, color = :color, email = :email, fontsize = :font_size, sexe = :gender, password = :password, username = :username WHERE id = :id'
 		);
 

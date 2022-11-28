@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers;
 
-require_once('src/model/post.php');
-
-use Application\Model\Blog\PostRepository;
 use Model\Post;
+use Model\PostRepository;
 
 class DeletePost {
     public function execute(Post $post): void {

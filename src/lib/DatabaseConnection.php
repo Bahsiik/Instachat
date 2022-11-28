@@ -1,19 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace Application\Lib\Database;
+namespace Database;
 
 use PDO;
 
-class DatabaseConnection
-{
-    private ?PDO $database = null;
+class DatabaseConnection {
+	private ?PDO $database = null;
 
-    public function getConnection(): PDO
-    {
-        if ($this->database === null) {
-            $this->database = new PDO('mysql:host=localhost;dbname=instachat;charset=utf8', 'root');
-        }
+	public function getConnection(): PDO {
+		if ($this->database === null) $this->database = new PDO('mysql:host=localhost;dbname=instachat;charset=utf8', 'root');
 
-        return $this->database;
-    }
+		return $this->database;
+	}
 }
