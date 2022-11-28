@@ -30,7 +30,7 @@ class PostRepository {
     }
 
     public function deletePost(int $id): void {
-        $statement = $this->databaseConnection->prepare('DELETE FROM posts WHERE id = :id');
+        $statement = $this->databaseConnection->prepare('UPDATE posts SET deleted = true WHERE id = :id');
         $statement->execute(compact('id'));
     }
 
@@ -46,10 +46,15 @@ class PostRepository {
         return $statement->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
 
-
     public function getPostsByUser(int $author_id): array {
         $statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :author_id ORDER BY creation_date DESC');
         $statement->execute(compact('author_id'));
+        return $statement->fetchAll(PDO::FETCH_CLASS, Post::class);
+    }
+
+    public function getPostContaining(string $content): array {
+        $statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content ORDER BY creation_date DESC');
+        $statement->execute(compact('content'));
         return $statement->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
 
