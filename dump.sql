@@ -1,14 +1,43 @@
+create table sessions
+(
+    id varchar(64) not null
+        primary key
+)
+    engine = InnoDB;
+
 create table users
 (
     id           bigint unsigned auto_increment
         primary key,
-    username     varchar(20)               not null,
-    password     varchar(64)               not null,
-    avatar       mediumblob                null,
-    created_date timestamp default (now()) not null,
-    birth_date   date                      not null
+    username     varchar(20)                      not null,
+    password     varchar(64)                      not null,
+    avatar       mediumblob                       null,
+    created_date timestamp        default (now()) not null,
+    birth_date   date                             not null,
+    display_name varchar(48)                      null,
+    fontsize     tinyint unsigned default (0)     not null,
+    color        tinyint unsigned default (0)     not null,
+    background   tinyint unsigned default (0)     not null,
+    sexe         varchar(20)                      not null
 )
     engine = InnoDB;
+
+create table blocked
+(
+    blocker_id bigint unsigned not null
+        primary key,
+    blocked_id bigint unsigned not null,
+    constraint fk_blocked_users
+        foreign key (blocker_id) references users (id)
+            on update cascade on delete cascade,
+    constraint fk_blocked_users_0
+        foreign key (blocked_id) references users (id)
+            on update cascade on delete cascade
+)
+    engine = InnoDB;
+
+create index idx_blocked_blocked
+    on blocked (blocked_id);
 
 create table friends
 (
@@ -53,11 +82,15 @@ create table comments
     reply_id      bigint unsigned              null,
     post_id       bigint unsigned              not null,
     creation_date timestamp    default (now()) not null,
+    author_id     bigint unsigned              not null,
     constraint fk_comments_comments
         foreign key (reply_id) references comments (id)
             on update cascade on delete cascade,
     constraint fk_comments_posts
         foreign key (id) references posts (id)
+            on update cascade on delete cascade,
+    constraint fk_comments_users
+        foreign key (author_id) references users (id)
             on update cascade on delete cascade
 )
     engine = InnoDB;
