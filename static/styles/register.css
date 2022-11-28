@@ -37,10 +37,10 @@ span {
     font-size: 12px;
 }
 
-a {
-    color: #333;
+.forgot {
+    color: white;
     font-size: 14px;
-    text-decoration: none;
+    text-decoration: underline;
     margin: 15px 0;
 }
 
@@ -83,15 +83,16 @@ form {
 }
 
 input {
-    background-color: #eee;
+    background-color: #1f1f1f;
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
+    color: white;
 }
 
 .container {
-    background-color: #fff;
+    background-color: #1f1f1f;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25),
     0 10px 10px rgba(0,0,0,0.22);

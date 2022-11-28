@@ -9,9 +9,14 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<?php if (isset($css)) {
 			foreach ($css as $cssFile) { ?>
-				<link rel="stylesheet" href="../static/<?= $cssFile ?>">
+				<link rel="stylesheet" href="../static/styles/<?= $cssFile ?>">
 			<?php }
 		} ?>
+        <?php if(isset($js)) {
+            foreach ($js as $jsFile) { ?>
+                <script defer src="../static/scripts/<?= $jsFile ?>"></script>
+            <?php }
+        } ?>
 		<title><?= $title ?? '' ?></title>
 	</head>
 	<body>

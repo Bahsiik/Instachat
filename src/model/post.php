@@ -15,6 +15,7 @@ class Post {
     public string $photo;
     public int $emotion;
     public string $reaction;
+    public bool $deleted;
 }
 
 class PostRepository {
