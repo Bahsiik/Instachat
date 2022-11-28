@@ -1,3 +1,8 @@
+<?php $title = 'Register';
+$css = ['register.css'];
+?>
+
+<?php ob_start(); ?>
 <div class="section">
     <div class="container">
         <div class="row full-height justify-content-center">
@@ -52,3 +57,5 @@
         </div>
     </div>
 </div>
+<?php $content = ob_get_clean(); ?>
+<?php require 'index.php'; ?>
