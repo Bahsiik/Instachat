@@ -37,13 +37,6 @@ span {
     font-size: 12px;
 }
 
-.forgot {
-    color: white;
-    font-size: 14px;
-    text-decoration: underline;
-    margin: 15px 0;
-}
-
 button {
     border-radius: 20px;
     border: 1px solid #FF4B2B;

@@ -19,21 +19,20 @@ $js = ['register.js'];
             <h1>Se connecter</h1>
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Mot de passe" />
-            <a class="forgot" href="#">Forgot your password?</a>
             <button>Se connecter</button>
         </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn">Sign In</button>
+                <h1>Re-bonjour !</h1>
+                <p>Pour vous connecter, entrez vos identifiants ici</p>
+                <button class="ghost" id="signIn">Se connecter</button>
             </div>
             <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
+                <h1>Bienvenue !</h1>
+                <p>Démarrez votre aventure, créez votre compte ici</p>
+                <button class="ghost" id="signUp">S'identifier</button>
             </div>
         </div>
     </div>
