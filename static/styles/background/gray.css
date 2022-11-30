@@ -1,0 +1,13 @@
+:root {
+	--bg-primary: #252525;
+	--bg-secondary: #1f1f1f;
+	--border: #3e3f3f;
+	--fg-primary: #ffffff;
+	--fg-secondary: #3e3f3f;
+	--input-invalid: #ff6363;
+	--input-placeholder: #888888;
+	--input-radio: #3e8bff;
+	--react-bg: #1a1f30;
+	--react-border: #5b7083;
+	--react-fg: #9747ff;
+}
