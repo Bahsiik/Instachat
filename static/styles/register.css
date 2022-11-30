@@ -47,7 +47,7 @@ button {
     letter-spacing: 1px;
     padding: 12px 45px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
+    transition: transform .15s;
     width: fit-content;
 }
 
@@ -259,4 +259,9 @@ label {
     font-size: 13px;
     border: none;
     padding: 0;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
 }

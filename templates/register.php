@@ -8,10 +8,25 @@ $js = ['register.js'];
     <div class="form-container sign-up-container">
         <form method="post" action="/index.php?create">
             <h1>Créer un compte</h1>
-            <input required name="username" type="text" placeholder="Pseudo" minlength="2" maxlength="20"/>
-            <input required name="email" type="email" placeholder="Email" minlength="5" maxlength="320"/>
-            <input required name="password" type="password" placeholder="Mot de passe" minlength="4" maxlength="64"/>
-            <input required name="confirm-password" type="password" placeholder="Confirmer mot de passe" minlength="4" maxlength="64"/>
+            <fieldset>
+                <legend>Email</legend>
+                <input required name="email" type="email" placeholder="Email" minlength="5" maxlength="320"/>
+            </fieldset>
+            <fieldset>
+                <legend>Pseudo</legend>
+                <input required name="username" type="text" placeholder="Pseudo" minlength="2" maxlength="20"/>
+            </fieldset>
+            <fieldset>
+                <legend>Mot de passe</legend>
+                <input required name="password" type="password" placeholder="Mot de passe" minlength="4"
+                       maxlength="64"/>
+            </fieldset>
+            <fieldset>
+                <legend>Confirmez mot de passe</legend>
+                <input required name="confirm-password" type="password" placeholder="Confirmer mot de passe"
+                       minlength="4"
+                       maxlength="64"/>
+            </fieldset>
             <fieldset>
                 <legend>Genre</legend>
                 <input checked type="radio" id="homme" name="gender" value="homme">
@@ -31,8 +46,9 @@ $js = ['register.js'];
     <div class="form-container sign-in-container">
         <form action="#">
             <h1>Se connecter</h1>
-            <input type="email" placeholder="Email"/>
-            <input class="login-password" type="password" placeholder="Mot de passe"/>
+            <input required type="email" placeholder="Email" name="email" minlength="5" maxlength="320"/>
+            <input required class="login-password" type="password" placeholder="Mot de passe" name="password"
+                   minlength="4" maxlength="64"/>
             <button>Se connecter</button>
         </form>
     </div>
