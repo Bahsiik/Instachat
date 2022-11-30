@@ -8,7 +8,7 @@
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="stylesheet" href="../static/styles/style.css">
-		<link rel="stylesheet" href="../static/styles/colors/first.css">
+		<link rel="stylesheet" href="../static/styles/colors/orange.css">
 		<link rel="stylesheet" href="../static/styles/background/gray.css">
 		<?php if (isset($css)) {
 			foreach ($css as $cssFile) { ?>
