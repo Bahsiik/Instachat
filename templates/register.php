@@ -46,9 +46,15 @@ $js = ['register.js'];
     <div class="form-container sign-in-container">
         <form action="#">
             <h1>Se connecter</h1>
-            <input required type="email" placeholder="Email" name="email" minlength="5" maxlength="320"/>
-            <input required class="login-password" type="password" placeholder="Mot de passe" name="password"
-                   minlength="4" maxlength="64"/>
+            <fieldset>
+                <legend>Email</legend>
+                <input required type="email" placeholder="Email" name="email" minlength="5" maxlength="320"/>
+            </fieldset>
+            <fieldset>
+                <legend>Mot de passe</legend>
+                <input required class="login-password" type="password" placeholder="Mot de passe" name="password"
+                       minlength="4" maxlength="64"/>
+            </fieldset>
             <button>Se connecter</button>
         </form>
     </div>
