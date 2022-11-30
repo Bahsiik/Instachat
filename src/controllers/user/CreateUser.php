@@ -2,14 +2,16 @@
 
 namespace Controllers\User;
 
-use Model\User;
+require_once('src/model/user.php');
+
 use Model\UserRepository;
 
 class CreateUser
 {
     public function execute(array $input): void
     {
-        (new UserRepository())->createUser($input['username'], $input['email'],  $input['password'], $input['gender'], $input['birthdate']);
-    }
 
+        $birth_date = date_create($input['birthdate']);
+        (new UserRepository())->createUser($input['username'], $input['email'],  $input['password'], $input['gender'], $birth_date);
+    }
 }

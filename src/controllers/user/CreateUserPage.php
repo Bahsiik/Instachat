@@ -8,5 +8,4 @@ class CreateUserPage
     {
         require_once('templates/register.php');
     }
-
 }

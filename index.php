@@ -23,7 +23,7 @@ try {
                 echo 'get';
                 break;
             }
-            $sign_in = ['pseudo','email','password','confirm','genre','genre','genre','birthday'];
+            $sign_in = ['username','email','password','gender','birthdate'];
             foreach ($sign_in as $key => $value) {
                 if (!isset($_POST[$value])) throw new RuntimeException('Invalid input');
             }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Model;
 
+require_once('src/lib/DatabaseConnection.php');
+
 use Database\DatabaseConnection;
 use DateTime;
 use PDO;
@@ -89,9 +91,9 @@ class User {
 class UserRepository {
 	public PDO $databaseConnection;
 
-	public function __construct(DatabaseConnection $databaseConnection) {
-		$this->databaseConnection = $databaseConnection->getConnection();
-	}
+    public function __construct() {
+        $this->databaseConnection = (new DatabaseConnection())->getConnection();
+    }
 
 	public function createUser(string $username, string $email, string $password, string $gender, DateTime $birth_date): bool {
 		$statement = $this->databaseConnection->prepare(
