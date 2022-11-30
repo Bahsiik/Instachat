@@ -1,8 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 * {
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -11,7 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
     height: 100vh;
     margin: -20px 0 50px;
 }
@@ -29,7 +28,7 @@ p {
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     margin: 20px 0 30px;
 }
 
@@ -44,11 +43,12 @@ button {
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
     padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    width: fit-content;
+    align-self: center;
 }
 
 button:active {
@@ -67,7 +67,6 @@ button.ghost {
 form {
     background-color: #1F1F1F;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 0 50px;
@@ -78,11 +77,11 @@ form {
 
 input {
     background-color: #1f1f1f;
-    border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
     color: white;
+    border: 2px transparent solid;
 }
 
 .container {
@@ -92,7 +91,7 @@ input {
     0 10px 10px rgba(0,0,0,0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 835px;
     max-width: 100%;
     min-height: 480px;
 }
@@ -157,8 +156,8 @@ input {
 
 .overlay {
     background: #FF416C;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background: -webkit-linear-gradient(135deg, #e0d907, #fd2b55);
+    background: linear-gradient(135deg, #e0d907, #fd2b55);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -220,4 +219,24 @@ input {
     margin: 0 5px;
     height: 40px;
     width: 40px;
+}
+
+fieldset {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    border: 2px solid #8c8c8c96;
+    color: #8c8c8c;
+    border-radius: 8px;
+    margin: 8px 0 30px;
+}
+
+input:focus, input:focus-visible {
+    border: 2px #8c8c8c96 solid;
+    outline: none;
+    border-radius: 8px;
+}
+
+.login-password {
+    margin: 8px 0 30px;
 }

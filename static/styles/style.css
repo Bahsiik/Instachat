@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,800');
+
+:root {
+	--font: 'Montserrat', sans-serif;
+	--gradient-h: linear-gradient(var(--gradient-h-rot), var(--gradient-colors));
+	--gradient-h-rot: 270deg;
+	--gradient-v: linear-gradient(var(--gradient-v-rot), var(--gradient-colors));
+	--gradient-v-rot: 180deg;
+}
+
+body {
+	background: var(--gradient-v) !important;
+}
