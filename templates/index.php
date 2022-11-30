@@ -18,6 +18,7 @@
             <?php }
         } ?>
 		<title><?= $title ?? '' ?></title>
+        <script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
 	</head>
 	<body>
 		<?= $content ?? '' ?>

@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 .toolbar_container {
     position: fixed;
@@ -12,46 +13,23 @@
     border-right: 1px solid #ccc;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     font-family: 'Montserrat', sans-serif;
-
-}
-
-.toolbar__nav {
-    /* Auto layout */
+    padding: 2rem 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
-    gap: 8px;
-
-    width: 225px;
-    height: 294px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+    gap: 1.5rem;
 }
 
 .toolbar_item {
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 12px;
-    gap: 12px;
+    gap: 1rem;
 
-    width: 137px;
-    height: 48px;
 
     border-radius: 24px;
-
-    /* Inside auto layout */
 
     flex: none;
     order: 1;
@@ -59,23 +37,16 @@
 }
 
 .toolbar_item a {
-    /* Profil */
-
-
     width: 52px;
     height: 24px;
 
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    /* identical to box height, or 120% */
 
 
     color: #FFFFFF;
-
-
-    /* Inside auto layout */
 
     flex: none;
     order: 1;
@@ -85,8 +56,6 @@
 }
 
 .toolbar_button {
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -97,12 +66,8 @@
     width: 225px;
     height: 48px;
 
-    /* border-bottom angle */
-
     background: linear-gradient(261.29deg, #FD2B55 0%, #F8F004 99.69%);
     border-radius: 24px;
-
-    /* Inside auto layout */
 
     flex: none;
     order: 1;
@@ -110,28 +75,19 @@
 }
 
 .toolbar_button a {
-    /* Chat */
-
-
     width: 42px;
     height: 20px;
 
 
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
     line-height: 20px;
-    /* identical to box height, or 100% */
 
     display: flex;
     align-items: center;
 
-    /* black txt color */
-
     color: #252525;
-
-
-    /* Inside auto layout */
 
     flex: none;
     order: 0;
@@ -139,3 +95,23 @@
 
     text-decoration: none;
 }
+
+
+/* Logo */
+img {
+    width: 20%;
+    height: fit-content;
+    object-fit: contain;
+}
+
+
+/* Icon CSS */
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 48;
+     color: #FFFFFF;
+     font-size: 2rem;
+ }
