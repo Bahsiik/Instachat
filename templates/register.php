@@ -8,13 +8,13 @@ $js = ['register.js'];
     <div class="form-container sign-up-container">
         <form method="post" action="/index.php?create">
             <h1>Créer un compte</h1>
-            <input name="username" type="text" placeholder="Pseudo" maxlength="20"/>
-            <input name="email" type="email" placeholder="Email" maxlength="320"/>
-            <input name="password" type="password" placeholder="Mot de passe" maxlength="64"/>
-            <input name="confirm-password" type="password" placeholder="Confirmer mot de passe" maxlength="64"/>
+            <input required name="username" type="text" placeholder="Pseudo" minlength="2" maxlength="20"/>
+            <input required name="email" type="email" placeholder="Email" minlength="5" maxlength="320"/>
+            <input required name="password" type="password" placeholder="Mot de passe" minlength="4" maxlength="64"/>
+            <input required name="confirm-password" type="password" placeholder="Confirmer mot de passe" minlength="4" maxlength="64"/>
             <fieldset>
                 <legend>Genre</legend>
-                <input type="radio" id="homme" name="gender" value="homme">
+                <input checked type="radio" id="homme" name="gender" value="homme">
                 <label for="homme">Homme</label>
                 <input type="radio" id="femme" name="gender" value="femme">
                 <label for="femme">Femme</label>
@@ -23,7 +23,7 @@ $js = ['register.js'];
             </fieldset>
             <fieldset>
                 <legend>Naissance</legend>
-                <input type="date" id="birthdate" name="birthdate">
+                <input required type="date" id="birthdate" name="birthdate">
             </fieldset>
             <button type="submit">S'identifier</button>
         </form>

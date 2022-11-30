@@ -20,7 +20,6 @@ try {
         case 'create':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 (new CreateUserPage())->execute();
-                echo 'get';
                 break;
             }
             $sign_in = ['username','email','password','gender','birthdate'];
