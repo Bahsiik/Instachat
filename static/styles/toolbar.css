@@ -1,117 +1,106 @@
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 .toolbar_container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 18%;
-    height: 100%;
+    align-items: flex-start;
     background-color: #1f1f1f;
-    z-index: 100;
     border-right: 1px solid #ccc;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    font-family: 'Montserrat', sans-serif;
-    padding: 2rem 1rem;
-
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    gap: 1rem;
+    height: 100%;
+    left: 0;
+    padding: 2rem 1rem;
+    position: fixed;
+    top: 0;
+    width: 18%;
+    z-index: 100;
 }
 
 .toolbar_item {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    gap: 1rem;
-
-
     border-radius: 24px;
-
+    display: flex;
     flex: none;
-    order: 1;
+    flex-direction: row;
     flex-grow: 0;
+    gap: 1rem;
+    justify-content: flex-start;
+    order: 1;
+    transition: all 0.2s;
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    width: 225px;
 }
 
-.toolbar_item a {
-    width: 52px;
-    height: 24px;
+.toolbar_item:hover  {
+    background-color: rgba(140, 140, 140, 0.34);
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+}
 
-
+.toolbar_item  {
     color: #FFFFFF;
-
     flex: none;
-    order: 1;
     flex-grow: 0;
-
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    height: 24px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    order: 1;
     text-decoration: none;
 }
 
 .toolbar_button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    padding: 10px;
-    gap: 10px;
-
-    width: 225px;
-    height: 48px;
-
     background: linear-gradient(261.29deg, #FD2B55 0%, #F8F004 99.69%);
-    border-radius: 24px;
-
+    border-radius: 30px;
+    display: flex;
     flex: none;
-    order: 1;
+    flex-direction: row;
     flex-grow: 0;
+    gap: 10px;
+    height: 2rem;
+    justify-content: center;
+    order: 1;
+    padding: 10px;
+    width: 225px;
 }
 
+
+
 .toolbar_button a {
-    width: 42px;
-    height: 20px;
-
-
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 20px;
-
-    display: flex;
-    align-items: center;
-
+    align-items: flex-start;
     color: #252525;
-
+    display: flex;
     flex: none;
-    order: 0;
     flex-grow: 0;
-
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    order: 0;
     text-decoration: none;
 }
 
 
+
+
 /* Logo */
 img {
-    width: 20%;
     height: fit-content;
     object-fit: contain;
+    width: 25%;
 }
 
 
 /* Icon CSS */
- .material-symbols-outlined {
-     font-variation-settings:
-             'FILL' 0,
-             'wght' 400,
-             'GRAD' 0,
-             'opsz' 48;
-     color: #FFFFFF;
-     font-size: 2rem;
- }
+.material-symbols-outlined {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-variation-settings: 'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+}

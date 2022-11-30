@@ -3,22 +3,22 @@ $css = ['toolbar.css'];
 ?>
     <div class="toolbar_container">
         <img src="../static/images/logo-default-theme" alt="logo">
-        <div class="toolbar_item">
+        <a class="toolbar_item" href="">
             <span class="material-symbols-outlined">home</span>
-            <a href="">Accueil</a>
-        </div>
-        <div class="toolbar_item">
+            Accueil
+        </a>
+        <a class="toolbar_item" href="">
             <span class="material-symbols-outlined">person</span>
-            <a href="">Profil</a>
-        </div>
-        <div class="toolbar_item">
+            Profil
+        </a>
+        <a class="toolbar_item" href="">
             <span class="material-symbols-outlined">group</span>
-            <a href="">Amis</a>
-        </div>
-        <div class="toolbar_item">
+            Amis
+        </a>
+        <a class="toolbar_item" href="">
             <span class="material-symbols-outlined">pending</span>
-            <a href="">Options</a>
-        </div>
+            Options
+        </a>
         <div class="toolbar_button">
             <a href="">Chat</a>
         </div>
