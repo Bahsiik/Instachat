@@ -6,7 +6,7 @@ $js = ['register.js'];
 <?php ob_start(); ?>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form method="post" action="/index.php?create_user">
+        <form method="post" action="/index.php?create">
             <h1>Créer un compte</h1>
             <input name="pseudo" type="text" placeholder="Pseudo" maxlength="20"/>
             <input name="email" type="email" placeholder="Email" maxlength="320"/>
@@ -52,5 +52,5 @@ $js = ['register.js'];
     </div>
 </div>
 <?php $content = ob_get_clean(); ?>
-<?php require 'index.php'; ?>
+<?php require_once('layout.php'); ?>
 
