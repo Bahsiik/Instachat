@@ -8,6 +8,7 @@ require_once('src/lib/DatabaseConnection.php');
 use Database\DatabaseConnection;
 use DateTime;
 use PDO;
+use Utils\Blob;
 
 enum Emotion: int {
 	case LIKE = 1;
@@ -30,18 +31,22 @@ enum Emotion: int {
 class Post {
 	public DateTime $creation_date;
 	public Emotion $emotion;
+	public ?Blob $image;
 
 	public function __construct(
-		public float   $id,
-		public string  $content,
-		public float   $author_id,
-		public ?string $photo,
-		int            $emotion,
-		string         $creation_date,
-		public bool    $deleted
+		public float  $author_id,
+		public string $content,
+		public bool   $deleted,
+		public float  $id,
+		string        $creation_date,
+		int           $emotion,
+		?string       $image
 	) {
 		$this->creation_date = date_create_from_format('U', $creation_date);
 		$this->emotion = Emotion::fromInt($emotion);
+		if ($image !== null) {
+			$this->image = new Blob($image);
+		}
 	}
 }
 

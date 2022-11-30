@@ -7,6 +7,7 @@ use Database\DatabaseConnection;
 use DateTime;
 use PDO;
 use RuntimeException;
+use Utils\Blob;
 
 enum Color: int {
 	case Orange = 0;
@@ -55,29 +56,33 @@ enum FontSize: int {
 }
 
 class User {
+	public ?Blob $avatar;
 	public Background $background;
 	public DateTime $birth_date;
 	public DateTime $created_at;
 	public FontSize $font_size;
 
 	private function __construct(
-		public string $avatar,
-		int           $background,
 		public string $bio,
-		string        $birth_date,
 		public Color  $color,
-		string        $created_at,
 		public string $email,
-		int           $font_size,
 		public string $gender,
 		public int    $id,
 		public string $password,
 		public string $username,
+		?string       $avatar,
+		int           $background,
+		string        $birth_date,
+		string        $created_at,
+		int           $font_size,
 	) {
 		$this->background = Background::fromInt($background);
 		$this->birth_date = date_create_from_format('U', $birth_date);
 		$this->created_at = date_create_from_format('U', $created_at);
 		$this->font_size = FontSize::fromInt($font_size);
+		if ($avatar !== null) {
+			$this->avatar = new Blob($avatar);
+		}
 	}
 }
 
@@ -133,7 +138,7 @@ class UserRepository {
 		);
 
 		$result = $statement->execute([
-			'avatar' => $user->avatar,
+			'avatar' => $user->avatar->data,
 			'background' => $user->background->value,
 			'bio' => $user->bio,
 			'birth_date' => $user->birth_date->getTimestamp(),
