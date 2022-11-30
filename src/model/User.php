@@ -101,7 +101,7 @@ class UserRepository {
 		);
 
 		$result = $statement->execute([
-			'birth_date' => $birth_date->getTimestamp(),
+			'birth_date' => $birth_date->format('Y-m-d'),
 			'email' => $email,
 			'sexe' => $gender,
 			'password' => $password,
