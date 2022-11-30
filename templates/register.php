@@ -6,7 +6,7 @@ $js = ['register.js'];
 <?php ob_start(); ?>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#">
+        <form method="post" action="/index.php?create_user">
             <h1>Créer un compte</h1>
             <input name="pseudo" type="text" placeholder="Pseudo" maxlength="20"/>
             <input name="email" type="email" placeholder="Email" maxlength="320"/>
@@ -20,6 +20,10 @@ $js = ['register.js'];
                 <label for="femme">Femme</label>
                 <input type="radio" id="autre" name="genre" value="autre">
                 <label for="autre">Autre</label>
+            </fieldset>
+            <fieldset>
+                <legend>Naissance</legend>
+                <input type="date" id="birthday" name="birthday">
             </fieldset>
             <button>S'identifier</button>
         </form>
