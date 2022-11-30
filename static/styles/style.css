@@ -1,2 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,800');
+
 :root {
+	--font: 'Montserrat', sans-serif;
 }

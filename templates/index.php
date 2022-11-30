@@ -7,6 +7,9 @@
 			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="../static/styles/style.css">
+		<link rel="stylesheet" href="../static/styles/colors/first.css">
+		<link rel="stylesheet" href="../static/styles/background/gray.css">
 		<?php if (isset($css)) {
 			foreach ($css as $cssFile) { ?>
 				<link rel="stylesheet" href="../static/styles/<?= $cssFile ?>">

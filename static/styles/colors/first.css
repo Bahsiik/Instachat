@@ -1,4 +1,5 @@
 :root {
-	--gradient: linear-gradient(261.29deg, #fd2b55 0%, #f8f004 99.69%);
+	--gradient-h: linear-gradient(270deg, #fd2b55, #f8f004);
+	--gradient-v: linear-gradient(180deg, #fd2b55, #f8f004);
 	--url: #e08928;
 }
