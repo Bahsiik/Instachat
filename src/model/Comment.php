@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Model;
 
+require_once('src/lib/DatabaseConnection.php');
+
+
 use Database\DatabaseConnection;
 use DateTime;
 use PDO;
@@ -28,9 +31,9 @@ class Comment {
 class CommentRepository {
 	public PDO $databaseConnection;
 
-	public function __construct() {
-		$this->databaseConnection = (new DatabaseConnection())->getConnection();
-	}
+    public function __construct() {
+        $this->databaseConnection = (new DatabaseConnection())->getConnection();
+    }
 
 	public function addComment(string $content, float $reply_id, float $post_id, float $author_id): void {
 		$statement = $this->databaseConnection->prepare('INSERT INTO comments (content, reply_id, post_id, author_id) VALUES (:content, :reply_id, :post_id, :author_id)');

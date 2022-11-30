@@ -6,12 +6,12 @@
 }
 
 body {
+    align-items: center;
     background: #252525;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     height: 100vh;
+    justify-content: center;
     margin: -20px 0 50px;
 }
 
@@ -27,8 +27,8 @@ h2 {
 p {
     font-size: 14px;
     font-weight: 100;
-    line-height: 20px;
     letter-spacing: 1px;
+    line-height: 20px;
     margin: 20px 0 30px;
 }
 
@@ -37,18 +37,18 @@ span {
 }
 
 button {
-    border-radius: 20px;
-    border: 1px solid #FF4B2B;
+    align-self: center;
     background-color: #FF4B2B;
+    border: 1px solid #FF4B2B;
+    border-radius: 20px;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
-    padding: 12px 45px;
     letter-spacing: 1px;
+    padding: 12px 45px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
     width: fit-content;
-    align-self: center;
 }
 
 button:active {
@@ -66,40 +66,45 @@ button.ghost {
 
 form {
     background-color: #1F1F1F;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 50px;
-    height: 100%;
-    text-align: center;
     color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: 0 50px;
+    text-align: center;
 }
 
 input {
     background-color: #1f1f1f;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
+    border: 2px #fff solid;
+    border-radius: 8px;
     color: white;
-    border: 2px transparent solid;
+    margin: 8px 0;
+    padding: 12px 15px;
+    width: 100%;
+}
+
+legend {
+    color: white;
 }
 
 .container {
     background-color: #1f1f1f;
     border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-    0 10px 10px rgba(0,0,0,0.22);
-    position: relative;
-    overflow: hidden;
-    width: 835px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
     max-width: 100%;
-    min-height: 480px;
+    min-height: 576px;
+    overflow: hidden;
+    position: relative;
+    width: 835px;
 }
 
 .form-container {
+    height: 100%;
     position: absolute;
     top: 0;
-    height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
@@ -115,16 +120,16 @@ input {
 
 .sign-up-container {
     left: 0;
-    width: 50%;
     opacity: 0;
+    width: 50%;
     z-index: 1;
 }
 
 .container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
     animation: show 0.6s;
+    opacity: 1;
+    transform: translateX(100%);
+    z-index: 5;
 }
 
 @keyframes show {
@@ -140,17 +145,17 @@ input {
 }
 
 .overlay-container {
+    height: 100%;
+    left: 50%;
+    overflow: hidden;
     position: absolute;
     top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
     transition: transform 0.6s ease-in-out;
+    width: 50%;
     z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
+.container.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
@@ -158,16 +163,16 @@ input {
     background: #FF416C;
     background: -webkit-linear-gradient(135deg, #e0d907, #fd2b55);
     background: linear-gradient(135deg, #e0d907, #fd2b55);
+    background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 0;
     color: #FFFFFF;
-    position: relative;
-    left: -100%;
     height: 100%;
-    width: 200%;
+    left: -100%;
+    position: relative;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
+    width: 200%;
 }
 
 .container.right-panel-active .overlay {
@@ -175,18 +180,18 @@ input {
 }
 
 .overlay-panel {
-    position: absolute;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    display: flex;
     flex-direction: column;
+    height: 100%;
+    justify-content: center;
     padding: 0 40px;
+    position: absolute;
     text-align: center;
     top: 0;
-    height: 100%;
-    width: 50%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
+    width: 50%;
 }
 
 .overlay-left {
@@ -211,32 +216,47 @@ input {
 }
 
 .social-container a {
+    align-items: center;
     border: 1px solid #DDDDDD;
     border-radius: 50%;
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
     height: 40px;
+    justify-content: center;
+    margin: 0 5px;
     width: 40px;
 }
 
 fieldset {
+    align-items: center;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    color: #8c8c8c;
     display: flex;
     font-size: 13px;
-    align-items: center;
-    border: 2px solid #8c8c8c96;
-    color: #8c8c8c;
-    border-radius: 8px;
-    margin: 8px 0 30px;
+    margin-bottom: 8px;
+}
+
+fieldset:last-of-type {
+    margin-bottom: 30px; !important;
 }
 
 input:focus, input:focus-visible {
-    border: 2px #8c8c8c96 solid;
-    outline: none;
+    border: 2px #fd2b55 solid;
     border-radius: 8px;
+    outline: none;
 }
 
 .login-password {
     margin: 8px 0 30px;
+}
+
+label {
+    text-align: left;
+    font-size: 13px;
+}
+
+#birthdate {
+    font-size: 13px;
+    border: none;
+    padding: 0;
 }
