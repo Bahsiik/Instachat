@@ -7,7 +7,3 @@
 	--gradient-v: linear-gradient(var(--gradient-v-rot), var(--gradient-colors));
 	--gradient-v-rot: 180deg;
 }
-
-body {
-	background: var(--gradient-v) !important;
-}
