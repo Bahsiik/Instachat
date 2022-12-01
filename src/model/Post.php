@@ -112,7 +112,7 @@ class PostRepository
 
     public function getTrends(): array
     {
-        $statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY)');
+        $statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY) AND deleted = false');
         $statement->execute();
         $posts = $statement->fetchAll(PDO::FETCH_COLUMN);
         $words = [];
