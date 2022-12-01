@@ -2,8 +2,10 @@
 
 require_once('src/controllers/user/CreateUserPage.php');
 require_once('src/controllers/user/CreateUser.php');
+require_once('src/controllers/post/GetTrends.php');
 
 
+use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
 use Controllers\User\CreateUserPage;
 
@@ -27,6 +29,11 @@ try {
                 if (!isset($_POST[$value])) throw new RuntimeException('Invalid input');
             }
             (new CreateUser())->execute($_POST);
+            break;
+        case 'trend':
+            $trends = (new GetTrends())->execute();
+            echo json_encode($trends);
+
             break;
     }
 } catch (Exception $e) {
