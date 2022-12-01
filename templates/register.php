@@ -40,28 +40,29 @@ $js = ['register.js'];
 				</label>
 			</fieldset>
 			<fieldset class="padding">
-				<legend>Naissance</legend>
-				<input id="birthdate" name="birthdate" required type="date">
-			</fieldset>
-			<button type="submit">S'identifier</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="/index.php?login" method="post">
-			<h1>Se connecter</h1>
-			<fieldset>
-				<legend>Email</legend>
-				<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
-			</fieldset>
-			<fieldset>
-				<legend>Mot de passe</legend>
-				<input class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
-			</fieldset>
-			<button>Se connecter</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
+                <legend>Naissance</legend>
+                <input id="birthdate" name="birthdate" required type="date">
+            </fieldset>
+            <button type="submit">S'identifier</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form action="/index.php?login" method="post">
+            <h1>Se connecter</h1>
+            <fieldset>
+                <legend>Email ou pseudo</legend>
+                <input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required/>
+            </fieldset>
+            <fieldset>
+                <legend>Mot de passe</legend>
+                <input class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
+                       required type="password"/>
+            </fieldset>
+            <button>Se connecter</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Re-bonjour !</h1>
 				<p>Pour vous connecter, entrez vos identifiants ici</p>

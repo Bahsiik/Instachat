@@ -7,6 +7,7 @@ require_once('src/lib/DatabaseConnection.php');
 
 use Database\DatabaseConnection;
 use DateTime;
+use Exception;
 use PDO;
 use RuntimeException;
 use Utils\Blob;
@@ -113,7 +114,7 @@ class UserRepository {
 
     public function loginUser(string $email, string $password): bool {
         $statement = $this->databaseConnection->prepare(
-            'SELECT * FROM users WHERE email = :email AND password = :password'
+            'SELECT * FROM users WHERE (email = :email OR username = :email) AND password = :password'
         );
 
         $statement->execute([
@@ -127,7 +128,7 @@ class UserRepository {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function createSession(int $user_id): string {
         $session_id = bin2hex(random_bytes(32));
@@ -156,24 +157,27 @@ class UserRepository {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
 		$statement->execute(compact('id'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
-		return $user === false ? throw new RuntimeException('User not found') : $user;
-	}
+        return $user === false ? throw new RuntimeException('User not found') : $user;
+    }
 
-	public function getUserById(int $id): User {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
-		$statement->execute(compact('id'));
-		$user = $statement->fetch(PDO::FETCH_ASSOC);
-		return $user === false ? throw new RuntimeException('User not found') : $user;
-	}
+    public function getUserById(int $id): User
+    {
+        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
+        $statement->execute(compact('id'));
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user === false ? throw new RuntimeException('User not found') : $user;
+    }
 
-    public function getUserIdByEmail(string $email): array {
-        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE email = :email');
+    public function getUserIdByEmailOrUsername(string $email): array
+    {
+        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE email = :email OR username = :email');
         $statement->execute(compact('email'));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         return $user === false ? throw new RuntimeException('User not found') : $user;
     }
 
-    public function createSessionById(int $id): string {
+    public function createSessionById(int $id): string
+    {
         $session_id = bin2hex(random_bytes(32));
         $statement = $this->databaseConnection->prepare(
             'INSERT INTO sessions (id, user_id) VALUES (:id, :user_id)'
