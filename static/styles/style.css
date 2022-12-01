@@ -6,7 +6,7 @@
 	--gradient-h-rot: 270deg;
 	--gradient-v: -webkit-linear-gradient(var(--gradient-v-rot), var(--gradient-colors));
 	--gradient-v-rot: 180deg;
-	--input-bg: var(--bg-primary);
+	--input-bg: var(--bg-secondary);
 	--input-border-radius: 8px;
 	--input-border-width: 2px;
 	--input-color: var(--fg-primary);
@@ -16,55 +16,69 @@ body {
 	font-family: var(--font);
 }
 
-input[type='text'],
-input[type='password'],
-input[type='email'] {
+fieldset {
 	-webkit-background-clip: padding-box;
 	background-color: var(--input-bg);
 	border: var(--input-border-width) solid var(--input-color);
 	border-radius: var(--input-border-radius);
 	box-sizing: border-box;
 	color: var(--fg-primary);
+	display: flex;
 	font-size: 1rem;
 	font-weight: 300;
 	outline: none;
-	padding: 12px 20px;
+	padding: 5px;
 	position: relative;
+	text-align: start;
 	transition: none;
 }
 
-input[type='text']::placeholder,
-input[type='password']::placeholder,
-input[type='email']::placeholder {
+fieldset:has(input[type='text']::placeholder),
+fieldset:has(input[type='password']::placeholder),
+fieldset:has(input[type='email']::placeholder ) {
 	color: var(--input-placeholder);
 }
 
-input[type='text']:valid:not(:placeholder-shown):not(:focus),
-input[type='password']:valid:not(:placeholder-shown):not(:focus),
-input[type='email']:valid:not(:placeholder-shown):not(:focus) {
+fieldset:has(input[type='text']:valid:not(:placeholder-shown):not(:focus)),
+fieldset:has(input[type='password']:valid:not(:placeholder-shown):not(:focus)),
+fieldset:has(input[type='email']:valid:not(:placeholder-shown):not(:focus) ) {
 	border-color: var(--input-valid);
 }
 
-input[type='text']:invalid,
-input[type='password']:invalid,
-input[type='email']:invalid {
+fieldset:has(input[type='text']:invalid:not(:focus):is(:required:not(:placeholder-shown), :optional)),
+fieldset:has(input[type='password']:invalid:not(:focus):is(:required:not(:placeholder-shown), :optional)),
+fieldset:has(input[type='email']:invalid:not(:focus):is(:required:not(:placeholder-shown), :optional) ) {
 	border-color: var(--input-invalid);
-	transition: border .3s ease-in-out;
 }
 
-input[type='text']:focus,
-input[type='password']:focus,
-input[type='email']:focus {
-	background: linear-gradient(var(--bg-primary), var(--bg-primary)), var(--gradient-v);
+fieldset:has(input[type='text']:focus),
+fieldset:has(input[type='password']:focus),
+fieldset:has(input[type='email']:focus) {
+	background: linear-gradient(var(--input-bg), var(--input-bg)), var(--gradient-v);
 	-webkit-background-clip: padding-box, border-box;
 	background-origin: border-box;
 	border: double 2px transparent;
 	transition: border .3s ease-in-out;
 }
 
-input[type='text']:-webkit-autofill:hover,
-input[type='password']:-webkit-autofill:hover,
-input[type='email']:-webkit-autofill:hover {
+fieldset:has(input[type='text']:focus) legend,
+fieldset:has(input[type='password']:focus) legend,
+fieldset:has(input[type='email']:focus) legend {
+	background: var(--input-bg);
+}
+
+fieldset:has(input[type='text']:-webkit-autofill:hover),
+fieldset:has(input[type='password']:-webkit-autofill:hover),
+fieldset:has(input[type='email']:-webkit-autofill:hover ) {
 	-webkit-box-shadow: 0 0 0 30px var(--bg-primary) inset;
 	-webkit-text-fill-color: var(--fg-primary) !important;
+}
+
+input {
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	outline: none;
+	padding: 4px 15px 8px;
 }
