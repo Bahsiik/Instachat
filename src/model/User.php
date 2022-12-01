@@ -126,6 +126,23 @@ class UserRepository {
         return !($result === false);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function createSession(int $user_id): string {
+        $session_id = bin2hex(random_bytes(32));
+        $statement = $this->databaseConnection->prepare(
+            'INSERT INTO sessions (id, user_id) VALUES (:id, :user_id)'
+        );
+
+        $statement->execute([
+            'id' => $session_id,
+            'user_id' => $user_id,
+        ]);
+
+        return $session_id;
+    }
+
 	public function deleteUserById(int $id): void {
 		$statement = $this->databaseConnection->prepare('DELETE FROM users WHERE id = :id');
 		$statement->execute(compact('id'));
@@ -148,6 +165,27 @@ class UserRepository {
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		return $user === false ? throw new RuntimeException('User not found') : $user;
 	}
+
+    public function getUserIdByEmail(string $email): array {
+        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE email = :email');
+        $statement->execute(compact('email'));
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user === false ? throw new RuntimeException('User not found') : $user;
+    }
+
+    public function createSessionById(int $id): string {
+        $session_id = bin2hex(random_bytes(32));
+        $statement = $this->databaseConnection->prepare(
+            'INSERT INTO sessions (id, user_id) VALUES (:id, :user_id)'
+        );
+
+        $statement->execute([
+            'id' => $session_id,
+            'user_id' => $id,
+        ]);
+
+        return $session_id;
+    }
 
 	public function updateUser(User $user): bool {
 		$statement = $this->databaseConnection->prepare(
