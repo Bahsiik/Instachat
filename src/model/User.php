@@ -111,6 +111,21 @@ class UserRepository {
 		return $result === false ? throw new RuntimeException('Could not create user') : true;
 	}
 
+    public function loginUser(string $email, string $password): bool {
+        $statement = $this->databaseConnection->prepare(
+            'SELECT * FROM users WHERE email = :email AND password = :password'
+        );
+
+        $statement->execute([
+            'email' => $email,
+            'password' => $password,
+        ]);
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return !($result === false);
+    }
+
 	public function deleteUserById(int $id): void {
 		$statement = $this->databaseConnection->prepare('DELETE FROM users WHERE id = :id');
 		$statement->execute(compact('id'));

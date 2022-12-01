@@ -44,7 +44,7 @@ $js = ['register.js'];
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form method="post" action="/index.php?login">
             <h1>Se connecter</h1>
             <fieldset>
                 <legend>Email</legend>
@@ -55,7 +55,7 @@ $js = ['register.js'];
                 <input required class="login-password" type="password" placeholder="Mot de passe" name="password"
                        minlength="4" maxlength="64"/>
             </fieldset>
-            <button>Se connecter</button>
+            <button type="submit">Se connecter</button>
         </form>
     </div>
     <div class="overlay-container">
