@@ -109,7 +109,7 @@ class PostRepository
         $statement->execute(['id' => $id, 'emotion' => $emotion->value]);
     }
 
-    // function getTrends that returns an array of the 10 most used group of max 2 words in the last 24 hours
+
     public function getTrends(): array
     {
         $statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY)');
