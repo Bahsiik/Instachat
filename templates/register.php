@@ -47,7 +47,7 @@ $js = ['register.js'];
 		<form action="/index.php?login" method="post">
 			<h1>Se connecter</h1>
 			<label>Email ou pseudo
-				<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required/>
+				<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
 			</label>
 			<label>Mot de passe
 				<input
