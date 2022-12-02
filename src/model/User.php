@@ -170,10 +170,18 @@ class UserRepository {
 
     public function getUserIdByEmailOrUsername(string $email): array
     {
-        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE email = :email OR username = :email');
+        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE (email = :email OR username = :email)');
         $statement->execute(compact('email'));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         return $user === false ? throw new RuntimeException('User not found') : $user;
+    }
+
+    public function isUserAlreadyRegistered(string $email, string $username): bool
+    {
+        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email OR username = :username');
+        $statement->execute(compact('email', 'username'));
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user !== false;
     }
 
     public function createSessionById(int $id): string
