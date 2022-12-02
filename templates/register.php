@@ -43,7 +43,7 @@ $js = ['register.js'];
                 <legend>Naissance</legend>
                 <input id="birthdate" name="birthdate" required type="date">
             </fieldset>
-            <button type="submit">S'identifier</button>
+            <button type="submit">S'inscrire</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -71,7 +71,7 @@ $js = ['register.js'];
 			<div class="overlay-panel overlay-right">
 				<h1>Bienvenue !</h1>
 				<p>Démarrez votre aventure, créez votre compte ici</p>
-				<button class="ghost" id="signUp">S'identifier</button>
+				<button class="ghost" id="signUp">S'inscrire</button>
 			</div>
 		</div>
 	</div>

@@ -44,7 +44,6 @@ try {
         case 'trend':
             $trends = (new GetTrends())->execute();
             echo json_encode($trends);
-
             break;
     }
 } catch (Exception $e) {
