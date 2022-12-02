@@ -64,25 +64,27 @@ class User {
 	public DateTime $birth_date;
 	public DateTime $created_at;
 	public FontSize $font_size;
+	public Color $color;
 
-	private function __construct(
-		public string $bio,
-		public Color  $color,
-		public string $email,
-		public string $gender,
-		public int    $id,
-		public string $password,
-		public string $username,
-		?string       $avatar,
-		int           $background,
-		string        $birth_date,
-		string        $created_at,
-		int           $font_size,
+	public function __construct(
+		public ?string $bio,
+		public string  $email,
+		public string  $gender,
+		public int     $id,
+		public string  $password,
+		public string  $username,
+		?string        $avatar,
+		int            $background,
+		string         $birth_date,
+		int            $color,
+		string         $created_at,
+		int            $font_size,
 	) {
 		$this->background = Background::fromInt($background);
-		$this->birth_date = date_create_from_format('U', $birth_date);
-		$this->created_at = date_create_from_format('U', $created_at);
+		$this->birth_date = date_create_from_format('Y-m-d', $birth_date);
+		$this->created_at = date_create_from_format('Y-m-d H:i:s', $created_at);
 		$this->font_size = FontSize::fromInt($font_size);
+		$this->color = Color::fromInt($color);
 		if ($avatar !== null) {
 			$this->avatar = new Blob($avatar);
 		}
@@ -92,16 +94,16 @@ class User {
 class UserRepository {
 	public PDO $databaseConnection;
 
-    public function __construct() {
-        $this->databaseConnection = (new DatabaseConnection())->getConnection();
-    }
+	public function __construct() {
+		$this->databaseConnection = (new DatabaseConnection())->getConnection();
+	}
 
 	public function createUser(string $username, string $email, string $password, string $gender, DateTime $birth_date): bool {
 		$statement = $this->databaseConnection->prepare(
 			'INSERT INTO users (birth_date, email, sexe, password, username) VALUES (:birth_date, :email, :sexe, :password, :username)'
 		);
 
-        $password = password_hash($password, PASSWORD_DEFAULT);
+		$password = password_hash($password, PASSWORD_DEFAULT);
 
 		$result = $statement->execute([
 			'birth_date' => $birth_date->format('Y-m-d'),
@@ -114,55 +116,6 @@ class UserRepository {
 		return $result === false ? throw new RuntimeException('Could not create user') : true;
 	}
 
-    public function loginUser(string $email, string $password): bool {
-        $passwordGood = $this->checkHash($email, $password);
-        if($passwordGood){
-            $statement = $this->databaseConnection->prepare(
-                'SELECT * FROM users WHERE (email = :email OR username = :email)'
-            );
-
-            $statement->execute([
-                'email' => $email,
-            ]);
-
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            return !($result === false);
-        }
-        return false;
-    }
-
-    public function checkHash(string $email, string $password): bool {
-        $statement = $this->databaseConnection->prepare(
-            'SELECT password FROM users WHERE (email = :email OR username = :email)'
-        );
-
-        $statement->execute([
-            'email' => $email,
-        ]);
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return password_verify($password, $result['password']);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function createSession(int $user_id): string {
-        $session_id = bin2hex(random_bytes(32));
-        $statement = $this->databaseConnection->prepare(
-            'INSERT INTO sessions (id, user_id) VALUES (:id, :user_id)'
-        );
-
-        $statement->execute([
-            'id' => $session_id,
-            'user_id' => $user_id,
-        ]);
-
-        return $session_id;
-    }
-
 	public function deleteUserById(int $id): void {
 		$statement = $this->databaseConnection->prepare('DELETE FROM users WHERE id = :id');
 		$statement->execute(compact('id'));
@@ -170,61 +123,82 @@ class UserRepository {
 
 	/**
 	 * @param int $id
-	 * @return array<User>
+	 * @return Array<User>
 	 */
 	public function getFriendsOfUser(int $id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
 		$statement->execute(compact('id'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
-        return $user === false ? throw new RuntimeException('User not found') : $user;
-    }
+		return $user === false ? throw new RuntimeException('User not found') : $user;
+	}
 
-    public function getUserById(int $id): User
-    {
-        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
-        $statement->execute(compact('id'));
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        return $user === false ? throw new RuntimeException('User not found') : $user;
-    }
+	public function getUserById(int $id): ?User {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
+		$statement->setFetchMode(PDO::FETCH_CLASS, User::class);
+		$statement->execute(compact('id'));
+		$result = $statement->fetch(PDO::FETCH_ASSOC);
 
-    public function getUserIdByEmailOrUsername(string $email): array
-    {
-        $statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE (email = :email OR username = :email)');
-        $statement->execute(compact('email'));
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        return $user === false ? throw new RuntimeException('User not found') : $user;
-    }
+		try {
+			return new User(
+				$result['bio'],
+				$result['email'],
+				$result['sexe'],
+				$result['id'],
+				$result['password'],
+				$result['username'],
+				$result['avatar'],
+				$result['background'],
+				$result['birth_date'],
+				$result['color'],
+				$result['created_date'],
+				$result['fontsize'],
+			);
+		} catch (Exception) {
+			return null;
+		}
+	}
 
-    public function getUserBySessionId(string $session_id): User
-    {
-        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = (SELECT user_id FROM sessions WHERE id = :session_id)');
-        $statement->execute(compact('session_id'));
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        return $user === false ? throw new RuntimeException('User not found') : $user;
-    }
+	public function getUserIdByEmailOrUsername(string $email): ?float {
+		$statement = $this->databaseConnection->prepare('SELECT id FROM users WHERE (email = :email OR username = :email)');
+		$statement->execute(compact('email'));
+		$user = $statement->fetch(PDO::FETCH_ASSOC);
+		return !isset($user['id']) ? null : (float)$user['id'];
+	}
 
-    public function isUserAlreadyRegistered(string $email, string $username): bool
-    {
-        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email OR username = :username');
-        $statement->execute(compact('email', 'username'));
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        return $user !== false;
-    }
+	public function isUserAlreadyRegistered(string $email, string $username): bool {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email OR username = :username');
+		$statement->execute(compact('email', 'username'));
+		$user = $statement->fetch(PDO::FETCH_ASSOC);
+		return $user !== false;
+	}
 
-    public function createSessionById(int $id): string
-    {
-        $session_id = bin2hex(random_bytes(32));
-        $statement = $this->databaseConnection->prepare(
-            'INSERT INTO sessions (id, user_id) VALUES (:id, :user_id)'
-        );
+	public function loginUser(string $email, string $password): bool {
+		$passwordGood = $this->checkHash($email, $password);
+		if ($passwordGood) {
+			$statement = $this->databaseConnection->prepare(
+				'SELECT * FROM users WHERE (email = :email OR username = :email)'
+			);
 
-        $statement->execute([
-            'id' => $session_id,
-            'user_id' => $id,
-        ]);
+			$statement->execute(compact('email'));
 
-        return $session_id;
-    }
+			$result = $statement->fetch(PDO::FETCH_ASSOC);
+
+			return !($result === false);
+		}
+		return false;
+	}
+
+	public function checkHash(string $email, string $password): bool {
+		$statement = $this->databaseConnection->prepare(
+			'SELECT password FROM users WHERE (email = :email OR username = :email)'
+		);
+
+		$statement->execute(compact('email'));
+
+		$result = $statement->fetch(PDO::FETCH_ASSOC);
+
+		return password_verify($password, $result['password']);
+	}
 
 	public function updateUser(User $user): bool {
 		$statement = $this->databaseConnection->prepare(

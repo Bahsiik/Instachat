@@ -16,15 +16,17 @@ use Controllers\User\CreateUser;
 use Controllers\User\GetConnectedUser;
 use Controllers\User\LoginUser;
 
-try {
-    /**
-     * @type string $action
-     */
-    $action = $_SERVER['QUERY_STRING'] ?? '';
+session_start();
 
-    switch ($action) {
-        default:
-            (new HomePage())->execute();
+try {
+	/**
+	 * @type string $action
+	 */
+	$action = $_SERVER['QUERY_STRING'] ?? '';
+
+	switch ($action) {
+		default:
+			(new HomePage())->execute();
             break;
         case 'create':
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {

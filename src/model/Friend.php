@@ -39,10 +39,7 @@ class FriendRepository
     public function sendRequest(float $requester_id, float $requested_id): void
     {
         $statement = $this->databaseConnection->prepare('INSERT INTO friends (requester_id, requested_id) VALUES (:requester_id, :requested_id)');
-        $statement->execute([
-            'requester_id' => $requester_id,
-            'requested_id' => $requested_id,
-        ]);
+	    $statement->execute(compact('requester_id', 'requested_id'));
     }
 
     public function acceptRequest(float $requester_id, float $requested_id): void
