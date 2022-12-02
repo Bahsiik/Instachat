@@ -101,6 +101,8 @@ class UserRepository {
 			'INSERT INTO users (birth_date, email, sexe, password, username) VALUES (:birth_date, :email, :sexe, :password, :username)'
 		);
 
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
 		$result = $statement->execute([
 			'birth_date' => $birth_date->format('Y-m-d'),
 			'email' => $email,
@@ -113,18 +115,35 @@ class UserRepository {
 	}
 
     public function loginUser(string $email, string $password): bool {
+        $passwordGood = $this->checkHash($email, $password);
+        if($passwordGood){
+            $statement = $this->databaseConnection->prepare(
+                'SELECT * FROM users WHERE (email = :email OR username = :email)'
+            );
+
+            $statement->execute([
+                'email' => $email,
+            ]);
+
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return !($result === false);
+        }
+        return false;
+    }
+
+    public function checkHash(string $email, string $password): bool {
         $statement = $this->databaseConnection->prepare(
-            'SELECT * FROM users WHERE (email = :email OR username = :email) AND password = :password'
+            'SELECT password FROM users WHERE (email = :email OR username = :email)'
         );
 
         $statement->execute([
             'email' => $email,
-            'password' => $password,
         ]);
 
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return !($result === false);
+        return password_verify($password, $result['password']);
     }
 
     /**
