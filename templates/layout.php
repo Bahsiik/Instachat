@@ -22,8 +22,10 @@
         } ?>
 		<title><?= $title ?? '' ?></title>
         <script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/14.0.2/twemoji.min.js" integrity="sha384-32KMvAMS4DUBcQtHG6fzADguo/tpN1Nh6BAJa2QqZc6/i0K+YPQE+bWiqBRAWuFs" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<?= $content ?? '' ?>
 	</body>
+    <script defer>twemoji.parse(document.body)</script>
 </html>

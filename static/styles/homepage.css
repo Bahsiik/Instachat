@@ -1,0 +1,44 @@
+body {
+    background-color: var(--bg-primary);
+}
+
+.emotion:checked + span {
+    background-color: var(--bg-ternary);
+}
+
+.emotions {
+    display: flex;
+    gap: 5px;
+}
+
+span:hover {
+    cursor: pointer;
+    background-color: var(--bg-ternary);
+}
+
+span {
+    border-radius: 20px;
+    transition: all .3s;
+    width: fit-content;
+    padding: 7px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.emoji {
+    width: 25px;
+    height: 25px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: fit-content;
+    width: fit-content;
+    color: var(--input-placeholder);
+}
+

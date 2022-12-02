@@ -2,7 +2,7 @@
 
 namespace Controllers\Post;
 
-require_once('src/model/post.php');
+require_once('src/model/Post.php');
 
 use Model\PostRepository;
 

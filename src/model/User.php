@@ -195,6 +195,14 @@ class UserRepository {
         return $user === false ? throw new RuntimeException('User not found') : $user;
     }
 
+    public function getUserBySessionId(string $session_id): User
+    {
+        $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = (SELECT user_id FROM sessions WHERE id = :session_id)');
+        $statement->execute(compact('session_id'));
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user === false ? throw new RuntimeException('User not found') : $user;
+    }
+
     public function isUserAlreadyRegistered(string $email, string $username): bool
     {
         $statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email OR username = :username');

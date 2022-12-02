@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers\User;
+namespace Controllers\Pages;
 
-class CreateUserPage
+class AuthentificationPage
 {
     public function execute(): void
     {
