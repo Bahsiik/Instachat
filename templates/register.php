@@ -8,25 +8,22 @@ $js = ['register.js'];
 	<div class="form-container sign-up-container">
 		<form action="/index.php?create" method="post">
 			<h1>Créer un compte</h1>
-			<fieldset>
-				<legend>Email</legend>
+			<label>Email
 				<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
-			</fieldset>
-			<fieldset>
-				<legend>Pseudo</legend>
+			</label>
+
+			<label>Pseudo
 				<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text"/>
-			</fieldset>
-			<fieldset>
-				<legend>Mot de passe</legend>
-				<input
-					required name="password" type="password" placeholder="Mot de passe" minlength="4"
-					maxlength="64"
-				/>
-			</fieldset>
-			<fieldset>
-				<legend>Confirmez mot de passe</legend>
+			</label>
+
+			<label>Mot de passe
+				<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
+			</label>
+
+			<label>Confirmez mot de passe
 				<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe" required type="password"/>
-			</fieldset>
+			</label>
+
 			<fieldset class="padding">
 				<legend>Genre</legend>
 				<label for="homme">Homme
@@ -40,29 +37,29 @@ $js = ['register.js'];
 				</label>
 			</fieldset>
 			<fieldset class="padding">
-                <legend>Naissance</legend>
-                <input id="birthdate" name="birthdate" required type="date">
-            </fieldset>
-            <button type="submit">S'inscrire</button>
-        </form>
-    </div>
-    <div class="form-container sign-in-container">
-        <form action="/index.php?login" method="post">
-            <h1>Se connecter</h1>
-            <fieldset>
-                <legend>Email ou pseudo</legend>
-                <input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required/>
-            </fieldset>
-            <fieldset>
-                <legend>Mot de passe</legend>
-                <input class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
-                       required type="password"/>
-            </fieldset>
-            <button>Se connecter</button>
-        </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
+				<legend>Naissance</legend>
+				<input id="birthdate" name="birthdate" required type="date">
+			</fieldset>
+			<button type="submit">S'identifier</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="/index.php?login" method="post">
+			<h1>Se connecter</h1>
+			<label>Email ou pseudo
+				<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required/>
+			</label>
+			<label>Mot de passe
+				<input
+					class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
+					required type="password"
+				/>
+			</label>
+			<button>Se connecter</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Re-bonjour !</h1>
 				<p>Pour vous connecter, entrez vos identifiants ici</p>
@@ -71,7 +68,7 @@ $js = ['register.js'];
 			<div class="overlay-panel overlay-right">
 				<h1>Bienvenue !</h1>
 				<p>Démarrez votre aventure, créez votre compte ici</p>
-				<button class="ghost" id="signUp">S'inscrire</button>
+				<button class="ghost" id="signUp">S'identifier</button>
 			</div>
 		</div>
 	</div>

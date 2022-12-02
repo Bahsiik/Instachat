@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
 * {
 	box-sizing: border-box;
 	font-family: 'Montserrat', sans-serif;
@@ -17,7 +15,7 @@ body {
 
 h1 {
 	font-weight: bold;
-	margin: 0;
+	margin: 0 0 1rem 0;
 }
 
 h2 {
@@ -29,7 +27,7 @@ p {
 	font-weight: 100;
 	letter-spacing: 1px;
 	line-height: 20px;
-	margin: 20px 0 30px;
+	margin: 0 0 1.5rem;
 }
 
 span {
@@ -88,7 +86,7 @@ legend {
 	border-radius: 10px;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 	max-width: 100%;
-	min-height: 576px;
+	min-height: 600px;
 	overflow: hidden;
 	position: relative;
 	width: 835px;
@@ -123,6 +121,10 @@ legend {
 	opacity: 1;
 	transform: translateX(100%);
 	z-index: 5;
+}
+
+.sign-up-container > form > label {
+	margin: 0;
 }
 
 @keyframes show {
@@ -219,26 +221,8 @@ legend {
 	width: 40px;
 }
 
-fieldset {
-	margin: 5px;
-}
-
 fieldset:last-of-type {
 	margin-bottom: 30px;
-}
-
-fieldset.padding {
-	padding: 12px;
-}
-
-fieldset.padding label:has(input[type='radio']) {
-	align-items: center;
-	display: flex;
-	flex-direction: row-reverse;
-}
-
-fieldset.padding:has(label > input[type='radio']) {
-	justify-content: space-between;
 }
 
 label {
