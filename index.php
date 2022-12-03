@@ -2,7 +2,7 @@
 
 require_once('src/controllers/pages/AuthentificationPage.php');
 require_once('src/controllers/pages/HomePage.php');
-require_once('src/controllers/pages/OptionsPage.php');
+//require_once('src/controllers/pages/OptionsPage.php');
 require_once('src/controllers/post/AddPost.php');
 require_once('src/controllers/post/GetTrends.php');
 require_once('src/controllers/user/CreateUser.php');
@@ -27,6 +27,14 @@ try {
 	$firstSegment = $uriSegments[1] ?? '';
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
 
+    if($connected_user !== null && $method === 'GET') {
+        $_SESSION['expire'] = time() + 3600;
+        if(time() > $_SESSION['expire']) {
+            session_destroy();
+        }
+    }
+
+
 	switch ($firstSegment) {
 		default:
 			(new HomePage())->execute();
@@ -47,9 +55,9 @@ try {
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
-		case 'options':
-			(new OptionsPage())->execute($connected_user);
-			break;
+//		case 'options':
+//			(new OptionsPage())->execute($connected_user);
+//			break;
 
 		case 'trend':
 			redirect_if_method_not('post', '/');
