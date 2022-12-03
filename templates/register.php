@@ -4,19 +4,19 @@ $js = ['register.js'];
 ?>
 
 <?php ob_start(); ?>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="/index.php?create" method="post">
-			<h1>Créer un compte</h1>
-			<label>Email
-				<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
-			</label>
+	<div class="container" id="container">
+		<div class="form-container sign-up-container">
+			<form action="/create" method="post">
+				<h1>Créer un compte</h1>
+				<label>Email
+					<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
+				</label>
 
-			<label>Pseudo
-				<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text"/>
-			</label>
+				<label>Pseudo
+					<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text"/>
+				</label>
 
-			<label>Mot de passe
+				<label>Mot de passe
 				<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
 			</label>
 
@@ -72,7 +72,7 @@ $js = ['register.js'];
 			</div>
 		</div>
 	</div>
-</div>
-<?php $content = ob_get_clean(); ?>
-<?php require_once('layout.php'); ?>
-
+	</div>
+<?php
+$content = ob_get_clean();
+require_once('layout.php');
