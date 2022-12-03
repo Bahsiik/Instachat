@@ -2,7 +2,7 @@
 
 require_once('src/controllers/pages/AuthentificationPage.php');
 require_once('src/controllers/pages/HomePage.php');
-require_once('src/controllers/pages/OptionsPage.php');
+//require_once('src/controllers/pages/OptionsPage.php');
 require_once('src/controllers/post/AddPost.php');
 require_once('src/controllers/post/GetTrends.php');
 require_once('src/controllers/user/CreateUser.php');
@@ -11,7 +11,6 @@ require_once('src/controllers/user/LoginUser.php');
 
 use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\HomePage;
-use Controllers\Pages\OptionsPage;
 use Controllers\Post\AddPost;
 use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
@@ -47,9 +46,9 @@ try {
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
-		case 'options':
+		/*case 'options':
 			(new OptionsPage())->execute($connected_user);
-			break;
+			break;*/
 
 		case 'trend':
 			redirect_if_method_not('post', '/');
