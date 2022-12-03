@@ -16,6 +16,7 @@ use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
 use Controllers\User\GetConnectedUser;
 use Controllers\User\LoginUser;
+use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
 
 session_start();
@@ -24,6 +25,7 @@ try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
 	$uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 	$firstSegment = $uriSegments[1] ?? '';
+    global $connected_user;
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
 
     if($connected_user !== null && $method === 'GET') {
@@ -32,7 +34,6 @@ try {
             session_destroy();
         }
     }
-
 
 	switch ($firstSegment) {
 		default:
@@ -45,12 +46,17 @@ try {
 			break;
 
 		case 'login':
-			redirect_if_method_not('post', '/');
+			redirect_if_method_not('POST', '/');
 			(new LoginUser())->execute($_POST);
 			break;
 
+        case 'logout':
+            session_destroy();
+            redirect('/');
+            //no break needed
+
 		case 'chat':
-			redirect_if_method_not('post', '/');
+			redirect_if_method_not('POST', '/');
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
@@ -59,7 +65,7 @@ try {
 			break;*/
 
 		case 'trend':
-			redirect_if_method_not('post', '/');
+			redirect_if_method_not('POST', '/');
 			$trends = (new GetTrends())->execute();
 			echo json_encode($trends);
 			break;

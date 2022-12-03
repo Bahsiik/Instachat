@@ -9,6 +9,6 @@ use Model\UserRepository;
 
 class GetConnectedUser {
 	public function execute(array $input): ?User {
-		return (new UserRepository())->getUserById($input['user_id']);
+		return (new UserRepository())->getUserById($input['user_id']??-1);
 	}
 }

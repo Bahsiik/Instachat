@@ -20,15 +20,11 @@ class LoginUser {
 		}
 
 		$user_id = (new UserRepository())->loginUser($input['email'], $input['password']);
-		if ($user_id) {
-			$user_id = (new UserRepository())->getUserIdByEmailOrUsername($input['email']);
-			$_SESSION['user_id'] = $user_id;
-
-			if ($user_id === null) throw new RuntimeException('User not found');
-
-			redirect('index.php');
+		if ($user_id !== null) {
+			$_SESSION['user_id'] = $user_id->id;
+			redirect('/');
 		} else {
-			redirect('index.php?create');
+			redirect('/create');
 		}
 	}
 }

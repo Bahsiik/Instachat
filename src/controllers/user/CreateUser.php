@@ -20,12 +20,10 @@ class CreateUser
         $user_exist = (new UserRepository())->isUserAlreadyRegistered($input['email'], $input['username']);
         if($user_exist) {
             echo("User already exists");
-            redirect('index.php?create');
-            return;
+            redirect('/');
         }
         $birth_date = date_create($input['birthdate']);
         (new UserRepository())->createUser($input['username'], $input['email'],  $input['password'], $input['gender'], $birth_date);
-        redirect('index.php?create'); //to make sure the user logs in
-        return;
+        redirect('/create'); //to make sure the user logs in
     }
 }

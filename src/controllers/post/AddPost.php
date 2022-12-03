@@ -16,6 +16,6 @@ class AddPost {
 	    }
 	    (new PostRepository())->addPost($input['content'], $connected_user->id, $input['photo'] ?? '', (int)$input['emotion']);
 
-	    redirect('index.php');
+	    redirect('/');
     }
 }
