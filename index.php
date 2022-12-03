@@ -35,6 +35,10 @@ try {
         }
     }
 
+    if($connected_user === null && $firstSegment !== 'create' && $method === 'GET') {
+        redirect('/create');
+    }
+
 	switch ($firstSegment) {
 		default:
 			(new HomePage())->execute();

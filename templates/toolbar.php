@@ -8,6 +8,7 @@
         <span class="material-symbols-outlined">home</span>
         Accueil
     </a>
+    <?php if (isset($connected_user)) { ?>
     <a class="toolbar-item" href="">
         <span class="material-symbols-outlined">person</span>
         Profil
@@ -20,12 +21,6 @@
         <span class="material-symbols-outlined">pending</span>
         Options
     </a>
-    <?php if (!isset($connected_user)) { ?>
-        <a class="toolbar-item" href="/create">
-            <span class="material-symbols-outlined">login</span>
-            Connexion
-        </a>
-    <?php } else { ?>
         <button class="chat-btn">Chat</button>
         <a class="toolbar-item" href="/logout">
             <span class="material-symbols-outlined">logout</span>
