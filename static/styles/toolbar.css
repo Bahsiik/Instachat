@@ -58,10 +58,14 @@
 }
 
 /* Logo */
-.toolbar-container > img {
+.toolbar-container .logo-link {
+	width: min-content;
+}
+
+.toolbar-container img {
 	height: fit-content;
 	object-fit: contain;
-	width: 25%;
+	width: 4.5rem;
 }
 
 

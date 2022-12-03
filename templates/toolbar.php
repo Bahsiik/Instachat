@@ -1,6 +1,6 @@
 <?php $css[] = 'toolbar.css'; ?>
 <div class="toolbar-container">
-	<a href="/">
+	<a class="logo-link" href="/">
 		<img src="../static/images/logo.png" alt="logo">
 	</a>
 	<a class="toolbar-item" href="/">
