@@ -20,16 +20,16 @@
         <span class="material-symbols-outlined">pending</span>
         Options
     </a>
-    <button class="chat-btn">Chat</button>
-    <?php if (isset($connected_user)) { ?>
-        <a class="toolbar-item" href="/logout">
-            <span class="material-symbols-outlined">logout</span>
-            Déconnexion
-        </a>
-    <?php } else { ?>
+    <?php if (!isset($connected_user)) { ?>
         <a class="toolbar-item" href="/create">
             <span class="material-symbols-outlined">login</span>
             Connexion
+        </a>
+    <?php } else { ?>
+        <button class="chat-btn">Chat</button>
+        <a class="toolbar-item" href="/logout">
+            <span class="material-symbols-outlined">logout</span>
+            Déconnexion
         </a>
     <?php } ?>
 </div>
