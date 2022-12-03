@@ -36,25 +36,25 @@ $js = ['register.js'];
 					<input id="autre" name="gender" type="radio" value="autre">
 				</label>
 			</fieldset>
-			<fieldset class="padding">
-				<legend>Naissance</legend>
-				<input id="birthdate" name="birthdate" required type="date">
-			</fieldset>
-			<button type="submit">S'identifier</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="/index.php?login" method="post">
-			<h1>Se connecter</h1>
-			<label>Email ou pseudo
-				<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
-			</label>
-			<label>Mot de passe
-				<input
-					class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
-					required type="password"
-				/>
-			</label>
+				<fieldset class="padding">
+					<legend>Naissance</legend>
+					<input id="birthdate" name="birthdate" required type="date">
+				</fieldset>
+				<button type="submit">S'identifier</button>
+			</form>
+		</div>
+		<div class="form-container sign-in-container">
+			<form action="/login" method="post">
+				<h1>Se connecter</h1>
+				<label>Email ou pseudo
+					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
+				</label>
+				<label>Mot de passe
+					<input
+						class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
+						required type="password"
+					/>
+				</label>
 			<button>Se connecter</button>
 		</form>
 	</div>
