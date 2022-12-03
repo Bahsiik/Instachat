@@ -15,7 +15,7 @@
 		<span class="material-symbols-outlined">group</span>
 		Amis
 	</a>
-	<a class="toolbar-item" href="">
+	<a class="toolbar-item" href="/options">
 		<span class="material-symbols-outlined">pending</span>
 		Options
 	</a>

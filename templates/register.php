@@ -1,9 +1,9 @@
 <?php $title = 'Register';
 $css = ['register.css'];
 $js = ['register.js'];
-?>
 
-<?php ob_start(); ?>
+ob_start();
+?>
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
 			<form action="/create" method="post">

@@ -2,9 +2,7 @@
 
 $css = ['homepage.css'];
 $title = 'Instachat';
-?>
 
-<?php
 ob_start();
 require_once('toolbar.php');
 ?>

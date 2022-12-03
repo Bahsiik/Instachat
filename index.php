@@ -11,7 +11,6 @@ require_once('src/controllers/user/LoginUser.php');
 
 use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\HomePage;
-use Controllers\Pages\OptionsPage;
 use Controllers\Post\AddPost;
 use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
@@ -55,9 +54,9 @@ try {
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
-//		case 'options':
-//			(new OptionsPage())->execute($connected_user);
-//			break;
+		/*case 'options':
+			(new OptionsPage())->execute($connected_user);
+			break;*/
 
 		case 'trend':
 			redirect_if_method_not('post', '/');
