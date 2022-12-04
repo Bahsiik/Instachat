@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,500,700,900');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
@@ -14,9 +14,35 @@
 }
 
 body {
+	background-color: var(--bg-primary);
+	color: var(--fg-primary);
 	display: flex;
 	font-family: var(--font);
 	margin: 0;
+}
+
+.title {
+	padding: 0 1rem 1rem;
+	position: relative;
+}
+
+.title > h1 {
+	background: var(--gradient-v);
+	-webkit-background-clip: text;
+	font-weight: 900;
+	margin: 0;
+	width: fit-content;
+	-webkit-text-fill-color: transparent;
+}
+
+.title::after {
+	background: var(--gradient-v);
+	content: '';
+	height: .2rem;
+	left: 0;
+	position: absolute;
+	top: 100%;
+	width: 100%;
 }
 
 fieldset {

@@ -1,0 +1,53 @@
+.danger {
+	color: var(--input-invalid)
+}
+
+.options {
+	flex: 1;
+	margin: 2rem;
+}
+
+.options-container {
+	display: flex;
+	flex-direction: column;
+	gap: .2rem;
+	margin-top: 2rem;
+	width: clamp(30rem, 50vw, 47.5rem);
+}
+
+.option {
+	align-items: center;
+	border-radius: var(--input-border-radius);
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	padding: 1.5rem 1rem;
+}
+
+.option:hover .arrow, .option.selected {
+	/* background: var(--gradient-h);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent; */
+	background-position: left bottom 100%;
+}
+
+.option h2 {
+	font-size: 1.3rem;
+	margin: 0;
+}
+
+.option .subtitle {
+	color: var(--fg-secondary);
+	margin: .75rem 0 0;
+}
+
+.option .arrow {
+	-webkit-background-clip: text;
+	background-image: linear-gradient(to top, var(--fg-primary), var(--fg-primary) 50%, var(--gradient-first) 60%, var(--gradient-second));
+	background-position: left bottom;
+	background-size: 100% 300%;
+	font-size: 3rem;
+	transition: all .2s ease-in-out;
+	-webkit-text-fill-color: transparent;
+	font-variation-settings: 'wght' 700;
+}

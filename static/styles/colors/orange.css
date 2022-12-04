@@ -1,4 +1,6 @@
 :root {
 	--gradient-colors: #fd2b55, #f8f004;
+	--gradient-first: #fd2b55;
+	--gradient-second: #f8f004;
 	--url: #e08928;
 }
