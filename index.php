@@ -8,6 +8,7 @@ require_once('src/controllers/post/GetTrends.php');
 require_once('src/controllers/user/CreateUser.php');
 require_once('src/controllers/user/GetConnectedUser.php');
 require_once('src/controllers/user/LoginUser.php');
+require_once('src/lib/utils.php');
 
 use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\HomePage;
@@ -21,6 +22,7 @@ use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
 
 session_start();
+date_default_timezone_set('Europe/Paris');
 
 try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
@@ -28,7 +30,6 @@ try {
 	$firstSegment = $uriSegments[1] ?? '';
 	global $connected_user;
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
-
 	if ($connected_user !== null && $method === 'GET') {
 		$_SESSION['expire'] = time() + 3600;
 		if (time() > $_SESSION['expire']) {

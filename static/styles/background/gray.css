@@ -1,10 +1,11 @@
 :root {
 	--bg-primary: #252525;
+	--bg-quaternary: #141414;
 	--bg-secondary: #1f1f1f;
 	--bg-ternary: #3d3d3d;
 	--border: #3e3f3f;
 	--fg-primary: #ffffff;
-	--fg-secondary: #5B7083;
+	--fg-secondary: #5b7083;
 	--input-invalid: #ff6363;
 	--input-placeholder: #888888;
 	--input-radio: #3e8bff;

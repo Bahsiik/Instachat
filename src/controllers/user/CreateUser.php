@@ -3,7 +3,6 @@
 namespace Controllers\User;
 
 require_once('src/model/User.php');
-require_once('src/lib/utils.php');
 
 use Model\UserRepository;
 use RuntimeException;

@@ -45,6 +45,10 @@ body {
 	width: 100%;
 }
 
+.subtitle {
+	color: var(--fg-secondary);
+}
+
 fieldset {
 	border: var(--input-border-width) solid var(--input-color);
 	border-radius: var(--input-border-radius);
@@ -134,4 +138,53 @@ input[type='password']:-webkit-autofill:hover,
 input[type='email']:-webkit-autofill:hover {
 	-webkit-box-shadow: 0 0 0 30px var(--bg-primary) inset;
 	-webkit-text-fill-color: var(--fg-primary) !important;
+}
+
+.tabbed-menu {
+	--border-radius: 16px;
+	--height: 3rem;
+	align-items: center;
+	background-color: var(--bg-secondary);
+	border-top-left-radius: var(--border-radius);
+	border-top-right-radius: var(--border-radius);
+	display: flex;
+	flex-direction: row;
+	height: var(--height);
+	justify-content: space-around;
+	overflow: hidden;
+}
+
+.tabbed-menu > .tab {
+	align-items: center;
+	box-sizing: border-box;
+	display: flex;
+	flex: 1;
+	height: 100%;
+	justify-content: center;
+	margin: 0;
+	text-align: center;
+	transition: all .3s ease-in-out;
+}
+
+.tabbed-menu > .tab:not(.selected) + .tab:not(:first-child) > p {
+	border-left: 2px solid var(--bg-quaternary);
+}
+
+.tabbed-menu > .selected {
+	background-color: var(--bg-quaternary);
+	font-weight: 700;
+}
+
+.tabbed-menu > div:not(.selected):hover {
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.tabbed-menu > div > p {
+	--height: 2rem;
+	flex: 1;
+	height: var(--height);
+	line-height: var(--height);
+	margin: 0;
+	padding: 0;
 }

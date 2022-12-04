@@ -1,6 +1,8 @@
 :root {
 	--bg-primary: #000000;
+	--bg-quaternary: #141414;
 	--bg-secondary: #0e0e0e;
+	--bg-ternary: #232323;
 	--border: #252525;
 	--fg-primary: #ffffff;
 	--fg-secondary: #3e3f3f;
