@@ -5,9 +5,9 @@
         <a class="logo-link" href="/">
             <img src="../static/images/logo.png" alt="logo">
         </a>
-        <a class="toolbar-item toolbar-item-selected" href="/">
-            <span class="material-symbols-outlined">home</span>
-            Accueil
+        <a class="toolbar-item" href="/">
+            <span class="material-symbols-outlined toolbar-item-selected">home</span>
+            <span class="toolbar-item-selected">Accueil</span>
         </a>
         <?php if (isset($connected_user)) { ?>
         <a class="toolbar-item" href="">

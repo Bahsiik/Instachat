@@ -185,38 +185,35 @@ class UserRepository
 
     public function loginUser(string $email, string $password): ?User
     {
+        $statement = $this->databaseConnection->prepare(
+            'SELECT * FROM users WHERE (email = :email OR username = :email)'
+        );
+
+        $statement->execute(compact('email'));
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($user === false) return null;
+
         $passwordGood = $this->checkHash($email, $password);
-        if ($passwordGood) {
-            $statement = $this->databaseConnection->prepare(
-                'SELECT * FROM users WHERE (email = :email OR username = :email)'
+        if (!$passwordGood) return null;
+        try {
+            return new User(
+                $user['bio'],
+                $user['display_name'],
+                $user['email'],
+                $user['sexe'],
+                $user['id'],
+                $user['password'],
+                $user['username'],
+                $user['avatar'],
+                $user['background'],
+                $user['birth_date'],
+                $user['color'],
+                $user['created_date'],
+                $user['fontsize'],
             );
-
-            $statement->execute(compact('email'));
-
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            if ($result === false) return null;
-            try {
-                return new User(
-                    $result['bio'],
-                    $result['display_name'],
-                    $result['email'],
-                    $result['sexe'],
-                    $result['id'],
-                    $result['password'],
-                    $result['username'],
-                    $result['avatar'],
-                    $result['background'],
-                    $result['birth_date'],
-                    $result['color'],
-                    $result['created_date'],
-                    $result['fontsize'],
-                );
-            } catch (Exception) {
-                return null;
-            }
+        } catch (Exception) {
+            return null;
         }
-        return null;
     }
 
 
