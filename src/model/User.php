@@ -75,6 +75,7 @@ class User
 
     public function __construct(
         public ?string $bio,
+        public string  $display_name,
         public string  $email,
         public string  $gender,
         public int     $id,
@@ -156,6 +157,7 @@ class UserRepository
         try {
             return new User(
                 $result['bio'],
+                $result['display_name'],
                 $result['email'],
                 $result['sexe'],
                 $result['id'],
@@ -197,6 +199,7 @@ class UserRepository
             try {
                 return new User(
                     $result['bio'],
+                    $result['display_name'],
                     $result['email'],
                     $result['sexe'],
                     $result['id'],
