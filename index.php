@@ -26,8 +26,9 @@ date_default_timezone_set('Europe/Paris');
 
 try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
-	$uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+	$uriSegments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 	$firstSegment = $uriSegments[1] ?? '';
+
 	global $connected_user;
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
 	if ($connected_user !== null && $method === 'GET') {
@@ -59,7 +60,6 @@ try {
 		case 'logout':
 			session_destroy();
 			redirect('/');
-		//no break needed
 
 		case 'chat':
 			redirect_if_method_not('POST', '/');
