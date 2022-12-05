@@ -9,7 +9,7 @@
 	padding: 2rem 1rem;
 	position: sticky;
 	top: 0;
-	width: 16rem;
+	width: 471px;
 	z-index: 100;
 	justify-content: space-between;
 	box-sizing: border-box;
@@ -29,7 +29,7 @@
 	color: var(--fg-primary);
 	cursor: pointer;
 	display: flex;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-style: normal;
 	font-weight: 600;
 	gap: .75rem;
@@ -115,6 +115,7 @@
 
 .user-display-name {
 	color: var(--fg-primary);
+	font-weight: 700;
 }
 
 .user-username:hover, .user-display-name:hover, .logout-btn:hover {

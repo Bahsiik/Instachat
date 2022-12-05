@@ -10,6 +10,9 @@ require_once('toolbar.php');
 <?php global $posts; ?>
 <?php if (isset($connected_user)) { ?>
     <div class="homepage-container">
+        <div class="title">
+            <h1>Accueil</h1>
+        </div>
         <div class="chat-container">
             <form class="post-form" action="/chat" method="post">
                 <textarea class="chat-area" placeholder="Chatter quelque chose..." name="content"></textarea>
@@ -33,7 +36,7 @@ require_once('toolbar.php');
         <div class="feed-container">
             <?php
             foreach ($posts as $post) {
-                require_once('post.php');
+                require('post.php');
             }
             ?>
         </div>

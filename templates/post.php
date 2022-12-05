@@ -35,10 +35,10 @@
                 if ($diff->days > 0) {
                     echo $date_only_formatter->format($post_date);
                 } else if ($diff->h > 0) {
-                    echo $diff->h . 'heures';
+                    echo $diff->h . ' h';
                 } else if ($diff->i > 0) {
-                    echo $diff->i . 'min';
-                } else if ($diff->s > 0) {
+                    echo $diff->i . ' min';
+                } else if ($diff->s >= 0) {
                     echo $diff->s . 's';
                 }
                 ?>
