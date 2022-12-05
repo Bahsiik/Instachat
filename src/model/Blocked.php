@@ -15,7 +15,7 @@ class Blocked
     public string $blocked_word;
 }
 
-class BlockedDAO
+class BlockedRepository
 {
     public PDO $databaseConnection;
 
