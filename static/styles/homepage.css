@@ -11,7 +11,7 @@ body {
     gap: 5px;
 }
 
-span:hover {
+.emoji-span:hover {
     cursor: pointer;
     background-color: var(--bg-ternary);
 }
@@ -37,8 +37,31 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    box-sizing: border-box;
+    align-items: flex-start;
+    padding: 7px 16px;
+    width: 100%;
     height: fit-content;
-    width: fit-content;
-    color: var(--input-placeholder);
+    border-bottom: 1px solid #3E3F3F;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
+.homepage-container {
+    width: 100%;
+    padding: 4px 44px;
+}
+
+.chat-area {
+    font-family: var(--font);
+    background-color: transparent;
+    border: none;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 80px;
+    color: var(--fg-secondary);
+}
+
+.post-form {
+    width: 100%;
+}

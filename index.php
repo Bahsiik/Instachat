@@ -5,6 +5,8 @@ require_once('src/controllers/pages/HomePage.php');
 require_once('src/controllers/pages/OptionsPage.php');
 require_once('src/controllers/post/AddPost.php');
 require_once('src/controllers/post/GetTrends.php');
+require_once('src/controllers/post/GetFeed.php');
+require_once('src/controllers/post/GetComments.php');
 require_once('src/controllers/user/CreateUser.php');
 require_once('src/controllers/user/GetConnectedUser.php');
 require_once('src/controllers/user/LoginUser.php');
@@ -14,6 +16,8 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
 use Controllers\Post\AddPost;
+use Controllers\Post\GetComments;
+use Controllers\Post\GetFeed;
 use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
 use Controllers\User\GetConnectedUser;
@@ -36,10 +40,16 @@ try {
 			session_destroy();
 		}
 	}
-
 	if ($connected_user === null && $firstSegment !== 'create' && $method === 'GET') {
 		redirect('/create');
 	}
+
+    global $posts;
+    $posts = (new GetFeed())->execute();
+    global $post;
+    $post = $posts[0];
+    global $comments;
+    $comments = (new GetComments())->execute($post->id);
 
 	switch ($firstSegment) {
 		default:
