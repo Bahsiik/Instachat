@@ -1,4 +1,5 @@
-<?php use Model\Emotion;
+<?php use Controllers\Post\GetComments;
+use Model\Emotion;
 
 $css = ['homepage.css'];
 $title = 'Instachat';
@@ -35,8 +36,19 @@ require_once('toolbar.php');
         </div>
         <div class="feed-container">
             <?php
-            foreach ($posts as $post) {
-                require('post.php');
+            if (count($posts) > 0) {
+                global $post;
+                global $comments;
+                foreach ($posts as $post) {
+                    $comments = (new GetComments())->execute($post->id);
+                    require('post.php');
+                }
+            } else {
+                ?>
+                <div class="no-post">
+                    <p>Il n'y a pas de post pour le moment</p>
+                </div>
+                <?php
             }
             ?>
         </div>

@@ -53,15 +53,10 @@ try {
 		redirect('/create');
 	}
 
-    global $posts;
-    $posts = (new GetFeed())->execute();
-    global $post;
-    $post = $posts[0];
-    global $comments;
-    $comments = (new GetComments())->execute($post->id);
-
 	switch ($firstSegment) {
 		default:
+            global $posts;
+            $posts = (new GetFeed())->execute($_SESSION);
 			(new HomePage())->execute();
 			break;
 

@@ -12,8 +12,7 @@ class GetFeed {
 	/**
 	 * @return Array<Post>
 	 */
-	public function execute(): array {
-        $user_id = $_SESSION['user_id'];
-		return (new PostRepository())->getFeed($user_id);
+	public function execute(array $input): array {
+		return (new PostRepository())->getFeed($input['user_id']);
 	}
 }
