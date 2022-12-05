@@ -18,29 +18,25 @@
             <span class="material-symbols-outlined">group</span>
             Amis
         </a>
-        <a class="toolbar-item" href="/options">
-            <span class="material-symbols-outlined">pending</span>
-            Options
-        </a>
-        <button class="chat-btn">Chat</button>
+	    <a class="toolbar-item" href="/options">
+		    <span class="material-symbols-outlined">pending</span>
+		    Options
+	    </a>
+	    <button class="chat-btn">Chat</button>
     </div>
-    <div class="user-info">
-        <img class="user-avatar" src="../static/images/logo.png" alt="avatar">
-        <div class="user-names-container">
+	<div class="user-info">
+		<img class="user-avatar" src="../static/images/logo.png" alt="avatar">
+		<div class="user-names-container">
                 <span class="user-display-name">
-                <?php if (isset($connected_user->display_name)) { ?>
-                    <?= $connected_user->display_name ?>
-                <?php } else { ?>
-                    <?= $connected_user->username ?>
-                <?php } ?>
+                <?= $connected_user->getDisplayOrUsername() ?>
                 </span>
-            <span class="user-username">
-                    <?= '@' . $connected_user->username ?>
+			<span class="user-username">
+                    <?= "@$connected_user->username" ?>
                 </span>
-        </div>
-        <a class="user-logout" href="/logout">
-            <span class="logout-btn material-symbols-outlined">logout</span>
-        </a>
-    </div>
-    <?php } ?>
+		</div>
+		<a class="user-logout" href="/logout">
+			<span class="logout-btn material-symbols-outlined">logout</span>
+		</a>
+	</div>
+	<?php } ?>
 </div>
