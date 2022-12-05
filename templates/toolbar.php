@@ -14,7 +14,7 @@
             <span class="material-symbols-outlined">person</span>
             Profil
         </a>
-        <a class="toolbar-item" href="">
+        <a class="toolbar-item" href="/friends">
             <span class="material-symbols-outlined">group</span>
             Amis
         </a>
