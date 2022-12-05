@@ -149,9 +149,12 @@ class PostRepository
         $posts = $statement->fetchAll(PDO::FETCH_COLUMN);
         $words = [];
         foreach ($posts as $post) {
-            $words = array_merge($words, explode(' ', $post));
+            $uniqueWords = array_unique(explode(' ', $post));
+            $words = array_merge($words, $uniqueWords);
         }
         $words = array_filter($words, fn($word) => strlen($word) > 3);
+        $words = array_map('strtolower', $words);
+        $words = array_map('ucfirst', $words);
         $words = array_count_values($words);
         arsort($words);
         return array_slice($words, 0, 10);

@@ -84,7 +84,7 @@ try {
 			break;
 
 		case 'trend':
-			redirect_if_method_not('POST', '/');
+			redirect_if_method_not('GET', '/');
 			$trends = (new GetTrends())->execute();
 			echo json_encode($trends);
 			break;
