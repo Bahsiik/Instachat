@@ -92,8 +92,14 @@ class PostRepository
 
     public function getFeed(float $user_id): array
     {
-//		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id IN (SELECT requested_id FROM friends WHERE requester_id = :author_id AND accepted = true) ORDER BY creation_date DESC');
-        $statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :user_id ORDER BY creation_date DESC');
+        $statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id IN 
+                                        (SELECT requested_id OR requester_id 
+                                        FROM friends 
+                                        WHERE (requester_id = :user_id OR requested_id = :user_id) 
+                                        AND accepted = true) 
+                                        OR author_id = :user_id 
+                                        ORDER BY creation_date DESC LIMIT 5');
+//        $statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :user_id ORDER BY creation_date DESC');
         $statement->execute(compact('user_id'));
         $posts = [];
 
