@@ -36,7 +36,8 @@ require_once('toolbar.php');
 						</div>
 						<span class="material-symbols-outlined arrow">navigate_next</span>
 					</div>
-				<?php } ?>
+				<?php
+				} ?>
 
 				<div class="option">
 					<div class="option-title">
@@ -123,16 +124,20 @@ require_once('toolbar.php');
 				</form>
 
 				<form action="/options" class="options-group" data-option-number="1" method="post">
-					<input type="hidden" autocomplete="username" name="username" value="<?= $connected_user->username ?>">
+					<input type="hidden" autocomplete="username" name="username"
+					       value="<?= $connected_user->username ?>">
 
 					<label>Ancien mot de passe
-						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe" required type="password">
+						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe"
+						       required type="password">
 					</label>
 					<label>Nouveau mot de passe
-						<input autocomplete="new-password" maxlength="64" minlength="8" placeholder="Nouveau mot de passe" required type="password">
+						<input autocomplete="new-password" maxlength="64" minlength="8"
+						       placeholder="Nouveau mot de passe" required type="password">
 					</label>
 					<label>Confirmer le nouveau mot de passe
-						<input autocomplete="new-password" maxlength="64" minlength="8" placeholder="Confirmer nouveau mot de passe" required type="password">
+						<input autocomplete="new-password" maxlength="64" minlength="8"
+						       placeholder="Confirmer nouveau mot de passe" required type="password">
 					</label>
 
 					<button type="submit">Confirmer</button>
@@ -249,12 +254,15 @@ require_once('toolbar.php');
 
 				<form action="/delete" class="options-group" data-option-number="5" method="post">
 					<h3>Supprimer mon compte</h3>
-					<p class="subtitle">Cette action est irreversible et supprimera tous vos chats, réactions et commentaires et vous déconnectera
+					<p class="subtitle">Cette action est irreversible et supprimera tous vos chats, réactions et
+						commentaires et vous déconnectera
 						instantanément.</p>
-					<p class="subtitle">Toutes vos informations seront supprimées et irrécupérables et votre @nomdutilisateur sera disponible pour tout le
+					<p class="subtitle">Toutes vos informations seront supprimées et irrécupérables et votre
+						@nomdutilisateur sera disponible pour tout le
 						monde.</p>
 					<label>Confirmer mot de passe
-						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe" required type="password">
+						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe"
+						       required type="password">
 					</label>
 					<button class="delete-account">Supprimer mon compte</button>
 				</form>

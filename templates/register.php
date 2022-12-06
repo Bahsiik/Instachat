@@ -1,4 +1,5 @@
-<?php $title = 'Register';
+<?php
+$title = 'Register';
 $css = ['register.css'];
 $js = ['register.js'];
 
@@ -17,25 +18,27 @@ ob_start();
 				</label>
 
 				<label>Mot de passe
-				<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
-			</label>
+					<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required
+					       type="password"/>
+				</label>
 
-			<label>Confirmez mot de passe
-				<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe" required type="password"/>
-			</label>
+				<label>Confirmez mot de passe
+					<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe"
+					       required type="password"/>
+				</label>
 
-			<fieldset class="padding">
-				<legend>Genre</legend>
-				<label for="homme">Homme
-					<input checked id="homme" name="gender" type="radio" value="homme">
-				</label>
-				<label for="femme">Femme
-					<input id="femme" name="gender" type="radio" value="femme">
-				</label>
-				<label for="autre">Autre
-					<input id="autre" name="gender" type="radio" value="autre">
-				</label>
-			</fieldset>
+				<fieldset class="padding">
+					<legend>Genre</legend>
+					<label for="homme">Homme
+						<input checked id="homme" name="gender" type="radio" value="homme">
+					</label>
+					<label for="femme">Femme
+						<input id="femme" name="gender" type="radio" value="femme">
+					</label>
+					<label for="autre">Autre
+						<input id="autre" name="gender" type="radio" value="autre">
+					</label>
+				</fieldset>
 				<fieldset class="padding">
 					<legend>Naissance</legend>
 					<input id="birthdate" name="birthdate" required type="date">
@@ -47,7 +50,8 @@ ob_start();
 			<form action="/login" method="post">
 				<h1>Se connecter</h1>
 				<label>Email ou pseudo
-					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
+					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required
+					       type="text"/>
 				</label>
 				<label>Mot de passe
 					<input
@@ -55,23 +59,23 @@ ob_start();
 						required type="password"
 					/>
 				</label>
-			<button>Se connecter</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Re-bonjour !</h1>
-				<p>Pour vous connecter, entrez vos identifiants ici</p>
-				<button class="ghost" id="signIn">Se connecter</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Bienvenue !</h1>
-				<p>Démarrez votre aventure, créez votre compte ici</p>
-				<button class="ghost" id="signUp">S'identifier</button>
+				<button>Se connecter</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Re-bonjour !</h1>
+					<p>Pour vous connecter, entrez vos identifiants ici</p>
+					<button class="ghost" id="signIn">Se connecter</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Bienvenue !</h1>
+					<p>Démarrez votre aventure, créez votre compte ici</p>
+					<button class="ghost" id="signUp">S'identifier</button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 <?php
 $content = ob_get_clean();

@@ -22,9 +22,9 @@ body {
 }
 
 .title {
+	margin-bottom: 2rem;
 	padding: 0 1rem 1rem;
 	position: relative;
-	margin-bottom: 2rem;
 }
 
 .title > h1 {

@@ -1,16 +1,16 @@
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #e8e8e8;
-    --bg-ternary: #c0c0c0;
-    --bg-quaternary: #dddddd;
-    --border: #c0c0c0;
-    --fg-primary: #000000;
-    --fg-secondary: #3c4141;
-    --input-invalid: #ff5555;
-    --input-placeholder: #5a5a5a;
-    --input-radio: #3e8bff;
-    --input-valid: #4cff4c;
-    --react-bg: #8996c8;
-    --react-border: #3d5362;
-    --react-fg: #9747ff;
+	--bg-primary: #ffffff;
+	--bg-quaternary: #dddddd;
+	--bg-secondary: #e8e8e8;
+	--bg-ternary: #c0c0c0;
+	--border: #c0c0c0;
+	--fg-primary: #000000;
+	--fg-secondary: #3c4141;
+	--input-invalid: #ff5555;
+	--input-placeholder: #5a5a5a;
+	--input-radio: #3e8bff;
+	--input-valid: #4cff4c;
+	--react-bg: #8996c8;
+	--react-border: #3d5362;
+	--react-fg: #9747ff;
 }

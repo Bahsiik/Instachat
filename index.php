@@ -25,7 +25,6 @@ use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
 use Controllers\Post\AddPost;
-use Controllers\Post\GetComments;
 use Controllers\Post\GetFeed;
 use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
@@ -56,8 +55,8 @@ try {
 
 	switch ($firstSegment) {
 		default:
-            global $posts;
-            $posts = (new GetFeed())->execute($_SESSION);
+			global $posts;
+			$posts = (new GetFeed())->execute($_SESSION);
 			(new HomePage())->execute();
 			break;
 
@@ -90,21 +89,21 @@ try {
 			echo json_encode($trends);
 			break;
 
-        case 'friends':
-            redirect_if_method_not('GET', '/');
-            global $friend_list;
-            $friend_list = (new GetFriends())->execute($connected_user);
-            global $friend_requests;
-            $friend_requests = (new GetFriendRequests())->execute($connected_user);
-            global $sent_requests;
-            $sent_requests = (new GetSentRequests())->execute($connected_user);
-            (new FriendPage())->execute($connected_user);
-            echo json_encode($friend_list);
-            echo "<br><br>";
-            echo json_encode($friend_requests);
-            echo "<br><br>";
-            echo json_encode($sent_requests);
-            break;
+		case 'friends':
+			redirect_if_method_not('GET', '/');
+			global $friend_list;
+			$friend_list = (new GetFriends())->execute($connected_user);
+			global $friend_requests;
+			$friend_requests = (new GetFriendRequests())->execute($connected_user);
+			global $sent_requests;
+			$sent_requests = (new GetSentRequests())->execute($connected_user);
+			(new FriendPage())->execute($connected_user);
+			echo json_encode($friend_list);
+			echo "<br><br>";
+			echo json_encode($friend_requests);
+			echo "<br><br>";
+			echo json_encode($sent_requests);
+			break;
 	}
 } catch (Exception $e) {
 	echo $e->getMessage();

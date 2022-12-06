@@ -1,4 +1,4 @@
-<?php use Model\Emotion;
+<?php
 
 $css = ['homepage.css'];
 $title = 'Instachat';

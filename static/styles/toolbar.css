@@ -1,18 +1,18 @@
 .toolbar-container {
 	align-items: flex-start;
 	background-color: var(--bg-secondary);
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	height: 100vh;
+	justify-content: space-between;
 	left: 0;
 	padding: 2rem 1rem;
 	position: sticky;
 	top: 0;
 	width: 471px;
 	z-index: 100;
-	justify-content: space-between;
-	box-sizing: border-box;
 }
 
 .toolbar-top-container {
@@ -88,21 +88,21 @@
 }
 
 .user-info {
-	display: flex;
-	flex-direction: row;
 	align-items: center;
-	padding: 5px 18px 5px 12px;
-	width: 87%;
 	background: var(--bg-primary);
 	border-radius: 50px;
+	display: flex;
+	flex-direction: row;
+	padding: 5px 18px 5px 12px;
+	width: 87%;
 }
 
 .user-avatar {
 	border-radius: 61px;
 	height: 48px;
+	margin-right: 10px;
 	object-fit: contain;
 	width: 48px;
-	margin-right: 10px;
 }
 
 .user-username, .user-display-name {
@@ -134,7 +134,7 @@
 .toolbar-item-selected {
 	background: linear-gradient(180deg, #FD2B55 0%, #F8F004 100%);
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 	background-clip: text;
+	-webkit-text-fill-color: transparent;
 	text-fill-color: transparent;
 }
