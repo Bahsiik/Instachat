@@ -18,8 +18,8 @@ button[type='submit']:hover {
 }
 
 .options {
-	flex: 1;
-	margin: 2rem;
+	padding: 20px 44px;
+	width: 100%;
 }
 
 .options-container {
