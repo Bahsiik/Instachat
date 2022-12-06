@@ -15,6 +15,7 @@ require_once('src/controllers/friend/GetFriends.php');
 require_once('src/controllers/friend/GetFriendRequests.php');
 require_once('src/controllers/friend/GetSentRequests.php');
 require_once('src/lib/utils.php');
+require_once('src/model/Post.php');
 
 use Controllers\Friend\GetFriendRequests;
 use Controllers\Friend\GetFriends;

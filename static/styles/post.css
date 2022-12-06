@@ -43,7 +43,7 @@
 }
 
 .post-info {
-    gap: 5px;
+    gap: 8px;
     height: fit-content;
     text-align: center;
 }
@@ -85,4 +85,13 @@
 
 .post-display-name {
     font-weight: 700;
+}
+
+.post-emotion {
+    padding: 0;
+}
+
+.post-emotion .emoji {
+    width: 17px;
+    height: 17px;
 }
