@@ -67,7 +67,7 @@ enum FontSize: int {
 }
 
 class User {
-	public ?Blob $avatar;
+	public ?Blob $avatar = null;
 	public Background $background;
 	public DateTime $birth_date;
 	public Color $color;
@@ -101,6 +101,10 @@ class User {
 
 	public function getDisplayOrUsername(): string {
 		return $this->display_name ?? $this->username;
+	}
+
+	public function displayAvatar(): string {
+		return $this->avatar?->toLink() ?? '/static/images/logo.png';
 	}
 }
 

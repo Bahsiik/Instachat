@@ -6,6 +6,8 @@ use Model\Emotion;
 use Model\Post;
 use Model\User;
 
+require_once('src/controllers/user/GetUser.php');
+
 $css[] = 'post.css';
 $user_controller = new GetUser();
 /** @var Post $post */
@@ -16,7 +18,7 @@ $user = $user_controller->execute($post->author_id);
 global $comments; ?>
 <div class="post-container">
 	<div class="post-avatar">
-		<img src="<?= $user->avatar->toLink() ?>" alt="avatar">
+		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
