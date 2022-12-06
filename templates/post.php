@@ -2,25 +2,27 @@
 use Model\User;
 use Model\Post;
 use Model\Comment;
+use Controllers\User\GetUser;
 
 $css[] = 'post.css';
-/** @var User $connected_user */
-global $connected_user;
+$user_controller =  new GetUser();
 /** @var Post $post */
 global $post;
+/** @var User $user */
+$user = $user_controller->execute($post->author_id);
 /** @var Comment[] $comments */
 global $comments; ?>
 <div class="post-container">
     <div class="post-avatar">
-        <img src="../static/images/logo.png" alt="avatar">
+        <img src="<?= $user->avatar->toLink()?>" alt="avatar">
     </div>
     <div class="post-right-part">
         <div class="post-info">
             <div class="post-display-name">
-                <?= $connected_user->getDisplayOrUsername() ?>
+                <?= $user->getDisplayOrUsername() ?>
             </div>
             <div class="post-username">
-                <?= "@$connected_user->username" ?>
+                <?= "@$user->username" ?>
             </div>
             <div class="post-dot-separator">·</div>
             <div class="post-date">
