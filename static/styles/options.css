@@ -1,5 +1,5 @@
 .danger {
-	color: var(--input-invalid)
+	color: var(--input-invalid);
 }
 
 button[type='submit'] {

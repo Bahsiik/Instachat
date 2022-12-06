@@ -1,17 +1,19 @@
 .toolbar-container {
+	--size: 16rem;
 	align-items: flex-start;
 	background-color: var(--bg-secondary);
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
 	height: 100vh;
 	justify-content: space-between;
 	left: 0;
+	max-width: var(--size);
+	min-width: var(--size);
 	padding: 2rem 1rem;
 	position: sticky;
 	top: 0;
-	width: 471px;
+	width: var(--size);
 	z-index: 100;
 }
 
@@ -35,7 +37,7 @@
 	gap: .75rem;
 	justify-content: flex-start;
 	letter-spacing: 1px;
-	padding: 0 .7rem;
+	padding: .7rem .7rem;
 	text-decoration: none;
 	transition: background-color .2s;
 	width: 75%;
