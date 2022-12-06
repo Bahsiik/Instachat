@@ -133,23 +133,23 @@ class UserRepository {
 		return $result || throw new RuntimeException('Could not create user');
 	}
 
-	public function deleteUserById(int $id): void {
+	public function deleteUserById(float $id): void {
 		$statement = $this->databaseConnection->prepare('DELETE FROM users WHERE id = :id');
 		$statement->execute(compact('id'));
 	}
 
 	/**
-	 * @param int $id
+	 * @param float $id
 	 * @return Array<User>
 	 */
-	public function getFriendsOfUser(int $id): array {
+	public function getFriendsOfUser(float $id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
 		$statement->execute(compact('id'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		return $user === false ? throw new RuntimeException('User not found') : $user;
 	}
 
-	public function getUserById(int $id): ?User {
+	public function getUserById(float $id): ?User {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
 		$statement->setFetchMode(PDO::FETCH_CLASS, User::class);
 		$statement->execute(compact('id'));
