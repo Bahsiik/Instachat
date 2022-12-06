@@ -16,7 +16,7 @@ body {
 	cursor: pointer;
 }
 
-span {
+.emoji-span {
 	align-items: center;
 	border-radius: 20px;
 	border-radius: 9px;
