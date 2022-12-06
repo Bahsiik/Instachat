@@ -33,7 +33,7 @@
     width: 100%;
     height: fit-content;
     background: #252525;
-    border-bottom: 1px solid #3E3F3F;
+    border-bottom: 1px solid var(--border);
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
