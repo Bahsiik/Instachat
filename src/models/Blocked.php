@@ -1,12 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Model;
+namespace Src\Models;
 
-require_once('src/lib/DatabaseConnection.php');
-
-use Database\DatabaseConnection;
 use PDO;
+use Src\Lib\DatabaseConnection;
 
 class Blocked {
 	public float $blocker_id;

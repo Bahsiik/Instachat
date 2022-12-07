@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Controllers\Post;
+namespace Src\Controllers\Post;
 
-use Model\Post;
-use Model\PostRepository;
+use Src\Models\Post;
+use Src\Models\PostRepository;
 
 class GetPost {
 	public function execute(int $id): Post {
 		return (new PostRepository())->getPost($id);
 	}
 }
-
-

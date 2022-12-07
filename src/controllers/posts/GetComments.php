@@ -1,12 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Controllers\Post;
+namespace Src\Controllers\Post;
 
-require_once('src/model/Comment.php');
-
-use Model\Comment;
-use Model\CommentRepository;
+use Src\Models\Comment;
+use Src\Models\CommentRepository;
 
 class GetComments {
 	/**

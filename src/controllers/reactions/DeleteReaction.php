@@ -1,10 +1,10 @@
 <?php
 
-namespace Controllers\Reaction;
+namespace Src\Controllers\Reactions;
 
-use Model\Post;
-use Model\ReactionsRepository;
-use Model\User;
+use Src\Models\Post;
+use Src\Models\ReactionsRepository;
+use Src\Models\User;
 
 class DeleteReaction {
 	public function execute(Post|float $id, User|float $user, string $emoji): void {

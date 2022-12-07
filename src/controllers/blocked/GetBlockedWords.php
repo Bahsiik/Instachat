@@ -1,9 +1,9 @@
 <?php
 
-namespace Controllers\Friend;
+namespace Src\Controllers\Blocked;
 
-use Model\BlockedRepository;
-use Model\User;
+use Src\Models\BlockedRepository;
+use Src\Models\User;
 
 class GetBlockedWords {
 	public function execute(User $connected_user): array {

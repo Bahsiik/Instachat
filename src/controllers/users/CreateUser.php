@@ -1,12 +1,10 @@
 <?php
 
-namespace Controllers\User;
+namespace Src\Controllers\Users;
 
-require_once('src/model/User.php');
-
-use Model\UserRepository;
 use RuntimeException;
-use function Lib\Utils\redirect;
+use Src\Models\UserRepository;
+use function Src\Lib\Utils\redirect;
 
 class CreateUser {
 	public function execute(array $input): void {

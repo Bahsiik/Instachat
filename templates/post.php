@@ -1,12 +1,11 @@
 <?php
 
-use Controllers\User\GetUser;
-use Model\Comment;
-use Model\Emotion;
-use Model\Post;
-use Model\User;
+use Src\Controllers\Users\GetUser;
+use Src\Models\Comment;
+use Src\Models\Emotion;
+use Src\Models\Post;
+use Src\Models\User;
 
-require_once('src/controllers/user/GetUser.php');
 
 $css[] = 'post.css';
 $user_controller = new GetUser();
@@ -81,5 +80,3 @@ global $comments; ?>
 		</div>
 	</div>
 </div>
-
-

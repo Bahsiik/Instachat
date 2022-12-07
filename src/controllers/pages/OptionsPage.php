@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers\Pages;
+namespace Src\Controllers\Pages;
 
-use Model\User;
+use Src\Models\User;
 
 class OptionsPage {
 	public function execute(User $current_user): void {

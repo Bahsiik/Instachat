@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\Pages;
+namespace Src\Controllers\Pages;
 
 class AuthentificationPage {
 	public function execute(): void {

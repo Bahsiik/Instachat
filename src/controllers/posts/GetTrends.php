@@ -1,10 +1,8 @@
 <?php
 
-namespace Controllers\Post;
+namespace Src\Controllers\Post;
 
-require_once('src/model/Post.php');
-
-use Model\PostRepository;
+use Src\Models\PostRepository;
 
 class GetTrends {
 	public function execute(): array {

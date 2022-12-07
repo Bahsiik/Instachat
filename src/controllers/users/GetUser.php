@@ -1,11 +1,9 @@
 <?php
 
-namespace Controllers\User;
+namespace Src\Controllers\Users;
 
-use Model\User;
-use Model\UserRepository;
-
-require_once('src/model/User.php');
+use Src\Models\User;
+use Src\Models\UserRepository;
 
 class GetUser {
 	public function execute(float $id): ?User {

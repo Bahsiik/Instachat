@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Controllers\User;
+namespace Src\Controllers\Users;
 
-use Model\User;
-use Model\UserRepository;
+use Src\Models\User;
+use Src\Models\UserRepository;
 
 class DeleteUser {
 	public function execute(User|float $input): void {

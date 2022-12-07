@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Controllers\Post;
+namespace Src\Controllers\Post;
 
-use Model\Post;
-use Model\PostRepository;
+use Src\Models\Post;
+use Src\Models\PostRepository;
 
 class DeletePost {
 	public function execute(Post|float $post): void {

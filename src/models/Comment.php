@@ -1,14 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Model;
+namespace Src\Models;
 
-require_once('src/lib/DatabaseConnection.php');
-
-
-use Database\DatabaseConnection;
 use DateTime;
+use Exception;
 use PDO;
+use Src\Lib\DatabaseConnection;
 
 class Comment {
 	public DateTime $created_at;
@@ -83,7 +81,7 @@ class CommentRepository {
 					$comment['$created_at']
 				);
 			}
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			return [];
 		}
 		return $comments;

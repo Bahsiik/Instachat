@@ -1,16 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Model;
+namespace Src\Models;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/lib/Blob.php');
-
-use Database\DatabaseConnection;
 use DateTime;
 use Exception;
 use PDO;
-use Utils\Blob;
+use Src\Lib\Blob;
+use Src\Lib\DatabaseConnection;
 
 enum Emotion: int {
 	case HAPPY = 1;

@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Model;
+namespace Src\Models;
 
-require_once('src/lib/DatabaseConnection.php');
 
-use Database\DatabaseConnection;
 use DateTime;
 use Exception;
 use PDO;
 use RuntimeException;
-use Utils\Blob;
+use Src\Lib\Blob;
+use Src\Lib\DatabaseConnection;
 
 enum Color: int {
 	case Orange = 0;

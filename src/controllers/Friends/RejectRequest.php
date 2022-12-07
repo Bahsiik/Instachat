@@ -1,11 +1,11 @@
 <?php
 
-namespace Controllers\Friend;
+namespace Src\Controllers\Friends;
 
-use Model\FriendRepository;
-use Model\User;
 use RuntimeException;
-use function Lib\Utils\redirect;
+use Src\Models\FriendRepository;
+use Src\Models\User;
+use function Src\Lib\Utils\redirect;
 
 class RejectRequest {
 	public function execute(User $connected_user, array $input): void {

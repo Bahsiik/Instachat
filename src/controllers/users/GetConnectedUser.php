@@ -1,11 +1,9 @@
 <?php
 
-namespace Controllers\User;
+namespace Src\Controllers\Users;
 
-require_once('src/model/User.php');
-
-use Model\User;
-use Model\UserRepository;
+use Src\Models\User;
+use Src\Models\UserRepository;
 
 class GetConnectedUser {
 	public function execute(array $input): ?User {
