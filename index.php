@@ -30,6 +30,7 @@ use Controllers\Post\GetTrends;
 use Controllers\User\CreateUser;
 use Controllers\User\GetConnectedUser;
 use Controllers\User\LoginUser;
+use Model\User;
 use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
 
@@ -41,6 +42,9 @@ try {
 	$uriSegments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 	$firstSegment = $uriSegments[1] ?? '';
 
+	/**
+	 * @var User $connected_user
+	 */
 	global $connected_user;
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
 	if ($connected_user !== null && $method === 'GET') {
@@ -79,6 +83,11 @@ try {
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
+		case 'delete':
+			redirect_if_method_not('POST', '/');
+			(new DeletePost())->execute($connected_user, $_POST);
+			break;
+
 		case 'options':
 			(new OptionsPage())->execute($connected_user);
 			break;
@@ -99,9 +108,9 @@ try {
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
 			(new FriendPage())->execute($connected_user);
 			echo json_encode($friend_list);
-			echo "<br><br>";
+			echo '<br><br>';
 			echo json_encode($friend_requests);
-			echo "<br><br>";
+			echo '<br><br>';
 			echo json_encode($sent_requests);
 			break;
 	}

@@ -12,8 +12,7 @@ class GetComments {
 	/**
 	 * @return Array<Comment>
 	 */
-	public function execute(int $post_id): array {
+	public function execute(float $post_id): array {
 		return (new CommentRepository())->getCommentsByPost($post_id);
 	}
-
 }

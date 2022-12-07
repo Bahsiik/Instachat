@@ -36,7 +36,7 @@ class ReactionsRepository {
 		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
 	}
 
-	public function deleteReaction(float $post_id, string $emoji, float $user_id): void {
+	public function deleteReaction(float $post_id, float $user_id, string $emoji): void {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			DELETE reaction_users
 			FROM reaction_users
