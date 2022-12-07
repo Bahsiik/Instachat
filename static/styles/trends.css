@@ -1,0 +1,38 @@
+.trends-container {
+    background-color: var(--bg-secondary);
+    border-radius: 25px;
+    padding: 15px;
+    width: 20rem;
+    font-size: 0.85em;
+}
+
+.trend {
+    border-bottom: 1px solid var(--border);
+    padding:  0.75rem 1rem;
+}
+
+.trend p {
+    margin: 0;
+    padding: 0.15rem 0;
+}
+
+.trend-rank, .trend-number{
+    color: var(--fg-secondary);
+}
+
+.trend-content {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.show-more button {
+    color: var(--url);
+    margin: 0.75rem 0.6rem;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+}
+
+.show-more button:hover {
+    cursor: pointer;
+}
