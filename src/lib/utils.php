@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Lib\Utils;
+namespace Lib\Utils;
 
 function redirect(string $url): never {
 	header("Location: $url");

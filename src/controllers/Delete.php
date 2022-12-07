@@ -1,11 +1,11 @@
 <?php
 
-namespace Src\Controllers;
+namespace Controllers;
 
-use Src\Controllers\Post\DeleteComment;
-use Src\Controllers\Post\DeletePost;
-use Src\Controllers\Reactions\DeleteReaction;
-use Src\Controllers\Users\DeleteUser;
+use Controllers\Post\DeleteComment;
+use Controllers\Post\DeletePost;
+use Controllers\Reaction\DeleteReaction;
+use Controllers\User\DeleteUser;
 
 enum DeleteType: int {
 	case POST = 0;

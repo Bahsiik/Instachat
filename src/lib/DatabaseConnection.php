@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Lib;
+namespace Database;
 
 use PDO;
 

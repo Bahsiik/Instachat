@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Models;
+namespace Model;
 
+require_once('src/lib/DatabaseConnection.php');
 
+use Database\DatabaseConnection;
 use PDO;
-use Src\Lib\DatabaseConnection;
 
 class Reaction {
 	public string $emoji;

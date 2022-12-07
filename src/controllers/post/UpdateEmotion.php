@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Controllers\Post;
+namespace Controllers\Post;
 
-use Src\Models\Emotion;
-use Src\Models\PostRepository;
+use Model\Emotion;
+use Model\PostRepository;
 
 class UpdateEmotion {
 	public function execute(float $id, Emotion $emotion): void {

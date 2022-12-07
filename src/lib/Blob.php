@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Lib;
+namespace Utils;
 
 class Blob {
 	public function __construct(

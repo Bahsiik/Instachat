@@ -14,19 +14,6 @@
       "name": "Bahsiik"
     }
   ],
-  "autoload": {
-    "psr-4": {
-      "Src\\Controllers\\": "src/controllers/",
-      "Src\\Controllers\\Blocked\\": "src/controllers/blocked/",
-      "Src\\Controllers\\Friends\\": "src/controllers/friends/",
-      "Src\\Controllers\\Pages\\": "src/controllers/pages/",
-      "Src\\Controllers\\Post\\": "src/controllers/posts/",
-      "Src\\Controllers\\Reactions\\": "src/controllers/reactions/",
-      "Src\\Controllers\\Users\\": "src/controllers/users/",
-      "Src\\Lib\\": "src/lib/",
-      "Src\\Models\\": "src/models/"
-    }
-  },
   "require": {
     "ext-pdo": "*",
     "ext-intl": "*"

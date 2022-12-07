@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Controllers\Pages;
+namespace Controllers\Pages;
 
-use Src\Models\User;
+use Model\User;
 
 class FriendPage {
 	public function execute(User $connected_user): void {

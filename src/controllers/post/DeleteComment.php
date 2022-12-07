@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Controllers\Post;
+namespace Controllers\Post;
 
-use Src\Models\Comment;
-use Src\Models\CommentRepository;
+use Model\Comment;
+use Model\CommentRepository;
 
 class DeleteComment {
 	public function execute(Comment|float $comment): void {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Controllers\Post;
+namespace Controllers\Post;
 
-use Src\Models\Post;
-use Src\Models\PostRepository;
+use Model\Post;
+use Model\PostRepository;
 
 class GetPostsByUser {
 	/**

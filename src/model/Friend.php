@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Models;
+namespace Model;
 
+require_once('src/lib/DatabaseConnection.php');
+
+use Database\DatabaseConnection;
 use DateTime;
-use Exception;
 use PDO;
-use Src\Lib\DatabaseConnection;
 
 class Friend {
 	public DateTime $send_date;
@@ -76,7 +77,7 @@ class FriendRepository {
 					$friend['response_date'],
 				);
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			return [];
 		}
 		return $friends;
@@ -97,7 +98,7 @@ class FriendRepository {
 					$friend['response_date'],
 				);
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			return [];
 		}
 		return $friends;
@@ -118,7 +119,7 @@ class FriendRepository {
 					$friend['response_date'],
 				);
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			return [];
 		}
 		return $friends;

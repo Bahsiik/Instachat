@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Controllers\Post;
+namespace Controllers\Post;
 
-use Src\Models\Post;
-use Src\Models\PostRepository;
+require_once('src/model/Post.php');
+
+use Model\Post;
+use Model\PostRepository;
 
 class GetFeed {
 	/**

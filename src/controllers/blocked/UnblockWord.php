@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Controllers\Blocked;
+namespace Controllers\Friend;
 
+use Model\BlockedRepository;
+use Model\User;
 use RuntimeException;
-use Src\Models\BlockedRepository;
-use Src\Models\User;
 
 class UnblockWord {
 	public function execute(User $connected_user, array $input): void {

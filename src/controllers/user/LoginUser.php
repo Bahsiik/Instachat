@@ -1,11 +1,13 @@
 <?php
 
-namespace Src\Controllers\Users;
+namespace Controllers\User;
+
+require_once('src/model/User.php');
 
 use Exception;
+use Model\UserRepository;
 use RuntimeException;
-use Src\Models\UserRepository;
-use function Src\Lib\Utils\redirect;
+use function Lib\Utils\redirect;
 
 class LoginUser {
 	/**

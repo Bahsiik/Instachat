@@ -1,23 +1,38 @@
 <?php
 
-require_once('vendor/autoload.php');
+require_once('src/controllers/pages/AuthentificationPage.php');
+require_once('src/controllers/pages/HomePage.php');
+require_once('src/controllers/pages/FriendPage.php');
+require_once('src/controllers/pages/OptionsPage.php');
+require_once('src/controllers/post/AddPost.php');
+require_once('src/controllers/post/GetTrends.php');
+require_once('src/controllers/post/GetFeed.php');
+require_once('src/controllers/post/GetComments.php');
+require_once('src/controllers/user/CreateUser.php');
+require_once('src/controllers/user/GetConnectedUser.php');
+require_once('src/controllers/user/LoginUser.php');
+require_once('src/controllers/friend/GetFriends.php');
+require_once('src/controllers/friend/GetFriendRequests.php');
+require_once('src/controllers/friend/GetSentRequests.php');
+require_once('src/lib/utils.php');
+require_once('src/model/Post.php');
 
-use Src\Controllers\Friends\GetFriendRequests;
-use Src\Controllers\Friends\GetFriends;
-use Src\Controllers\Friends\GetSentRequests;
-use Src\Controllers\Pages\AuthentificationPage;
-use Src\Controllers\Pages\FriendPage;
-use Src\Controllers\Pages\HomePage;
-use Src\Controllers\Pages\OptionsPage;
-use Src\Controllers\Post\AddPost;
-use Src\Controllers\Post\GetFeed;
-use Src\Controllers\Post\GetTrends;
-use Src\Controllers\Users\CreateUser;
-use Src\Controllers\Users\GetConnectedUser;
-use Src\Controllers\Users\LoginUser;
-use Src\Models\User;
-use function Src\Lib\Utils\redirect;
-use function Src\Lib\Utils\redirect_if_method_not;
+use Controllers\Friend\GetFriendRequests;
+use Controllers\Friend\GetFriends;
+use Controllers\Friend\GetSentRequests;
+use Controllers\Pages\AuthentificationPage;
+use Controllers\Pages\FriendPage;
+use Controllers\Pages\HomePage;
+use Controllers\Pages\OptionsPage;
+use Controllers\Post\AddPost;
+use Controllers\Post\GetFeed;
+use Controllers\Post\GetTrends;
+use Controllers\User\CreateUser;
+use Controllers\User\GetConnectedUser;
+use Controllers\User\LoginUser;
+use Model\User;
+use function Lib\Utils\redirect;
+use function Lib\Utils\redirect_if_method_not;
 
 session_start();
 date_default_timezone_set('Europe/Paris');

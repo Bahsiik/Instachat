@@ -1,7 +1,7 @@
 <?php
 
-use Src\Controllers\Post\GetComments;
-use Src\Models\Emotion;
+use Controllers\Post\GetComments;
+use Model\Emotion;
 
 $css = ['homepage.css'];
 $title = 'Instachat';
@@ -70,7 +70,7 @@ if (isset($connected_user)) { ?>
 		</div>
 	</div>
 
-	<?php
+<?php
 } ?>
 <?php
 $content = ob_get_clean();
