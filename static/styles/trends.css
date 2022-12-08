@@ -3,7 +3,7 @@
     border-radius: 25px;
     padding: 5px 15px;
     margin: 50px;
-    width: 20rem;
+    min-width: 15rem;
     font-size: 0.85em;
     height: fit-content;
 }
@@ -31,6 +31,11 @@
     font-weight: bold;
 }
 
+.trend-content p {
+    width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .show-more button {
     color: var(--url);
     margin: 0.75rem 0.6rem;

@@ -49,7 +49,7 @@ body {
 
 .homepage-container {
 	padding: 20px 44px;
-	width: 100%;
+	width: 50rem;
 }
 
 .chat-area {
@@ -60,7 +60,8 @@ body {
 	font-family: var(--font);
 	min-height: 80px;
 	resize: none;
-	width: 100%;
+	width: 45rem;
+	overflow: hidden;
 }
 
 .post-form {

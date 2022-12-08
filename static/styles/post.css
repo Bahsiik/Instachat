@@ -34,7 +34,7 @@
 	gap: 12px;
 	height: fit-content;
 	padding: 8px 16px;
-	width: 100%;
+	width: 50rem;
 }
 
 .post-action-buttons, .post-top, .post-info {
@@ -56,6 +56,7 @@
 	display: flex;
 	flex-flow: column;
 	gap: 5px;
+	width: 45rem;
 }
 
 .post-action-buttons {
@@ -95,4 +96,9 @@
 .post-emotion .emoji {
 	height: 17px;
 	width: 17px;
+}
+
+.post-content {
+	word-wrap: break-word;
+	max-width: initial;
 }
