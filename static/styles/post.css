@@ -77,12 +77,12 @@
 
 .post-comment-btn:hover .post-action-buttons-color, .post-share-btn:hover .post-action-buttons-color, .post-reaction-btn:hover .post-action-buttons-color {
 	background-color: #e0892838;
-	color: var(--url);
 	border-radius: 9px;
+	color: var(--accent-color);
 }
 
 .post-comment-btn:hover .post-comment-count {
-	color: var(--url);
+	color: var(--accent-color);
 }
 
 .post-display-name {
@@ -99,6 +99,6 @@
 }
 
 .post-content {
-	word-wrap: break-word;
 	max-width: initial;
+	word-wrap: break-word;
 }

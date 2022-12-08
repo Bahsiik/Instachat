@@ -1,6 +1,6 @@
 :root {
+	--accent-color: #7422fa;
 	--gradient-colors: var(--gradient-first), var(--gradient-second);
 	--gradient-first: #2b4dfd;
 	--gradient-second: #aa04f8;
-	--url: #7422fa;
 }

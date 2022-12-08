@@ -59,9 +59,9 @@ body {
 	color: var(--input-placeholder);
 	font-family: var(--font);
 	min-height: 80px;
+	overflow: hidden;
 	resize: none;
 	width: 45rem;
-	overflow: hidden;
 }
 
 .post-form {
@@ -100,7 +100,7 @@ body {
 }
 
 .chat-action-buttons-color {
-	color: var(--url) !important;
+	color: var(--accent-color) !important;
 	font-size: 1.8rem !important;
 	margin-right: 5px;
 	padding: 5px !important;
@@ -128,7 +128,7 @@ body {
 
 .chat-image-btn:hover .chat-action-buttons-color {
 	background-color: #e089282b;
-	color: var(--url);
-	cursor: pointer;
 	border-radius: 9px;
+	color: var(--accent-color);
+	cursor: pointer;
 }

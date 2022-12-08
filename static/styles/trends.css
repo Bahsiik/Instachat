@@ -1,49 +1,50 @@
 .trends-container {
-    background-color: var(--bg-secondary);
-    border-radius: 25px;
-    padding: 5px 15px;
-    margin: 50px;
-    min-width: 15rem;
-    font-size: 0.85em;
-    height: fit-content;
+	background-color: var(--bg-secondary);
+	border-radius: 25px;
+	font-size: 0.85em;
+	height: fit-content;
+	margin: 50px;
+	min-width: 15rem;
+	padding: 5px 15px;
 }
 
 .trend {
-    border-bottom: 1px solid var(--border);
-    padding:  0.75rem 1rem;
+	border-bottom: 1px solid var(--border);
+	padding: 0.75rem 1rem;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .trend p {
-    margin: 0;
-    padding: 0.15rem 0;
+	margin: 0;
+	padding: 0.15rem 0;
 }
 
-.trend-rank, .trend-number{
-    color: var(--fg-secondary);
+.trend-rank, .trend-number {
+	color: var(--fg-secondary);
 }
 
 .trend-content {
-    font-size: 1.05rem;
-    font-weight: bold;
+	font-size: 1.05rem;
+	font-weight: bold;
 }
 
 .trend-content p {
-    width: 10rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 10rem;
 }
+
 .show-more button {
-    color: var(--url);
-    margin: 0.75rem 0.6rem;
-    background-color: transparent;
-    border: none;
-    font-family: inherit;
+	background-color: transparent;
+	border: none;
+	color: var(--accent-color);
+	font-family: inherit;
+	margin: 0.75rem 0.6rem;
 }
 
 .show-more button:hover {
-    cursor: pointer;
+	cursor: pointer;
 }

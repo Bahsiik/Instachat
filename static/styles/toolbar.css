@@ -130,8 +130,8 @@
 }
 
 .user-names-container {
-	flex: 1;
 	display: flex;
+	flex: 1;
 	flex-flow: column;
 }
 
