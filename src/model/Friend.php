@@ -68,7 +68,13 @@ class FriendRepository {
 		$friends = [];
 
 		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$friends[] = new Friend(...array_values($friend));
+			$friends[] = new Friend(
+				$friend['requester_id'],
+				$friend['requested_id'],
+				(int) $friend['accepted'],
+				$friend['send_date'],
+				$friend['response_date']
+			);
 		}
 
 		return $friends;
@@ -80,19 +86,31 @@ class FriendRepository {
 		$friends = [];
 
 		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$friends[] = new Friend(...array_values($friend));
+			$friends[] = new Friend(
+				$friend['requester_id'],
+				$friend['requested_id'],
+				(int) $friend['accepted'],
+				$friend['send_date'],
+				$friend['response_date']
+			);
 		}
 
 		return $friends;
 	}
 
 	public function getSentRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND accepted = FALSE');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND (accepted = FALSE OR accepted IS NULL)');
 		$statement->execute(compact('user_id'));
 		$friends = [];
 
 		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$friends[] = new Friend(...array_values($friend));
+			$friends[] = new Friend(
+				$friend['requester_id'],
+				$friend['requested_id'],
+				(int) $friend['accepted'],
+				$friend['send_date'],
+				$friend['response_date']
+			);
 		}
 		return $friends;
 	}
