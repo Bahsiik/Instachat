@@ -1,6 +1,7 @@
 <?php
 
 $css[] = 'trends.css';
+$js[] = 'trends.js';
 ?>
 <?php
 global $trends; ?>
@@ -12,25 +13,41 @@ global $trends; ?>
 			<?php
 			$index = 1;
 			foreach ($trends as $name => $count) {
-				?>
-				<div class="trend">
-					<div class="trend-rank">
-						<p><?= $index . ' • Tendances' ?></p>
+				if ($index < 6) {
+					?>
+					<div class="trend">
+						<div class="trend-rank">
+							<p><?= $index . ' • Tendances' ?></p>
+						</div>
+						<div class="trend-content">
+							<p><?= $name ?></p>
+						</div>
+						<div class="trend-number">
+							<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
+						</div>
 					</div>
-					<div class="trend-content">
-						<p><?= $name ?></p>
+					<?php
+				} else {
+					?>
+					<div class="trend hidden">
+						<div class="trend-rank">
+							<p><?= $index . ' • Tendances' ?></p>
+						</div>
+						<div class="trend-content">
+							<p><?= $name ?></p>
+						</div>
+						<div class="trend-number">
+							<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
+						</div>
 					</div>
-					<div class="trend-number">
-						<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
-					</div>
-				</div>
-				<?php
+					<?php
+				}
 				$index++;
 			}
 			?>
-<!--			<div class="show-more">-->
-<!--				<button>Afficher plus</button>-->
-<!--			</div>-->
+			<div class="show-more">
+				<button class="show-more-button" onclick="changeTrendsDisplay()">Afficher plus</button>
+			</div>
 		</div>
 	</div>
 <?php
