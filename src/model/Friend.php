@@ -81,7 +81,7 @@ class FriendRepository {
 	}
 
 	public function getFriendRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND accepted = FALSE');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND (accepted = FALSE OR accepted IS NULL)');
 		$statement->execute(compact('user_id'));
 		$friends = [];
 

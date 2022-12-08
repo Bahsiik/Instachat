@@ -14,7 +14,7 @@ $user = $user_controller->execute($post->author_id);
 ?>
 <div class="post-container">
 	<div class="post-avatar">
-		<img src="<?= $user->displayAvatar($connected_user) ?>" alt="avatar">
+		<img src="<?= $user->displayAvatar($user) ?>" alt="avatar">
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">

@@ -117,14 +117,6 @@ try {
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
 			(new FriendPage())->execute($connected_user);
-//			echo '<br><br>';
-//			echo 'friend requests';
-//			echo '<br>';
-//			echo json_encode($friend_requests);
-//			echo '<br><br>';
-//			echo 'sent requests';
-//			echo '<br>';
-//			echo json_encode($sent_requests);
 			break;
 	}
 } catch (Exception $exception) {

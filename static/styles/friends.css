@@ -52,6 +52,13 @@
 .friend > .friend-actions > button {
 	background: transparent;
 	border: none;
+}
+
+.friend > .friend-actions > .confirm {
+	color: var(--fg-primary);
+}
+
+.friend > .friend-actions > .cancel {
 	color: var(--input-invalid);
 }
 

@@ -2,7 +2,7 @@ function changeTrendsDisplay() {
 	const text = event.target.className;
 	switch (text) {
 		case "show-more-button":
-			const hiddenTrends = document.getElementsByClassName("hidden");
+			const hiddenTrends = document.getElementsByClassName("trend hidden");
 			[...hiddenTrends].forEach(trend => trend.classList.remove("hidden"));
 			document.getElementsByClassName("show-more-button")[0].innerText = "Afficher moins";
 			document.getElementsByClassName("show-more-button")[0].className = "show-less-button";
