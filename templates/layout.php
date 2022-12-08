@@ -7,29 +7,22 @@
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel='icon' href='../static/images/logo-<?= isset($connected_user) ? $connected_user->color->lowercaseName() : 'orange' ?>.png'>
 		<link rel='stylesheet' href='../static/styles/style.css'>
+
 		<?php
 		global $connected_user;
 		if ($connected_user === null) {
 			array_unshift($css, 'colors/orange.css', 'background/gray.css');
-			?>
-			<link rel="icon" href="../static/images/logo-orange.png">
-
-			<?php
 		} else {
 			array_unshift($css, "colors/{$connected_user->color->lowercaseName()}.css", "background/{$connected_user->background->lowercaseName()}.css");
-			?>
-			<link rel="icon" href="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png">
-			<?php
 		}
-		?>
 
-		<?php
 		foreach ($css as $css_file) { ?>
 			<link rel="stylesheet" href="../static/styles/<?= $css_file ?>">
 			<?php
-		} ?>
-		<?php
+		}
+
 		if (isset($js)) {
 			foreach ($js as $js_file) { ?>
 				<script defer src="../static/scripts/<?= $js_file ?>"></script>
