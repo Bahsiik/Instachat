@@ -20,6 +20,7 @@ require_once('src/controllers/post/GetFeed.php');
 require_once('src/controllers/post/GetTrends.php');
 require_once('src/controllers/user/CreateUser.php');
 require_once('src/controllers/user/GetConnectedUser.php');
+require_once('src/controllers/user/GetUser.php');
 require_once('src/controllers/user/LoginUser.php');
 require_once('src/controllers/user/UpdatePreferences.php');
 require_once('src/lib/utils.php');
@@ -83,8 +84,13 @@ try {
 
 		case 'getFeed':
 			redirect_if_method_not('GET', '/');
-			echo (new GetFeed())->execute($connected_user);
-			break;
+			$posts = (new GetFeed())->execute($connected_user);
+			global $post;
+			foreach ($posts as $post) {
+				require('templates/post.php');
+			}
+
+			exit();
 
 		case 'create':
 			if ($method === 'GET') (new AuthentificationPage())->execute();

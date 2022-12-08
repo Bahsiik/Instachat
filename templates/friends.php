@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 use Controllers\User\GetUser;
 
-require_once('src/controllers/user/GetUser.php');
-
 $friend_controller = new GetUser();
 
 $css[] = 'friends.css';
@@ -127,7 +125,6 @@ global $sent_requests;
 				}
 				?>
 			</div>
-
 		</div>
 	</div>
 

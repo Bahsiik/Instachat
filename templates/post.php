@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
+use Controllers\Post\GetComments;
 use Controllers\User\GetUser;
 use Model\Emotion;
-
-require_once('src/controllers/user/GetUser.php');
 
 $user_controller = new GetUser();
 
 global $post;
-global $comments;
 global $connected_user;
+$comments = (new GetComments())->execute($post->id);
 $user = $user_controller->execute($post->author_id);
 ?>
 <div class="post-container">

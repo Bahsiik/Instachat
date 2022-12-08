@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use Controllers\Post\GetComments;
 use Model\Emotion;
 
 $css = ['homepage.css', 'post.css'];
@@ -56,9 +55,7 @@ global $posts; ?>
 			<?php
 			if (count($posts) > 0) {
 				global $post;
-				global $comments;
 				foreach ($posts as $post) {
-					$comments = (new GetComments())->execute($post->id);
 					require('post.php');
 				}
 			} else {
