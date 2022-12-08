@@ -13,8 +13,6 @@ require_once('toolbar.php');
 global $connected_user; ?>
 <?php
 global $posts; ?>
-<?php
-if (isset($connected_user)) { ?>
 	<div class="homepage-container">
 		<div class="title">
 			<h1>Accueil</h1>
@@ -69,9 +67,9 @@ if (isset($connected_user)) { ?>
 			?>
 		</div>
 	</div>
-
 <?php
-} ?>
+require_once ('trends.php');
+?>
 <?php
 $content = ob_get_clean();
 require_once('layout.php');

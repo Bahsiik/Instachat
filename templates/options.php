@@ -36,7 +36,7 @@ require_once('toolbar.php');
 						</div>
 						<span class="material-symbols-outlined arrow">navigate_next</span>
 					</div>
-				<?php
+					<?php
 				} ?>
 
 				<div class="option">
@@ -51,37 +51,37 @@ require_once('toolbar.php');
 				<form action="/options" class="options-group active" data-option-number="0" method="post">
 					<label>Nom d'utilisateur
 						<input
-							autocomplete="username"
-							maxlength="20"
-							minlength="2"
-							pattern="[\_\-a-zA-Z0-9]{2,20}"
-							placeholder="Nom d'utilisateur"
-							required
-							type="text"
-							value="<?= $connected_user->username ?>"
+								autocomplete="username"
+								maxlength="20"
+								minlength="2"
+								pattern="[\_\-a-zA-Z0-9]{2,20}"
+								placeholder="Nom d'utilisateur"
+								required
+								type="text"
+								value="<?= $connected_user->username ?>"
 						>
 					</label>
 					<label>Nom Affiché
 						<input
-							autocomplete="name"
-							maxlength="48"
-							minlength="2"
-							pattern="[\_\-a-zA-Z0-9]{2,48}"
-							placeholder="Nom Affiché"
-							required
-							type="text"
-							value="<?= $connected_user->getDisplayOrUsername() ?>"
+								autocomplete="name"
+								maxlength="48"
+								minlength="2"
+								pattern="[\_\-a-zA-Z0-9]{2,48}"
+								placeholder="Nom Affiché"
+								required
+								type="text"
+								value="<?= $connected_user->getDisplayOrUsername() ?>"
 						>
 					</label>
 					<label>Email
 						<input
-							autocomplete="email"
-							maxlength="320"
-							minlength="5"
-							placeholder="Email"
-							required
-							type="email"
-							value="<?= $connected_user->email ?>"
+								autocomplete="email"
+								maxlength="320"
+								minlength="5"
+								placeholder="Email"
+								required
+								type="email"
+								value="<?= $connected_user->email ?>"
 						>
 					</label>
 
@@ -128,11 +128,11 @@ require_once('toolbar.php');
 					       value="<?= $connected_user->username ?>">
 
 					<label>Ancien mot de passe
-						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe"
+						<input autocomplete="current-password" maxlength="64" minlength="4" placeholder="Mot de passe"
 						       required type="password">
 					</label>
 					<label>Nouveau mot de passe
-						<input autocomplete="new-password" maxlength="64" minlength="8"
+						<input autocomplete="new-password" maxlength="64" minlength="4"
 						       placeholder="Nouveau mot de passe" required type="password">
 					</label>
 					<label>Confirmer le nouveau mot de passe
@@ -229,9 +229,9 @@ require_once('toolbar.php');
 						}
 
 						$devs = [
-							new Dev("Pierre ROY", "Lead Développeur", "Ayfri"),
-							new Dev("Antoine PIZZETTA", "Développeur", "antaww"),
-							new Dev("Olivier MISTRAL", "Développeur", "Bahsiik"),
+							new Dev('Pierre ROY', 'Lead Développeur', 'Ayfri'),
+							new Dev('Antoine PIZZETTA', 'Développeur', 'antaww'),
+							new Dev('Olivier MISTRAL', 'Développeur', 'Bahsiik'),
 						];
 
 						foreach ($devs as $dev) {
@@ -252,7 +252,7 @@ require_once('toolbar.php');
 					</ul>
 				</div>
 
-				<form action="/delete" class="options-group" data-option-number="5" method="post">
+				<form action="/delete?type=user" class="options-group" data-option-number="5" method="post">
 					<h3>Supprimer mon compte</h3>
 					<p class="subtitle">Cette action est irreversible et supprimera tous vos chats, réactions et
 						commentaires et vous déconnectera
@@ -261,7 +261,7 @@ require_once('toolbar.php');
 						@nomdutilisateur sera disponible pour tout le
 						monde.</p>
 					<label>Confirmer mot de passe
-						<input autocomplete="current-password" maxlength="64" minlength="8" placeholder="Mot de passe"
+						<input autocomplete="current-password" name="password" maxlength="64" minlength="4" placeholder="Mot de passe"
 						       required type="password">
 					</label>
 					<button class="delete-account">Supprimer mon compte</button>

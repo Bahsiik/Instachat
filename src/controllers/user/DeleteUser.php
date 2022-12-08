@@ -5,10 +5,16 @@ namespace Controllers\User;
 
 use Model\User;
 use Model\UserRepository;
+use RuntimeException;
+use function Lib\Utils\redirect;
 
 class DeleteUser {
-	public function execute(User|float $input): void {
-		$user_id = $input instanceof User ? $input->id : $input;
-		(new UserRepository())->deleteUserById($user_id);
+	public function execute(User $user, array $input): void {
+		$password = $input['password'] ?? throw new RuntimeException('Invalid input');
+		$is_valid = (new UserRepository())->checkHash($user->email, $password);
+		if (!$is_valid) throw new RuntimeException('Invalid password');
+
+		(new UserRepository())->deleteUserById($user->id);
+		redirect('/create');
 	}
 }

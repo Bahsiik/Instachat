@@ -122,7 +122,6 @@ class PostRepository {
 			$words = array_merge($words, $uniqueWords);
 		}
 		$words = array_filter($words, fn($word) => strlen($word) > 3);
-		$words = array_map('strtolower', $words);
 		$words = array_map('ucfirst', $words);
 		$words = array_count_values($words);
 		arsort($words);
