@@ -27,26 +27,7 @@ $user = $user_controller->execute($post->author_id);
 			<div class="post-dot-separator">·</div>
 			<div class="post-date">
 				<?php
-				$post_date = $post->creation_date;
-				$current_date = new DateTime();
-				$diff = $current_date->diff($post_date);
-				$date_only_formatter = IntlDateFormatter::create(
-					'fr_FR',
-					IntlDateFormatter::FULL,
-					IntlDateFormatter::FULL,
-					'Europe/Paris',
-					IntlDateFormatter::GREGORIAN,
-					'd MMMM yyyy'
-				);
-				if ($diff->days > 0) {
-					echo $date_only_formatter->format($post_date);
-				} else if ($diff->h > 0) {
-					echo $diff->h . ' h';
-				} else if ($diff->i > 0) {
-					echo $diff->i . ' min';
-				} else if ($diff->s >= 0) {
-					echo $diff->s . 's';
-				}
+				format_date_time($post->creation_date);
 				?>
 			</div>
 			<div class="post-emotion">

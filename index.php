@@ -19,6 +19,7 @@ require_once('src/controllers/user/GetConnectedUser.php');
 require_once('src/controllers/user/LoginUser.php');
 require_once('src/controllers/user/UpdatePreferences.php');
 require_once('src/lib/utils.php');
+require_once('src/lib/dateUtils.php');
 require_once('src/model/Post.php');
 
 use Controllers\Delete;
@@ -29,7 +30,6 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
-use Controllers\Pages\TrendPage;
 use Controllers\Post\AddPost;
 use Controllers\Post\GetFeed;
 use Controllers\Post\GetTrends;
@@ -106,26 +106,25 @@ try {
 			(new UpdatePreferences())->execute($connected_user, $_POST);
 			break;
 
-		case 'trend':
-			redirect_if_method_not('GET', '/');
-
-			(new TrendPage())->execute($connected_user);
-			break;
-
 		case 'friends':
 			redirect_if_method_not('GET', '/');
 			global $friend_list;
 			global $friend_requests;
 			global $sent_requests;
+			global $trends;
 			$friend_list = (new GetFriends())->execute($connected_user);
 			$friend_requests = (new GetFriendRequests())->execute($connected_user);
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
+			$trends = (new GetTrends())->execute();
 			(new FriendPage())->execute($connected_user);
-			echo json_encode($friend_list);
-			echo '<br><br>';
-			echo json_encode($friend_requests);
-			echo '<br><br>';
-			echo json_encode($sent_requests);
+//			echo '<br><br>';
+//			echo 'friend requests';
+//			echo '<br>';
+//			echo json_encode($friend_requests);
+//			echo '<br><br>';
+//			echo 'sent requests';
+//			echo '<br>';
+//			echo json_encode($sent_requests);
 			break;
 	}
 } catch (Exception $exception) {
