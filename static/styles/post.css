@@ -1,12 +1,12 @@
 .post-action-buttons-color {
-	color: var(--fg-secondary);
+	color: var(--fg-secondary) !important;
 	font-size: 1.4rem !important;
 	margin-right: 5px;
 	padding: 5px;
 	transition: all .3s;
 }
 
-.post-comment-btn, .post-reaction-btn, .post-share-btn {
+.post-comment-btn, .post-reaction-btn, .post-share-btn, .post-menu-btn, .menu-delete-btn {
 	align-items: center;
 	background: transparent;
 	border: none;
@@ -44,8 +44,10 @@
 }
 
 .post-info {
+	align-items: center;
 	gap: 8px;
 	height: fit-content;
+	justify-content: left;
 	text-align: center;
 }
 
@@ -72,14 +74,17 @@
 	transition: all .3s;
 }
 
-.post-comment-btn:hover, .post-reaction-btn:hover, .post-share-btn:hover {
+.post-comment-btn:hover, .post-reaction-btn:hover, .post-share-btn:hover, .post-menu-btn:hover, .menu-delete-btn:hover {
 	cursor: pointer;
 }
 
-.post-comment-btn:hover .post-action-buttons-color, .post-share-btn:hover .post-action-buttons-color, .post-reaction-btn:hover .post-action-buttons-color {
+.post-comment-btn:hover .post-action-buttons-color, .post-share-btn:hover .post-action-buttons-color, .post-reaction-btn:hover .post-action-buttons-color, .post-menu-btn:hover .post-action-buttons-color, .menu-delete-btn:hover .post-action-buttons-color {
 	background-color: var(--accent-transparent);
-	border-radius: 9px;
 	color: var(--accent-color);
+}
+
+.post-comment-btn .post-action-buttons-color, .post-share-btn .post-action-buttons-color, .post-reaction-btn .post-action-buttons-color, .post-menu-btn .post-action-buttons-color, .menu-delete-btn .post-action-buttons-color {
+	border-radius: 9px;
 }
 
 .post-comment-btn:hover .post-comment-count {
@@ -102,4 +107,8 @@
 .post-content {
 	max-width: initial;
 	word-wrap: break-word;
+}
+
+.post-menu {
+	margin-left: auto;
 }

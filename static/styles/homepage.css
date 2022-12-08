@@ -18,7 +18,7 @@ body {
 
 .emoji-span {
 	align-items: center;
-	border-radius: 20px;
+	border-radius: 30px;
 	display: flex;
 	height: fit-content;
 	justify-content: center;
@@ -128,7 +128,11 @@ body {
 
 .chat-image-btn:hover .chat-action-buttons-color {
 	background-color: var(--accent-transparent);
-	border-radius: 9px;
 	color: var(--accent-color);
 	cursor: pointer;
 }
+
+.chat-image-btn .chat-action-buttons-color {
+	border-radius: 9px;
+}
+

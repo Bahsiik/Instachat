@@ -32,8 +32,28 @@ $user = $user_controller->execute($post->author_id);
 				?>
 			</div>
 			<div class="post-emotion">
-				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
+				<span
+					class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
+			<?php
+			if ($connected_user->id === (int)$post->author_id) {
+				?>
+				<div class="post-menu">
+					<button type='submit' class='post-menu-btn'>
+						<span class='material-symbols-outlined post-action-buttons-color'>more_horiz</span>
+					</button>
+				</div>
+				<div class="menu-container menu-hidden">
+					<form action="/delete-post" method="post">
+						<input type="hidden" name="post_id" value="<?= $post->id ?>">
+						<button type="submit" class="menu-delete-btn"><span
+								class="material-symbols-outlined post-action-buttons-color">close</span>Supprimer
+						</button>
+					</form>
+				</div>
+				<?php
+			}
+			?>
 		</div>
 		<div class="post-content">
 			<?php
