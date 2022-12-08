@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\Friend;
 
@@ -9,9 +10,8 @@ use function Lib\Utils\redirect;
 
 class AcceptRequest {
 	public function execute(User $connected_user, array $input): void {
-		$friendRepository = new FriendRepository();
 		if (!isset($input['requester_id'])) throw new RuntimeException('Invalid input');
-		$friendRepository->acceptRequest($connected_user->id, $input['requester_id']);
+		(new FriendRepository())->acceptRequest($connected_user->id, $input['requester_id']);
 		redirect('/friends');
 	}
 }
