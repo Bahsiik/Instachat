@@ -1,13 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace Controllers\Friend;
+namespace Controllers\Blocked;
 
 use Model\BlockedRepository;
 use Model\User;
 
 class GetBlockedUsers {
 	public function execute(User $connected_user): array {
-		$friendRepository = new BlockedRepository();
-		return $friendRepository->getBlockedUsers($connected_user->id);
+		return (new BlockedRepository())->getBlockedUsers($connected_user->id);
 	}
 }

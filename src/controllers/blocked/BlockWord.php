@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace Controllers\Friend;
+namespace Controllers\Blocked;
 
 use Model\BlockedRepository;
 use Model\User;
@@ -8,8 +9,7 @@ use RuntimeException;
 
 class BlockWord {
 	public function execute(User $connected_user, array $input): void {
-		$friendRepository = new BlockedRepository();
 		if (!isset($input['blocked_id'])) throw new RuntimeException('Invalid input');
-		$friendRepository->blockWord($connected_user->id, $input['blocked_id']);
+		(new BlockedRepository())->blockWord($connected_user->id, $input['blocked_id']);
 	}
 }
