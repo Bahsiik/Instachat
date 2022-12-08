@@ -103,6 +103,7 @@ body {
 	font-size: 1.8rem !important;
 	margin-right: 5px;
 	padding: 5px !important;
+	transition: all .3s;
 }
 
 .homepage-container .chat-btn {

@@ -1,8 +1,9 @@
 .post-action-buttons-color {
 	color: var(--fg-secondary);
-	font-size: 1.4rem;
+	font-size: 1.4rem !important;
 	margin-right: 5px;
 	padding: 5px;
+	transition: all .3s;
 }
 
 .post-comment-btn, .post-reaction-btn, .post-share-btn {
