@@ -5,9 +5,7 @@ use Controllers\User\GetUser;
 
 require_once('src/controllers/user/GetUser.php');
 
-
 $friend_controller = new GetUser();
-
 
 $css[] = 'friends.css';
 $js[] = 'tabbed-menu.js';
@@ -38,14 +36,15 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar($friend)?>" alt="Avatar">
+								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
 									<p><?= $friend->username ?></p>
 								</div>
 								<div class="friendship-term">
-									<p>Amis depuis <?php format_date_time($value->responseDate)?></p>
+									<p>Amis depuis <?php
+										format_date_time($value->responseDate) ?></p>
 								</div>
 							</div>
 						</div>
@@ -67,7 +66,7 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar($friend)?>" alt="Avatar">
+								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
@@ -97,7 +96,7 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar($friend)?>" alt="Avatar">
+								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">

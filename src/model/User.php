@@ -11,6 +11,7 @@ use PDO;
 use RuntimeException;
 use Utils\Blob;
 use function array_values;
+use function Lib\Utils\display_icon;
 use function strtolower;
 
 enum Color: int {
@@ -112,8 +113,8 @@ class User {
 		return $this->display_name ?? $this->username;
 	}
 
-	public function displayAvatar(User $connected_user): string {
-		return $this->avatar?->toLink() ?? "/static/images/logo-{$connected_user->color->lowercaseName()}.png";
+	public function displayAvatar(): string {
+		return $this->avatar?->toLink() ?? display_icon($this);
 	}
 }
 

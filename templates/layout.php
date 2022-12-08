@@ -1,3 +1,9 @@
+<?php
+declare(strict_types=1);
+
+use function Lib\Utils\display_icon;
+
+?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -7,7 +13,7 @@
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<link rel='icon' href='../static/images/logo-<?= isset($connected_user) ? $connected_user->color->lowercaseName() : 'orange' ?>.png'>
+		<link rel='icon' href='<?= display_icon($connected_user ?? null) ?>'>
 		<link rel='stylesheet' href='../static/styles/style.css'>
 
 		<?php

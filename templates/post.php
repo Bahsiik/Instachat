@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Controllers\User\GetUser;
 use Model\Emotion;
@@ -14,7 +15,7 @@ $user = $user_controller->execute($post->author_id);
 ?>
 <div class="post-container">
 	<div class="post-avatar">
-		<img src="<?= $user->displayAvatar($user) ?>" alt="avatar">
+		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
