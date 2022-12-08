@@ -48,7 +48,7 @@ require_once('toolbar.php');
 			</div>
 
 			<div class="options-form">
-				<form action="/options" class="options-group active" data-option-number="0" method="post">
+				<form action="/update-user" class="options-group active" method="post">
 					<label>Nom d'utilisateur
 						<input
 								autocomplete="username"
@@ -123,7 +123,7 @@ require_once('toolbar.php');
 					<button type="submit">Enregistrer</button>
 				</form>
 
-				<form action="/options" class="options-group" data-option-number="1" method="post">
+				<form action="/update-password" class="options-group" method="post">
 					<input type="hidden" autocomplete="username" name="username"
 					       value="<?= $connected_user->username ?>">
 
@@ -143,7 +143,7 @@ require_once('toolbar.php');
 					<button type="submit">Confirmer</button>
 				</form>
 
-				<div class="options-group" data-option-number="2">
+				<div class="options-group">
 					<div class="tabbed-menu">
 						<div class="selected tab"><p>Masqués</p></div>
 						<div class="tab"><p>Bloqués</p></div>
@@ -158,12 +158,12 @@ require_once('toolbar.php');
 					</div>
 				</div>
 
-				<form action="/options" class="options-group" data-option-number="3" method="post">
+				<form action="/update-preferences" class="options-group" method="post">
 					<h3>Police</h3>
 					<div class="font-options">
 						<p>aA</p>
 						<div class="font-size">
-							<input type="range" min="1" max="2" step="0.333" value="1" list="font-steps">
+							<input type="range" min="1" max="4" name="font-size" step="1" value="<?= $connected_user->font_size->value ?>" list="font-steps">
 							<div class="font-size-rounds">
 								<?php
 								foreach (FontSize::cases() as $font) {
@@ -181,12 +181,14 @@ require_once('toolbar.php');
 					<h3>Couleurs</h3>
 					<div class="color-options">
 						<?php
-						foreach (Color::cases() as $index => $color) {
-							$selected = $color === $connected_user->color ? ' selected' : '';
+						$count = count(Color::cases());
+						for ($i = 0; $i < $count; $i++) {
+							$color = Color::cases()[$i];
+							$selected = $color === $connected_user->color ? ' checked' : '';
 							$name = strtolower($color->name);
 							echo <<<HTML
-								<input id="$name" hidden name="color" type="radio" value="$index">
-								<label class="$name$selected" for="$name"></label>
+								<input id="$name" hidden name="color" type="radio" value="$i"$selected>
+								<label class="$name" for="$name"></label>
 							HTML;
 						}
 						?>
@@ -215,7 +217,7 @@ require_once('toolbar.php');
 					<button type="submit">Enregistrer</button>
 				</form>
 
-				<div class="options-group" data-option-number="4">
+				<div class="options-group">
 					<h3>Liste des développeurs</h3>
 					<ul class="dev-list">
 						<?php
@@ -252,7 +254,7 @@ require_once('toolbar.php');
 					</ul>
 				</div>
 
-				<form action="/delete?type=user" class="options-group" data-option-number="5" method="post">
+				<form action="/delete?type=user" class="options-group" method="post">
 					<h3>Supprimer mon compte</h3>
 					<p class="subtitle">Cette action est irreversible et supprimera tous vos chats, réactions et
 						commentaires et vous déconnectera

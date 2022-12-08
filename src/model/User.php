@@ -197,21 +197,36 @@ class UserRepository {
 
 	public function updateUser(User $user): bool {
 		$statement = $this->databaseConnection->prepare(
-			'UPDATE users SET avatar = :avatar, background = :background, bio = :bio, birth_date = :birth_date, color = :color, email = :email, fontsize = :font_size, sexe = :gender, password = :password, username = :username WHERE id = :id'
+			'UPDATE users
+			SET
+				avatar = :avatar,
+				background = :background,
+				bio = :bio,
+				birth_date = :birth_date,
+				color = :color,
+				email = :email,
+				fontsize = :font_size,
+				sexe = :gender,
+				password = :password,
+				username = :username
+				WHERE
+					id = :id'
 		);
 
 		$result = $statement->execute([
-			'avatar' => $user->avatar->data,
+			'avatar' => $user->avatar?->data,
 			'background' => $user->background->value,
 			'bio' => $user->bio,
 			'birth_date' => $user->birth_date->getTimestamp(),
 			'color' => $user->color->value,
 			'email' => $user->email,
 			'font_size' => $user->font_size->value,
+			'gender' => $user->gender,
 			'password' => $user->password,
-			'sexe' => $user->gender,
 			'username' => $user->username,
+			'id' => $user->id,
 		]);
+
 
 		return $result === false ? throw new RuntimeException('Could not update user') : true;
 	}
