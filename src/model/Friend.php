@@ -10,18 +10,20 @@ use DateTime;
 use PDO;
 
 class Friend {
-	public DateTime $send_date;
-	public DateTime $response_date;
+	public DateTime $sendDate;
+	public DateTime $responseDate;
+	public bool $accepted;
 
 	public function __construct(
 		public float $requester_id,
 		public float $requested_id,
-		public bool  $accepted,
+		int          $accepted,
 		string       $send_date,
 		string       $response_date
 	) {
-		$this->send_date = date_create_from_format('Y-m-d H:i:s', $send_date);
-		$this->response_date = date_create_from_format('Y-m-d H:i:s', $response_date);
+		$this->sendDate = date_create_from_format('Y-m-d H:i:s', $send_date);
+		$this->responseDate = date_create_from_format('Y-m-d H:i:s', $response_date);
+		$this->accepted = $accepted === 1;
 	}
 }
 

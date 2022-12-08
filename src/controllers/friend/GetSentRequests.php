@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\Friend;
 
@@ -7,7 +8,6 @@ use Model\User;
 
 class GetSentRequests {
 	public function execute(User $connected_user): array {
-		$friendRepository = new FriendRepository();
-		return $friendRepository->getSentRequests($connected_user->id);
+		return (new FriendRepository())->getSentRequests($connected_user->id);
 	}
 }
