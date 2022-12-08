@@ -75,12 +75,21 @@ class PostRepository {
 	}
 
 	public function getFeed(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT p.*
-            FROM posts p
-                     JOIN friends f
-                          ON (p.author_id = f.requested_id OR p.author_id = f.requester_id)
-            WHERE ((f.requested_id = :user_id OR f.requester_id = :user_id) OR p.author_id = :user_id)
-              AND f.accepted = 1 AND p.deleted = 0 ORDER BY p.creation_date DESC LIMIT 5');
+		$statement = $this->databaseConnection->prepare('SELECT
+			p.*
+			FROM
+				instachat.posts p
+					LEFT JOIN (
+					          SELECT f.requester_id, f.requested_id, f.accepted FROM instachat.friends f WHERE f.requested_id = :user_id OR f.requester_id = :user_id
+					          ) f ON p.author_id = f.requester_id OR p.author_id = f.requested_id
+			WHERE
+				p.author_id = :user_id
+				OR (f.accepted = TRUE AND f.requested_id = :user_id)
+				OR (f.accepted = TRUE AND f.requester_id = :user_id)
+				
+			ORDER BY p.creation_date DESC
+			LIMIT 5
+		');
 		$statement->execute(compact('user_id'));
 		$posts = [];
 
