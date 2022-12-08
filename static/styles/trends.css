@@ -1,7 +1,8 @@
 .trends-container {
     background-color: var(--bg-secondary);
     border-radius: 25px;
-    padding: 15px;
+    padding: 5px 15px;
+    margin: 50px;
     width: 20rem;
     font-size: 0.85em;
 }
@@ -21,7 +22,7 @@
 }
 
 .trend-content {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: bold;
 }
 

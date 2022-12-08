@@ -4,6 +4,7 @@ require_once('src/controllers/pages/AuthentificationPage.php');
 require_once('src/controllers/pages/HomePage.php');
 require_once('src/controllers/pages/FriendPage.php');
 require_once('src/controllers/pages/OptionsPage.php');
+require_once('src/controllers/pages/TrendPage.php');
 require_once('src/controllers/post/AddPost.php');
 require_once('src/controllers/post/GetTrends.php');
 require_once('src/controllers/post/GetFeed.php');
@@ -24,6 +25,7 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
+use Controllers\Pages\TrendPage;
 use Controllers\Post\AddPost;
 use Controllers\Post\GetFeed;
 use Controllers\Post\GetTrends;
@@ -60,7 +62,9 @@ try {
 	switch ($firstSegment) {
 		default:
 			global $posts;
+			global $trends;
 			$posts = (new GetFeed())->execute($_SESSION);
+			$trends = (new GetTrends())->execute();
 			(new HomePage())->execute();
 			break;
 
@@ -94,8 +98,8 @@ try {
 
 		case 'trend':
 			redirect_if_method_not('GET', '/');
-			$trends = (new GetTrends())->execute();
-			echo json_encode($trends);
+
+			(new TrendPage())->execute($connected_user);
 			break;
 
 		case 'friends':
