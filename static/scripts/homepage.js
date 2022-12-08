@@ -13,13 +13,15 @@ class RGB {
 function updateCharacterCount() {
 	const text = chatArea.value;
 	characterCount.innerHTML = text.length;
-	const color = new RGB(255, 255 - (text.length / 400) * 255, 0);
-	characterCount.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-	characterCountMax.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-
 	if (text.length === 0) {
 		characterCount.style.color = 'white';
 		characterCountMax.style.color = 'white';
+	} else {
+		const color = text.length <= 100
+			? new RGB(255, 255, 255 - (text.length / 100) * 255)
+			: new RGB(255, 255 - ((text.length - 100) / 300) * 255, 0);
+		characterCount.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
+		characterCountMax.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
 	}
 }
 
