@@ -7,7 +7,7 @@ global $connected_user; ?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
-			<img src="../static/images/logo.png" alt="logo">
+			<img src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="logo">
 		</a>
 		<a class="toolbar-item" href="/">
 			<span class="material-symbols-outlined toolbar-item-selected">home</span>
@@ -30,7 +30,7 @@ global $connected_user; ?>
 		<button class="chat-btn">Chat</button>
 	</div>
 	<div class="user-info">
-		<img class="user-avatar" src="../static/images/logo.png" alt="avatar">
+		<img class="user-avatar" src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="avatar">
 		<div class="user-names-container">
                 <span class="user-display-name">
                 <?= $connected_user->getDisplayOrUsername() ?>

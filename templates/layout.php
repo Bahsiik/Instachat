@@ -7,7 +7,6 @@
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<link rel="icon" href="../static/images/logo.png">
 		<link rel='stylesheet' href='../static/styles/style.css'>
 		<?php
 		global $connected_user;
@@ -15,10 +14,10 @@
 		if ($connected_user === null) {
 			array_unshift($css, 'colors/orange.css', 'background/gray.css');
 		} else {
-			array_unshift($css, 'colors/' . strtolower($connected_user->color->name) . '.css', 'background/' . strtolower($connected_user->background->name) . '.css');
+			array_unshift($css, "colors/{$connected_user->color->lowercaseName()}.css", "background/{$connected_user->background->lowercaseName()}.css");
 		}
 		?>
-
+		<link rel="icon" href="../static/images/logo-<?= $connected_user->color->lowercaseName() ?? 'orange' ?>.png">
 
 		<?php
 		foreach ($css as $css_file) { ?>

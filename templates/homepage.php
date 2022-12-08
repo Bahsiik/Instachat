@@ -10,10 +10,8 @@ $js = ['homepage.js'];
 
 ob_start();
 require_once('toolbar.php');
-?>
-<?php
-global $connected_user; ?>
-<?php
+
+global $connected_user;
 global $posts; ?>
 	<div class="homepage-container">
 		<div class="title">
@@ -21,7 +19,7 @@ global $posts; ?>
 		</div>
 		<div class="chat-container">
 			<div class="chat-avatar">
-				<img src="../static/images/logo.png" alt="avatar">
+				<img src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="avatar">
 			</div>
 			<div class="chat-right">
 				<form class="post-form" action="/chat" method="post">

@@ -80,13 +80,13 @@
 
 /* Icon CSS */
 .material-symbols-outlined {
-	color: #ffffff;
+	color: var(--fg-primary);
 	font-size: 2rem;
 	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
 .logout-btn {
-	color: var(--input-invalid)
+	color: var(--input-invalid);
 }
 
 .user-info {
@@ -136,7 +136,7 @@
 }
 
 .toolbar-item-selected {
-	background: linear-gradient(180deg, #FD2B55 0%, #F8F004 100%);
+	background: var(--gradient-h);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;

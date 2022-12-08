@@ -11,6 +11,7 @@ use PDO;
 use RuntimeException;
 use Utils\Blob;
 use function array_values;
+use function strtolower;
 
 enum Color: int {
 	case Orange = 0;
@@ -25,6 +26,10 @@ enum Color: int {
 			3 => self::Gray,
 			default => self::Orange,
 		};
+	}
+
+	public function lowercaseName(): string {
+		return strtolower($this->name);
 	}
 }
 
@@ -47,6 +52,10 @@ enum Background: int {
 			self::Gray => 'Gris',
 			self::Black => 'Noir',
 		};
+	}
+
+	public function lowercaseName(): string {
+		return strtolower($this->name);
 	}
 }
 
@@ -103,8 +112,8 @@ class User {
 		return $this->display_name ?? $this->username;
 	}
 
-	public function displayAvatar(): string {
-		return $this->avatar?->toLink() ?? '/static/images/logo.png';
+	public function displayAvatar(User $connected_user): string {
+		return $this->avatar?->toLink() ?? "/static/images/logo-{$connected_user->color->lowercaseName()}.png";
 	}
 }
 

@@ -186,7 +186,7 @@ require_once('toolbar.php');
 						for ($i = 0; $i < $count; $i++) {
 							$color = Color::cases()[$i];
 							$selected = $color === $connected_user->color ? ' checked' : '';
-							$name = strtolower($color->name);
+							$name = $color->lowercaseName();
 							echo <<<HTML
 								<input id="$name" hidden name="color" type="radio" value="$i"$selected>
 								<label class="$name" for="$name"></label>

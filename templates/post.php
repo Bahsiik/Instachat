@@ -1,23 +1,20 @@
 <?php
 
 use Controllers\User\GetUser;
-use Model\Comment;
 use Model\Emotion;
-use Model\Post;
-use Model\User;
 
 require_once('src/controllers/user/GetUser.php');
 
 $user_controller = new GetUser();
-/** @var Post $post */
+
 global $post;
-/** @var User $user */
+global $comments;
+global $connected_user;
 $user = $user_controller->execute($post->author_id);
-/** @var Comment[] $comments */
-global $comments; ?>
+?>
 <div class="post-container">
 	<div class="post-avatar">
-		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
+		<img src="<?= $user->displayAvatar($connected_user) ?>" alt="avatar">
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
@@ -80,5 +77,3 @@ global $comments; ?>
 		</div>
 	</div>
 </div>
-
-
