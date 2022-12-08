@@ -1,13 +1,13 @@
 :root {
 	--bg-primary: #000000;
 	--bg-quaternary: #141414;
-	--bg-secondary: #0e0e0e;
+	--bg-secondary: #090909;
 	--bg-ternary: #232323;
-	--border: #252525;
+	--border: #404040;
 	--fg-primary: #ffffff;
-	--fg-secondary: #3e3f3f;
+	--fg-secondary: #9d9d9d;
 	--input-invalid: #ff6363;
-	--input-placeholder: #888888;
+	--input-placeholder: #747474;
 	--input-radio: #376fc8;
 	--input-valid: #4cff4c;
 	--react-bg: #141825;
