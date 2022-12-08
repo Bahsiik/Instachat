@@ -1,6 +1,8 @@
 <?php
+declare(strict_types=1);
+
 $title = 'Register';
-$css = ['register.css'];
+$css[] = 'register.css';
 $js = ['register.js'];
 
 ob_start();
@@ -55,8 +57,8 @@ ob_start();
 				</label>
 				<label>Mot de passe
 					<input
-						class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
-						required type="password"
+							class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
+							required type="password"
 					/>
 				</label>
 				<button>Se connecter</button>

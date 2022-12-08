@@ -16,13 +16,13 @@ enum Color: int {
 	case Orange = 0;
 	case Purple = 1;
 	case Blue = 2;
-	case Grey = 3;
+	case Gray = 3;
 
 	public static function fromInt(int $value): self {
 		return match ($value) {
 			1 => self::Purple,
 			2 => self::Blue,
-			3 => self::Grey,
+			3 => self::Gray,
 			default => self::Orange,
 		};
 	}

@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 $css[] = 'trends.css';
 $js[] = 'trends.js';
-?>
-<?php
+
 global $trends; ?>
 	<div class="trends-container">
 		<div class="title">

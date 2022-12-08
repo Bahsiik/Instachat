@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-$css = ['homepage.css'];
+$css[] = 'homepage.css';
 $title = 'Instachat';
 
 ob_start();

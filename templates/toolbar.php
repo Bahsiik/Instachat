@@ -1,6 +1,8 @@
 <?php
-$css[] = 'toolbar.css'; ?>
-<?php
+declare(strict_types=1);
+
+$css[] = 'toolbar.css';
+
 global $connected_user; ?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">

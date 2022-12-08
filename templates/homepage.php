@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 use Controllers\Post\GetComments;
 use Model\Emotion;
 
-$css = ['homepage.css', 'post.css'];
+array_push($css, 'homepage.css', 'post.css');
 $title = 'Instachat';
 $js = ['homepage.js'];
 
@@ -73,7 +74,7 @@ global $posts; ?>
 		</div>
 	</div>
 <?php
-require_once ('trends.php');
+require_once('trends.php');
 ?>
 <?php
 $content = ob_get_clean();

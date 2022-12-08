@@ -3,26 +3,33 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta
-			name="viewport"
-			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+				name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="icon" href="../static/images/logo.png">
-		<link rel="stylesheet" href="../static/styles/style.css">
-		<link rel="stylesheet" href="../static/styles/colors/orange.css">
-		<link rel="stylesheet" href="../static/styles/background/gray.css">
+		<link rel='stylesheet' href='../static/styles/style.css'>
 		<?php
-		if (isset($css)) {
-			foreach ($css as $cssFile) { ?>
-				<link rel="stylesheet" href="../static/styles/<?= $cssFile ?>">
+		global $connected_user;
+		if (!isset($css)) $css = [];
+		if ($connected_user === null) {
+			array_unshift($css, 'colors/orange.css', 'background/gray.css');
+		} else {
+			array_unshift($css, 'colors/' . strtolower($connected_user->color->name) . '.css', 'background/' . strtolower($connected_user->background->name) . '.css');
+		}
+		?>
+
+
+		<?php
+		foreach ($css as $css_file) { ?>
+			<link rel="stylesheet" href="../static/styles/<?= $css_file ?>">
 			<?php
-			}
 		} ?>
 		<?php
 		if (isset($js)) {
-			foreach ($js as $jsFile) { ?>
-				<script defer src="../static/scripts/<?= $jsFile ?>"></script>
-			<?php
+			foreach ($js as $js_file) { ?>
+				<script defer src="../static/scripts/<?= $js_file ?>"></script>
+				<?php
 			}
 		} ?>
 		<title><?= $title ?? '' ?></title>
@@ -35,8 +42,8 @@
 		<?= $content ?? '' ?>
 	</body>
 	<script defer>
-		document.addEventListener('DOMContentLoaded', () => {
-			twemoji.parse(document.body);
-		});
+        document.addEventListener('DOMContentLoaded', () => {
+            twemoji.parse(document.body);
+        });
 	</script>
 </html>
