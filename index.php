@@ -121,6 +121,14 @@ try {
 			echo json_encode($sent_requests);
 			break;
 	}
-} catch (Exception $e) {
-	echo $e->getMessage();
+} catch (Exception $exception) {
+	echo '<pre>';
+	echo 'Exception: ' . $exception->getMessage();
+	$previous = $exception->getPrevious();
+
+	while ($previous !== null) {
+		echo '<br>Previous: ' . $previous->getMessage();
+		$previous = $previous->getPrevious();
+	}
+	echo '</pre>';
 }
