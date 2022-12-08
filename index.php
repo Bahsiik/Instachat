@@ -68,9 +68,14 @@ try {
 		default:
 			global $posts;
 			global $trends;
-			$posts = (new GetFeed())->execute($_SESSION);
+			$posts = (new GetFeed())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
 			(new HomePage())->execute();
+			break;
+
+		case 'getFeed':
+			redirect_if_method_not('GET', '/');
+			echo (new GetFeed())->execute($connected_user);
 			break;
 
 		case 'create':

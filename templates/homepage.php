@@ -6,7 +6,7 @@ use Model\Emotion;
 
 $css = ['homepage.css', 'post.css'];
 $title = 'Instachat';
-$js = ['homepage.js'];
+$js = ['homepage.js', 'update-feed.js'];
 
 ob_start();
 require_once('toolbar.php');

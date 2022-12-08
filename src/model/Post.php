@@ -81,8 +81,8 @@ class PostRepository {
 		$statement->execute(compact('id'));
 	}
 
-	public function getFeed(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT
+	public function getFeed(float $user_id, int $offset): array {
+		$statement = $this->databaseConnection->prepare("SELECT
 			p.*
 			FROM
 				instachat.posts p
@@ -95,9 +95,8 @@ class PostRepository {
 				OR (f.accepted = TRUE AND f.requester_id = :user_id)
 				
 			ORDER BY p.creation_date DESC
-			LIMIT 5
-		');
-		$statement->execute(compact('user_id'));
+			LIMIT $offset, 5");
+		$statement->execute(compact('user_id', 'offset'));
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
