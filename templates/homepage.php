@@ -3,7 +3,7 @@
 use Controllers\Post\GetComments;
 use Model\Emotion;
 
-$css = ['homepage.css'];
+$css = ['homepage.css', 'post.css'];
 $title = 'Instachat';
 $js = ['homepage.js'];
 

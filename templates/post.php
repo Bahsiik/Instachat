@@ -8,7 +8,6 @@ use Model\User;
 
 require_once('src/controllers/user/GetUser.php');
 
-$css[] = 'post.css';
 $user_controller = new GetUser();
 /** @var Post $post */
 global $post;
