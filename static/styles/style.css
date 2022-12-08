@@ -3,6 +3,7 @@
 
 :root {
 	--font: 'Montserrat', sans-serif;
+	--gradient-colors: var(--gradient-first), var(--gradient-second);
 	--gradient-h: -webkit-linear-gradient(var(--gradient-h-rot), var(--gradient-colors));
 	--gradient-h-rot: 270deg;
 	--gradient-v: -webkit-linear-gradient(var(--gradient-v-rot), var(--gradient-colors));

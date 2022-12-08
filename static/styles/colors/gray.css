@@ -1,7 +1,6 @@
 :root {
 	--accent-color: #a8a5b2;
 	--accent-transparent: #a8a5b21a;
-	--gradiant-colors: var(--gradient-first), var(--gradient-second);
 	--gradient-first: #e6dff7;
 	--gradient-second: #303030;
 }
