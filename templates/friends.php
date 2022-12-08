@@ -49,7 +49,10 @@ global $sent_requests;
 							</div>
 						</div>
 						<div class="friend-actions">
-							<button class="material-symbols-outlined cancel">close</button>
+							<form action="/remove-friend" method="post">
+								<input type="hidden" name="friend_id" value="<?= $friend->id ?>">
+								<button class="material-symbols-outlined cancel" type="submit">close</button>
+							</form>
 						</div>
 					</div>
 					<?php
@@ -78,8 +81,14 @@ global $sent_requests;
 							</div>
 						</div>
 						<div class="friend-actions">
-							<button class="material-symbols-outlined confirm">how_to_reg</button>
-							<button class="material-symbols-outlined cancel">close</button>
+							<form action="/accept-friend" method="post">
+								<input type="hidden" name="requester_id" value="<?= $friend->id ?>">
+								<button class="material-symbols-outlined cancel" type="submit">how_to_reg</button>
+							</form>
+							<form action="/decline-friend" method="post">
+								<input type="hidden" name="requester_id" value="<?= $friend->id ?>">
+								<button class="material-symbols-outlined cancel" type="submit">close</button>
+							</form>
 						</div>
 					</div>
 					<?php
@@ -108,7 +117,10 @@ global $sent_requests;
 							</div>
 						</div>
 						<div class="friend-actions">
-							<button class="material-symbols-outlined cancel">close</button>
+							<form action="/cancel-friend" method="post">
+								<input type="hidden" name="requested_id" value="<?= $friend->id ?>">
+								<button class="material-symbols-outlined cancel" type="submit">close</button>
+							</form>
 						</div>
 					</div>
 					<?php

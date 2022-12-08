@@ -9,6 +9,7 @@
 .content {
 	background-color: var(--bg-quinternary);
 	padding: 2rem 7rem;
+	border-radius: 0 0 16px 16px;
 }
 
 .friend {
@@ -49,19 +50,16 @@
 	display: flex;
 }
 
-.friend > .friend-actions > button {
+.friend-actions > form > button {
 	background: transparent;
 	border: none;
 }
 
-.friend > .friend-actions > .confirm {
-	color: var(--fg-primary);
-}
-
-.friend > .friend-actions > .cancel {
+.friend-actions > form > .cancel {
 	color: var(--input-invalid);
+
 }
 
-.friend > .friend-actions > button:hover {
+.friend > .friend-actions > form > button:hover {
 	cursor: pointer;
 }

@@ -8,10 +8,10 @@ use Model\User;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
-class AcceptRequest {
+class DeclineRequest {
 	public function execute(User $connected_user, array $input): void {
 		if (!isset($input['requester_id'])) throw new RuntimeException('Invalid input');
-		(new FriendRepository())->acceptRequest((float)$input['requester_id'], $connected_user->id);
+		(new FriendRepository())->rejectRequest((float)$input['requester_id'], $connected_user->id);
 		redirect('/friends');
 	}
 }

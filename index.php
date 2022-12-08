@@ -5,6 +5,10 @@ require_once('src/controllers/Delete.php');
 require_once('src/controllers/friend/GetFriendRequests.php');
 require_once('src/controllers/friend/GetFriends.php');
 require_once('src/controllers/friend/GetSentRequests.php');
+require_once('src/controllers/friend/RemoveFriend.php');
+require_once('src/controllers/friend/AcceptRequest.php');
+require_once('src/controllers/friend/DeclineRequest.php');
+require_once('src/controllers/friend/CancelRequest.php');
 require_once('src/controllers/pages/AuthentificationPage.php');
 require_once('src/controllers/pages/FriendPage.php');
 require_once('src/controllers/pages/HomePage.php');
@@ -23,9 +27,13 @@ require_once('src/lib/dateUtils.php');
 require_once('src/model/Post.php');
 
 use Controllers\Delete;
+use Controllers\Friend\AcceptRequest;
+use Controllers\Friend\CancelRequest;
+use Controllers\Friend\DeclineRequest;
 use Controllers\Friend\GetFriendRequests;
 use Controllers\Friend\GetFriends;
 use Controllers\Friend\GetSentRequests;
+use Controllers\Friend\RemoveFriend;
 use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
@@ -122,6 +130,26 @@ try {
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
 			(new FriendPage())->execute($connected_user);
+			break;
+
+		case 'remove-friend':
+			redirect_if_method_not('POST', '/friends');
+			(new RemoveFriend())->execute($connected_user, $_POST);
+			break;
+
+		case 'accept-friend':
+			redirect_if_method_not('POST', '/friends');
+			(new AcceptRequest())->execute($connected_user, $_POST);
+			break;
+
+		case'decline-friend':
+			redirect_if_method_not('POST', '/friends');
+			(new DeclineRequest())->execute($connected_user, $_POST);
+			break;
+
+		case 'cancel-friend':
+			redirect_if_method_not('POST', '/friends');
+			(new CancelRequest())->execute($connected_user, $_POST);
 			break;
 	}
 } catch (Exception $exception) {

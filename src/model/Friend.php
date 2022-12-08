@@ -62,6 +62,11 @@ class FriendRepository {
 		$statement->execute(compact('requester_id', 'requested_id'));
 	}
 
+	public function cancelRequest(float $requester_id, float $requested_id): void {
+		$statement = $this->databaseConnection->prepare('DELETE FROM friends WHERE requester_id = :requester_id AND requested_id = :requested_id');
+		$statement->execute(compact('requester_id', 'requested_id'));
+	}
+
 	public function getFriends(float $user_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE (requester_id = :user_id OR requested_id = :user_id) AND accepted = TRUE');
 		$statement->execute(compact('user_id'));
@@ -81,7 +86,7 @@ class FriendRepository {
 	}
 
 	public function getFriendRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND (accepted = FALSE OR accepted IS NULL)');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND accepted IS NULL');
 		$statement->execute(compact('user_id'));
 		$friends = [];
 
@@ -99,7 +104,7 @@ class FriendRepository {
 	}
 
 	public function getSentRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND (accepted = FALSE OR accepted IS NULL)');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND accepted IS NULL');
 		$statement->execute(compact('user_id'));
 		$friends = [];
 
