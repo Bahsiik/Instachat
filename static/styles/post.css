@@ -77,6 +77,7 @@
 .post-comment-btn:hover .post-action-buttons-color, .post-share-btn:hover .post-action-buttons-color, .post-reaction-btn:hover .post-action-buttons-color {
 	background-color: #e0892838;
 	color: var(--url);
+	border-radius: 9px;
 }
 
 .post-comment-btn:hover .post-comment-count {

@@ -38,7 +38,7 @@ if (isset($connected_user)) { ?>
 								<label>
 									<input type="radio" name="emotion" class="emotion"
 									       value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
-									<span class="emoji-span"><?= Emotion::cases()[$i - 1]->display() ?></span>
+									<span class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
 								</label>
 								<?php
 							}

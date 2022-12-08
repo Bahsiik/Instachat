@@ -54,7 +54,7 @@ global $comments; ?>
 				?>
 			</div>
 			<div class="post-emotion">
-				<span class="post-emotion"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
+				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 		</div>
 		<div class="post-content">

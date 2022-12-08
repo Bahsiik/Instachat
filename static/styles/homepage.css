@@ -129,4 +129,5 @@ body {
 	background-color: #e089282b;
 	color: var(--url);
 	cursor: pointer;
+	border-radius: 9px;
 }

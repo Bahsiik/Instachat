@@ -34,5 +34,9 @@
 	<body>
 		<?= $content ?? '' ?>
 	</body>
-	<script defer>twemoji.parse(document.body)</script>
+	<script defer>
+		document.addEventListener('DOMContentLoaded', () => {
+			twemoji.parse(document.body);
+		});
+	</script>
 </html>
