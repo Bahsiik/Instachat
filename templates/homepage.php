@@ -73,7 +73,5 @@ global $posts; ?>
 	</div>
 <?php
 require_once('trends.php');
-?>
-<?php
 $content = ob_get_clean();
 require_once('layout.php');

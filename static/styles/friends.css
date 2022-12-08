@@ -1,0 +1,60 @@
+.friends-tab-container {
+	margin: 22px 44px;
+}
+
+.tabbed-menu {
+	width: 50rem;
+}
+
+.content {
+	background-color: var(--bg-quinternary);
+	padding: 2rem 7rem;
+}
+
+.friend {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 1rem 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.friend > .friend-info {
+	display: flex;
+}
+
+.friend > .friend-info > .friend-avatar {
+	align-items: center;
+	display: flex;
+}
+
+.friend > .friend-info > .friend-avatar > img {
+	border-radius: 61px;
+	height: 48px;
+	object-fit: contain;
+	width: 48px;
+}
+
+.friend > .friend-info > .friend-info-text {
+	margin-left: 1rem;
+}
+
+.friend > .friend-info > .friend-info-text > .friendship-term > p {
+	font-size: 0.85rem;
+	color: var(--fg-secondary);
+}
+
+.friend > .friend-actions {
+	align-items: center;
+	display: flex;
+}
+
+.friend > .friend-actions > button {
+	background: transparent;
+	border: none;
+	color: var(--input-invalid);
+}
+
+.friend > .friend-actions > button:hover {
+	cursor: pointer;
+}
