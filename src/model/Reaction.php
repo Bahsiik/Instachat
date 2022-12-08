@@ -11,7 +11,7 @@ use PDO;
 class Reaction {
 	public string $emoji;
 	public float $id;
-	public float $post_id;
+	public float $postId;
 }
 
 class ReactionsRepository {
@@ -28,7 +28,7 @@ class ReactionsRepository {
 			ON DUPLICATE KEY UPDATE id = id;
 			
 			INSERT INTO reaction_users (reaction_id, user_id)
-			SELECT id, :user_id as user_id
+			SELECT id, :user_id AS user_id
 			FROM reactions
 			WHERE post_id = :post_id AND emoji = :emoji;
 		SQL

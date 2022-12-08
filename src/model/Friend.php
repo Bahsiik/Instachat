@@ -38,7 +38,7 @@ class FriendRepository {
 	}
 
 	public function acceptRequest(float $requester_id, float $requested_id): void {
-		$statement = $this->databaseConnection->prepare('UPDATE friends SET accepted = true, response_date = :response_date WHERE requester_id = :requester_id AND requested_id = :requested_id');
+		$statement = $this->databaseConnection->prepare('UPDATE friends SET accepted = TRUE, response_date = :response_date WHERE requester_id = :requester_id AND requested_id = :requested_id');
 		$statement->execute([
 			'requester_id' => $requester_id,
 			'requested_id' => $requested_id,
@@ -47,7 +47,7 @@ class FriendRepository {
 	}
 
 	public function rejectRequest(float $requester_id, float $requested_id): void {
-		$statement = $this->databaseConnection->prepare('UPDATE friends SET accepted = false, response_date = :response_date WHERE requester_id = :requester_id AND requested_id = :requested_id');
+		$statement = $this->databaseConnection->prepare('UPDATE friends SET accepted = FALSE, response_date = :response_date WHERE requester_id = :requester_id AND requested_id = :requested_id');
 		$statement->execute([
 			'requester_id' => $requester_id,
 			'requested_id' => $requested_id,
@@ -57,70 +57,40 @@ class FriendRepository {
 
 	public function removeFriend(float $requester_id, float $requested_id): void {
 		$statement = $this->databaseConnection->prepare('DELETE FROM friends WHERE (requester_id = :requester_id AND requested_id = :requested_id) OR (requester_id = :requested_id AND requested_id = :requester_id)');
-		$statement->execute([
-			'requester_id' => $requester_id,
-			'requested_id' => $requested_id,
-		]);
+		$statement->execute(compact('requester_id', 'requested_id'));
 	}
 
 	public function getFriends(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE (requester_id = :user_id OR requested_id = :user_id) AND accepted = true');
-		$statement->execute(['user_id' => $user_id]);
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE (requester_id = :user_id OR requested_id = :user_id) AND accepted = TRUE');
+		$statement->execute(compact('user_id'));
 		$friends = [];
-		try {
-			while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-				$friends[] = new Friend(
-					$friend['requester_id'],
-					$friend['requested_id'],
-					$friend['accepted'] === 1,
-					$friend['send_date'],
-					$friend['response_date'],
-				);
-			}
-		} catch (\Exception $e) {
-			return [];
+
+		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$friends[] = new Friend(...array_values($friend));
 		}
+
 		return $friends;
 	}
 
-	//request sent to the user
-	function getFriendRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND accepted = false');
-		$statement->execute(['user_id' => $user_id]);
+	public function getFriendRequests(float $user_id): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requested_id = :user_id AND accepted = FALSE');
+		$statement->execute(compact('user_id'));
 		$friends = [];
-		try {
-			while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-				$friends[] = new Friend(
-					$friend['requester_id'],
-					$friend['requested_id'],
-					$friend['accepted'] === 1,
-					$friend['send_date'],
-					$friend['response_date'],
-				);
-			}
-		} catch (\Exception $e) {
-			return [];
+
+		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$friends[] = new Friend(...array_values($friend));
 		}
+
 		return $friends;
 	}
 
-	//request sent by the user
-	function getSentRequests(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND accepted = false');
-		$statement->execute(['user_id' => $user_id]);
+	public function getSentRequests(float $user_id): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM friends WHERE requester_id = :user_id AND accepted = FALSE');
+		$statement->execute(compact('user_id'));
 		$friends = [];
-		try {
-			while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
-				$friends[] = new Friend(
-					$friend['requester_id'],
-					$friend['requested_id'],
-					$friend['accepted'] === 1,
-					$friend['send_date'],
-					$friend['response_date'],
-				);
-			}
-		} catch (\Exception $e) {
-			return [];
+
+		while ($friend = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$friends[] = new Friend(...array_values($friend));
 		}
 		return $friends;
 	}

@@ -7,10 +7,10 @@ require_once('src/lib/DatabaseConnection.php');
 
 use Database\DatabaseConnection;
 use DateTime;
-use Exception;
 use PDO;
 use RuntimeException;
 use Utils\Blob;
+use function array_values;
 
 enum Color: int {
 	case Orange = 0;
@@ -75,19 +75,19 @@ class User {
 	public FontSize $font_size;
 
 	public function __construct(
-		public ?string $bio,
-		public ?string $display_name,
-		public string  $email,
-		public string  $gender,
 		public int     $id,
-		public string  $password,
 		public string  $username,
+		public string  $password,
 		?string        $avatar,
-		int            $background,
-		string         $birth_date,
-		int            $color,
 		string         $created_at,
+		string         $birth_date,
+		public ?string $display_name,
 		int            $font_size,
+		int            $color,
+		int            $background,
+		public string  $gender,
+		public string  $email,
+		public ?string $bio,
 	) {
 		$this->background = Background::fromInt($background);
 		$this->birth_date = date_create_from_format('Y-m-d', $birth_date);
@@ -145,36 +145,22 @@ class UserRepository {
 	public function getFriendsOfUser(float $id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
 		$statement->execute(compact('id'));
-		$user = $statement->fetch(PDO::FETCH_ASSOC);
-		return $user === false ? throw new RuntimeException('User not found') : $user;
+		$users = [];
+
+		while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$users[] = new User(...array_values($user));
+		}
+
+		return $users;
 	}
 
 	public function getUserById(float $id): ?User {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id = :id');
-		$statement->setFetchMode(PDO::FETCH_CLASS, User::class);
 		$statement->execute(compact('id'));
 		$result = $statement->fetch(PDO::FETCH_ASSOC);
 
 		if ($result === false) return null;
-		try {
-			return new User(
-				$result['bio'],
-				$result['display_name'],
-				$result['email'],
-				$result['sexe'],
-				$result['id'],
-				$result['password'],
-				$result['username'],
-				$result['avatar'],
-				$result['background'],
-				$result['birth_date'],
-				$result['color'],
-				$result['created_date'],
-				$result['fontsize'],
-			);
-		} catch (Exception) {
-			return null;
-		}
+		return new User(...array_values($result));
 	}
 
 	public function isUserAlreadyRegistered(string $email, string $username): bool {
@@ -193,27 +179,9 @@ class UserRepository {
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		if ($user === false) return null;
 
-		$passwordGood = $this->checkHash($email, $password);
-		if (!$passwordGood) return null;
-		try {
-			return new User(
-				$user['bio'],
-				$user['display_name'],
-				$user['email'],
-				$user['sexe'],
-				$user['id'],
-				$user['password'],
-				$user['username'],
-				$user['avatar'],
-				$user['background'],
-				$user['birth_date'],
-				$user['color'],
-				$user['created_date'],
-				$user['fontsize'],
-			);
-		} catch (Exception) {
-			return null;
-		}
+		$password_good = $this->checkHash($email, $password);
+		if (!$password_good) return null;
+		return new User(...array_values($user));
 	}
 
 	public function checkHash(string $email, string $password): bool {
@@ -222,7 +190,6 @@ class UserRepository {
 		);
 
 		$statement->execute(compact('email'));
-
 		$result = $statement->fetch(PDO::FETCH_ASSOC);
 
 		return password_verify($password, $result['password']);

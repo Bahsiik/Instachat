@@ -8,7 +8,6 @@ require_once('src/lib/Blob.php');
 
 use Database\DatabaseConnection;
 use DateTime;
-use Exception;
 use PDO;
 use Utils\Blob;
 
@@ -48,7 +47,15 @@ class Post {
 	public Emotion $emotion;
 	public ?Blob $image;
 
-	public function __construct(public float $author_id, public ?string $content, public int $deleted, public float $id, string $creation_date, int $emotion, ?string $image) {
+	public function __construct(
+		public float   $id,
+		public ?string $content,
+		public float   $author_id,
+		string         $creation_date,
+		?string        $image,
+		int            $emotion,
+		public int     $deleted,
+	) {
 		$this->creation_date = date_create_from_format('Y-m-d H:i:s', $creation_date);
 		$this->emotion = Emotion::fromInt($emotion);
 		if ($image !== null) {
@@ -70,7 +77,7 @@ class PostRepository {
 	}
 
 	public function deletePost(float $id): void {
-		$statement = $this->databaseConnection->prepare('UPDATE posts SET deleted = true WHERE id = :id');
+		$statement = $this->databaseConnection->prepare('UPDATE posts SET deleted = TRUE WHERE id = :id');
 		$statement->execute(compact('id'));
 	}
 
@@ -93,36 +100,34 @@ class PostRepository {
 		$statement->execute(compact('user_id'));
 		$posts = [];
 
-		try {
-			while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-				$posts[] = new Post($post['author_id'], $post['content'], $post['deleted'], $post['id'], $post['creation_date'], $post['emotion'], $post['photo']);
-			}
-		} catch (Exception) {
-			return [];
+		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$posts[] = new Post(...array_values($post));
 		}
+
 		return $posts;
 	}
 
 	public function getPost(float $id): Post {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE id = :id');
 		$statement->execute(compact('id'));
-		return $statement->fetchObject(Post::class);
-	}
-
-	public function getPostContaining(string $content): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content ORDER BY creation_date DESC');
-		$statement->execute(compact('content'));
-		return $statement->fetchObject(Post::class);
+		$post = $statement->fetch(PDO::FETCH_ASSOC);
+		return new Post(...array_values($post));
 	}
 
 	public function getPostsByUser(float $author_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :author_id ORDER BY creation_date DESC');
 		$statement->execute(compact('author_id'));
-		return $statement->fetchObject(Post::class);
+		$posts = [];
+
+		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$posts[] = new Post(...array_values($post));
+		}
+
+		return $posts;
 	}
 
 	public function getTrends(): array {
-		$statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY) AND deleted = false');
+		$statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY) AND deleted = FALSE');
 		$statement->execute();
 		$posts = $statement->fetchAll(PDO::FETCH_COLUMN);
 		$words = [];
@@ -135,10 +140,5 @@ class PostRepository {
 		$words = array_count_values($words);
 		arsort($words);
 		return array_slice($words, 0, 10);
-	}
-
-	public function updateEmotion(float $id, Emotion $emotion): void {
-		$statement = $this->databaseConnection->prepare('UPDATE posts SET emotion = :emotion WHERE id = :id');
-		$statement->execute(['id' => $id, 'emotion' => $emotion->value]);
 	}
 }
