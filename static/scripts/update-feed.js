@@ -28,11 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	observer.observe(lastChild);
 
 	let postMenu = getPostMenu();
-	console.log("postMenu1", postMenu);
 	postMenu.forEach((menu) => {
 		postClicked(menu);
 	});
 });
+
 
 function postClicked(menu) {
 	menu.addEventListener('click', () => {
@@ -41,15 +41,22 @@ function postClicked(menu) {
 }
 
 function showMenu(menu) {
+	hideOthersMenu(menu);
 	let nextMenuContainer = menu.nextElementSibling;
 	nextMenuContainer.classList.toggle('menu-hidden');
 	nextMenuContainer.style.left = menu.getBoundingClientRect().right - (menu.offsetWidth + nextMenuContainer.offsetWidth + 10) + 'px';
 	nextMenuContainer.style.top = menu.offsetTop + 'px';
 }
 
+function hideOthersMenu(menu) {
+	let postMenu = getPostMenu();
+	postMenu.forEach((postMenu) => {
+		if (postMenu !== menu) {
+			postMenu.nextElementSibling.classList.add('menu-hidden');
+		}
+	});
+}
+
 function getPostMenu() {
 	return document.querySelectorAll('.post-menu');
 }
-
-
-
