@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+	console.log('DOM loaded');
 	const feedContainer = document.querySelector('.feed-container');
 	const lastChild = feedContainer.lastElementChild;
 	let offset = 5;
@@ -30,6 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
 	let postMenu = getPostMenu();
 	postMenu.forEach((menu) => {
 		postClicked(menu);
+	});
+
+	document.addEventListener('click', (e) => {
+		if (!e.target.closest('.post-menu')) {
+			let postMenu = getPostMenu();
+			postMenu.forEach((menu) => {
+				menu.nextElementSibling.classList.add('menu-hidden');
+			});
+		}
 	});
 });
 
