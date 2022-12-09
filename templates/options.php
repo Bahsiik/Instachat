@@ -49,12 +49,13 @@ require_once('toolbar.php');
 			</div>
 
 			<div class="options-form">
-				<form action="/update-user" class="options-group active" method="post">
+				<form action="/update-user-information" class="options-group active" method="post">
 					<label>Nom d'utilisateur
 						<input
 							autocomplete="username"
 							maxlength="20"
 							minlength="2"
+							name="username"
 							pattern="[\_\-a-zA-Z0-9]{2,20}"
 							placeholder="Nom d'utilisateur"
 							required
@@ -67,11 +68,11 @@ require_once('toolbar.php');
 							autocomplete="name"
 							maxlength="48"
 							minlength="2"
+							name="display-name"
 							pattern="[\_\-a-zA-Z0-9]{2,48}"
-							placeholder="Nom Affiché"
-							required
+							placeholder="<?= htmlspecialchars($connected_user->username) ?>"
 							type="text"
-							value="<?= $connected_user->getDisplayOrUsername() ?>"
+							value="<?= htmlspecialchars($connected_user->display_name ?? '') ?>"
 						>
 					</label>
 					<label>Email
@@ -79,6 +80,7 @@ require_once('toolbar.php');
 							autocomplete="email"
 							maxlength="320"
 							minlength="5"
+							name="email"
 							placeholder="Email"
 							required
 							type="email"

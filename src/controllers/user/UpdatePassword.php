@@ -26,6 +26,7 @@ class UpdatePassword {
 		$new_user->password = password_hash($new_password, PASSWORD_DEFAULT);
 
 		(new UserRepository())->updateUser($new_user);
+
 		redirect('/options');
 	}
 }

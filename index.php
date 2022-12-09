@@ -24,6 +24,7 @@ require_once('src/controllers/user/GetUser.php');
 require_once('src/controllers/user/LoginUser.php');
 require_once('src/controllers/user/UpdatePassword.php');
 require_once('src/controllers/user/UpdatePreferences.php');
+require_once('src/controllers/user/UpdateUserInformation.php');
 require_once('src/lib/utils.php');
 require_once('src/lib/dateUtils.php');
 require_once('src/model/Post.php');
@@ -48,6 +49,7 @@ use Controllers\User\GetConnectedUser;
 use Controllers\User\LoginUser;
 use Controllers\User\UpdatePassword;
 use Controllers\User\UpdatePreferences;
+use Controllers\User\UpdateUserInformation;
 use Model\User;
 use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
@@ -130,6 +132,11 @@ try {
 		case 'update-password':
 			redirect_if_method_not('POST', '/options');
 			(new UpdatePassword())->execute($connected_user, $_POST);
+			break;
+
+		case 'update-user-information':
+			redirect_if_method_not('POST', '/options');
+			(new UpdateUserInformation())->execute($connected_user, $_POST);
 			break;
 
 		case 'friends':
