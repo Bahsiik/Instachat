@@ -11,7 +11,7 @@ $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
 global $connected_user;
-require_once('toolbar.php');
+require_once('components/toolbar.php');
 ?>
 	<div class="options">
 		<div class="title">

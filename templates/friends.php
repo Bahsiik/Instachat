@@ -11,7 +11,7 @@ $js[] = 'tabbed-menu.js';
 $js[] = 'friends.js';
 
 ob_start();
-require_once('toolbar.php');
+require_once('components/toolbar.php');
 
 global $connected_user;
 global $friend_list;
@@ -130,6 +130,6 @@ global $sent_requests;
 	</div>
 
 <?php
-require_once('trends.php');
+require_once('components/trends.php');
 $content = ob_get_clean();
 require_once('layout.php');

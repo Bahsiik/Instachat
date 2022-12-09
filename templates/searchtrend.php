@@ -5,7 +5,7 @@ $css[] = 'searchtrend.css';
 $css[] = 'post.css';
 
 ob_start();
-require_once('toolbar.php');
+require_once('components/toolbar.php');
 
 global $searched_posts;
 global $searched_trend;
@@ -20,7 +20,7 @@ global $searched_trend;
 			if (count($searched_posts) > 0) {
 				global $post;
 				foreach ($searched_posts as $post) {
-					require('post.php');
+					require('components/post.php');
 				}
 			} else {
 				?>
@@ -34,6 +34,6 @@ global $searched_trend;
 	</div>
 
 <?php
-require_once('trends.php');
+require_once('components/trends.php');
 $content = ob_get_clean();
 require_once('layout.php');
