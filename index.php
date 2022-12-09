@@ -14,6 +14,7 @@ require_once('src/controllers/pages/FriendPage.php');
 require_once('src/controllers/pages/HomePage.php');
 require_once('src/controllers/pages/OptionsPage.php');
 require_once('src/controllers/pages/TrendPage.php');
+require_once('src/controllers/pages/SearchTrendPage.php');
 require_once('src/controllers/posts/AddPost.php');
 require_once('src/controllers/posts/GetComments.php');
 require_once('src/controllers/posts/GetFeed.php');
@@ -42,6 +43,7 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
+use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
 use Controllers\Posts\GetPostContaining;
@@ -81,8 +83,7 @@ try {
 
 	switch ($firstSegment) {
 		default:
-			global $posts;
-			global $trends;
+			global $posts, $trends;
 			$posts = (new GetFeed())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
 			(new HomePage())->execute();
@@ -143,10 +144,7 @@ try {
 
 		case 'friends':
 			redirect_if_method_not('GET', '/');
-			global $friend_list;
-			global $friend_requests;
-			global $sent_requests;
-			global $trends;
+			global $friend_list, $friend_requests, $sent_requests, $trends;
 			$friend_list = (new GetFriends())->execute($connected_user);
 			$friend_requests = (new GetFriendRequests())->execute($connected_user);
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
@@ -176,8 +174,11 @@ try {
 
 		case 'search-trend':
 			redirect_if_method_not('POST', '/');
-			$trends = (new GetPostContaining())->execute($_POST['trend']);
-			echo json_encode($trends);
+			global $searched_trend, $searched_posts,  $trends;
+			$searched_trend = $_POST['trend'];
+			$searched_posts = (new GetPostContaining())->execute($_POST['trend']);
+			$trends = (new GetTrends())->execute();
+			(new SearchTrendPage())->execute();
 			global $trend;
 	}
 } catch (Exception $exception) {
