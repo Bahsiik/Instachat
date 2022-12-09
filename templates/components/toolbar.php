@@ -5,7 +5,8 @@ use function Lib\Utils\selectToolbarItem;
 
 $css[] = 'toolbar.css';
 
-global $connected_user; ?>
+global $connected_user;
+global $second_segment?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
@@ -18,9 +19,9 @@ global $connected_user; ?>
 		</a>
 		<?php
 		if (isset($connected_user)) { ?>
-		<a class="toolbar-item" href="/profile">
-			<span class="material-symbols-outlined <?= selectToolbarItem('/profile') ?>">person</span>
-			<span class="<?= selectToolbarItem('/profile') ?>">Profil</span>
+		<a class="toolbar-item" href="/profile/<?= $connected_user->username ?>">
+			<span class="material-symbols-outlined <?= selectToolbarItem('/profile/'. $second_segment) ?>">person</span>
+			<span class="<?= selectToolbarItem('/profile/' . $second_segment) ?>">Profil</span>
 		</a>
 		<a class="toolbar-item" href="/friends">
 			<span class="material-symbols-outlined <?= selectToolbarItem('/friends') ?>">group</span>

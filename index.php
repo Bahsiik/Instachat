@@ -1,37 +1,38 @@
 <?php
 declare(strict_types=1);
 
-require_once('src/controllers/Delete.php');
-require_once('src/controllers/friends/GetFriendRequests.php');
-require_once('src/controllers/friends/GetFriends.php');
-require_once('src/controllers/friends/GetSentRequests.php');
-require_once('src/controllers/friends/RemoveFriend.php');
-require_once('src/controllers/friends/AcceptRequest.php');
-require_once('src/controllers/friends/DeclineRequest.php');
-require_once('src/controllers/friends/CancelRequest.php');
-require_once('src/controllers/pages/AuthentificationPage.php');
-require_once('src/controllers/pages/FriendPage.php');
-require_once('src/controllers/pages/HomePage.php');
-require_once('src/controllers/pages/OptionsPage.php');
-require_once('src/controllers/pages/TrendPage.php');
-require_once('src/controllers/pages/SearchTrendPage.php');
-require_once('src/controllers/pages/ProfilePage.php');
-require_once('src/controllers/posts/AddPost.php');
-require_once('src/controllers/posts/GetComments.php');
-require_once('src/controllers/posts/GetFeed.php');
-require_once('src/controllers/posts/GetTrends.php');
-require_once('src/controllers/posts/GetPostContaining.php');
-require_once('src/controllers/posts/GetPostsByUser.php');
-require_once('src/controllers/users/CreateUser.php');
-require_once('src/controllers/users/GetConnectedUser.php');
-require_once('src/controllers/users/GetUser.php');
-require_once('src/controllers/users/LoginUser.php');
-require_once('src/controllers/users/UpdatePassword.php');
-require_once('src/controllers/users/UpdatePreferences.php');
-require_once('src/controllers/users/UpdateUserInformation.php');
-require_once('src/lib/utils.php');
-require_once('src/lib/dateUtils.php');
-require_once('src/models/Post.php');
+require_once 'src/controllers/Delete.php';
+require_once 'src/controllers/friends/GetFriendRequests.php';
+require_once 'src/controllers/friends/GetFriends.php';
+require_once 'src/controllers/friends/GetSentRequests.php';
+require_once 'src/controllers/friends/RemoveFriend.php';
+require_once 'src/controllers/friends/AcceptRequest.php';
+require_once 'src/controllers/friends/DeclineRequest.php';
+require_once 'src/controllers/friends/CancelRequest.php';
+require_once 'src/controllers/pages/AuthentificationPage.php';
+require_once 'src/controllers/pages/FriendPage.php';
+require_once 'src/controllers/pages/HomePage.php';
+require_once 'src/controllers/pages/OptionsPage.php';
+require_once 'src/controllers/pages/TrendPage.php';
+require_once 'src/controllers/pages/SearchTrendPage.php';
+require_once 'src/controllers/pages/ProfilePage.php';
+require_once 'src/controllers/posts/AddPost.php';
+require_once 'src/controllers/posts/GetComments.php';
+require_once 'src/controllers/posts/GetFeed.php';
+require_once 'src/controllers/posts/GetTrends.php';
+require_once 'src/controllers/posts/GetPostContaining.php';
+require_once 'src/controllers/posts/GetPostsByUser.php';
+require_once 'src/controllers/users/CreateUser.php';
+require_once 'src/controllers/users/GetConnectedUser.php';
+require_once 'src/controllers/users/GetUser.php';
+require_once 'src/controllers/users/GetUserByUsername.php';
+require_once 'src/controllers/users/LoginUser.php';
+require_once 'src/controllers/users/UpdatePassword.php';
+require_once 'src/controllers/users/UpdatePreferences.php';
+require_once 'src/controllers/users/UpdateUserInformation.php';
+require_once 'src/lib/utils.php';
+require_once 'src/lib/dateUtils.php';
+require_once 'src/models/Post.php';
 
 use Controllers\Delete;
 use Controllers\Friends\AcceptRequest;
@@ -54,6 +55,7 @@ use Controllers\Posts\GetPostsByUser;
 use Controllers\Posts\GetTrends;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
+use Controllers\Users\GetUserByUsername;
 use Controllers\Users\LoginUser;
 use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
@@ -67,8 +69,10 @@ date_default_timezone_set('Europe/Paris');
 
 try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
-	$uriSegments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-	$firstSegment = $uriSegments[1] ?? '';
+	$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+	$first_segment = $uri_segments[1] ?? '';
+	global $second_segment;
+	$second_segment = $uri_segments[2] ?? '';
 
 	/**
 	 * @var User $connected_user
@@ -81,11 +85,11 @@ try {
 			session_destroy();
 		}
 	}
-	if ($connected_user === null && $firstSegment !== 'create' && $method === 'GET') {
+	if ($connected_user === null && $first_segment !== 'create' && $method === 'GET') {
 		redirect('/create');
 	}
 
-	switch ($firstSegment) {
+	switch ($first_segment) {
 		default:
 			global $posts, $trends;
 			$posts = (new GetFeed())->execute($connected_user);
@@ -98,7 +102,7 @@ try {
 			$posts = (new GetFeed())->execute($connected_user);
 			global $post;
 			foreach ($posts as $post) {
-				require('templates/components/post.php');
+				require 'templates/components/post.php';
 			}
 
 			exit();
@@ -186,12 +190,20 @@ try {
 			break;
 
 		case 'profile':
-			redirect_if_method_not('GET', '/');
-			global $friend_list, $user_posts, $trends;
-			$friend_list = (new GetFriends())->execute($connected_user);
-			$user_posts = (new GetPostsByUser())->execute($connected_user->id);
-			$trends = (new GetTrends())->execute();
-			(new ProfilePage())->execute();
+			if ($second_segment == null) {
+				redirect('/');
+			} else {
+				redirect_if_method_not('GET', '/');
+				global $user, $friend_list, $user_posts, $trends;
+				$user = (new GetUserByUsername())->execute($second_segment);
+				if ($user == null) {
+					redirect('/');
+				}
+				$friend_list = (new GetFriends())->execute($user);
+				$user_posts = (new GetPostsByUser())->execute($user->id);
+				$trends = (new GetTrends())->execute();
+				(new ProfilePage())->execute();
+			}
 			break;
 	}
 } catch (Exception $exception) {

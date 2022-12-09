@@ -6,12 +6,10 @@ $css[] = 'profile.css';
 ob_start();
 require_once('components/toolbar.php');
 
-global $connected_user;
-global $friend_list;
-global $user_posts;
+global $connected_user, $user, $friend_list, $user_posts;
 
 
-$title = 'Instachat | ' . $username = htmlspecialchars($connected_user->username);
+$title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 
 ?>
 	<div class="profile-container">
@@ -21,21 +19,30 @@ $title = 'Instachat | ' . $username = htmlspecialchars($connected_user->username
 		<div class="profile-info-container">
 			<div class="profile-info">
 				<div class="profile-info-avatar">
-					<img src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="avatar">
+					<img src="../static/images/logo-<?= $user->color->lowercaseName() ?>.png" alt="avatar">
 				</div>
 				<div class="profile-info-middle">
 					<div class="profile-info-username">
-						<p class="display-name"><?= ($connected_user->display_name !== null) ? htmlspecialchars($connected_user->display_name) : $username ?></p>
+						<p class="display-name"><?= ($user->display_name !== null) ? htmlspecialchars($user->display_name) : $username ?></p>
 						<p class="username"><?= '@' . $username ?></p>
 					</div>
 					<div class="profile-info-inscription-date">
 						<p class="inscription-date">Membre depuis le</p>
-						<p class="inscription-date"><?= format_date_time($connected_user->created_at) ?></p>
+						<p class="inscription-date"><?= format_date_time($user->created_at) ?></p>
 					</div>
 				</div>
 				<div class="profile-info-right">
 					<div class="profile-bio">
-						<?= ($connected_user->bio == null) ? 'Vous n\'avez pas encore renseigné de bio vous concernant..' : htmlspecialchars($connected_user->bio) ?>
+						<?php
+						if ($user->bio == null) {
+							if ($user->id == $connected_user->id) {
+								echo 'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !';
+							} else {
+								echo 'Cet utilisateur n\'a pas encore ajouté de bio.';
+							}
+						} else {
+							echo htmlspecialchars($user->bio);
+						}  ?>
 					</div>
 					<div class="profile-info-data">
 						<div class="profile-info-data-content">
@@ -47,15 +54,21 @@ $title = 'Instachat | ' . $username = htmlspecialchars($connected_user->username
 							<p class="posts-text"><?= (count($user_posts) <= 1) ? 'chat' : 'chats' ?></p>
 						</div>
 						<div class="profile-info-data-content">
-							<p class="reactions-number">50</p>
+							<p class="reactions-number">ching chong</p>
 							<p class="reactions-text">Réactions</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="profile-actions">
-				<button class="material-symbols-outlined">edit</button>
-			</div>
+			<?php
+			if ($connected_user->id == $user->id) {
+				?>
+				<div class="profile-actions">
+					<button class="material-symbols-outlined">edit</button>
+				</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 
