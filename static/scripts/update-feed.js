@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log('DOM loaded');
 	const feedContainer = document.querySelector('.feed-container');
 	const lastChild = feedContainer.lastElementChild;
 	let offset = 5;
@@ -12,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				credentials: 'include',
 			});
 			const text = await request.text();
-			let div = document.createElement('div');
+			const div = document.createElement('div');
 			div.innerHTML = text;
-			for (let child of div.children) {
-				let menuChild = child.querySelector('.post-menu');
+			for (const child of div.children) {
+				const menuChild = child.querySelector('.post-menu');
 				if (!menuChild) continue;
 				postClicked(menuChild);
 			}
@@ -28,21 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 	observer.observe(lastChild);
 
-	let postMenu = getPostMenu();
+	const postMenu = getPostMenu();
 	postMenu.forEach((menu) => {
 		postClicked(menu);
 	});
 
 	document.addEventListener('click', (e) => {
 		if (!e.target.closest('.post-menu')) {
-			let postMenu = getPostMenu();
+			const postMenu = getPostMenu();
 			postMenu.forEach((menu) => {
-				menu.nextElementSibling.classList.add('menu-hidden');
+				hideOthersMenu(menu);
 			});
 		}
 	});
-});
 
+});
 
 function postClicked(menu) {
 	menu.addEventListener('click', () => {
@@ -52,17 +51,29 @@ function postClicked(menu) {
 
 function showMenu(menu) {
 	hideOthersMenu(menu);
-	let nextMenuContainer = menu.nextElementSibling;
+	const nextMenuContainer = menu.nextElementSibling;
 	nextMenuContainer.classList.toggle('menu-hidden');
-	nextMenuContainer.style.left = menu.getBoundingClientRect().right - (menu.offsetWidth + nextMenuContainer.offsetWidth + 10) + 'px';
-	nextMenuContainer.style.top = menu.offsetTop + 'px';
+	nextMenuContainer.style.left = `${menu.getBoundingClientRect().right - (menu.offsetWidth + nextMenuContainer.offsetWidth + 10)}px`;
+	nextMenuContainer.style.top = `${menu.offsetTop}px`;
+	nextMenuContainer.addEventListener('click', (e) => {
+		if (e.target.classList.contains('menu-delete-btn')) {
+			const modal = nextMenuContainer.querySelector('dialog');
+			modal.showModal();
+			if (modal.open) {
+				modal.querySelector('.modal-cancel-btn').addEventListener('click', () => {
+					modal.close()
+				});
+			}
+		}
+	});
 }
 
 function hideOthersMenu(menu) {
-	let postMenu = getPostMenu();
-	postMenu.forEach((postMenu) => {
-		if (postMenu !== menu) {
-			postMenu.nextElementSibling.classList.add('menu-hidden');
+	const postMenu = getPostMenu();
+	postMenu.forEach((e) => {
+		if (e !== menu) {
+			console.log("hide");
+			e.nextElementSibling.classList.add('menu-hidden');
 		}
 	});
 }
