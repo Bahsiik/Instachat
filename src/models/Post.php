@@ -140,7 +140,7 @@ class PostRepository {
 	}
 
 	public function getPostContaining(string $content): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content ORDER BY creation_date DESC');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE ORDER BY creation_date DESC');
 		$statement->execute(['content' => "%$content%"]);
 		$posts = [];
 
