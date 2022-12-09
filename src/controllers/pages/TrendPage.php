@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\Pages;
 
-use Model\User;
-
 class TrendPage {
-	public function execute(User $connected_user): void {
+	public function execute(): void {
 		require_once('templates/trends.php');
 	}
 }

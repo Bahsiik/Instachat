@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\User;
 
@@ -16,7 +17,7 @@ class CreateUser {
 		}
 		$user_exist = (new UserRepository())->isUserAlreadyRegistered($input['email'], $input['username']);
 		if ($user_exist) {
-			echo("User already exists");
+			echo('User already exists');
 			redirect('/');
 		}
 		$birth_date = date_create($input['birthdate']);

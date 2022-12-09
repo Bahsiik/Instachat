@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\Pages;
 
-use Model\User;
-
 class OptionsPage {
-	public function execute(User $current_user): void {
+	public function execute(): void {
 		require_once('templates/options.php');
 	}
 }

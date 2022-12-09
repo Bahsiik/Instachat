@@ -119,7 +119,7 @@ try {
 			break;
 
 		case 'options':
-			(new OptionsPage())->execute($connected_user);
+			(new OptionsPage())->execute();
 			break;
 
 		case 'update-preferences':
@@ -142,7 +142,7 @@ try {
 			$friend_requests = (new GetFriendRequests())->execute($connected_user);
 			$sent_requests = (new GetSentRequests())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
-			(new FriendPage())->execute($connected_user);
+			(new FriendPage())->execute();
 			break;
 
 		case 'remove-friend':
