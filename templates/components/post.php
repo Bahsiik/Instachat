@@ -18,12 +18,14 @@ $user = $user_controller->execute($post->author_id);
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
-			<div class="post-display-name">
-				<?= $user->getDisplayOrUsername() ?>
-			</div>
-			<div class="post-username">
-				<?= "@$user->username" ?>
-			</div>
+			<a href="/profile/<?= $user->username ?>">
+				<div class="post-display-name">
+					<?= $user->getDisplayOrUsername() ?>
+				</div>
+				<div class="post-username">
+					<?= "@$user->username" ?>
+				</div>
+			</a>
 			<div class="post-dot-separator">·</div>
 			<div class="post-date">
 				<?php
