@@ -180,9 +180,17 @@ class UserRepository {
 		return $user !== false;
 	}
 
-	public function getAlreadyRegisteredUser(string $email, string $username): ?User {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email OR username = :username');
-		$statement->execute(compact('email', 'username'));
+	public function getUserByEmail(string $email): ?User {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE email = :email');
+		$statement->execute(compact('email'));
+		$user = $statement->fetch(PDO::FETCH_ASSOC);
+		if ($user === false) return null;
+		return new User(...array_values($user));
+	}
+
+	public function getUserByUsername(string $username): ?User {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE username = :username');
+		$statement->execute(compact('username'));
 		$user = $statement->fetch(PDO::FETCH_ASSOC);
 		if ($user === false) return null;
 		return new User(...array_values($user));
