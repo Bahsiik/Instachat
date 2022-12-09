@@ -173,10 +173,10 @@ try {
 			break;
 
 		case 'search-trend':
-			redirect_if_method_not('POST', '/');
-			global $searched_trend, $searched_posts,  $trends;
-			$searched_trend = $_POST['trend'];
-			$searched_posts = (new GetPostContaining())->execute($_POST['trend']);
+			redirect_if_method_not('GET', '/');
+			global $searched_trend, $searched_posts, $trends;
+			$searched_trend = $_GET['trend'];
+			$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 			$trends = (new GetTrends())->execute();
 			(new SearchTrendPage())->execute();
 			global $trend;

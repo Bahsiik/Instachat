@@ -9,13 +9,17 @@
 }
 
 
-.trends-feed > form > button {
+.trends-feed > a {
+	text-decoration: none;
+}
+
+.trends-feed > a > button {
 	border: none;
 	text-align: left;
 	width: 100%;
 }
 
-.trends-feed > form > .trend  {
+.trends-feed > a > .trend  {
 	border-bottom: 1px solid var(--border);
 	padding: 0.75rem 1rem;
 	background: none;
@@ -24,16 +28,16 @@
 	flex-direction: column;
 }
 
-.trends-feed > form > .trend:hover {
+.trends-feed > a > .trend:hover {
 	background-color: var(--bg-quinternary);
 	cursor: pointer;
 }
 
-.trends-feed > form > .hidden {
+.trends-feed > a > .hidden {
 	display: none;
 }
 
-.trends-feed > form > .trend > span {
+.trends-feed > a > .trend > span {
 	margin: 0;
 	padding: 0.15rem 0;
 }
@@ -42,7 +46,7 @@
 	color: var(--fg-secondary);
 }
 
-.trends-feed > form > .trend > .trend-content {
+.trends-feed > a > .trend > .trend-content {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 10rem;

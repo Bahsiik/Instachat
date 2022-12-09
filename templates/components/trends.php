@@ -14,14 +14,13 @@ global $trends; ?>
 		$index = 1;
 		foreach ($trends as $name => $count) {
 			?>
-			<form action="/search-trend" method="post">
-				<input type="hidden" name="trend" value="<?= $name ?>">
+			<a href="/search-trend?trend=<?= urlencode($name) ?>">
 				<button class="trend<?= $index > 5 ? ' hidden' : '' ?>" type="submit">
 					<span class="trend-rank"><?= "$index • Tendances" ?></span>
 					<span class="trend-content"><?= htmlspecialchars($name) ?></span>
 					<span class="trend-number"><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></span>
 				</button>
-			</form>
+			</a>
 			<?php
 			$index++;
 		}
