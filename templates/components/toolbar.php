@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 use function Lib\Utils\selectToolbarItem;
 
-
 $css[] = 'toolbar.css';
 
-$current_url = $_SERVER['REQUEST_URI'];
 global $connected_user; ?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
