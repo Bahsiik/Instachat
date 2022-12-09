@@ -136,3 +136,7 @@ body {
 	border-radius: 9px;
 }
 
+.chat-image {
+	height: 345px;
+	object-fit: contain;
+}

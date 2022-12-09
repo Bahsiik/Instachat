@@ -27,4 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	chatArea.addEventListener('input', updateCharacterCount);
+
+	function addImage() {
+		const fileInput = document.querySelector('.chat-image-input');
+		fileInput.click();
+		const reader = new FileReader();
+		fileInput.addEventListener('change', () => {
+			const file = fileInput.files[0];
+			reader.onload = () => {
+				const img = (`<img class="chat-image" src='${reader.result}' alt="">`);
+				const chatFormImageContainer = document.querySelector('.chat-form-image-container');
+				chatFormImageContainer.innerHTML += img;
+			};
+			reader.readAsDataURL(file);
+		});
+	}
+
+	const imageButton = document.querySelector('.chat-image-btn');
+	imageButton.addEventListener('click', addImage);
 });

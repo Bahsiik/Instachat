@@ -5,6 +5,7 @@ use Controllers\Posts\GetComments;
 use Controllers\Users\GetUser;
 use Models\Emotion;
 
+
 $user_controller = new GetUser();
 
 global $post;
@@ -66,6 +67,15 @@ $user = $user_controller->execute($post->author_id);
 			<?php
 			if (isset($post->content)) echo htmlspecialchars($post->content); ?>
 		</div>
+		<?php
+		if (isset($post->image->data) && str_starts_with($post->image->data, 'data:image')) {
+			?>
+			<div class="post-image">
+				<img class="post-image" src="<?= $post->image->data ?>" alt="post-image">
+			</div>
+			<?php
+		}
+		?>
 		<div class="post-action-buttons">
 			<button class="post-comment-btn">
 				<span class="material-symbols-outlined post-action-buttons-color">chat_bubble</span>

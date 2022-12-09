@@ -22,11 +22,13 @@ global $posts; ?>
 				<img src="<?= display_icon($connected_user) ?>" alt="avatar">
 			</div>
 			<div class="chat-right">
-				<form class="post-form" action="/chat" method="post">
+				<form class="post-form" action="/chat" method="post" enctype="multipart/form-data">
                     <textarea class="chat-area" placeholder="Chatter quelque chose..." name="content"
                               maxlength="400"></textarea>
+					<div class="chat-form-image-container"></div>
 					<div class="chat-form-bottom">
-						<button class="chat-image-btn">
+						<input type='file' class='chat-image-input' name="image-content" hidden>
+						<button class="chat-image-btn" type="button">
 							<span class="material-symbols-outlined chat-action-buttons-color">image</span>
 						</button>
 						<div class="emotions">

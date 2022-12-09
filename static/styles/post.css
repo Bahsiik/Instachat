@@ -166,3 +166,8 @@
 .menu-delete-btn:hover .menu-delete-symbol {
 	color: var(--fg-primary) !important;
 }
+
+.post-image {
+	height: 345px;
+	object-fit: contain;
+}
