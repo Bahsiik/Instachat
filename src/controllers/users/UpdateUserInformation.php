@@ -15,7 +15,8 @@ class UpdateUserInformation {
 		$email = $input['email'] ?? $connected_user->email;
 
 		$user_repository = new UserRepository();
-		if ($user_repository->isUserAlreadyRegistered($email, $username)) {
+		$check = $user_repository->getAlreadyRegisteredUser($email, $username);
+		if ($check?->id !== $connected_user->id) {
 			throw new RuntimeException('User already registered');
 		}
 
