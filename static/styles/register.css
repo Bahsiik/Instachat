@@ -10,7 +10,6 @@ body {
 	flex-direction: column;
 	height: 100vh;
 	justify-content: center;
-	margin: -20px 0 50px;
 }
 
 h1 {
@@ -86,7 +85,7 @@ legend {
 	border-radius: 10px;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 	max-width: 100%;
-	min-height: 600px;
+	min-height: 649px;
 	overflow: hidden;
 	position: relative;
 	width: 835px;
