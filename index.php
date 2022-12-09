@@ -15,11 +15,13 @@ require_once('src/controllers/pages/HomePage.php');
 require_once('src/controllers/pages/OptionsPage.php');
 require_once('src/controllers/pages/TrendPage.php');
 require_once('src/controllers/pages/SearchTrendPage.php');
+require_once('src/controllers/pages/ProfilePage.php');
 require_once('src/controllers/posts/AddPost.php');
 require_once('src/controllers/posts/GetComments.php');
 require_once('src/controllers/posts/GetFeed.php');
 require_once('src/controllers/posts/GetTrends.php');
 require_once('src/controllers/posts/GetPostContaining.php');
+require_once('src/controllers/posts/GetPostsByUser.php');
 require_once('src/controllers/users/CreateUser.php');
 require_once('src/controllers/users/GetConnectedUser.php');
 require_once('src/controllers/users/GetUser.php');
@@ -43,10 +45,12 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
+use Controllers\Pages\ProfilePage;
 use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
 use Controllers\Posts\GetPostContaining;
+use Controllers\Posts\GetPostsByUser;
 use Controllers\Posts\GetTrends;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
@@ -179,7 +183,16 @@ try {
 			$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 			$trends = (new GetTrends())->execute();
 			(new SearchTrendPage())->execute();
-			global $trend;
+			break;
+
+		case 'profile':
+			redirect_if_method_not('GET', '/');
+			global $friend_list, $user_posts, $trends;
+			$friend_list = (new GetFriends())->execute($connected_user);
+			$user_posts = (new GetPostsByUser())->execute($connected_user->id);
+			$trends = (new GetTrends())->execute();
+			(new ProfilePage())->execute();
+			break;
 	}
 } catch (Exception $exception) {
 	echo '<pre>';

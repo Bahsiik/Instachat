@@ -1,0 +1,77 @@
+.profile-container {
+	padding: 20px 44px;
+	width: 100%;
+}
+
+.profile-info-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 2rem 3rem;
+	border-bottom: 3px solid var(--border);
+}
+
+.profile-info {
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+}
+
+.profile-info-avatar > img {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+.profile-info-middle {
+	width: 10rem;
+}
+
+.profile-info-username  > .display-name {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.profile-info-username  > .username {
+	color: var(--fg-secondary);
+	margin: 0;
+}
+
+.profile-info-inscription-date {
+	margin-top: 1rem;
+}
+
+.inscription-date {
+	color: var(--fg-secondary);
+	margin: 0;
+}
+
+.profile-info-right {
+	width: 40rem;
+	height: 7rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.profile-info-data {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 75%;
+}
+
+.profile-info-data-content {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	color: var(--fg-secondary);
+}
+
+.profile-actions > button {
+	font-size: 1.5rem;
+	background: none;
+	border: none;
+	color: var(--fg-secondary);
+}
