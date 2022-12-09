@@ -45,7 +45,8 @@ $user = $user_controller->execute($post->author_id);
 				<div class='menu-container menu-hidden'>
 					<input type='hidden' name='post_id' value="<?= $post->id ?>">
 					<button class='menu-delete-btn'>
-						Supprimer <span class='material-symbols-outlined menu-delete-symbol'>close</span>
+						Supprimer
+						<span class='material-symbols-outlined menu-delete-symbol'>close</span>
 					</button>
 				</div>
 				<?php

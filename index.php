@@ -94,7 +94,7 @@ try {
 			$posts = (new GetFeed())->execute($connected_user);
 			global $post;
 			foreach ($posts as $post) {
-				require('templates/post.php');
+				require('templates/components/post.php');
 			}
 
 			exit();
