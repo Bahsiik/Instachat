@@ -36,7 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (!e.target.closest('.post-menu')) {
 			const postMenu = getPostMenu();
 			postMenu.forEach((menu) => {
-				hideOthersMenu(menu);
+				// hideOthersMenu(menu);
+				// if line above is uncommented, it will hide all menus when clicking outside of menu
+				// but hiding all menus is also hiding the modal dialog
+				// todo: find a way to hide all menus except the modal dialog
+				//  (remove menu-hidden class from menu-container)
 			});
 		}
 	});
