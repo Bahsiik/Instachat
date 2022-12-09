@@ -12,6 +12,10 @@
 	border-radius: 0 0 16px 16px;
 }
 
+.content > .hidden {
+	display: none;
+}
+
 .friend {
 	display: flex;
 	flex-direction: row;
