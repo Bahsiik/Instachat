@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Model\Emotion;
+use Models\Emotion;
 use function Lib\Utils\display_icon;
 
 $css = ['homepage.css', 'post.css'];

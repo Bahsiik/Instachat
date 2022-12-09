@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Controllers\User\GetUser;
+use Controllers\Users\GetUser;
 
 $friend_controller = new GetUser();
 

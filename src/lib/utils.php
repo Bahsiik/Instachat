@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Lib\Utils;
 
-use Model\User;
+use Models\User;
 
 const LOGO_LINK = '/static/images/logo-';
 

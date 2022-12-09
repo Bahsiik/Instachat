@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace Controllers;
 
-require_once('src/controllers/user/DeleteUser.php');
-require_once('src/controllers/post/DeletePost.php');
-require_once('src/controllers/post/DeleteComment.php');
+require_once('src/controllers/users/DeleteUser.php');
+require_once('src/controllers/posts/DeletePost.php');
+require_once('src/controllers/posts/DeleteComment.php');
 require_once('src/controllers/reactions/DeleteReaction.php');
 
-use Controllers\Post\DeleteComment;
-use Controllers\Post\DeletePost;
+use Controllers\Posts\DeleteComment;
+use Controllers\Posts\DeletePost;
 use Controllers\Reaction\DeleteReaction;
-use Controllers\User\DeleteUser;
+use Controllers\Users\DeleteUser;
 use RuntimeException;
 use function strtolower;
 

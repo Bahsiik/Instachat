@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use Model\Background;
-use Model\Color;
-use Model\FontSize;
+use Models\Background;
+use Models\Color;
+use Models\FontSize;
 
 $title = 'Options';
 $css[] = 'options.css';

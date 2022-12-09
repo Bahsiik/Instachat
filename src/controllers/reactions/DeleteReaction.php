@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\Reaction;
 
-use Model\Post;
-use Model\ReactionsRepository;
-use Model\User;
+use Models\Post;
+use Models\ReactionsRepository;
+use Models\User;
 
 class DeleteReaction {
 	public function execute(Post|float $id, User|float $user, string $emoji): void {

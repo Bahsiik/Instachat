@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use Controllers\Post\GetComments;
-use Controllers\User\GetUser;
-use Model\Emotion;
+use Controllers\Posts\GetComments;
+use Controllers\Users\GetUser;
+use Models\Emotion;
 
 $user_controller = new GetUser();
 
@@ -46,7 +46,8 @@ $user = $user_controller->execute($post->author_id);
 					<form action="/delete-post" method="post">
 						<input type="hidden" name="post_id" value="<?= $post->id ?>">
 						<button type="submit" class="menu-delete-btn"><span
-								class="material-symbols-outlined post-action-buttons-color">close</span>Supprimer
+								class="material-symbols-outlined post-action-buttons-color">close</span>
+							Supprimer
 						</button>
 					</form>
 				</div>
