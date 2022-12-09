@@ -3,27 +3,30 @@ declare(strict_types=1);
 
 namespace Models;
 
-require_once('src/lib/DatabaseConnection.php');
+require_once 'src/lib/DatabaseConnection.php';
 
 use Database\DatabaseConnection;
 use DateTime;
 use PDO;
+use function array_values;
 
 class Comment {
-	public DateTime $created_at;
+	public DateTime $createdAt;
+	public bool $deleted;
 
 	public function __construct(
-		public float  $author_id,
-		public string $content,
-		public bool   $deleted,
-		public int    $downvotes,
 		public float  $id,
-		public float  $post_id,
-		public float  $reply_id,
+		public string $content,
 		public int    $upvotes,
-		string        $created_at
+		public int    $downvotes,
+		public ?float $reply_id,
+		public float  $post_id,
+		string        $created_at,
+		public float  $author_id,
+		int           $deleted,
 	) {
-		$this->created_at = date_create_from_format('Y-m-d H:i:s', $created_at);
+		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $created_at);
+		$this->deleted = $deleted === 1;
 	}
 }
 
@@ -47,7 +50,9 @@ class CommentRepository {
 	public function getCommentById(float $id): ?Comment {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE id = :id');
 		$statement->execute(compact('id'));
-		return $statement->fetchObject(Comment::class) ?: null;
+		$comment = $statement->fetch(PDO::FETCH_ASSOC);
+		if ($comment === false) return null;
+		return new Comment(...array_values($comment));
 	}
 
 	/**
@@ -57,7 +62,12 @@ class CommentRepository {
 	public function getCommentsByAuthor(float $author_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE author_id = :author_id AND deleted = FALSE');
 		$statement->execute(compact('author_id'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Comment::class);
+		$comments = [];
+		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$comments[] = new Comment(...array_values($comment));
+		}
+
+		return $comments;
 	}
 
 	/**
@@ -70,7 +80,7 @@ class CommentRepository {
 		$comments = [];
 
 		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$comments[] = new Friend(...array_values($comment));
+			$comments[] = new Comment(...array_values($comment));
 		}
 
 		return $comments;
@@ -86,7 +96,7 @@ class CommentRepository {
 		$comments = [];
 
 		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$comments[] = new Friend(...array_values($comment));
+			$comments[] = new Comment(...array_values($comment));
 		}
 
 		return $comments;
@@ -99,6 +109,12 @@ class CommentRepository {
 	public function getCommentsContaining(string $content): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE content LIKE :content AND deleted = FALSE');
 		$statement->execute(compact('content'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Comment::class);
+		$comments = [];
+
+		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$comments[] = new Comment(...array_values($comment));
+		}
+
+		return $comments;
 	}
 }

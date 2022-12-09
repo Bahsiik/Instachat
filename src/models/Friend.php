@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Models;
 
-require_once('src/lib/DatabaseConnection.php');
+require_once 'src/lib/DatabaseConnection.php';
 
 use Database\DatabaseConnection;
 use DateTime;

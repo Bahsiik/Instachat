@@ -2,10 +2,6 @@
 declare(strict_types=1);
 
 
-/**
- * @param DateTime $date
- * @return void
- */
 function format_date_time(DateTime $date): void {
 	$current_date = new DateTime();
 	$diff = $current_date->diff($date);
@@ -17,6 +13,7 @@ function format_date_time(DateTime $date): void {
 		IntlDateFormatter::GREGORIAN,
 		'd MMMM yyyy'
 	);
+
 	if ($diff->days > 0) {
 		echo $date_only_formatter->format($date);
 	} else if ($diff->h > 0) {
