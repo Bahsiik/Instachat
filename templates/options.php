@@ -125,20 +125,34 @@ require_once('toolbar.php');
 				</form>
 
 				<form action="/update-password" class="options-group" method="post">
-					<input type="hidden" autocomplete="username" name="username"
-					       value="<?= htmlspecialchars($connected_user->username) ?>">
+					<input autocomplete="username" name="username" type="hidden" value="<?= htmlspecialchars($connected_user->username) ?>">
 
 					<label>Ancien mot de passe
-						<input autocomplete="current-password" maxlength="64" minlength="4" placeholder="Mot de passe"
-						       required type="password">
+						<input autocomplete="current-password"
+						       maxlength="64"
+						       name="old-password"
+						       minlength="4"
+						       placeholder="Mot de passe"
+						       required
+						       type="password">
 					</label>
 					<label>Nouveau mot de passe
-						<input autocomplete="new-password" maxlength="64" minlength="4"
-						       placeholder="Nouveau mot de passe" required type="password">
+						<input autocomplete="new-password"
+						       maxlength="64"
+						       minlength="4"
+						       name="new-password"
+						       placeholder="Nouveau mot de passe"
+						       required
+						       type="password">
 					</label>
 					<label>Confirmer le nouveau mot de passe
-						<input autocomplete="new-password" maxlength="64" minlength="8"
-						       placeholder="Confirmer nouveau mot de passe" required type="password">
+						<input autocomplete="new-password"
+						       maxlength="64"
+						       minlength="4"
+						       name="confirm-password"
+						       placeholder="Confirmer nouveau mot de passe"
+						       required
+						       type="password">
 					</label>
 
 					<button type="submit">Confirmer</button>
