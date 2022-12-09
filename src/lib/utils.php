@@ -19,3 +19,7 @@ function redirect(string $url): never {
 function redirect_if_method_not(string $route_type, string $url): void {
 	if ($_SERVER['REQUEST_METHOD'] !== $route_type) redirect($url);
 }
+
+function selectToolbarItem(string $route): string {
+	return $_SERVER['REQUEST_URI'] === $route ? 'toolbar-item-selected' : '';
+}

@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use function Lib\Utils\selectToolbarItem;
+
+
 $css[] = 'toolbar.css';
 
 $current_url = $_SERVER['REQUEST_URI'];
@@ -12,23 +15,23 @@ global $connected_user; ?>
 		</a>
 		<a class="toolbar-item" href="/">
 			<span
-				class="material-symbols-outlined <?= $current_url === '/' ? 'toolbar-item-selected' : '' ?>">home</span>
-			<span class="<?= $current_url === '/' ? 'toolbar-item-selected' : '' ?>">Accueil</span>
+				class="material-symbols-outlined <?= selectToolbarItem('/') ?>">home</span>
+			<span class="<?= selectToolbarItem('/') ?>">Accueil</span>
 		</a>
 		<?php
 		if (isset($connected_user)) { ?>
-		<a class="toolbar-item" href="">
-			<span class="material-symbols-outlined <?= $current_url === '/profile' ? 'toolbar-item-selected' : '' ?>">person</span>
-			<span class="<?= $current_url === '/profile' ? 'toolbar-item-selected' : '' ?>">Profil</span>
+		<a class="toolbar-item" href="/profile">
+			<span class="material-symbols-outlined <?= selectToolbarItem('/profile') ?>">person</span>
+			<span class="<?= selectToolbarItem('/profile') ?>">Profil</span>
 		</a>
 		<a class="toolbar-item" href="/friends">
-			<span class="material-symbols-outlined <?= $current_url === '/friends' ? 'toolbar-item-selected' : '' ?>">group</span>
-			<span class="<?= $current_url === '/friends' ? 'toolbar-item-selected' : '' ?>">Amis</span>
+			<span class="material-symbols-outlined <?= selectToolbarItem('/friends') ?>">group</span>
+			<span class="<?= selectToolbarItem('/friends') ?>">Amis</span>
 
 		</a>
 		<a class="toolbar-item" href="/options">
-			<span class="material-symbols-outlined <?= $current_url === '/options' ? 'toolbar-item-selected' : '' ?>">pending</span>
-			<span class="<?= $current_url === '/options' ? 'toolbar-item-selected' : '' ?>">Options</span>
+			<span class="material-symbols-outlined <?= selectToolbarItem('/options') ?>">pending</span>
+			<span class="<?= selectToolbarItem('/options') ?>">Options</span>
 
 		</a>
 		<button class="chat-btn">Chat</button>
