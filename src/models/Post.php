@@ -140,4 +140,16 @@ class PostRepository {
 		arsort($words);
 		return array_slice($words, 0, 10);
 	}
+
+	public function getPostContaining(string $content): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content');
+		$statement->execute(['content' => "%$content%"]);
+		$posts = [];
+
+		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$posts[] = new Post(...array_values($post));
+		}
+
+		return $posts;
+	}
 }

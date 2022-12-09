@@ -18,6 +18,7 @@ require_once('src/controllers/posts/AddPost.php');
 require_once('src/controllers/posts/GetComments.php');
 require_once('src/controllers/posts/GetFeed.php');
 require_once('src/controllers/posts/GetTrends.php');
+require_once('src/controllers/posts/GetPostContaining.php');
 require_once('src/controllers/users/CreateUser.php');
 require_once('src/controllers/users/GetConnectedUser.php');
 require_once('src/controllers/users/GetUser.php');
@@ -43,6 +44,7 @@ use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
+use Controllers\Posts\GetPostContaining;
 use Controllers\Posts\GetTrends;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
@@ -171,6 +173,12 @@ try {
 			redirect_if_method_not('POST', '/friends');
 			(new CancelRequest())->execute($connected_user, $_POST);
 			break;
+
+		case 'search-trend':
+			redirect_if_method_not('POST', '/');
+			$trends = (new GetPostContaining())->execute($_POST['trend']);
+			echo json_encode($trends);
+			global $trend;
 	}
 } catch (Exception $exception) {
 	echo '<pre>';

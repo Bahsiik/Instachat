@@ -8,16 +8,32 @@
 	padding: 5px 15px;
 }
 
-.trend {
-	border-bottom: 1px solid var(--border);
-	padding: 0.75rem 1rem;
+
+.trends-feed > form > button {
+	border: none;
+	text-align: left;
+	width: 100%;
 }
 
-.hidden {
+.trends-feed > form > .trend  {
+	border-bottom: 1px solid var(--border);
+	padding: 0.75rem 1rem;
+	background: none;
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	flex-direction: column;
+}
+
+.trends-feed > form > .trend:hover {
+	background-color: var(--bg-quinternary);
+	cursor: pointer;
+}
+
+.trends-feed > form > .hidden {
 	display: none;
 }
 
-.trend p {
+.trends-feed > form > .trend > span {
 	margin: 0;
 	padding: 0.15rem 0;
 }
@@ -26,15 +42,13 @@
 	color: var(--fg-secondary);
 }
 
-.trend-content {
-	font-size: 1.05rem;
-	font-weight: bold;
-}
-
-.trend-content p {
+.trends-feed > form > .trend > .trend-content {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 10rem;
+	color: var(--fg-primary);
+	font-size: 1.05rem;
+	font-weight: bold;
 }
 
 .show-more button {
