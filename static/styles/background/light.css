@@ -7,6 +7,7 @@
 	--fg-primary: #000000;
 	--fg-secondary: #869595;
 	--input-invalid: #ff5555;
+	--input-invalid-bg: rgba(255, 99, 99, 0.5);
 	--input-placeholder: #959799;
 	--input-radio: #3e8bff;
 	--input-valid: #4cff4c;

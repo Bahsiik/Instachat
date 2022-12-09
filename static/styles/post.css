@@ -6,7 +6,7 @@
 	transition: all .3s;
 }
 
-.post-comment-btn, .post-reaction-btn, .post-share-btn, .post-menu-btn, .menu-delete-btn {
+.post-comment-btn, .post-reaction-btn, .post-share-btn, .post-menu-btn {
 	align-items: center;
 	background: transparent;
 	border: none;
@@ -74,7 +74,7 @@
 	transition: all .3s;
 }
 
-.post-comment-btn:hover, .post-reaction-btn:hover, .post-share-btn:hover, .post-menu-btn:hover, .menu-delete-btn:hover {
+.post-comment-btn:hover, .post-reaction-btn:hover, .post-share-btn:hover, .post-menu-btn:hover {
 	cursor: pointer;
 }
 
@@ -111,4 +111,51 @@
 
 .post-menu {
 	margin-left: auto;
+	position: relative;
+}
+
+.menu-container {
+	align-items: center;
+	background-color: var(--bg-quinternary);
+	border-radius: 8px;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	padding: 7px;
+	position: absolute;
+	width: 123px;
+}
+
+.menu-hidden {
+	display: none;
+}
+
+.menu-delete-symbol {
+	color: var(--input-invalid) !important;
+	font-size: 1.2rem !important;
+	transition: all .3s;
+}
+
+.menu-delete-btn {
+	align-items: center;
+	background: transparent;
+	border: none;
+	border-radius: 3px;
+	color: var(--input-invalid);
+	display: flex;
+	font-family: var(--font);
+	justify-content: space-between;
+	padding: 7px;
+	transition: all .3s;
+	width: 100%;
+}
+
+.menu-delete-btn:hover {
+	background-color: var(--input-invalid-bg);
+	color: var(--fg-primary) !important;
+	cursor: pointer;
+}
+
+.menu-delete-btn:hover .menu-delete-symbol {
+	color: var(--fg-primary) !important;
 }
