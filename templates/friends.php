@@ -28,7 +28,7 @@ global $sent_requests;
 			<div class="friends-list">
 				<?php
 				foreach ($friend_list as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = ($connected_user->id === $value->requester_id) ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -38,7 +38,7 @@ global $sent_requests;
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= $friend->username ?></p>
+									<p><?= htmlspecialchars($friend->username) ?></p>
 								</div>
 								<div class="friendship-term">
 									<p>Amis depuis <?php
@@ -61,7 +61,7 @@ global $sent_requests;
 			<div class="waiting-list hidden">
 				<?php
 				foreach ($friend_requests as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = ($connected_user->id === $value->requester_id) ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -71,7 +71,7 @@ global $sent_requests;
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= $friend->username ?></p>
+									<p><?= htmlspecialchars($friend->username) ?></p>
 								</div>
 								<div class="friendship-term">
 									<p>Demande reçu</p>
@@ -97,7 +97,7 @@ global $sent_requests;
 			<div class="requests-list hidden">
 				<?php
 				foreach ($sent_requests as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = ($connected_user->id === $value->requester_id) ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -107,7 +107,7 @@ global $sent_requests;
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= $friend->username ?></p>
+									<p><?= htmlspecialchars($friend->username) ?></p>
 								</div>
 								<div class="friendship-term">
 									<p>Requête envoyée</p>

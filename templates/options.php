@@ -52,37 +52,37 @@ require_once('toolbar.php');
 				<form action="/update-user" class="options-group active" method="post">
 					<label>Nom d'utilisateur
 						<input
-								autocomplete="username"
-								maxlength="20"
-								minlength="2"
-								pattern="[\_\-a-zA-Z0-9]{2,20}"
-								placeholder="Nom d'utilisateur"
-								required
-								type="text"
-								value="<?= $connected_user->username ?>"
+							autocomplete="username"
+							maxlength="20"
+							minlength="2"
+							pattern="[\_\-a-zA-Z0-9]{2,20}"
+							placeholder="Nom d'utilisateur"
+							required
+							type="text"
+							value="<?= htmlspecialchars($connected_user->username) ?>"
 						>
 					</label>
 					<label>Nom Affiché
 						<input
-								autocomplete="name"
-								maxlength="48"
-								minlength="2"
-								pattern="[\_\-a-zA-Z0-9]{2,48}"
-								placeholder="Nom Affiché"
-								required
-								type="text"
-								value="<?= $connected_user->getDisplayOrUsername() ?>"
+							autocomplete="name"
+							maxlength="48"
+							minlength="2"
+							pattern="[\_\-a-zA-Z0-9]{2,48}"
+							placeholder="Nom Affiché"
+							required
+							type="text"
+							value="<?= $connected_user->getDisplayOrUsername() ?>"
 						>
 					</label>
 					<label>Email
 						<input
-								autocomplete="email"
-								maxlength="320"
-								minlength="5"
-								placeholder="Email"
-								required
-								type="email"
-								value="<?= $connected_user->email ?>"
+							autocomplete="email"
+							maxlength="320"
+							minlength="5"
+							placeholder="Email"
+							required
+							type="email"
+							value="<?= htmlspecialchars($connected_user->email) ?>"
 						>
 					</label>
 
@@ -126,7 +126,7 @@ require_once('toolbar.php');
 
 				<form action="/update-password" class="options-group" method="post">
 					<input type="hidden" autocomplete="username" name="username"
-					       value="<?= $connected_user->username ?>">
+					       value="<?= htmlspecialchars($connected_user->username) ?>">
 
 					<label>Ancien mot de passe
 						<input autocomplete="current-password" maxlength="64" minlength="4" placeholder="Mot de passe"

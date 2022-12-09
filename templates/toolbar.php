@@ -36,7 +36,10 @@ global $connected_user; ?>
                 <?= $connected_user->getDisplayOrUsername() ?>
                 </span>
 			<span class="user-username">
-                    <?= "@$connected_user->username" ?>
+					<?php
+					$username = htmlspecialchars($connected_user->username);
+					echo "@$username"
+					?>
                 </span>
 		</div>
 		<a class="user-logout" href="/logout">

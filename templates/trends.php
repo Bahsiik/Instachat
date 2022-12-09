@@ -13,35 +13,19 @@ global $trends; ?>
 		<?php
 		$index = 1;
 		foreach ($trends as $name => $count) {
-			if ($index < 6) {
-				?>
-				<div class="trend">
-					<div class="trend-rank">
-						<p><?= "$index • Tendances" ?></p>
-					</div>
-					<div class="trend-content">
-						<p><?= $name ?></p>
-					</div>
-					<div class="trend-number">
-						<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
-					</div>
+			?>
+			<div class="trend<?= $index > 5 ? ' hidden' : '' ?>">
+				<div class="trend-rank">
+					<p><?= "$index • Tendances" ?></p>
 				</div>
-				<?php
-			} else {
-				?>
-				<div class="trend hidden">
-					<div class="trend-rank">
-						<p><?= "$index • Tendances" ?></p>
-					</div>
-					<div class="trend-content">
-						<p><?= $name ?></p>
-					</div>
-					<div class="trend-number">
-						<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
-					</div>
+				<div class="trend-content">
+					<p><?= htmlspecialchars($name) ?></p>
 				</div>
-				<?php
-			}
+				<div class="trend-number">
+					<p><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></p>
+				</div>
+			</div>
+			<?php
 			$index++;
 		}
 		?>

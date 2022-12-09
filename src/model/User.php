@@ -110,7 +110,7 @@ class User {
 	}
 
 	public function getDisplayOrUsername(): string {
-		return $this->display_name ?? $this->username;
+		return htmlspecialchars($this->display_name ?? $this->username);
 	}
 
 	public function displayAvatar(): string {

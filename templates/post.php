@@ -56,9 +56,7 @@ $user = $user_controller->execute($post->author_id);
 		</div>
 		<div class="post-content">
 			<?php
-			if (isset($post->content)) {
-				echo $post->content;
-			} ?>
+			if (isset($post->content)) echo htmlspecialchars($post->content); ?>
 		</div>
 		<div class="post-action-buttons">
 			<button class="post-comment-btn">

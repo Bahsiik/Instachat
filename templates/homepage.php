@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Model\Emotion;
+use function Lib\Utils\display_icon;
 
 $css = ['homepage.css', 'post.css'];
 $title = 'Instachat';
@@ -18,7 +19,7 @@ global $posts; ?>
 		</div>
 		<div class="chat-container">
 			<div class="chat-avatar">
-				<img src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="avatar">
+				<img src="<?= display_icon($connected_user) ?>" alt="avatar">
 			</div>
 			<div class="chat-right">
 				<form class="post-form" action="/chat" method="post">
