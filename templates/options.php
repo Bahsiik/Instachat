@@ -140,6 +140,7 @@ require_once('toolbar.php');
 						<input autocomplete="new-password"
 						       maxlength="64"
 						       minlength="4"
+						       id="new-password"
 						       name="new-password"
 						       placeholder="Nouveau mot de passe"
 						       required
@@ -149,6 +150,7 @@ require_once('toolbar.php');
 						<input autocomplete="new-password"
 						       maxlength="64"
 						       minlength="4"
+						       id="confirm-password"
 						       name="confirm-password"
 						       placeholder="Confirmer nouveau mot de passe"
 						       required
