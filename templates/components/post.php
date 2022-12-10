@@ -15,7 +15,9 @@ $user = $user_controller->execute($post->author_id);
 ?>
 <div class="post-container">
 	<div class="post-avatar">
-		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
+		<a href="/profile/<?= $user->username ?>">
+			<img src="<?= $user->displayAvatar() ?>" alt='avatar'>
+		</a>
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
