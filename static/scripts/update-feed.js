@@ -53,6 +53,8 @@ function showMenu(menu) {
     nextMenuContainer.style.top = `${menu.offsetTop}px`;
     nextMenuContainer.addEventListener('click', e => {
         if (e.target.classList.contains('menu-delete-btn')) {
+            if ([...document.querySelectorAll('dialog')].some(dialog => dialog.open)) return;
+
             const modal = nextMenuContainer.querySelector('dialog');
             modal.showModal();
             if (modal.open) {
@@ -69,11 +71,6 @@ function hideOthersMenu(menu) {
             e.nextElementSibling.classList.add('menu-hidden');
         }
     });
-}
-
-function hideAllMenus() {
-    const postMenus = getPostMenus();
-    postMenus.forEach(menu => menu.nextElementSibling.classList.add('menu-hidden'));
 }
 
 function getPostMenus() {
