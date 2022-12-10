@@ -55,7 +55,6 @@ global $posts; ?>
 					</div>
 				</form>
 			</div>
-
 		</div>
 		<div class="feed-container">
 			<?php

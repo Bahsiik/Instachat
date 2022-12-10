@@ -35,7 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		fileInput.addEventListener('change', () => {
 			const file = fileInput.files[0];
 			reader.onload = () => {
-				const img = (`<img class="chat-image" src='${reader.result}' alt="">`);
+				if (document.querySelector('.chat-image')) {
+					const existingImage = document.querySelector('.chat-image');
+					existingImage.remove();
+				}
+				const img = (`<img class="chat-image" src="${reader.result}" alt="">`);
 				const chatFormImageContainer = document.querySelector('.chat-form-image-container');
 				chatFormImageContainer.innerHTML += img;
 			};
