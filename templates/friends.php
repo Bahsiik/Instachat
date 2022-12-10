@@ -20,9 +20,9 @@ global $sent_requests;
 ?>
 	<div class="friends-tab-container">
 		<div class="tabbed-menu">
-			<div class="selected tab friends"><p>Amis</p></div>
-			<div class="tab waitings"><p>Demandes</p></div>
-			<div class="tab requests"><p>Requêtes</p></div>
+			<div class="selected tab friends" onclick="showTab(tab1)"><p>Amis</p></div>
+			<div class="tab waitings" onclick="showTab(tab2)"><p>Demandes</p></div>
+			<div class="tab requests" onclick="showTab(tab3)"><p>Requêtes</p></div>
 		</div>
 		<div class="content">
 
