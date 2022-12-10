@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (div.children.length > 0) {
 				feedContainer.appendChild(...div.children);
+				twemoji.parse(document.body);
 				offset += 5;
 			}
 		}
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 		}
 	});
-
 });
 
 function postClicked(menu) {
