@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function addInfiniteFeed() {
     const feedContainer = document.querySelector('.feed-container');
     const lastChild = feedContainer.lastElementChild;
     let offset = 5;
@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: 'GET',
                 credentials: 'include',
             });
+
             const text = await request.text();
             const div = document.createElement('div');
             div.innerHTML = text;
             for (const child of div.children) {
                 const menuChild = child.querySelector('.post-menu');
                 if (!menuChild) continue;
-                postClicked(menuChild);
+                menuChild.addEventListener('click', () => showMenu(menuChild));
             }
 
             if (div.children.length > 0) {
@@ -26,28 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-    observer.observe(lastChild);
 
-    const postMenu = getPostMenu();
-    postMenu.forEach(menu => postClicked(menu));
+    observer.observe(lastChild);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    addInfiniteFeed();
+
+    const postMenus = getPostMenus();
+    postMenus.forEach(menu => menu.addEventListener('click', () => showMenu(menu)));
 
     document.addEventListener('click', e => {
-        if (!e.target.closest('.post-menu')) {
-            const postMenu = getPostMenu();
-            postMenu.forEach(menu => {
-                // hideOthersMenu(menu);
-                // if line above is uncommented, it will hide all menus when clicking outside of menu
-                // but hiding all menus is also hiding the modal dialog
-                // todo: find a way to hide all menus except the modal dialog
-                //  (remove menu-hidden class from menu-container)
-            });
-        }
+        if (e.target.closest('.menu-container') || e.target.closest('.post-menu')) return;
+
+        const postMenus = getPostMenus();
+        postMenus.forEach(menu => menu.nextElementSibling.classList.add('menu-hidden'));
     });
 });
-
-function postClicked(menu) {
-    menu.addEventListener('click', () => showMenu(menu));
-}
 
 function showMenu(menu) {
     hideOthersMenu(menu);
@@ -67,21 +63,25 @@ function showMenu(menu) {
 }
 
 function hideOthersMenu(menu) {
-    const postMenu = getPostMenu();
-    postMenu.forEach(e => {
+    const postMenus = getPostMenus();
+    postMenus.forEach(e => {
         if (e !== menu) {
-            console.log("hide");
             e.nextElementSibling.classList.add('menu-hidden');
         }
     });
 }
 
-function getPostMenu() {
+function hideAllMenus() {
+    const postMenus = getPostMenus();
+    postMenus.forEach(menu => menu.nextElementSibling.classList.add('menu-hidden'));
+}
+
+function getPostMenus() {
     return document.querySelectorAll('.post-menu');
 }
 
 function addClickEvent(post) {
-    let postMenu = post.querySelector('.post-right-part');
+    const postMenu = post.querySelector('.post-right-part');
     postMenu.addEventListener('click', e => {
         /**
          * @type {EventTarget & HTMLElement}
