@@ -22,6 +22,10 @@ body {
 	margin: 0;
 }
 
+a {
+	text-decoration: none;
+}
+
 .title {
 	margin-bottom: 2rem;
 	padding: 0 1rem 1rem;

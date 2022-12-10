@@ -120,15 +120,6 @@
 	font-weight: 700;
 }
 
-.user-username:hover, .user-display-name:hover, .logout-btn:hover {
-	background-color: transparent;
-	cursor: default;
-}
-
-.logout-btn:hover {
-	cursor: pointer;
-}
-
 .user-names-container {
 	display: flex;
 	flex: 1;

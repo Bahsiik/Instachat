@@ -6,7 +6,7 @@ use function Lib\Utils\selectToolbarItem;
 $css[] = 'toolbar.css';
 
 global $connected_user;
-global $second_segment?>
+global $second_segment ?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
@@ -20,7 +20,8 @@ global $second_segment?>
 		<?php
 		if (isset($connected_user)) { ?>
 		<a class="toolbar-item" href="/profile/<?= $connected_user->username ?>">
-			<span class="material-symbols-outlined <?= selectToolbarItem('/profile/'. $second_segment) ?>">person</span>
+			<span
+				class="material-symbols-outlined <?= selectToolbarItem('/profile/' . $second_segment) ?>">person</span>
 			<span class="<?= selectToolbarItem('/profile/' . $second_segment) ?>">Profil</span>
 		</a>
 		<a class="toolbar-item" href="/friends">
@@ -36,18 +37,24 @@ global $second_segment?>
 		<button class="chat-btn">Chat</button>
 	</div>
 	<div class="user-info">
-		<img class="user-avatar" src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png"
-		     alt="avatar">
+		<a href="/profile/<?= $connected_user->username ?>">
+			<img class="user-avatar" src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png"
+			     alt="avatar">
+		</a>
 		<div class="user-names-container">
+			<a href="/profile/<?= $connected_user->username ?>">
                 <span class="user-display-name">
                 <?= $connected_user->getDisplayOrUsername() ?>
                 </span>
+			</a>
+			<a href="/profile/<?= $connected_user->username ?>">
 			<span class="user-username">
 					<?php
 					$username = htmlspecialchars($connected_user->username);
 					echo "@$username"
 					?>
                 </span>
+			</a>
 		</div>
 		<a class="user-logout" href="/logout">
 			<span class="logout-btn material-symbols-outlined">logout</span>
