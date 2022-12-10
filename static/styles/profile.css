@@ -69,15 +69,27 @@
 	color: var(--fg-secondary);
 }
 
+.profile-actions {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+
+}
+
 .profile-actions > form > button {
 	font-size: 1.5rem;
 	background: none;
 	border: none;
 	color: var(--fg-secondary);
+	display: flex;
+	justify-content: center;
+	width: 25px;
 }
 
 .profile-actions > form > button:hover {
 	cursor: pointer;
+	background-color: var(--bg-secondary);
+	border-radius: 5px;
 }
 
 .profile-bottom-container {

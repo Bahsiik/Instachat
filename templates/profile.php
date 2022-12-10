@@ -102,7 +102,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						<form action="/remove-friend" method="post">
 							<input type="hidden" name="friend_id" value="<?= $user->id ?>">
 							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit">person_remove</button>
+							<button class="material-symbols-outlined cancel" type="submit" title="Supprimer cet ami">person_remove</button>
 						</form>
 					</div>
 					<?php
@@ -112,12 +112,12 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						<form action="/accept-friend" method="post">
 							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
 							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit">how_to_reg</button>
+							<button class="material-symbols-outlined cancel" type="submit" title="Accepter la demande d'ami">how_to_reg</button>
 						</form>
 						<form action="/decline-friend" method="post">
 							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
 							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit">close</button>
+							<button class="material-symbols-outlined cancel" type="submit" title="Refuser la demande d'ami">close</button>
 						</form>
 					</div>
 					<?php
@@ -127,7 +127,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						<form action="/cancel-friend" method="post">
 							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
 							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit">close</button>
+							<button class="material-symbols-outlined cancel" type="submit" title="Annuler votre demande d'ami">close</button>
 						</form>
 					</div>
 					<?php
@@ -137,7 +137,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						<form action="/send-friend-request" method="post">
 							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
 							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit">person_add</button>
+							<button class="material-symbols-outlined cancel" type="submit" title="Envoyer une demande d'ami">person_add</button>
 						</form>
 					</div>
 					<?php
