@@ -92,7 +92,7 @@ global $sent_requests;
 							<form action="/accept-friend" method="post">
 								<input type="hidden" name="requester_id" value="<?= $friend->id ?>">
 								<input type="hidden" name="redirect" value="'/friends'">
-								<button class="material-symbols-outlined cancel" type="submit">how_to_reg</button>
+								<button class="material-symbols-outlined accept" type="submit">how_to_reg</button>
 							</form>
 							<form action="/decline-friend" method="post">
 								<input type="hidden" name="requester_id" value="<?= $friend->id ?>">
