@@ -86,8 +86,13 @@
 	width: 50rem;
 }
 
-.user-post-container {
-	margin-top: 15px;
+.profile-list-container {
+	background-color: var(--bg-quinternary);
+	height: fit-content;
+}
+
+.post-container {
+	margin-top: 15px !important;
 	background-color: var(--bg-quinternary) !important;
 }
 

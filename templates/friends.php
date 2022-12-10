@@ -11,7 +11,7 @@ $js[] = 'tabbed-menu.js';
 $js[] = 'friends.js';
 
 ob_start();
-require_once('components/toolbar.php');
+require_once 'components/toolbar.php';
 
 global $connected_user;
 global $friend_list;
@@ -29,7 +29,7 @@ global $sent_requests;
 			<div class="friends-list">
 				<?php
 				foreach ($friend_list as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = $connected_user->id == $value->requester_id ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -43,7 +43,7 @@ global $sent_requests;
 								</div>
 								<div class="friendship-term">
 									<p>Amis depuis <?php
-										format_date_time($value->responseDate) ?></p>
+										format_date_time_diff($value->responseDate) ?></p>
 								</div>
 							</div>
 						</div>
@@ -62,7 +62,7 @@ global $sent_requests;
 			<div class="waiting-list hidden">
 				<?php
 				foreach ($friend_requests as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = $connected_user->id == $value->requester_id ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -98,7 +98,7 @@ global $sent_requests;
 			<div class="requests-list hidden">
 				<?php
 				foreach ($sent_requests as $name => $value) {
-					$friend_id = ($connected_user->id == $value->requester_id) ? $value->requested_id : $value->requester_id;
+					$friend_id = $connected_user->id == $value->requester_id ? $value->requested_id : $value->requester_id;
 					$friend = $friend_controller->execute($friend_id);
 					?>
 					<div class="friend">
@@ -130,6 +130,6 @@ global $sent_requests;
 	</div>
 
 <?php
-require_once('components/trends.php');
+require_once 'components/trends.php';
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';

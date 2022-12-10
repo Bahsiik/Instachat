@@ -112,7 +112,7 @@ class PostRepository {
 	}
 
 	public function getPostsByUser(float $author_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :author_id ORDER BY creation_date DESC');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE author_id = :author_id AND deleted = FALSE ORDER BY creation_date DESC');
 		$statement->execute(compact('author_id'));
 		$posts = [];
 

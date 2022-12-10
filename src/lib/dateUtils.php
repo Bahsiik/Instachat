@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-function format_date_time(DateTime $date): void {
+function format_date_time_diff(DateTime $date): void {
 	$current_date = new DateTime();
 	$diff = $current_date->diff($date);
 	$date_only_formatter = IntlDateFormatter::create(
@@ -23,4 +23,25 @@ function format_date_time(DateTime $date): void {
 	} else if ($diff->s >= 0) {
 		echo $diff->s . 's';
 	}
+}
+
+function format_date_time(DateTime $date): void {
+	$date_only_formatter = IntlDateFormatter::create(
+		'fr_FR',
+		IntlDateFormatter::FULL,
+		IntlDateFormatter::FULL,
+		'Europe/Paris',
+		IntlDateFormatter::GREGORIAN,
+		'd MMMM yyyy'
+	);
+	$time_only_formatter = IntlDateFormatter::create(
+		'fr_FR',
+		IntlDateFormatter::FULL,
+		IntlDateFormatter::FULL,
+		'Europe/Paris',
+		IntlDateFormatter::GREGORIAN,
+		'H:mm'
+	);
+
+	echo $date_only_formatter->format($date);
 }

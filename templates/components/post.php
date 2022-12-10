@@ -32,7 +32,7 @@ $user = $user_controller->execute($post->author_id);
 			<div class="post-dot-separator">·</div>
 			<div class="post-date">
 				<?php
-				format_date_time($post->creation_date);
+				format_date_time_diff($post->creation_date);
 				?>
 			</div>
 			<div class="post-emotion">

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-$css[] = 'profile.css';
-$css[] = 'post.css';
+$css = ['profile.css', 'post.css'];
+$js[] = 'update-feed.js';
 
 
 ob_start();
