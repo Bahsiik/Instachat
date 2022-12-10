@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		const reader = new FileReader();
 		fileInput.addEventListener('change', () => {
 			const file = fileInput.files[0];
-			reader.onload = () => {
+			reader.onloadend = () => {
+				const fileType = file.type.split('/')[1];
+				if (fileType !== 'png' && fileType !== 'jpeg' && fileType !== 'jpg') {
+					return;
+				}
 				if (document.querySelector('.chat-image')) {
 					const existingImage = document.querySelector('.chat-image');
 					existingImage.remove();
