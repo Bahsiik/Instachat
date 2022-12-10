@@ -35,11 +35,15 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								<a href="/profile/<?= $friend->username ?>">
+									<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								</a>
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= htmlspecialchars($friend->username) ?></p>
+									<a href="/profile/<?= $friend->username ?>">
+										<p><?= htmlspecialchars($friend->username) ?></p>
+									</a>
 								</div>
 								<div class="friendship-term">
 									<p>Amis depuis <?php
@@ -69,11 +73,15 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								<a href="/profile/<?= $friend->username ?>">
+									<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								</a>
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= htmlspecialchars($friend->username) ?></p>
+									<a href="/profile/<?= $friend->username ?>">
+										<p><?= htmlspecialchars($friend->username) ?></p>
+									</a>
 								</div>
 								<div class="friendship-term">
 									<p>Demande reçu</p>
@@ -107,11 +115,15 @@ global $sent_requests;
 					<div class="friend">
 						<div class="friend-info">
 							<div class="friend-avatar">
-								<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								<a href="/profile/<?= $friend->username ?>">
+									<img src="<?= $friend->displayAvatar() ?>" alt="Avatar">
+								</a>
 							</div>
 							<div class="friend-info-text">
 								<div class="friend-name">
-									<p><?= htmlspecialchars($friend->username) ?></p>
+									<a href="/profile/<?= $friend->username ?>">
+										<p><?= htmlspecialchars($friend->username) ?></p>
+									</a>
 								</div>
 								<div class="friendship-term">
 									<p>Requête envoyée</p>

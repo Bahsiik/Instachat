@@ -33,7 +33,7 @@
 	display: flex;
 }
 
-.friend > .friend-info > .friend-avatar > img {
+.friend > .friend-info > .friend-avatar > a > img {
 	border-radius: 61px;
 	height: 48px;
 	object-fit: contain;
@@ -44,7 +44,11 @@
 	margin-left: 1rem;
 }
 
-.friend > .friend-info > .friend-info-text > .friendship-term > p {
+.friend > .friend-info > .friend-info-text > .friend-name > a > p {
+	color: var(--fg-primary);
+}
+
+.friend > .friend-info > .friend-info-text > .friendship-term p {
 	font-size: 0.85rem;
 	color: var(--fg-secondary);
 }
@@ -61,7 +65,6 @@
 
 .friend-actions > form > .cancel {
 	color: var(--input-invalid);
-
 }
 
 .friend > .friend-actions > form > button:hover {
