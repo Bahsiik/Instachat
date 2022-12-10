@@ -10,6 +10,17 @@ require_once('components/toolbar.php');
 
 global $connected_user, $user, $friend_list, $user_posts;
 
+$friendship = null;
+
+if ($connected_user->id !== $user->id) {
+	foreach ($friend_list as $friend) {
+		if ($user->id == $friend->requester_id || $user->id == $friend->requested_id) {
+			$friendship = true;
+			break;
+		}
+	}
+}
+
 
 $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 
@@ -69,6 +80,20 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					<button class="material-symbols-outlined">edit</button>
 				</div>
 				<?php
+			} else {
+				if ($friendship) {
+					?>
+					<div class="profile-actions">
+						<button class="material-symbols-outlined">person_remove</button>
+					</div>
+					<?php
+				} else {
+					?>
+					<div class="profile-actions">
+						<button class="material-symbols-outlined">person_add</button>
+					</div>
+					<?php
+				}
 			}
 			?>
 		</div>
