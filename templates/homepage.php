@@ -19,7 +19,9 @@ global $posts; ?>
 		</div>
 		<div class="chat-container">
 			<div class="chat-avatar">
-				<img src="<?= display_icon($connected_user) ?>" alt="avatar">
+				<a href="/profile/<?= $connected_user->username ?>">
+					<img src="<?= display_icon($connected_user) ?>" alt="avatar">
+				</a>
 			</div>
 			<div class="chat-right">
 				<form class="post-form" action="/chat" method="post" enctype="multipart/form-data">
@@ -38,7 +40,8 @@ global $posts; ?>
 								<label>
 									<input type="radio" name="emotion" class="emotion"
 									       value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
-									<span class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
+									<span
+										class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
 								</label>
 								<?php
 							}
