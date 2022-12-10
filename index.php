@@ -67,6 +67,7 @@ use function Lib\Utils\redirect_if_method_not;
 session_start();
 date_default_timezone_set('Europe/Paris');
 
+
 try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
 	$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));

@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 $css[] = 'profile.css';
+$css[] = 'post.css';
+
 
 ob_start();
 require_once('components/toolbar.php');
@@ -42,7 +44,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 							}
 						} else {
 							echo htmlspecialchars($user->bio);
-						}  ?>
+						} ?>
 					</div>
 					<div class="profile-info-data">
 						<div class="profile-info-data-content">
@@ -68,6 +70,36 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 				</div>
 				<?php
 			}
+			?>
+		</div>
+		<div class="profile-bottom-container">
+			<div class="profile-list-container">
+				<div class="tabbed-menu">
+					<div class="selected tab chats" onclick="showTab(tab1)"><p>Chats</p></div>
+					<div class="tab comments" onclick="showTab(tab2)"><p>Commentaires</p></div>
+					<div class="tab reactions" onclick="showTab(tab3)"><p>Réactions</p></div>
+				</div>
+				<div class="tab-content">
+					<div class="user-post-container">
+						<?php
+						if (count($user_posts) > 0) {
+							global $post;
+							foreach ($user_posts as $post) {
+								require('components/post.php');
+							}
+						} else {
+							?>
+							<div class="no-post">
+								<h2>Aucun post trouvé</h2>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+			</div>
+			<?php
+			require_once 'components/trends.php';
 			?>
 		</div>
 	</div>
