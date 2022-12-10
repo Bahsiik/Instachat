@@ -47,7 +47,7 @@ global $posts; ?>
 							}
 							?>
 						</div>
-						<button class="chat-btn" type="submit">Chat</button>
+						<button class="chat-btn" type="submit" disabled>Chat</button>
 						<div class="chat-count">
 							<span class="chat-count-number">0</span>
 							<span class="chat-count-max">/ 400</span>

@@ -28,6 +28,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	chatArea.addEventListener('input', updateCharacterCount);
 
+	const form = document.querySelector('.post-form');
+	const textarea = document.querySelector('.chat-area');
+	const imageInput = document.querySelector('.chat-image-input');
+	const chatFormBottom = document.querySelector('.chat-form-bottom');
+	const chatButton = chatFormBottom.querySelector('.chat-btn');
+
+	textarea.addEventListener('input', () => {
+		updateChatButton();
+	});
+	imageInput.addEventListener('change', () => {
+		updateChatButton();
+	});
+
+	function updateChatButton() {
+		console.log('updateChatButton');
+		if (textarea.value.length < 2 && imageInput.files.length < 1) {
+			chatButton.setAttribute('disabled', '');
+		} else {
+			chatButton.removeAttribute('disabled');
+		}
+	}
+
+	// Additional security to check when submitting form
+	form.addEventListener('submit', (e) => {
+		if (textarea.value.length < 2 && imageInput.files.length < 1) {
+			e.preventDefault();
+		}
+	});
+
 	function addImage() {
 		const fileInput = document.querySelector('.chat-image-input');
 		fileInput.click();

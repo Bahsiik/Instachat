@@ -170,6 +170,6 @@
 }
 
 .post-image {
-	height: 345px;
+	max-height: 345px;
 	object-fit: contain;
 }

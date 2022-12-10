@@ -117,11 +117,16 @@ body {
 	font-style: normal;
 	font-weight: 700;
 	padding: .5rem 0;
-	transition: transform .3s ease-in-out, color .2s ease-in-out;
+	transition: all .3s ease-in-out;
 	width: 74px;
 }
 
-.homepage-container .chat-btn:hover {
+.homepage-container .chat-btn:disabled {
+	cursor: not-allowed;
+	opacity: 50%;
+}
+
+.homepage-container .chat-btn:hover:not(:disabled) {
 	color: var(--fg-primary);
 	transform: scale(1.05);
 }
