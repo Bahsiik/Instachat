@@ -9,7 +9,7 @@ $title = 'Instachat';
 $js = ['homepage.js', 'update-feed.js'];
 
 ob_start();
-require_once('components/toolbar.php');
+require_once 'components/toolbar.php';
 
 global $connected_user;
 global $posts; ?>
@@ -56,13 +56,12 @@ global $posts; ?>
 				</form>
 			</div>
 		</div>
+
 		<div class="feed-container">
 			<?php
 			if (count($posts) > 0) {
 				global $post;
-				foreach ($posts as $post) {
-					require('components/post.php');
-				}
+				foreach ($posts as $post) require 'components/post.php';
 			} else {
 				?>
 				<div class="no-post">
@@ -74,6 +73,6 @@ global $posts; ?>
 		</div>
 	</div>
 <?php
-require_once('components/trends.php');
+require_once 'components/trends.php';
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';

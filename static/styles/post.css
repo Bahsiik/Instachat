@@ -1,20 +1,39 @@
-.post-action-buttons-color {
-	color: var(--fg-secondary) !important;
+.post-link {
+	color: var(--fg-primary);
+	text-decoration: none;
+}
+
+.action-btn-color {
+	color: var(--fg-secondary);
 	font-size: 1.4rem !important;
 	margin-right: 5px;
 	padding: 5px;
 	transition: all .3s;
 }
 
-.post-comment-btn, .post-reaction-btn, .post-share-btn, .post-menu-btn {
+.action-btn {
 	align-items: center;
 	background: transparent;
 	border: none;
 	color: var(--fg-secondary);
+	cursor: pointer;
 	display: flex;
 	font-family: var(--font);
 	justify-content: center;
 	padding: 0;
+}
+
+.action-btn:hover .action-btn-color {
+	background-color: var(--accent-transparent);
+	color: var(--accent-color);
+}
+
+.action-btn .action-btn-color {
+	border-radius: 9px;
+}
+
+.action-btn:hover .action-btn-color:hover {
+	color: var(--accent-color);
 }
 
 .post-avatar img {
@@ -43,6 +62,12 @@
 	flex-flow: row;
 }
 
+.post-action-buttons {
+	gap: 8rem;
+	margin-top: 20px;
+	width: fit-content;
+}
+
 .post-info {
 	align-items: center;
 	gap: 8px;
@@ -69,33 +94,10 @@
 	width: 45rem;
 }
 
-.post-action-buttons {
-	gap: 83px;
-	margin-top: 20px;
-	width: fit-content;
-}
-
 .post-comment-count {
 	margin: 0;
 	padding: 0;
 	transition: all .3s;
-}
-
-.post-comment-btn:hover, .post-reaction-btn:hover, .post-share-btn:hover, .post-menu-btn:hover {
-	cursor: pointer;
-}
-
-.post-comment-btn:hover .post-action-buttons-color, .post-share-btn:hover .post-action-buttons-color, .post-reaction-btn:hover .post-action-buttons-color, .post-menu-btn:hover .post-action-buttons-color, .menu-delete-btn:hover .post-action-buttons-color {
-	background-color: var(--accent-transparent);
-	color: var(--accent-color);
-}
-
-.post-comment-btn .post-action-buttons-color, .post-share-btn .post-action-buttons-color, .post-reaction-btn .post-action-buttons-color, .post-menu-btn .post-action-buttons-color, .menu-delete-btn .post-action-buttons-color {
-	border-radius: 9px;
-}
-
-.post-comment-btn:hover .post-comment-count {
-	color: var(--accent-color);
 }
 
 .post-display-name {

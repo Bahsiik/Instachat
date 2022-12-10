@@ -1,0 +1,43 @@
+.comments {
+	display: flex;
+	flex-flow: column;
+}
+
+.comment-header {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+}
+
+.comment-avatar img {
+	border-radius: 100vmax;
+	height: 48px;
+	object-fit: contain;
+	width: 48px;;
+}
+
+.comment-info {
+	align-items: center;
+	gap: 8px;
+	height: fit-content;
+	justify-content: left;
+	text-align: center;
+}
+
+.comment-username {
+	color: var(--fg-secondary);
+}
+
+.comment-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.comment-footer > div {
+	align-items: center;
+	color: var(--fg-secondary);
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}

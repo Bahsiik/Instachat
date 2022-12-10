@@ -103,6 +103,33 @@ class CommentRepository {
 	}
 
 	/**
+	 * @param float $comment_id
+	 * @return Array<Comment>
+	 */
+	public function getCommentsReplyingRecursively(float $comment_id): array {
+		$statement = $this->databaseConnection->prepare(<<<SQL
+			WITH RECURSIVE
+				cte AS 
+				    (
+				       SELECT * FROM instachat.comments WHERE id = :comment_id			
+				       UNION ALL			
+				       SELECT c.* FROM instachat.comments AS c INNER JOIN cte ON c.reply_id = cte.id
+				    )
+			SELECT * FROM cte;
+			SQL
+		);
+
+		$statement->execute(compact('comment_id'));
+		$comments = [];
+
+		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$comments[] = new Comment(...array_values($comment));
+		}
+
+		return $comments;
+	}
+
+	/**
 	 * @param string $content
 	 * @return Array<Comment>
 	 */

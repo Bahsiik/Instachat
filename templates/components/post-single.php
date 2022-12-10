@@ -5,7 +5,6 @@ use Controllers\Posts\GetComments;
 use Controllers\Users\GetUser;
 use Models\Emotion;
 
-
 $user_controller = new GetUser();
 
 global $post;
@@ -15,25 +14,17 @@ $user = $user_controller->execute($post->author_id);
 ?>
 <div class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
-		<a href="/profile/<?= $user->username ?>">
-			<img src="<?= $user->displayAvatar() ?>" alt='avatar'>
-		</a>
+		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
 	</div>
 	<div class="post-right-part">
 		<div class="post-info">
-			<a href="/profile/<?= $user->username ?>">
-				<div class="post-display-name">
+			<div class="post-user-info">
+				<p class="post-display-name">
 					<?= $user->getDisplayOrUsername() ?>
-				</div>
-				<div class="post-username">
+				</p>
+				<p class="post-username">
 					<?= "@$user->username" ?>
-				</div>
-			</a>
-			<div class="post-dot-separator">·</div>
-			<div class="post-date">
-				<?php
-				format_date_time_diff($post->creation_date);
-				?>
+				</p>
 			</div>
 			<div class="post-emotion">
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
@@ -47,18 +38,11 @@ $user = $user_controller->execute($post->author_id);
 					</button>
 				</div>
 				<div class='menu-container menu-hidden'>
-					<button type='button' class='menu-delete-btn'>
+					<input type='hidden' name='post_id' value="<?= $post->id ?>">
+					<button class='menu-delete-btn'>
 						Supprimer
 						<span class='material-symbols-outlined menu-delete-symbol'>close</span>
 					</button>
-					<dialog>
-						<form action='/delete?type=post' method='post'>
-							<input type='hidden' name='post_id' value="<?= $post->id ?>">
-							<p>Êtes-vous sûr de vouloir supprimer ce post ?</p>
-							<button type="button" value="cancel" class="modal-cancel-btn">Annuler</button>
-							<button type="submit" value="delete">Supprimer</button>
-						</form>
-					</dialog>
 				</div>
 				<?php
 			}
@@ -68,23 +52,29 @@ $user = $user_controller->execute($post->author_id);
 			<?php
 			if (isset($post->content)) echo htmlspecialchars($post->content); ?>
 		</div>
-		<?php
-		if (isset($post->image->data) && str_starts_with($post->image->data, 'data:image')) {
-			?>
-			<div class="post-image">
-				<img class="post-image" src="<?= $post->image->data ?>" alt="post-image">
+		<div class="post-bottom-info subtitle">
+			<div class="post-date">
+				<?php
+				format_date_time($post->creation_date);
+				?>
 			</div>
-			<?php
-		}
-		?>
+			<p class="post-replies">
+				<span class="bold"><?= count($comments) ?></span>
+				Réponses
+			</p>
+			<p class="post-reactions">
+				<span class="bold"><?= 0 ?></span>
+				Réactions
+			</p>
+		</div>
 		<div class="post-action-buttons">
 			<button class="post-comment-btn action-btn">
 				<span class="material-symbols-outlined action-btn-color">chat_bubble</span>
-				<p class="post-comment-count">
+				<span class="post-comment-count">
 					<?php
 					if (count($comments) > 0) echo count($comments);
 					?>
-				</p>
+				</span>
 			</button>
 			<button class="post-share-btn action-btn">
 				<span class="material-symbols-outlined action-btn-color">ios_share</span>

@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 require_once 'src/controllers/Delete.php';
 require_once 'src/controllers/friends/GetFriendRequests.php';
 require_once 'src/controllers/friends/GetFriends.php';
@@ -15,6 +14,7 @@ require_once 'src/controllers/pages/HomePage.php';
 require_once 'src/controllers/pages/OptionsPage.php';
 require_once 'src/controllers/pages/TrendPage.php';
 require_once 'src/controllers/pages/SearchTrendPage.php';
+require_once 'src/controllers/pages/PostPage.php';
 require_once 'src/controllers/pages/ProfilePage.php';
 require_once 'src/controllers/posts/AddPost.php';
 require_once 'src/controllers/posts/GetComments.php';
@@ -46,6 +46,7 @@ use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
+use Controllers\Pages\PostPage;
 use Controllers\Pages\ProfilePage;
 use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
@@ -107,6 +108,13 @@ try {
 			}
 
 			exit();
+
+		case 'post':
+			redirect_if_method_not('GET', '/');
+			global $trends;
+			$trends = (new GetTrends())->execute();
+			(new PostPage())->execute($_GET);
+			break;
 
 		case 'create':
 			if ($method === 'GET') (new AuthentificationPage())->execute();
