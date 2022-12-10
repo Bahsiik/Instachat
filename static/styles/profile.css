@@ -89,11 +89,18 @@
 .profile-list-container {
 	background-color: var(--bg-quinternary);
 	height: fit-content;
+	border-radius: 16px;
 }
 
 .post-container {
 	margin-top: 15px !important;
 	background-color: var(--bg-quinternary) !important;
+}
+
+.no-post > h2 {
+	display: flex;
+	font-size: 1.5rem;
+	justify-content: center;
 }
 
 .trends-container {
