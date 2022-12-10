@@ -8,14 +8,27 @@ $js[] = 'update-feed.js';
 ob_start();
 require_once('components/toolbar.php');
 
-global $connected_user, $user, $friend_list, $user_posts;
+global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts;
+
 
 $friendship = null;
 
 if ($connected_user->id !== $user->id) {
 	foreach ($friend_list as $friend) {
-		if ($user->id == $friend->requester_id || $user->id == $friend->requested_id) {
-			$friendship = true;
+		if (($user->id == $friend->requester_id && $connected_user->id == $friend->requested_id)  || ($user->id == $friend->requested_id && $connected_user->id == $friend->requester_id)) {
+			$friendship = 1;
+			break;
+		}
+	}
+	foreach ($friend_requests as $friend) {
+		if ($user->id == $friend->requester_id) {
+			$friendship = 2;
+			break;
+		}
+	}
+	foreach ($sent_requests as $friend) {
+		if ($user->id == $friend->requested_id) {
+			$friendship = 3;
 			break;
 		}
 	}
@@ -77,20 +90,55 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 			if ($connected_user->id == $user->id) {
 				?>
 				<div class="profile-actions">
-					<button class="material-symbols-outlined">edit</button>
+					<form action="" method="post">
+						<button class="material-symbols-outlined cancel" type="submit">edit</button>
+					</form>
 				</div>
 				<?php
 			} else {
-				if ($friendship) {
+				if ($friendship == 1) {
 					?>
 					<div class="profile-actions">
-						<button class="material-symbols-outlined">person_remove</button>
+						<form action="/remove-friend" method="post">
+							<input type="hidden" name="friend_id" value="<?= $user->id ?>">
+							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+							<button class="material-symbols-outlined cancel" type="submit">person_remove</button>
+						</form>
+					</div>
+					<?php
+				} else if ($friendship == 2) {
+					?>
+					<div class="profile-actions">
+						<form action="/accept-friend" method="post">
+							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+							<button class="material-symbols-outlined cancel" type="submit">how_to_reg</button>
+						</form>
+						<form action="/decline-friend" method="post">
+							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+							<button class="material-symbols-outlined cancel" type="submit">close</button>
+						</form>
+					</div>
+					<?php
+				} else if ($friendship == 3) {
+					?>
+					<div class="profile-actions">
+						<form action="/cancel-friend" method="post">
+							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+							<button class="material-symbols-outlined cancel" type="submit">close</button>
+						</form>
 					</div>
 					<?php
 				} else {
 					?>
 					<div class="profile-actions">
-						<button class="material-symbols-outlined">person_add</button>
+						<form action="/send-friend-request" method="post">
+							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+							<button class="material-symbols-outlined cancel" type="submit">person_add</button>
+						</form>
 					</div>
 					<?php
 				}

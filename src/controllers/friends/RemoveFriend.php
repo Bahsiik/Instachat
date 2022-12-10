@@ -9,9 +9,9 @@ use RuntimeException;
 use function Lib\Utils\redirect;
 
 class RemoveFriend {
-	public function execute(User $connected_user, array $input): void {
+	public function execute(User $connected_user, array $input, string $redirect): void {
 		if (!isset($input['friend_id'])) throw new RuntimeException('Invalid input');
 		(new FriendRepository())->removeFriend((float)$input['friend_id'], $connected_user->id);
-		redirect('/friends');
+		redirect($redirect);
 	}
 }

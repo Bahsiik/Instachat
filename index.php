@@ -5,6 +5,7 @@ require_once 'src/controllers/friends/GetFriendRequests.php';
 require_once 'src/controllers/friends/GetFriends.php';
 require_once 'src/controllers/friends/GetSentRequests.php';
 require_once 'src/controllers/friends/RemoveFriend.php';
+require_once 'src/controllers/friends/SendRequest.php';
 require_once 'src/controllers/friends/AcceptRequest.php';
 require_once 'src/controllers/friends/DeclineRequest.php';
 require_once 'src/controllers/friends/CancelRequest.php';
@@ -42,6 +43,7 @@ use Controllers\Friends\GetFriendRequests;
 use Controllers\Friends\GetFriends;
 use Controllers\Friends\GetSentRequests;
 use Controllers\Friends\RemoveFriend;
+use Controllers\Friends\SendRequest;
 use Controllers\Pages\AuthentificationPage;
 use Controllers\Pages\FriendPage;
 use Controllers\Pages\HomePage;
@@ -169,24 +171,29 @@ try {
 			(new FriendPage())->execute();
 			break;
 
+		case 'send-friend-request':
+			redirect_if_method_not('POST', '/');
+			(new SendRequest())->execute($connected_user, $_POST, $_POST['redirect']);
+			break;
+
 		case 'remove-friend':
-			redirect_if_method_not('POST', '/friends');
-			(new RemoveFriend())->execute($connected_user, $_POST);
+			redirect_if_method_not('POST', '/');
+			(new RemoveFriend())->execute($connected_user, $_POST, $_POST['redirect']);
 			break;
 
 		case 'accept-friend':
-			redirect_if_method_not('POST', '/friends');
-			(new AcceptRequest())->execute($connected_user, $_POST);
+			redirect_if_method_not('POST', '/');
+			(new AcceptRequest())->execute($connected_user, $_POST, $_POST['redirect']);
 			break;
 
 		case'decline-friend':
-			redirect_if_method_not('POST', '/friends');
-			(new DeclineRequest())->execute($connected_user, $_POST);
+			redirect_if_method_not('POST', '/');
+			(new DeclineRequest())->execute($connected_user, $_POST, $_POST['redirect']);
 			break;
 
 		case 'cancel-friend':
-			redirect_if_method_not('POST', '/friends');
-			(new CancelRequest())->execute($connected_user, $_POST);
+			redirect_if_method_not('POST', '/');
+			(new CancelRequest())->execute($connected_user, $_POST, $_POST['redirect']);
 			break;
 
 		case 'search-trend':
@@ -203,12 +210,14 @@ try {
 				redirect('/');
 			} else {
 				redirect_if_method_not('GET', '/');
-				global $user, $friend_list, $user_posts, $trends;
+				global $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $trends;
 				$user = (new GetUserByUsername())->execute($second_segment);
 				if ($user == null) {
 					redirect('/');
 				}
 				$friend_list = (new GetFriends())->execute($user);
+				$friend_requests = (new GetFriendRequests())->execute($connected_user);
+				$sent_requests = (new GetSentRequests())->execute($connected_user);
 				$user_posts = (new GetPostsByUser())->execute($user->id);
 				$trends = (new GetTrends())->execute();
 				(new ProfilePage())->execute();

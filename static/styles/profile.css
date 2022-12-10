@@ -48,7 +48,7 @@
 }
 
 .profile-info-right {
-	width: 40rem;
+	width: 30rem;
 	height: 7rem;
 	display: flex;
 	flex-direction: column;
@@ -65,15 +65,19 @@
 .profile-info-data-content {
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
+	gap: 0.5rem;
 	color: var(--fg-secondary);
 }
 
-.profile-actions > button {
+.profile-actions > form > button {
 	font-size: 1.5rem;
 	background: none;
 	border: none;
 	color: var(--fg-secondary);
+}
+
+.profile-actions > form > button:hover {
+	cursor: pointer;
 }
 
 .profile-bottom-container {
