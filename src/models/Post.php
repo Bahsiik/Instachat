@@ -142,11 +142,15 @@ class PostRepository {
 
 	public function getPostContaining(string $content): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE ORDER BY creation_date DESC');
-		$statement->execute(compact('content'));
+		$statement->execute(['content' => "%$content%"]);
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$posts[] = new Post(...array_values($post));
+			$words = explode(' ', $post['content']);
+			$words = array_map(fn($word) => strtolower($word), $words);
+			if (in_array(strtolower($content), $words)) {
+				$posts[] = new Post(...array_values($post));
+			}
 		}
 
 		return $posts;
