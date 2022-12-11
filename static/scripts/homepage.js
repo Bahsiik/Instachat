@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	form.addEventListener('submit', e => {
-		if (inputsAreValid(textarea, imageInput)) return;
+		if (inputsAreValid(textarea, imageInput)) {
+			chatButton.setAttribute('disabled', '');
+			return;
+		}
 		e.preventDefault();
 	});
 
