@@ -26,6 +26,10 @@ a {
 	text-decoration: none;
 }
 
+main {
+	padding: 1rem 2rem;
+}
+
 .title {
 	margin-bottom: 2rem;
 	padding: 0 1rem 1rem;

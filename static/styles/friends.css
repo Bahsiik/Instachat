@@ -1,15 +1,11 @@
-.friends-tab-container {
-	margin: 22px 44px;
-}
-
 .tabbed-menu {
 	width: 50rem;
 }
 
 .content {
 	background-color: var(--bg-quinternary);
-	padding: 2rem 7rem;
 	border-radius: 0 0 16px 16px;
+	padding: 2rem 7rem;
 }
 
 .content > .hidden {
@@ -17,11 +13,11 @@
 }
 
 .friend {
+	border-bottom: 1px solid var(--border);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	margin: 1rem 0;
-	border-bottom: 1px solid var(--border);
 }
 
 .friend > .friend-info {
@@ -49,8 +45,8 @@
 }
 
 .friend > .friend-info > .friend-info-text > .friendship-term p {
-	font-size: 0.85rem;
 	color: var(--fg-secondary);
+	font-size: 0.85rem;
 }
 
 .friend > .friend-actions {
