@@ -27,6 +27,10 @@
 	padding: 0.75rem 1rem;
 }
 
+.trends-feed > a:first-child > .trend {
+	border-radius: 15px 15px 0 0;
+}
+
 .trends-feed > a > .trend:hover {
 	background-color: var(--bg-quinternary);
 	cursor: pointer;
