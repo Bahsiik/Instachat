@@ -23,6 +23,7 @@ function addInfiniteFeed() {
             const menuChild = child.querySelector('.post-menu');
             if (!menuChild) continue;
             menuChild.addEventListener('click', () => showMenu(menuChild));
+            addClickEvent(child);
         }
 
         observer.unobserve(getLastPost());
@@ -37,6 +38,9 @@ function addInfiniteFeed() {
 
 document.addEventListener("DOMContentLoaded", () => {
     addInfiniteFeed();
+
+    const posts = document.querySelectorAll('.post-container');
+    posts.forEach(addClickEvent);
 
     const postMenus = getPostMenus();
     postMenus.forEach(menu => menu.addEventListener('click', () => showMenu(menu)));
@@ -89,6 +93,8 @@ function addClickEvent(post) {
          */
         const target = e.target;
         if (['a', 'button'].includes(target.tagName)) return;
-        window.location.href = `${window.location.origin}/post?id=${post.dataset.id}`;
+        const postId = post.dataset.postId;
+        if (!postId) return;
+        window.location.href = `${window.location.origin}/post?id=${postId}`;
     });
 }

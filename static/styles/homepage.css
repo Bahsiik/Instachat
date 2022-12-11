@@ -33,17 +33,14 @@ body {
 }
 
 .chat-container {
-	align-items: flex-start;
 	background: var(--bg-primary);
 	border-bottom: 1px solid var(--border);
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
 	gap: 12px;
-	height: fit-content;
-	padding: 8px 16px;
-	width: 100%;
+	margin-bottom: 1rem;
+	padding: 1rem;
 }
 
 .homepage-container {
