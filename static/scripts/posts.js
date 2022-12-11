@@ -92,7 +92,8 @@ function addClickEvent(post) {
          * @type {EventTarget & HTMLElement}
          */
         const target = e.target;
-        if (['a', 'button'].includes(target.tagName)) return;
+        if (['a', 'button'].includes(target.tagName) || target.classList.contains('action-btn-color')) return;
+
         const postId = post.dataset.postId;
         if (!postId) return;
         window.location.href = `${window.location.origin}/post?id=${postId}`;
