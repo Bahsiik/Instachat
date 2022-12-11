@@ -15,19 +15,19 @@ class ProfilePage {
 
 		if ($connected_user->id !== $user->id) {
 			foreach ($friend_list as $friend) {
-				if ($user->id === $friend->requester_id && $connected_user->id === $friend->requested_id || $user->id === $friend->requested_id && $connected_user->id === $friend->requester_id) {
+				if ($user->id === $friend->requesterId && $connected_user->id === $friend->requestedId || $user->id === $friend->requestedId && $connected_user->id === $friend->requesterId) {
 					$friendship = 1;
 					break;
 				}
 			}
 			foreach ($friend_requests as $friend) {
-				if ($user->id === $friend->requester_id) {
+				if ($user->id === $friend->requesterId) {
 					$friendship = 2;
 					break;
 				}
 			}
 			foreach ($sent_requests as $friend) {
-				if ($user->id === $friend->requested_id) {
+				if ($user->id === $friend->requestedId) {
 					$friendship = 3;
 					break;
 				}
