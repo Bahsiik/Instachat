@@ -30,7 +30,7 @@ $user = $user_controller->execute($post->author_id);
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 			<?php
-			if ($connected_user->id === (int)$post->author_id) {
+			if ($connected_user->id === $post->author_id) {
 				?>
 				<div class='post-menu'>
 					<button type='submit' class='post-menu-btn action-btn'>

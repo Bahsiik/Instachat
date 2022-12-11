@@ -6,7 +6,7 @@ $js[] = 'update-feed.js';
 
 
 ob_start();
-require_once('components/toolbar.php');
+require_once 'components/toolbar.php';
 
 global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts;
 
@@ -15,19 +15,19 @@ $friendship = null;
 
 if ($connected_user->id !== $user->id) {
 	foreach ($friend_list as $friend) {
-		if (($user->id == $friend->requester_id && $connected_user->id == $friend->requested_id)  || ($user->id == $friend->requested_id && $connected_user->id == $friend->requester_id)) {
+		if ($user->id === $friend->requester_id && $connected_user->id === $friend->requested_id || $user->id === $friend->requested_id && $connected_user->id === $friend->requester_id) {
 			$friendship = 1;
 			break;
 		}
 	}
 	foreach ($friend_requests as $friend) {
-		if ($user->id == $friend->requester_id) {
+		if ($user->id === $friend->requester_id) {
 			$friendship = 2;
 			break;
 		}
 	}
 	foreach ($sent_requests as $friend) {
-		if ($user->id == $friend->requested_id) {
+		if ($user->id === $friend->requested_id) {
 			$friendship = 3;
 			break;
 		}
@@ -49,23 +49,22 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 				</div>
 				<div class="profile-info-middle">
 					<div class="profile-info-username">
-						<p class="display-name"><?= ($user->display_name !== null) ? htmlspecialchars($user->display_name) : $username ?></p>
+						<p class="display-name"><?= $user->display_name !== null ? htmlspecialchars($user->display_name) : $username ?></p>
 						<p class="username"><?= '@' . $username ?></p>
 					</div>
 					<div class="profile-info-inscription-date">
 						<p class="inscription-date">Membre depuis le</p>
-						<p class="inscription-date"><?= format_date_time($user->created_at) ?></p>
+						<p class="inscription-date"><?
+							format_date_time($user->created_at) ?></p>
 					</div>
 				</div>
 				<div class="profile-info-right">
 					<div class="profile-bio">
 						<?php
-						if ($user->bio == null) {
-							if ($user->id == $connected_user->id) {
-								echo 'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !';
-							} else {
-								echo 'Cet utilisateur n\'a pas encore ajouté de bio.';
-							}
+						if ($user->bio === null) {
+							echo $user->id === $connected_user->id ?
+								'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !' :
+								"Cet utilisateur n'a pas encore ajouté de bio.";
 						} else {
 							echo htmlspecialchars($user->bio);
 						} ?>
@@ -73,11 +72,11 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					<div class="profile-info-data">
 						<div class="profile-info-data-content">
 							<p class="friends-number"><?= count($friend_list) ?> </p>
-							<p class="friends-text"> <?= (count($friend_list) <= 1) ? 'ami' : 'amis' ?> </p>
+							<p class="friends-text"> <?= count($friend_list) <= 1 ? 'ami' : 'amis' ?> </p>
 						</div>
 						<div class="profile-info-data-content">
 							<p class="posts-number"> <?= count($user_posts) ?> </p>
-							<p class="posts-text"><?= (count($user_posts) <= 1) ? 'chat' : 'chats' ?></p>
+							<p class="posts-text"><?= count($user_posts) <= 1 ? 'chat' : 'chats' ?></p>
 						</div>
 						<div class="profile-info-data-content">
 							<p class="reactions-number">ching chong</p>
@@ -87,7 +86,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 				</div>
 			</div>
 			<?php
-			if ($connected_user->id == $user->id) {
+			if ($connected_user->id === $user->id) {
 				?>
 				<div class="profile-actions">
 					<form action="" method="post">
@@ -95,53 +94,51 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					</form>
 				</div>
 				<?php
+			} else if ($friendship === 1) {
+				?>
+				<div class="profile-actions">
+					<form action="/remove-friend" method="post">
+						<input type="hidden" name="friend_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Supprimer cet ami">person_remove</button>
+					</form>
+				</div>
+				<?php
+			} else if ($friendship === 2) {
+				?>
+				<div class="profile-actions">
+					<form action="/accept-friend" method="post">
+						<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Accepter la demande d'ami">how_to_reg</button>
+					</form>
+					<form action="/decline-friend" method="post">
+						<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Refuser la demande d'ami">close</button>
+					</form>
+				</div>
+				<?php
+			} else if ($friendship === 3) {
+				?>
+				<div class="profile-actions">
+					<form action="/cancel-friend" method="post">
+						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Annuler votre demande d'ami">close</button>
+					</form>
+				</div>
+				<?php
 			} else {
-				if ($friendship == 1) {
-					?>
-					<div class="profile-actions">
-						<form action="/remove-friend" method="post">
-							<input type="hidden" name="friend_id" value="<?= $user->id ?>">
-							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit" title="Supprimer cet ami">person_remove</button>
-						</form>
-					</div>
-					<?php
-				} else if ($friendship == 2) {
-					?>
-					<div class="profile-actions">
-						<form action="/accept-friend" method="post">
-							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
-							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit" title="Accepter la demande d'ami">how_to_reg</button>
-						</form>
-						<form action="/decline-friend" method="post">
-							<input type="hidden" name="requester_id" value="<?= $user->id ?>">
-							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit" title="Refuser la demande d'ami">close</button>
-						</form>
-					</div>
-					<?php
-				} else if ($friendship == 3) {
-					?>
-					<div class="profile-actions">
-						<form action="/cancel-friend" method="post">
-							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
-							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit" title="Annuler votre demande d'ami">close</button>
-						</form>
-					</div>
-					<?php
-				} else {
-					?>
-					<div class="profile-actions">
-						<form action="/send-friend-request" method="post">
-							<input type="hidden" name="requested_id" value="<?= $user->id ?>">
-							<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-							<button class="material-symbols-outlined cancel" type="submit" title="Envoyer une demande d'ami">person_add</button>
-						</form>
-					</div>
-					<?php
-				}
+				?>
+				<div class="profile-actions">
+					<form action="/send-friend-request" method="post">
+						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Envoyer une demande d'ami">person_add</button>
+					</form>
+				</div>
+				<?php
 			}
 			?>
 		</div>
@@ -158,7 +155,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						if (count($user_posts) > 0) {
 							global $post;
 							foreach ($user_posts as $post) {
-								require('components/post.php');
+								require 'components/post.php';
 							}
 						} else {
 							?>
@@ -179,4 +176,4 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 
 <?php
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';

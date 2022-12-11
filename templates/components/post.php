@@ -39,7 +39,7 @@ $user = $user_controller->execute($post->author_id);
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 			<?php
-			if ($connected_user->id === (int)$post->author_id) {
+			if ($connected_user->id === $post->author_id) {
 				?>
 				<div class='post-menu'>
 					<button type='submit' class='post-menu-btn action-btn'>
@@ -80,11 +80,11 @@ $user = $user_controller->execute($post->author_id);
 		<div class="post-action-buttons">
 			<button class="post-comment-btn action-btn">
 				<span class="material-symbols-outlined action-btn-color">chat_bubble</span>
-				<p class="post-comment-count">
-					<?php
-					if (count($comments) > 0) echo count($comments);
-					?>
-				</p>
+				<span class="post-comment-count">
+				<?php
+				if (count($comments) > 0) echo count($comments);
+				?>
+				</span>
 			</button>
 			<button class="post-share-btn action-btn">
 				<span class="material-symbols-outlined action-btn-color">ios_share</span>

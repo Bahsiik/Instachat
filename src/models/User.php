@@ -85,7 +85,7 @@ class User {
 	public FontSize $font_size;
 
 	public function __construct(
-		public int     $id,
+		public float   $id,
 		public string  $username,
 		public string  $password,
 		?string        $avatar,

@@ -77,10 +77,10 @@
 }
 
 .post-info > a {
-	text-decoration: none;
 	color: var(--fg-primary);
 	display: flex;
 	gap: 0.5rem;
+	text-decoration: none;
 }
 
 .post-username, .post-dot-separator, .post-date {
@@ -95,8 +95,6 @@
 }
 
 .post-comment-count {
-	margin: 0;
-	padding: 0;
 	transition: all .3s;
 }
 
