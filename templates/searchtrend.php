@@ -5,7 +5,7 @@ $css[] = 'searchtrend.css';
 $css[] = 'post.css';
 
 ob_start();
-require_once('components/toolbar.php');
+require_once 'components/toolbar.php';
 
 global $searched_posts;
 global $searched_trend;
@@ -13,7 +13,7 @@ global $searched_trend;
 $title = 'Instachat | ' . $searched_trend;
 ?>
 
-	<div class="searched-trend-container">
+	<main class="searched-trend-container">
 		<div class="title">
 			<h1>Tendances - <?= htmlspecialchars($searched_trend) ?></h1>
 		</div>
@@ -22,7 +22,7 @@ $title = 'Instachat | ' . $searched_trend;
 			if (count($searched_posts) > 0) {
 				global $post;
 				foreach ($searched_posts as $post) {
-					require('components/post.php');
+					require 'components/post.php';
 				}
 			} else {
 				?>
@@ -33,9 +33,9 @@ $title = 'Instachat | ' . $searched_trend;
 			}
 			?>
 		</div>
-	</div>
+	</main>
 
 <?php
-require_once('components/trends.php');
+require_once 'components/trends.php';
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';

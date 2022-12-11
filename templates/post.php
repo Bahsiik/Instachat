@@ -14,27 +14,27 @@ global $post;
 global $connected_user;
 $comments = (new GetComments())->execute($post->id);
 ?>
-	<div class="post-page-container">
-		<div class="title">
-			<span class="material-symbols-outlined">arrow_back</span>
-			<h2>Chat</h2>
-		</div>
+	<main class="post-page-container">
+	<div class="title">
+		<span class="material-symbols-outlined">arrow_back</span>
+		<h2>Chat</h2>
+	</div>
+	<?php
+	require_once 'components/post-single.php' ?>
+	<div class='comments'>
 		<?php
-		require_once 'components/post-single.php' ?>
-		<div class='comments'>
-			<?php
-			if (count($comments) > 0) {
-				global $comment;
-				foreach ($comments as $comment) require 'components/comment.php';
-			} else {
-				?>
-				<div class="no-comments">
-					<p>Aucun commentaire</p>
-				</div>
-				<?php
-			}
+		if (count($comments) > 0) {
+			global $comment;
+			foreach ($comments as $comment) require 'components/comment.php';
+		} else {
 			?>
-		</div>
+			<div class="no-comments">
+				<p>Aucun commentaire</p>
+			</div>
+			<?php
+		}
+		?>
+	</div>
 	</div>
 <?php
 

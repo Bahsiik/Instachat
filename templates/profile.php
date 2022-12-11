@@ -7,8 +7,7 @@ $js[] = 'posts.js';
 
 ob_start();
 require_once 'components/toolbar.php';
-
-require_once('src/controllers/reactions/GetReactionsByAuthorId.php');
+require_once 'src/controllers/reactions/GetReactionsByAuthorId.php';
 
 use Controllers\Reaction\GetReactionsByAuthorId;
 
@@ -43,7 +42,7 @@ if ($connected_user->id !== $user->id) {
 $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 
 ?>
-	<div class="profile-container">
+	<main class="profile-container">
 		<div class="title">
 			<h1>Profil de <?= $username ?></h1>
 		</div>
@@ -187,7 +186,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 			require_once 'components/trends.php';
 			?>
 		</div>
-	</div>
+	</main>
 
 <?php
 $content = ob_get_clean();

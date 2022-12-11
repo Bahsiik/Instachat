@@ -18,7 +18,7 @@ global $friend_list;
 global $friend_requests;
 global $sent_requests;
 ?>
-	<div class="friends-tab-container">
+	<main class="friends-tab-container">
 		<div class="tabbed-menu">
 			<div class="selected tab friends" onclick="showTab(tab1)"><p>Amis</p></div>
 			<div class="tab waitings" onclick="showTab(tab2)"><p>Demandes</p></div>
@@ -143,7 +143,7 @@ global $sent_requests;
 				?>
 			</div>
 		</div>
-	</div>
+	</main>
 
 <?php
 require_once 'components/trends.php';

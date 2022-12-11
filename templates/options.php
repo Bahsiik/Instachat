@@ -11,9 +11,9 @@ $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
 global $connected_user;
-require_once('components/toolbar.php');
+require_once 'components/toolbar.php';
 ?>
-	<div class="options">
+	<main class="options">
 		<div class="title">
 			<h1>Paramètres</h1>
 		</div>
@@ -289,7 +289,7 @@ require_once('components/toolbar.php');
 				</form>
 			</div>
 		</div>
-	</div>
+	</main>
 <?php
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';

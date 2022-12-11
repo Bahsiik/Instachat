@@ -7,7 +7,7 @@ $js = ['register.js'];
 
 ob_start();
 ?>
-	<div class="container" id="container">
+	<main class="container" id="container">
 		<div class="form-container sign-up-container">
 			<form action="/create" method="post">
 				<h1>Créer un compte</h1>
@@ -57,8 +57,8 @@ ob_start();
 				</label>
 				<label>Mot de passe
 					<input
-							class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
-							required type="password"
+						class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
+						required type="password"
 					/>
 				</label>
 				<button>Se connecter</button>
@@ -78,7 +78,7 @@ ob_start();
 				</div>
 			</div>
 		</div>
-	</div>
+	</main>
 <?php
 $content = ob_get_clean();
 require_once('layout.php');

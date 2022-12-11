@@ -13,7 +13,7 @@ require_once 'components/toolbar.php';
 
 global $connected_user;
 global $posts; ?>
-	<div class="homepage-container">
+	<main class="homepage-container">
 		<div class="title">
 			<h1>Accueil</h1>
 		</div>
@@ -71,7 +71,7 @@ global $posts; ?>
 			}
 			?>
 		</div>
-	</div>
+	</main>
 <?php
 require_once 'components/trends.php';
 $content = ob_get_clean();
