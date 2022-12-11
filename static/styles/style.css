@@ -14,6 +14,11 @@
 	--input-color: var(--fg-primary);
 }
 
+html {
+	/*scroll-margin-bottom: 10rem;*/
+	scroll-behavior: smooth;
+}
+
 body {
 	background-color: var(--bg-primary);
 	color: var(--fg-primary);

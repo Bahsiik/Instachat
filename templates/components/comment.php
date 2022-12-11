@@ -12,7 +12,7 @@ global $comment;
 global $connected_user;
 $comment_user = (new GetUser())->execute($comment->authorId);
 ?>
-<article class="comment-container">
+<article class="comment-container" id="comment-<?= $comment->id ?>">
 	<div class="comment-avatar">
 		<img alt="profile picture" src="<?= $comment_user->displayAvatar() ?>">
 	</div>

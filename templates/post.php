@@ -5,7 +5,7 @@ use Controllers\Posts\GetComments;
 
 $title = 'Post';
 $css = ['post-page.css', 'post.css', 'comment.css'];
-$js = ['homepage.js'];
+$js = ['anchors.js'];
 
 ob_start();
 require_once 'components/toolbar.php';
