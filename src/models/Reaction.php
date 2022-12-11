@@ -58,7 +58,7 @@ class ReactionsRepository {
 	}
 
 	public function getReactionsByAuthorId(float $author_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM reactions WHERE author_id = :author_id');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM reactions WHERE id IN (SELECT reaction_id FROM reaction_users WHERE user_id = :author_id)');
 		$statement->execute(compact('author_id'));
 		return $statement->fetchAll(PDO::FETCH_CLASS, Reaction::class);
 	}
