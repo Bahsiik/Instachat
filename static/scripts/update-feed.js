@@ -1,34 +1,38 @@
+function getLastPost() {
+    return document.querySelector('.post-container:last-child');
+}
+
 function addInfiniteFeed() {
     const feedContainer = document.querySelector('.feed-container');
-    const lastChild = feedContainer.lastElementChild;
     let offset = 5;
 
     const observer = new IntersectionObserver(async entries => {
-        if (entries[0].isIntersecting) {
-            const url = `${window.location.origin}/getFeed?offset=${offset}`;
-            const request = await fetch(url, {
-                method: 'GET',
-                credentials: 'include',
-            });
+        if (!entries[0].isIntersecting) return;
 
-            const text = await request.text();
-            const div = document.createElement('div');
-            div.innerHTML = text;
-            for (const child of div.children) {
-                const menuChild = child.querySelector('.post-menu');
-                if (!menuChild) continue;
-                menuChild.addEventListener('click', () => showMenu(menuChild));
-            }
+        const url = `${window.location.origin}/getFeed?offset=${offset}`;
+        const request = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        const text = await request.text();
+        const div = document.createElement('div');
+        div.innerHTML = text;
+        if (div.children.length <= 0) return;
 
-            if (div.children.length > 0) {
-                feedContainer.appendChild(...div.children);
-                twemoji.parse(document.body);
-                offset += 5;
-            }
+        for (const child of div.children) {
+            const menuChild = child.querySelector('.post-menu');
+            if (!menuChild) continue;
+            menuChild.addEventListener('click', () => showMenu(menuChild));
         }
+
+        observer.unobserve(getLastPost());
+        feedContainer.append(...div.children);
+        observer.observe(getLastPost());
+        twemoji.parse(document.body);
+        offset += 5;
     });
 
-    observer.observe(lastChild);
+    observer.observe(getLastPost());
 }
 
 document.addEventListener("DOMContentLoaded", () => {
