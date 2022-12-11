@@ -47,7 +47,7 @@ global $sent_requests;
 								</div>
 								<div class="friendship-term">
 									<p>Amis depuis <?php
-										format_date_time_diff($value->responseDate) ?></p>
+										format_date_time_diff($value->responseDate, "le ")?></p>
 								</div>
 							</div>
 						</div>

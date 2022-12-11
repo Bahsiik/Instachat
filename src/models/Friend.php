@@ -44,7 +44,7 @@ class FriendRepository {
 		$statement->execute([
 			'requester_id' => $requester_id,
 			'requested_id' => $requested_id,
-			'response_date' => time(),
+			'response_date' => date('Y-m-d H:i:s')
 		]);
 	}
 
@@ -53,7 +53,7 @@ class FriendRepository {
 		$statement->execute([
 			'requester_id' => $requester_id,
 			'requested_id' => $requested_id,
-			'response_date' => time(),
+			'response_date' => date('Y-m-d H:i:s')
 		]);
 	}
 
