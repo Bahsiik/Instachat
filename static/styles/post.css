@@ -72,11 +72,15 @@
 	text-align: center;
 }
 
-.post-info > a {
+.post-user-info {
 	color: var(--fg-primary);
 	display: flex;
 	gap: 0.5rem;
 	text-decoration: none;
+}
+
+.post-user-info p {
+	margin: 0;
 }
 
 .post-avatar img {
