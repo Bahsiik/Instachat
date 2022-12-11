@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
+require_once 'src/controllers/comments/GetComments.php';
 require_once 'src/controllers/friends/GetFriendRequests.php';
 require_once 'src/controllers/friends/GetFriends.php';
 require_once 'src/controllers/friends/GetSentRequests.php';
@@ -18,7 +19,6 @@ require_once 'src/controllers/pages/SearchTrendPage.php';
 require_once 'src/controllers/pages/PostPage.php';
 require_once 'src/controllers/pages/ProfilePage.php';
 require_once 'src/controllers/posts/AddPost.php';
-require_once 'src/controllers/posts/GetComments.php';
 require_once 'src/controllers/posts/GetFeed.php';
 require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/posts/GetPostContaining.php';

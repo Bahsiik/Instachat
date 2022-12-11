@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Controllers\Posts;
+namespace Src\Controllers\comments;
 
 use Models\Comment;
 use Models\CommentRepository;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use Controllers\Posts\GetComments;
 use Controllers\Users\GetUser;
 use Models\Emotion;
+use Src\Controllers\comments\GetComments;
 
 $user_controller = new GetUser();
 

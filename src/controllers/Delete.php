@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace Controllers;
 
-require_once('src/controllers/users/DeleteUser.php');
-require_once('src/controllers/posts/DeletePost.php');
-require_once('src/controllers/posts/DeleteComment.php');
-require_once('src/controllers/reactions/DeleteReaction.php');
+require_once 'src/controllers/comments/DeleteComment.php';
+require_once 'src/controllers/posts/DeletePost.php';
+require_once 'src/controllers/reactions/DeleteReaction.php';
+require_once 'src/controllers/users/DeleteUser.php';
 
-use Controllers\Posts\DeleteComment;
 use Controllers\Posts\DeletePost;
 use Controllers\Reaction\DeleteReaction;
 use Controllers\Users\DeleteUser;
 use RuntimeException;
+use Src\Controllers\comments\DeleteComment;
 use function strtolower;
 
 enum DeleteType: int {

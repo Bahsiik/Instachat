@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Controllers\Posts\GetComments;
+use Src\Controllers\comments\GetComments;
 
 $title = 'Post';
 $css = ['post-page.css', 'post.css', 'comment.css'];
