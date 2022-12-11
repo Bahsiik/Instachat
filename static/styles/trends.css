@@ -58,6 +58,12 @@
 	width: 10rem;
 }
 
+.no-trends > h2 {
+	display: flex;
+	font-size: 1.25rem;
+	justify-content: center;
+}
+
 .show-more button {
 	background-color: transparent;
 	border: none;

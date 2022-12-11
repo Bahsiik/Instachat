@@ -11,22 +11,34 @@ global $trends; ?>
 	</div>
 	<div class="trends-feed">
 		<?php
-		$index = 1;
-		foreach ($trends as $name => $count) {
+		if (count($trends) > 0) {
+			$index = 1;
+			foreach ($trends as $name => $count) {
+				?>
+				<a href="/search-trend?trend=<?= urlencode($name) ?>">
+					<button class="trend<?= $index > 5 ? ' hidden' : '' ?>" type="submit">
+						<span class="trend-rank"><?= "$index • Tendances" ?></span>
+						<span class="trend-content"><?= htmlspecialchars($name) ?></span>
+						<span class="trend-number"><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></span>
+					</button>
+				</a>
+				<?php
+				$index++;
+			}
+		} else {
 			?>
-			<a href="/search-trend?trend=<?= urlencode($name) ?>">
-				<button class="trend<?= $index > 5 ? ' hidden' : '' ?>" type="submit">
-					<span class="trend-rank"><?= "$index • Tendances" ?></span>
-					<span class="trend-content"><?= htmlspecialchars($name) ?></span>
-					<span class="trend-number"><?= $count . ' chat' . ($count > 1 ? 's' : '') ?></span>
-				</button>
-			</a>
+			<div class="no-trends">
+				<h2>Aucune tendance pour le moment</h2>
+			</div>
 			<?php
-			$index++;
+		}
+		if (count($trends) > 5) {
+			?>
+			<div class="show-more">
+				<button class="show-more-button" onclick="changeTrendsDisplay()">Afficher plus</button>
+			</div>
+			<?php
 		}
 		?>
-		<div class="show-more">
-			<button class="show-more-button" onclick="changeTrendsDisplay()">Afficher plus</button>
-		</div>
 	</div>
 </div>
