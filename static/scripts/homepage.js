@@ -3,7 +3,7 @@
  * @param imageInput {HTMLInputElement}
  * @returns {boolean}
  */
-function inputsAreValid(textarea, imageInput) {
+function inputsAreValid(chatArea, imageInput) {
 	const image = imageInput.files[0];
 	const maxSize = 16 * 1024 * 1024;
 	if (image) {
@@ -21,7 +21,7 @@ function inputsAreValid(textarea, imageInput) {
 		}
 	}
 
-	return textarea.value.length >= 2 || imageInput.files.length >= 1;
+	return chatArea.value.length >= 2 || imageInput.files.length >= 1;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,21 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
 	chatArea.addEventListener('input', updateCharacterCount);
 
 	const form = document.querySelector('.post-form');
-	const textarea = document.querySelector('.chat-area');
 	const imageInput = document.querySelector('.chat-image-input');
 	const chatFormBottom = document.querySelector('.chat-form-bottom');
 	const chatButton = chatFormBottom.querySelector('.chat-btn');
 
-	textarea.addEventListener('input', () => updateChatButton());
+	chatArea.addEventListener('input', () => updateChatButton());
 	imageInput.addEventListener('change', () => updateChatButton());
 
 	function updateChatButton() {
-		if (inputsAreValid(textarea, imageInput)) chatButton.removeAttribute('disabled');
+		if (inputsAreValid(chatArea, imageInput)) chatButton.removeAttribute('disabled');
 		else chatButton.setAttribute('disabled', '');
 	}
 
 	form.addEventListener('submit', e => {
-		if (inputsAreValid(textarea, imageInput)) {
+		if (inputsAreValid(chatArea, imageInput)) {
 			chatButton.setAttribute('disabled', '');
 			return;
 		}
@@ -114,4 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const imageButton = document.querySelector('.chat-image-btn');
 	imageButton.addEventListener('click', addImage);
+
+	chatArea.addEventListener('input', () => {
+		chatArea.style.height = "1px";
+		chatArea.style.height = `${chatArea.scrollHeight}px`;
+	});
 });

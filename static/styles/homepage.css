@@ -49,7 +49,8 @@
 	box-sizing: border-box;
 	color: var(--input-placeholder);
 	font-family: var(--font);
-	min-height: 80px;
+	margin-bottom: 16px;
+	min-height: 49px;
 	overflow: hidden;
 	resize: none;
 	width: 45rem;
