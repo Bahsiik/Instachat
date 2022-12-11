@@ -10,7 +10,7 @@ require_once 'components/toolbar.php';
 global $searched_posts;
 global $searched_trend;
 
-$title = 'Instachat | ' . $searched_trend;
+$title = 'Instachat | Tendances - ' . $searched_trend;
 ?>
 
 	<main class="searched-trend-container">
