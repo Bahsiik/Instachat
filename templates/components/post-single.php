@@ -18,14 +18,14 @@ $user = $user_controller->execute($post->authorId);
 	</div>
 	<div class="post-main">
 		<div class="post-info">
-			<div class="post-user-info">
+			<a class="post-user-info" href="/profile/<?= $user->username ?>">
 				<p class="post-display-name">
 					<?= $user->getDisplayOrUsername() ?>
 				</p>
 				<p class="post-username">
 					<?= "@$user->username" ?>
 				</p>
-			</div>
+			</a>
 			<div class="post-emotion">
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
@@ -59,12 +59,13 @@ $user = $user_controller->execute($post->authorId);
 			<?php
 		}
 		?>
+		<p class='post-date'>
+			<?php
+			format_date_time($post->creationDate);
+			?>
+		</p>
 		<div class="post-bottom-info subtitle">
-			<div class="post-date">
-				<?php
-				format_date_time($post->creationDate);
-				?>
-			</div>
+
 			<p class="post-replies">
 				<span class="bold"><?= count($comments) ?></span>
 				Réponses

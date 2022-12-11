@@ -1,0 +1,24 @@
+.title {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	gap: 1.2rem;
+}
+
+.post-page-container {
+	width: 50vw;
+}
+
+.post-bottom-info {
+	display: flex;
+	gap: .75rem;
+	margin: .5rem 0 0;
+}
+
+.post-date, .post-replies, .post-reactions {
+	margin: 0;
+}
+
+.post-date {
+	margin-top: 1rem;
+}

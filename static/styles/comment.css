@@ -3,25 +3,42 @@
 	flex-flow: column;
 }
 
-.comment-header {
-	align-items: center;
+.comment-container {
+	border-bottom: 1px solid var(--border);
 	display: flex;
-	gap: 10px;
+	gap: 1rem;
+	padding: 1.25rem 0 .75rem;
+}
+
+.comment-main {
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	width: 100%;
+}
+
+.comment-content {
+	margin: 0 0 .2rem;
 }
 
 .comment-avatar img {
 	border-radius: 100vmax;
 	height: 48px;
 	object-fit: contain;
-	width: 48px;;
+	width: 48px;
 }
 
 .comment-info {
 	align-items: center;
+	display: flex;
 	gap: 8px;
 	height: fit-content;
 	justify-content: left;
 	text-align: center;
+}
+
+.comment-info p {
+	margin: 0;
 }
 
 .comment-username {
@@ -40,4 +57,24 @@
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
+}
+
+.comment-reply {
+	display: flex;
+	gap: .5rem;
+}
+
+.comment-reply p {
+	margin: 0;
+}
+
+.comment-reply-author {
+	color: var(--accent-color);
+}
+
+.comment-reply-content {
+	max-width: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
