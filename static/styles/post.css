@@ -171,11 +171,12 @@
 }
 
 .post-image {
-	border: 1px solid var(--border);
+	align-self: flex-start;
 	border-radius: .75rem;
+	filter: drop-shadow(0px 0px 5px var(--bg-ternary));
 	max-height: 345px;
+	max-width: 90%;
 	object-fit: contain;
-	width: min-content;
 }
 
 .delete-dialog {
@@ -183,6 +184,7 @@
 	border: none;
 	border-radius: 7px;
 	color: var(--fg-primary);
+	cursor: default;
 	padding: 16px;
 }
 
@@ -202,8 +204,12 @@
 	color: var(--fg-primary);
 	font-family: var(--font);
 	margin: 0 5px;
-	padding: 5px;
+	padding: 15px;
 	transition: all .3s;
+}
+
+.modal-delete-btn {
+	background-color: var(--input-invalid-bg);
 }
 
 .modal-cancel-btn:hover {
@@ -212,11 +218,6 @@
 }
 
 .modal-delete-btn:hover {
-	background-color: var(--input-invalid-bg);
-	color: var(--fg-primary);
 	cursor: pointer;
-}
-
-.modal-delete-btn {
-	color: var(--input-invalid);
+	filter: opacity(0.6);
 }
