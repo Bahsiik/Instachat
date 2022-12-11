@@ -8,10 +8,10 @@ use Models\PostRepository;
 
 class GetPostsByUser {
 	/**
-	 * @param int $id
+	 * @param float $id
 	 * @return Array<Post>
 	 */
-	public function execute(int $id): array {
+	public function execute(float $id): array {
 		return (new PostRepository())->getPostsByUser($id);
 	}
 }
