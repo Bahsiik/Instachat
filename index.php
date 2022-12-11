@@ -173,27 +173,27 @@ try {
 
 		case 'send-friend-request':
 			redirect_if_method_not('POST', '/');
-			(new SendRequest())->execute($connected_user, $_POST, $_POST['redirect']);
+			(new SendRequest())->execute($connected_user, $_POST);
 			break;
 
 		case 'remove-friend':
 			redirect_if_method_not('POST', '/');
-			(new RemoveFriend())->execute($connected_user, $_POST, $_POST['redirect']);
+			(new RemoveFriend())->execute($connected_user, $_POST);
 			break;
 
 		case 'accept-friend':
 			redirect_if_method_not('POST', '/');
-			(new AcceptRequest())->execute($connected_user, $_POST, $_POST['redirect']);
+			(new AcceptRequest())->execute($connected_user, $_POST);
 			break;
 
 		case'decline-friend':
 			redirect_if_method_not('POST', '/');
-			(new DeclineRequest())->execute($connected_user, $_POST, $_POST['redirect']);
+			(new DeclineRequest())->execute($connected_user, $_POST);
 			break;
 
 		case 'cancel-friend':
 			redirect_if_method_not('POST', '/');
-			(new CancelRequest())->execute($connected_user, $_POST, $_POST['redirect']);
+			(new CancelRequest())->execute($connected_user, $_POST);
 			break;
 
 		case 'search-trend':
