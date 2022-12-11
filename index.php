@@ -202,7 +202,7 @@ try {
 			$searched_trend = $_GET['trend'];
 			$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 			$trends = (new GetTrends())->execute();
-			if (in_array($searched_trend, $trends)) (new SearchTrendPage())->execute();
+			if (isset($trends[$searched_trend])) (new SearchTrendPage())->execute();
 			else redirect('/');
 			break;
 

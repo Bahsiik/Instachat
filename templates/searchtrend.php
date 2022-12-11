@@ -9,6 +9,7 @@ require_once 'components/toolbar.php';
 
 global $searched_posts;
 global $searched_trend;
+global $trends;
 
 $title = 'Instachat | Tendances - ' . $searched_trend;
 ?>

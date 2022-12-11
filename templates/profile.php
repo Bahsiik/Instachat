@@ -27,9 +27,9 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 						<p class="username"><?= '@' . $username ?></p>
 					</div>
 					<div class="profile-info-inscription-date">
-						<p class="inscription-date">Membre depuis </p>
+						<p class="inscription-date">Membre depuis le</p>
 						<p class="inscription-date"><?=
-							format_date_time($user->createdAt, "le ") ?></p>
+							format_date_time($user->createdAt) ?></p>
 					</div>
 				</div>
 				<div class="profile-info-right">
