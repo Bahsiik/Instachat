@@ -13,13 +13,13 @@ global $connected_user;
 $comments = (new GetComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
 ?>
-<div class="post-container" data-post-id="<?= $post->id ?>">
+<article class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
 		<a href="/profile/<?= $user->username ?>">
 			<img src="<?= $user->displayAvatar() ?>" alt='avatar'>
 		</a>
 	</div>
-	<div class="post-right-part">
+	<div class="post-main">
 		<div class="post-info">
 			<a href="/profile/<?= $user->username ?>">
 				<div class="post-display-name">
@@ -71,9 +71,7 @@ $user = $user_controller->execute($post->authorId);
 		<?php
 		if (isset($post->image->data) && str_starts_with($post->image->data, 'data:image')) {
 			?>
-			<!--			<div class="post-image">-->
-			<img class="post-image" src="<?= $post->image->data ?>" alt="post-image">
-			<!--			</div>-->
+			<img alt="post-image" class="post-image" src="<?= $post->image->data ?>">
 			<?php
 		}
 		?>
@@ -94,4 +92,4 @@ $user = $user_controller->execute($post->authorId);
 			</button>
 		</div>
 	</div>
-</div>
+</article>

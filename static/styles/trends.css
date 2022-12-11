@@ -8,7 +8,6 @@
 	padding: 5px 15px;
 }
 
-
 .trends-feed > a {
 	text-decoration: none;
 }
@@ -19,13 +18,13 @@
 	width: 100%;
 }
 
-.trends-feed > a > .trend  {
-	border-bottom: 1px solid var(--border);
-	padding: 0.75rem 1rem;
+.trends-feed > a > .trend {
 	background: none;
-	font-family: 'Montserrat', sans-serif;
+	border-bottom: 1px solid var(--border);
 	display: flex;
 	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	padding: 0.75rem 1rem;
 }
 
 .trends-feed > a > .trend:hover {
@@ -47,12 +46,12 @@
 }
 
 .trends-feed > a > .trend > .trend-content {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 10rem;
 	color: var(--fg-primary);
 	font-size: 1.05rem;
 	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 10rem;
 }
 
 .show-more button {

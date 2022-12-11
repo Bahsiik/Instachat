@@ -86,7 +86,7 @@ function getPostMenus() {
 }
 
 function addClickEvent(post) {
-    const postMenu = post.querySelector('.post-right-part');
+    const postMenu = post.querySelector('.post-main');
     postMenu.addEventListener('click', e => {
         /**
          * @type {EventTarget & HTMLElement}

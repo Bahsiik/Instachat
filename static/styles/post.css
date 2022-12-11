@@ -90,7 +90,7 @@
 	color: var(--fg-secondary);
 }
 
-.post-right-part {
+.post-main {
 	display: flex;
 	flex-flow: column;
 	gap: 5px;
