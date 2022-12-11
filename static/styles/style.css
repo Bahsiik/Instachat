@@ -20,6 +20,7 @@ body {
 	display: flex;
 	font-family: var(--font);
 	margin: 0;
+	overflow-x: hidden;
 }
 
 a {
