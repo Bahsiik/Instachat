@@ -7,37 +7,8 @@ $js[] = 'posts.js';
 
 ob_start();
 require_once 'components/toolbar.php';
-require_once 'src/controllers/reactions/GetReactionsByAuthorId.php';
 
-use Controllers\Reaction\GetReactionsByAuthorId;
-
-global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts;
-$reactions_list = (new GetReactionsByAuthorId())->execute($user->id);
-
-
-$friendship = null;
-
-if ($connected_user->id !== $user->id) {
-	foreach ($friend_list as $friend) {
-		if ($user->id === $friend->requester_id && $connected_user->id === $friend->requested_id || $user->id === $friend->requested_id && $connected_user->id === $friend->requester_id) {
-			$friendship = 1;
-			break;
-		}
-	}
-	foreach ($friend_requests as $friend) {
-		if ($user->id === $friend->requester_id) {
-			$friendship = 2;
-			break;
-		}
-	}
-	foreach ($sent_requests as $friend) {
-		if ($user->id === $friend->requested_id) {
-			$friendship = 3;
-			break;
-		}
-	}
-}
-
+global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts,$reactions_list;
 
 $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 
@@ -187,7 +158,6 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 			?>
 		</div>
 	</main>
-
 <?php
 $content = ob_get_clean();
 require_once 'layout.php';
