@@ -82,7 +82,7 @@ class PostRepository {
 	}
 
 	public function getFeed(float $user_id, int $offset): array {
-		$statement = $this->databaseConnection->prepare("SELECT p.*
+		$statement = $this->databaseConnection->prepare("SELECT DISTINCT p.*
 		FROM instachat.posts p
 		         LEFT JOIN (SELECT f.requester_id, f.requested_id, f.accepted
 		                    FROM instachat.friends f
@@ -98,20 +98,7 @@ class PostRepository {
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-			// check if the post_id is already in the array
-			// if it is, don't add it again
-			// this is to avoid duplicates
-			if (!in_array($post['id'], array_column($posts, 'id'))) {
-				$posts[] = new Post(
-					$post['id'],
-					$post['content'],
-					$post['author_id'],
-					$post['creation_date'],
-					$post['photo'],
-					$post['emotion'],
-					$post['deleted'],
-				);
-			}
+			$posts[] = new Post(...array_values($post));
 		}
 
 		return $posts;
