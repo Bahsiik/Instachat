@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		imageInput.addEventListener('change', () => {
 			const file = imageInput.files[0];
 			reader.onloadend = () => {
+				console.log("pierre");
 				const fileType = file.type.split('/')[1];
 				if (fileType !== 'png' && fileType !== 'jpeg' && fileType !== 'jpg') return;
 				if (document.querySelector('.chat-image')) {
@@ -91,6 +92,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				const img = `<img class="chat-image" src="${reader.result}" alt="">`;
 				const chatFormImageContainer = document.querySelector('.chat-form-image-container');
 				chatFormImageContainer.innerHTML += img;
+
+				if (document.querySelector('.chat-delete-image-symbol')) {
+					const existingSpan = document.querySelector('.chat-delete-image-symbol');
+					existingSpan.remove();
+				}
+				const deleteSymbol = document.createElement('span');
+				deleteSymbol.classList.add('material-symbols-outlined');
+				deleteSymbol.classList.add('chat-delete-image-symbol');
+				deleteSymbol.innerHTML = 'close';
+				chatFormImageContainer.appendChild(deleteSymbol);
+				deleteSymbol.addEventListener('click', () => {
+					imageInput.value = '';
+					chatFormImageContainer.innerHTML = '';
+					updateChatButton();
+				});
 			};
 			reader.readAsDataURL(file);
 		});

@@ -31,6 +31,10 @@ main {
 	padding: 1rem 2rem;
 }
 
+.material-symbols-outlined {
+	user-select: none;
+}
+
 .title {
 	margin-bottom: 2rem;
 	padding: 0 1rem 1rem;

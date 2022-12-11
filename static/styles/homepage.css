@@ -125,7 +125,6 @@
 
 .chat-image-btn:hover .chat-action-buttons-color {
 	background-color: var(--accent-transparent);
-	color: var(--accent-color);
 	cursor: pointer;
 }
 
@@ -134,6 +133,31 @@
 }
 
 .chat-image {
+	align-self: flex-start;
+	border-radius: .75rem;
+	filter: drop-shadow(0px 0px 5px var(--bg-ternary));
 	max-height: 345px;
+	max-width: 90%;
 	object-fit: contain;
 }
+
+.chat-form-image-container {
+	display: flex;
+	gap: 16px;
+}
+
+.chat-delete-image-symbol {
+	border-radius: 9px;
+	color: var(--accent-color);
+	font-size: 1.5rem;
+	height: fit-content;
+	padding: 5px !important;
+	transition: all .3s;
+}
+
+.chat-delete-image-symbol:hover {
+	background-color: var(--accent-transparent);
+	cursor: pointer;
+}
+
+
