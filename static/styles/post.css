@@ -177,3 +177,46 @@
 	object-fit: contain;
 	width: min-content;
 }
+
+.delete-dialog {
+	background-color: var(--bg-quinternary);
+	border: none;
+	border-radius: 7px;
+	color: var(--fg-primary);
+	padding: 16px;
+}
+
+.delete-dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.5);
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
+.modal-cancel-btn, .modal-delete-btn {
+	background-color: transparent;
+	border: none;
+	border-radius: 5px;
+	color: var(--fg-primary);
+	font-family: var(--font);
+	margin: 0 5px;
+	padding: 5px;
+	transition: all .3s;
+}
+
+.modal-cancel-btn:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.modal-delete-btn:hover {
+	background-color: var(--input-invalid-bg);
+	color: var(--fg-primary);
+	cursor: pointer;
+}
+
+.modal-delete-btn {
+	color: var(--input-invalid);
+}

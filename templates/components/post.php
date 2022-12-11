@@ -51,12 +51,12 @@ $user = $user_controller->execute($post->authorId);
 						Supprimer
 						<span class='material-symbols-outlined menu-delete-symbol'>close</span>
 					</button>
-					<dialog>
+					<dialog class="delete-dialog">
 						<form action='/delete?type=post' method='post'>
 							<input type='hidden' name='post_id' value="<?= $post->id ?>">
 							<p>Êtes-vous sûr de vouloir supprimer ce post ?</p>
 							<button type="button" value="cancel" class="modal-cancel-btn">Annuler</button>
-							<button type="submit" value="delete">Supprimer</button>
+							<button type="submit" value="delete" class="modal-delete-btn">Supprimer</button>
 						</form>
 					</dialog>
 				</div>
