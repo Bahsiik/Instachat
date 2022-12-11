@@ -15,14 +15,14 @@ class Friend {
 	public bool $accepted;
 
 	public function __construct(
-		public float $requester_id,
-		public float $requested_id,
+		public float $requesterId,
+		public float $requestedId,
 		int          $accepted,
 		string       $send_date,
-		string       $response_date
+		string       $responseDate
 	) {
 		$this->sendDate = date_create_from_format('Y-m-d H:i:s', $send_date);
-		$this->responseDate = date_create_from_format('Y-m-d H:i:s', $response_date);
+		$this->responseDate = date_create_from_format('Y-m-d H:i:s', $responseDate);
 		$this->accepted = $accepted === 1;
 	}
 }

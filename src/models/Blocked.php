@@ -9,9 +9,9 @@ use Database\DatabaseConnection;
 use PDO;
 
 class Blocked {
-	public float $blocker_id;
-	public float $blocked_id;
-	public string $blocked_word;
+	public float $blockerId;
+	public float $blockedId;
+	public string $blockedWord;
 }
 
 class BlockedRepository {

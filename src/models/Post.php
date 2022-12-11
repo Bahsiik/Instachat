@@ -43,20 +43,20 @@ enum Emotion: int {
 }
 
 class Post {
-	public DateTime $creation_date;
+	public DateTime $creationDate;
 	public Emotion $emotion;
 	public ?Blob $image;
 
 	public function __construct(
 		public float   $id,
 		public ?string $content,
-		public float   $author_id,
-		string         $creation_date,
+		public float   $authorId,
+		string         $creationDate,
 		?string        $image,
 		int            $emotion,
 		public int     $deleted,
 	) {
-		$this->creation_date = date_create_from_format('Y-m-d H:i:s', $creation_date);
+		$this->creationDate = date_create_from_format('Y-m-d H:i:s', $creationDate);
 		$this->emotion = Emotion::fromInt($emotion);
 		if ($image !== null) {
 			$this->image = new Blob($image);

@@ -79,20 +79,20 @@ enum FontSize: int {
 class User {
 	public ?Blob $avatar = null;
 	public Background $background;
-	public DateTime $birth_date;
+	public DateTime $birthDate;
 	public Color $color;
-	public DateTime $created_at;
-	public FontSize $font_size;
+	public DateTime $createdAt;
+	public FontSize $fontSize;
 
 	public function __construct(
 		public float   $id,
 		public string  $username,
 		public string  $password,
 		?string        $avatar,
-		string         $created_at,
-		string         $birth_date,
+		string         $createdAt,
+		string         $birthDate,
 		public ?string $display_name,
-		int            $font_size,
+		int            $fontSize,
 		int            $color,
 		int            $background,
 		public string  $gender,
@@ -100,9 +100,9 @@ class User {
 		public ?string $bio,
 	) {
 		$this->background = Background::fromInt($background);
-		$this->birth_date = date_create_from_format('Y-m-d', $birth_date);
-		$this->created_at = date_create_from_format('Y-m-d H:i:s', $created_at);
-		$this->font_size = FontSize::fromInt($font_size);
+		$this->birthDate = date_create_from_format('Y-m-d', $birthDate);
+		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $createdAt);
+		$this->fontSize = FontSize::fromInt($fontSize);
 		$this->color = Color::fromInt($color);
 		if ($avatar !== null) {
 			$this->avatar = new Blob($avatar);
@@ -244,11 +244,11 @@ class UserRepository {
 			'avatar' => $user->avatar?->data,
 			'background' => $user->background->value,
 			'bio' => $user->bio,
-			'birth_date' => $user->birth_date->getTimestamp(),
+			'birth_date' => $user->birthDate->getTimestamp(),
 			'color' => $user->color->value,
 			'display_name' => $user->display_name,
 			'email' => $user->email,
-			'font_size' => $user->font_size->value,
+			'font_size' => $user->fontSize->value,
 			'gender' => $user->gender,
 			'password' => $user->password,
 			'username' => $user->username,

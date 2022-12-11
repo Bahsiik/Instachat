@@ -110,7 +110,7 @@ require_once('components/toolbar.php');
 
 					<h3>Création du compte</h3>
 					<p class="subtitle">
-						<?= $date_formatter->format($connected_user->created_at) ?>
+						<?= $date_formatter->format($connected_user->createdAt) ?>
 					</p>
 
 					<h3>Sexe</h3>
@@ -120,7 +120,7 @@ require_once('components/toolbar.php');
 
 					<h3>Date de naissance</h3>
 					<p class="subtitle">
-						<?= $date_only_formatter->format($connected_user->birth_date) ?>
+						<?= $date_only_formatter->format($connected_user->birthDate) ?>
 					</p>
 
 					<button type="submit">Enregistrer</button>
@@ -182,11 +182,11 @@ require_once('components/toolbar.php');
 					<div class="font-options">
 						<p>aA</p>
 						<div class="font-size">
-							<input type="range" min="1" max="4" name="font-size" step="1" value="<?= $connected_user->font_size->value ?>" list="font-steps">
+							<input type="range" min="1" max="4" name="font-size" step="1" value="<?= $connected_user->fontSize->value ?>" list="font-steps">
 							<div class="font-size-rounds">
 								<?php
 								foreach (FontSize::cases() as $font) {
-									$selected = $font === $connected_user->font_size ? ' selected' : '';
+									$selected = $font === $connected_user->fontSize ? ' selected' : '';
 									echo <<<HTML
 										<span class="font-size-round$selected"></span>
 									HTML;

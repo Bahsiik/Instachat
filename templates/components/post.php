@@ -11,7 +11,7 @@ $user_controller = new GetUser();
 global $post;
 global $connected_user;
 $comments = (new GetComments())->execute($post->id);
-$user = $user_controller->execute($post->author_id);
+$user = $user_controller->execute($post->authorId);
 ?>
 <div class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
@@ -32,14 +32,14 @@ $user = $user_controller->execute($post->author_id);
 			<div class="post-dot-separator">·</div>
 			<div class="post-date">
 				<?php
-				format_date_time_diff($post->creation_date);
+				format_date_time_diff($post->creationDate);
 				?>
 			</div>
 			<div class="post-emotion">
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 			<?php
-			if ($connected_user->id === $post->author_id) {
+			if ($connected_user->id === $post->authorId) {
 				?>
 				<div class='post-menu'>
 					<button type='submit' class='post-menu-btn action-btn'>

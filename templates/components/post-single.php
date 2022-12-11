@@ -10,7 +10,7 @@ $user_controller = new GetUser();
 global $post;
 global $connected_user;
 $comments = (new GetComments())->execute($post->id);
-$user = $user_controller->execute($post->author_id);
+$user = $user_controller->execute($post->authorId);
 ?>
 <div class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
@@ -30,7 +30,7 @@ $user = $user_controller->execute($post->author_id);
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 			<?php
-			if ($connected_user->id === $post->author_id) {
+			if ($connected_user->id === $post->authorId) {
 				?>
 				<div class='post-menu'>
 					<button type='submit' class='post-menu-btn action-btn'>
@@ -55,7 +55,7 @@ $user = $user_controller->execute($post->author_id);
 		<div class="post-bottom-info subtitle">
 			<div class="post-date">
 				<?php
-				format_date_time($post->creation_date);
+				format_date_time($post->creationDate);
 				?>
 			</div>
 			<p class="post-replies">

@@ -10,7 +10,7 @@ use Models\CommentRepository;
  */
 global $comment;
 global $connected_user;
-$comment_user = (new GetUser())->execute($comment->author_id);
+$comment_user = (new GetUser())->execute($comment->authorId);
 ?>
 <div class="comment-container">
 	<div class="comment-header">
@@ -28,9 +28,9 @@ $comment_user = (new GetUser())->execute($comment->author_id);
 	</div>
 	<div class="comment-content">
 		<?php
-		if ($comment->reply_id !== null) {
-			$reply = (new CommentRepository())->getCommentById($comment->reply_id);
-			$reply_user = (new GetUser())->execute($reply->author_id);
+		if ($comment->replyId !== null) {
+			$reply = (new CommentRepository())->getCommentById($comment->replyId);
+			$reply_user = (new GetUser())->execute($reply->authorId);
 			?>
 			<div class="comment-reply">
 				<div class="comment-reply-header">
@@ -56,11 +56,11 @@ $comment_user = (new GetUser())->execute($comment->author_id);
 		</button>
 		<button class="comment-upvote action-btn">
 			<span class="material-symbols-outlined action-btn-color">arrow_upward</span>
-			<span><?= $comment->upvotes ?></span>
+			<span><?= $comment->upVotes ?></span>
 		</button>
 		<button class="comment-downvote action-btn">
 			<span class="material-symbols-outlined action-btn-color">arrow_downward</span>
-			<span><?= $comment->downvotes ?></span>
+			<span><?= $comment->downVotes ?></span>
 		</button>
 		<button class="comment-share action-btn">
 			<span class="material-symbols-outlined action-btn-color">ios_share</span>

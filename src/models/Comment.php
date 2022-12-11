@@ -17,15 +17,15 @@ class Comment {
 	public function __construct(
 		public float  $id,
 		public string $content,
-		public int    $upvotes,
-		public int    $downvotes,
-		public ?float $reply_id,
-		public float  $post_id,
-		string        $created_at,
-		public float  $author_id,
+		public int    $upVotes,
+		public int    $downVotes,
+		public ?float $replyId,
+		public float  $postId,
+		string        $createdAt,
+		public float  $authorId,
 		int           $deleted,
 	) {
-		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $created_at);
+		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $createdAt);
 		$this->deleted = $deleted === 1;
 	}
 }

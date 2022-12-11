@@ -20,7 +20,7 @@ class UpdatePreferences {
 		$new_user = clone $connected_user;
 		$new_user->background = Background::fromInt((int)$background);
 		$new_user->color = Color::fromInt((int)$color);
-		$new_user->font_size = FontSize::fromInt((int)$font_size);
+		$new_user->fontSize = FontSize::fromInt((int)$font_size);
 		(new UserRepository())->updateUser($new_user);
 
 		redirect('/options');
