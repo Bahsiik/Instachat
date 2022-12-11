@@ -71,7 +71,7 @@ class PostRepository {
 		$this->databaseConnection = (new DatabaseConnection())->getConnection();
 	}
 
-	public function addPost(string $content, int $author_id, ?string $photo, int $emotion): void {
+	public function addPost(string $content, float $author_id, ?string $photo, int $emotion): void {
 		$statement = $this->databaseConnection->prepare('INSERT INTO posts (content, author_id, photo, emotion) VALUES (:content, :author_id, :photo, :emotion)');
 		$statement->execute(compact('content', 'author_id', 'photo', 'emotion'));
 	}
