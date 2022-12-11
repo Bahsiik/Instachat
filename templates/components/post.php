@@ -71,9 +71,9 @@ $user = $user_controller->execute($post->authorId);
 		<?php
 		if (isset($post->image->data) && str_starts_with($post->image->data, 'data:image')) {
 			?>
-			<div class="post-image">
-				<img class="post-image" src="<?= $post->image->data ?>" alt="post-image">
-			</div>
+			<!--			<div class="post-image">-->
+			<img class="post-image" src="<?= $post->image->data ?>" alt="post-image">
+			<!--			</div>-->
 			<?php
 		}
 		?>

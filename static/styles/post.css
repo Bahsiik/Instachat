@@ -171,6 +171,9 @@
 }
 
 .post-image {
+	border: 1px solid var(--border);
+	border-radius: .75rem;
 	max-height: 345px;
 	object-fit: contain;
+	width: min-content;
 }
