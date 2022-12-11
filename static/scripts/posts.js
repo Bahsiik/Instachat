@@ -92,7 +92,7 @@ function addClickEvent(post) {
          * @type {EventTarget & HTMLElement}
          */
         const target = e.target;
-        if (['a', 'button'].includes(target.tagName) || target.classList.contains('action-btn-color')) return;
+        if (['A', 'BUTTON'].includes(target.tagName) || ['action-btn-color', 'menu-container'].some(c => target.classList.contains(c))) return;
 
         const postId = post.dataset.postId;
         if (!postId) return;
