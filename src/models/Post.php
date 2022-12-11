@@ -98,7 +98,20 @@ class PostRepository {
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$posts[] = new Post(...array_values($post));
+			// check if the post_id is already in the array
+			// if it is, don't add it again
+			// this is to avoid duplicates
+			if (!in_array($post['id'], array_column($posts, 'id'))) {
+				$posts[] = new Post(
+					$post['id'],
+					$post['content'],
+					$post['author_id'],
+					$post['creation_date'],
+					$post['photo'],
+					$post['emotion'],
+					$post['deleted'],
+				);
+			}
 		}
 
 		return $posts;

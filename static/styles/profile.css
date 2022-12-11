@@ -105,6 +105,7 @@
 	background-color: var(--bg-quinternary);
 	border-radius: 16px;
 	height: fit-content;
+	width: 50rem;
 }
 
 .post-container {
