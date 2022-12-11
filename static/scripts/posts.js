@@ -60,9 +60,8 @@ function showMenu(menu) {
     nextMenuContainer.style.left = `${menu.getBoundingClientRect().right - (menu.offsetWidth + nextMenuContainer.offsetWidth + 10)}px`;
     nextMenuContainer.style.top = `${menu.offsetTop}px`;
     nextMenuContainer.addEventListener('click', e => {
-        if (e.target.classList.contains('menu-delete-btn')) {
+        if (e.target.classList.contains('menu-delete-btn') || e.target.classList.contains('menu-delete-symbol')) {
             if ([...document.querySelectorAll('dialog')].some(dialog => dialog.open)) return;
-
             const modal = nextMenuContainer.querySelector('dialog');
             modal.showModal();
             if (modal.open) {
