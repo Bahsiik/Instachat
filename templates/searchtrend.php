@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-$css[] = 'searchtrend.css';
-$css[] = 'post.css';
+$css = ['searchtrend.css', 'post.css'];
+$js[] = 'posts.js';
 
 ob_start();
 require_once 'components/toolbar.php';
