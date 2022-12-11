@@ -8,7 +8,7 @@ use Controllers\Reaction\GetReactionsByAuthorId;
 
 class ProfilePage {
 	public function execute(): void {
-		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $reactions_list;
+		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $reactions_list;
 
 		$reactions_list = (new GetReactionsByAuthorId())->execute($user->id);
 

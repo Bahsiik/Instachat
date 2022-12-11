@@ -11,7 +11,6 @@ require_once 'components/toolbar.php';
 global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts,$reactions_list;
 
 $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
-
 ?>
 	<main class="profile-container">
 		<div class="title">
