@@ -18,10 +18,10 @@ class Friend {
 		public float $requesterId,
 		public float $requestedId,
 		int          $accepted,
-		string       $send_date,
+		string       $sendDate,
 		string       $responseDate
 	) {
-		$this->sendDate = date_create_from_format('Y-m-d H:i:s', $send_date);
+		$this->sendDate = date_create_from_format('Y-m-d H:i:s', $sendDate);
 		$this->responseDate = date_create_from_format('Y-m-d H:i:s', $responseDate);
 		$this->accepted = $accepted === 1;
 	}
