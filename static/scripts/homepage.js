@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		imageInput.addEventListener('change', () => {
 			const file = imageInput.files[0];
 			reader.onloadend = () => {
-				console.log("pierre");
 				const fileType = file.type.split('/')[1];
 				if (fileType !== 'png' && fileType !== 'jpeg' && fileType !== 'jpg') return;
 				if (document.querySelector('.chat-image')) {

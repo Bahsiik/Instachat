@@ -17,8 +17,6 @@ class Comment {
 	public function __construct(
 		public float  $id,
 		public string $content,
-		public int    $upVotes,
-		public int    $downVotes,
 		public ?float $replyId,
 		public float  $postId,
 		string        $createdAt,
@@ -27,6 +25,10 @@ class Comment {
 	) {
 		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $createdAt);
 		$this->deleted = $deleted === 1;
+	}
+
+	public function getLink(): string {
+		return "/post?id=$this->postId#comment-$this->id";
 	}
 }
 

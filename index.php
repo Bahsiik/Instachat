@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
+require_once 'src/controllers/comments/DownVoteComment.php';
 require_once 'src/controllers/comments/GetComments.php';
+require_once 'src/controllers/comments/GetCommentVotes.php';
+require_once 'src/controllers/comments/UnVoteComment.php';
+require_once 'src/controllers/comments/UpVoteComment.php';
 require_once 'src/controllers/friends/GetFriendRequests.php';
 require_once 'src/controllers/friends/GetFriends.php';
 require_once 'src/controllers/friends/GetSentRequests.php';
@@ -33,8 +37,15 @@ require_once 'src/controllers/users/UpdatePreferences.php';
 require_once 'src/controllers/users/UpdateUserInformation.php';
 require_once 'src/lib/utils.php';
 require_once 'src/lib/dateUtils.php';
+require_once 'src/models/Blocked.php';
+require_once 'src/models/Comment.php';
+require_once 'src/models/Friend.php';
 require_once 'src/models/Post.php';
+require_once 'src/models/Reaction.php';
+require_once 'src/models/Votes.php';
 
+use Controllers\comments\UnVoteComment;
+use Controllers\comments\UpVoteComment;
 use Controllers\Delete;
 use Controllers\Friends\AcceptRequest;
 use Controllers\Friends\CancelRequest;
@@ -64,6 +75,7 @@ use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
 use Controllers\Users\UpdateUserInformation;
 use Models\User;
+use Src\Controllers\comments\DownVoteComment;
 use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
 
@@ -223,6 +235,21 @@ try {
 				$trends = (new GetTrends())->execute();
 				(new ProfilePage())->execute();
 			}
+			break;
+
+		case 'up-vote':
+			redirect_if_method_not('POST', '/');
+			(new UpVoteComment())->execute($connected_user, $_POST);
+			break;
+
+		case 'un-vote':
+			redirect_if_method_not('POST', '/');
+			(new UnVoteComment())->execute($connected_user, $_POST);
+			break;
+
+		case 'down-vote':
+			redirect_if_method_not('POST', '/');
+			(new DownVoteComment())->execute($connected_user, $_POST);
 			break;
 	}
 } catch (Exception $exception) {
