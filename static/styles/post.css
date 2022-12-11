@@ -119,6 +119,7 @@
 }
 
 .post-content {
+	margin-bottom: 5px;
 	max-width: initial;
 	word-wrap: break-word;
 }
