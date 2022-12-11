@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $css = ['profile.css', 'post.css'];
-$js[] = 'update-feed.js';
+$js[] = 'posts.js';
 
 
 ob_start();

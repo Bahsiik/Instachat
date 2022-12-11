@@ -6,7 +6,7 @@ use function Lib\Utils\display_icon;
 
 $css = ['homepage.css', 'post.css'];
 $title = 'Instachat';
-$js = ['homepage.js', 'update-feed.js'];
+$js = ['homepage.js', 'posts.js'];
 
 ob_start();
 require_once 'components/toolbar.php';
