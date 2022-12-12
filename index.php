@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
+require_once 'src/controllers/comments/AddComment.php';
 require_once 'src/controllers/comments/DownVoteComment.php';
 require_once 'src/controllers/comments/GetComments.php';
 require_once 'src/controllers/comments/GetCommentVotes.php';
@@ -44,6 +45,7 @@ require_once 'src/models/Post.php';
 require_once 'src/models/Reaction.php';
 require_once 'src/models/Votes.php';
 
+use Controllers\comments\AddComment;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
 use Controllers\Delete;
@@ -147,6 +149,11 @@ try {
 		case 'chat':
 			redirect_if_method_not('POST', '/');
 			(new AddPost())->execute($connected_user, $_POST);
+			break;
+
+		case 'comment':
+			redirect_if_method_not('POST', '/');
+			(new AddComment())->execute($connected_user, $_POST);
 			break;
 
 		case 'delete':

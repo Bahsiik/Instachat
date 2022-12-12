@@ -39,9 +39,9 @@ class CommentRepository {
 		$this->databaseConnection = (new DatabaseConnection())->getConnection();
 	}
 
-	public function addComment(string $content, float $reply_id, float $post_id, float $author_id): void {
-		$statement = $this->databaseConnection->prepare('INSERT INTO comments (content, reply_id, post_id, author_id) VALUES (:content, :reply_id, :post_id, :author_id)');
-		$statement->execute(compact('content', 'reply_id', 'post_id', 'author_id'));
+	public function addComment(string $content, float $post_id, float $author_id, ?float $reply_id = null): void {
+		$statement = $this->databaseConnection->prepare('INSERT INTO comments (author_id, content, post_id, reply_id) VALUES (:author_id, :content, :post_id, :reply_id)');
+		$statement->execute(compact('author_id', 'content', 'post_id', 'reply_id'));
 	}
 
 	public function deleteCommentById(float $id): void {
