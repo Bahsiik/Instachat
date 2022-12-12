@@ -26,7 +26,7 @@ function inputsAreValid(textarea, imageInput) {
 	let text = textarea.value.trim();
 	let hasTwoAlphanumericChars = regex.test(text);
 
-	if (!hasTwoAlphanumericChars) {
+	if (!hasTwoAlphanumericChars && imageInput.files.length >= 1) {
 		return false;
 	}
 
