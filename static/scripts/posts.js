@@ -58,21 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function listenShare(buttons) {
-    buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
+    buttons.forEach(btn =>
+        btn.addEventListener("click", async () => {
             const postId = btn.value;
-            copyToClipboard(`${window.location.origin}/post?id=${postId}`);
-        });
-    });
+            await copyToClipboard(`${window.location.origin}/post?id=${postId}`);
+        }));
 }
 
-function copyToClipboard(value) {
+async function copyToClipboard(value) {
     const tempInput = document.createElement("input");
-    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
     tempInput.value = value;
     document.body.appendChild(tempInput);
     tempInput.select();
-    document.execCommand("copy");
+    await navigator.clipboard.writeText(value);
     document.body.removeChild(tempInput);
 }
 
