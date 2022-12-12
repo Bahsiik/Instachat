@@ -211,3 +211,33 @@ input[type='email']:-webkit-autofill:hover {
 	margin: 0;
 	padding: 0;
 }
+
+.popup {
+	animation: popup-display 2s ease-in-out forwards;
+	background-color: var(--bg-ternary);
+	border-radius: .5rem;
+	bottom: .5rem;
+	color: var(--fg-primary);
+	font-size: 1.1rem;
+	left: 50%;
+	padding: .8rem 1.2rem;
+	position: fixed;
+	transform: translateX(-50%);
+}
+
+@keyframes popup-display {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(100%);
+	}
+	15% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

@@ -73,6 +73,8 @@ async function copyToClipboard(value) {
     tempInput.select();
     await navigator.clipboard.writeText(value);
     document.body.removeChild(tempInput);
+
+    showPopup("Lien copié !");
 }
 
 function showMenu(menu) {

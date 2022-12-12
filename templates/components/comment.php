@@ -74,7 +74,7 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 					<span><?= count(array_filter($votes, static fn($v) => !$v->isUpvote)) ?></span>
 				</button>
 
-				<button class="comment-share action-btn" type='button'>
+				<button class="comment-share action-btn" type='button' data-link="<?= $comment->getLink() ?>">
 					<span class="material-symbols-outlined action-btn-color">ios_share</span>
 				</button>
 			</div>
