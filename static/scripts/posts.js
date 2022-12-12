@@ -85,8 +85,7 @@ function getPostMenus() {
 }
 
 function addClickEvent(post) {
-    const postMenu = post.parentNode.querySelector('.post-container');
-    postMenu.addEventListener('click', e => {
+    post.addEventListener('click', e => {
         /**
          * @type {EventTarget & HTMLElement}
          */
@@ -96,7 +95,8 @@ function addClickEvent(post) {
         if (document.querySelectorAll('dialog[open]').length > 0) return;
 
         const postId = post.dataset.postId;
+        const url = `${window.location.origin}/post?id=${postId}`;
         if (!postId) return;
-        window.location.href = `${window.location.origin}/post?id=${postId}`;
+        window.location.href = url;
     });
 }
