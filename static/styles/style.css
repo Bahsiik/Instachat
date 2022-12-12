@@ -15,7 +15,6 @@
 }
 
 html {
-	/*scroll-margin-bottom: 10rem;*/
 	scroll-behavior: smooth;
 }
 
@@ -34,6 +33,10 @@ a {
 
 main {
 	padding: 1rem 2rem;
+}
+
+input, textarea, button, select, optgroup, option {
+	font-family: unset;
 }
 
 .material-symbols-outlined {

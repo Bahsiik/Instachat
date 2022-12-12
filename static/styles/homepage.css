@@ -48,7 +48,6 @@
 	border: none;
 	box-sizing: border-box;
 	color: var(--input-placeholder);
-	font-family: var(--font);
 	margin-bottom: 16px;
 	min-height: 49px;
 	overflow: hidden;
@@ -86,7 +85,6 @@
 	background: transparent;
 	border: none;
 	display: flex;
-	font-family: var(--font);
 	justify-content: center;
 	padding: 0;
 }
@@ -160,5 +158,3 @@
 	background-color: var(--accent-transparent);
 	cursor: pointer;
 }
-
-

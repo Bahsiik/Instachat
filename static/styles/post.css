@@ -32,7 +32,6 @@
 	color: var(--fg-secondary);
 	cursor: pointer;
 	display: flex;
-	font-family: var(--font);
 	justify-content: center;
 	padding: 0;
 }
@@ -160,7 +159,6 @@
 	border-radius: 3px;
 	color: var(--input-invalid);
 	display: flex;
-	font-family: var(--font);
 	justify-content: space-between;
 	padding: 7px;
 	transition: all .3s;
@@ -209,7 +207,6 @@
 	border: none;
 	border-radius: 5px;
 	color: var(--fg-primary);
-	font-family: var(--font);
 	margin: 0 5px;
 	padding: 15px;
 	transition: all .3s;

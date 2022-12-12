@@ -1,6 +1,5 @@
 * {
 	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -239,4 +238,3 @@ button:hover {
 	cursor: pointer;
 	transform: scale(1.05);
 }
-
