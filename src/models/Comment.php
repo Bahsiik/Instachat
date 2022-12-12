@@ -77,7 +77,7 @@ class CommentRepository {
 	 * @return Array<Comment>
 	 */
 	public function getCommentsByPost(float $post_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE post_id = :post_id AND deleted = FALSE');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE post_id = :post_id AND deleted = FALSE ORDER BY creation_date DESC');
 		$statement->execute(compact('post_id'));
 		$comments = [];
 
