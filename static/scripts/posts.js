@@ -85,13 +85,13 @@ function getPostMenus() {
 }
 
 function addClickEvent(post) {
-    const postMenu = post.querySelector('.post-main');
+    const postMenu = post.parentNode.querySelector('.post-container');
     postMenu.addEventListener('click', e => {
         /**
          * @type {EventTarget & HTMLElement}
          */
         const target = e.target;
-        if (['A', 'BUTTON'].includes(target.tagName) || ['material-symbols-outlined'].some(c => target.classList.contains(c))) return;
+        if (['A', 'BUTTON', 'IMG'].includes(target.tagName) || ['material-symbols-outlined'].some(c => target.classList.contains(c))) return;
 
         if (document.querySelectorAll('dialog[open]').length > 0) return;
 

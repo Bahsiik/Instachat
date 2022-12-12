@@ -1,9 +1,9 @@
 /**
- * @param textarea {HTMLTextAreaElement}
+ * @param chatArea {HTMLTextAreaElement}
  * @param imageInput {HTMLInputElement}
  * @returns {boolean}
  */
-function inputsAreValid(textarea, imageInput) {
+function inputsAreValid(chatArea, imageInput) {
 	const image = imageInput.files[0];
 	const maxSize = 16 * 1024 * 1024;
 	if (image) {
@@ -21,16 +21,16 @@ function inputsAreValid(textarea, imageInput) {
 		}
 	}
 
-	let regex = /^(?=.*[A-Za-z0-9]{2,})[\s\S]*$/;
+	const regex = /^(?=.*[A-Za-z0-9]{2,})[\s\S]*$/;
 
-	let text = textarea.value.trim();
-	let hasTwoAlphanumericChars = regex.test(text);
+	const text = chatArea.value.trim();
+	const hasTwoAlphanumericChars = regex.test(text);
 
-	if (!hasTwoAlphanumericChars && imageInput.files.length >= 1) {
+	if (!hasTwoAlphanumericChars && !imageInput.files.length >= 1) {
 		return false;
 	}
 
-	return textarea.value.length >= 2 || imageInput.files.length >= 1;
+	return chatArea.value.length >= 2 || imageInput.files.length >= 1;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

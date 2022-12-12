@@ -228,3 +228,7 @@
 	cursor: pointer;
 	filter: opacity(0.6);
 }
+
+.post-avatar > a {
+	display: block;
+}
