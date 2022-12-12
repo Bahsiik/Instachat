@@ -43,6 +43,10 @@
 	width: 50rem;
 }
 
+.post-form {
+	width: 100%;
+}
+
 .chat-area {
 	background-color: transparent;
 	border: none;
@@ -52,14 +56,12 @@
 	min-height: 49px;
 	overflow: hidden;
 	resize: none;
+	transition: color .3s;
 	width: 45rem;
 }
 
-.post-form {
-	width: 100%;
-}
-
 .chat-area:focus {
+	color: var(--fg-primary);
 	outline: none !important;
 }
 
