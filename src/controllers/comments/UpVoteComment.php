@@ -11,7 +11,7 @@ use function Lib\Utils\redirect;
 
 class UpVoteComment {
 	public function execute(User $user, array $input): void {
-		$comment_id = (float)$input['comment-id'] ?? throw new RuntimeException('Comment id is required');
+		$comment_id = isset($input['comment-id']) ? (float)$input['comment-id'] : throw new RuntimeException('Comment id is required');
 		$votes_repository = new VotesRepository();
 		$votes_repository->removeVote($comment_id, $user->id);
 		$votes_repository->addVote($comment_id, $user->id, true);

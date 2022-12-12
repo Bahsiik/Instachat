@@ -117,7 +117,7 @@ class CommentRepository {
 				       UNION ALL			
 				       SELECT c.* FROM instachat.comments AS c INNER JOIN cte ON c.reply_id = cte.id
 				    )
-			SELECT * FROM cte;
+			SELECT * FROM cte WHERE deleted = FALSE AND id != :comment_id
 			SQL
 		);
 
@@ -129,6 +129,12 @@ class CommentRepository {
 		}
 
 		return $comments;
+	}
+
+	public function commentHasReply(float $comment_id): bool {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE reply_id = :comment_id AND deleted = FALSE');
+		$statement->execute(compact('comment_id'));
+		return $statement->fetch(PDO::FETCH_ASSOC) !== false;
 	}
 
 	/**

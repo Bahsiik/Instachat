@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Src\Controllers\comments;
 
-require_once('src/models/Comment.php');
-
 use Models\Comment;
 use Models\CommentRepository;
 

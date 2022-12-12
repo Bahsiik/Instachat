@@ -11,7 +11,7 @@ use function Lib\Utils\redirect;
 
 class UnVoteComment {
 	public function execute(User $user, array $input): void {
-		$comment_id = (float)$input['comment-id'] ?? throw new RuntimeException('Comment id is required');
+		$comment_id = isset($input['comment-id']) ? (float)$input['comment-id'] : throw new RuntimeException('Comment id is required');
 		(new VotesRepository())->removeVote($comment_id, $user->id);
 
 		$comment = (new CommentRepository())->getCommentById($comment_id);

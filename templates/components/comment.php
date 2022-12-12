@@ -19,6 +19,9 @@ $current_user_vote = array_filter($votes, static fn($vote) => $vote->userId === 
 $has_voted = $current_user_vote !== null;
 $has_down_voted = $has_voted && !$current_user_vote->isUpvote;
 $has_up_voted = $has_voted && $current_user_vote->isUpvote;
+
+$comment_repository = new CommentRepository();
+$replies = $comment_repository->commentHasReply($comment->id) ? count($comment_repository->getCommentsReplyingRecursively($comment->id)) : 0;
 ?>
 <article class="comment-container" id="comment-<?= $comment->id ?>">
 	<div class="comment-avatar">
@@ -36,7 +39,7 @@ $has_up_voted = $has_voted && $current_user_vote->isUpvote;
 		<div class="comment-content">
 			<?php
 			if ($comment->replyId !== null) {
-				$reply = (new CommentRepository())->getCommentById($comment->replyId);
+				$reply = ($comment_repository)->getCommentById($comment->replyId);
 				$reply_user = (new GetUser())->execute($reply->authorId);
 				?>
 				<div class="comment-reply subtitle">
@@ -58,7 +61,7 @@ $has_up_voted = $has_voted && $current_user_vote->isUpvote;
 			<div class="comment-footer">
 				<button class="comment-replies action-btn" type="button">
 					<span class="material-symbols-outlined action-btn-color">chat_bubble</span>
-					<span><?= count((new CommentRepository())->getCommentsReplyingRecursively($comment->id)) ?></span>
+					<span><?= $replies === 0 ? '' : $replies ?></span>
 				</button>
 
 				<button class="comment-vote action-btn <?= $has_up_voted ? ' active' : '' ?>" formaction="/<?= $has_up_voted ? 'un-vote' : 'up-vote' ?>">
