@@ -18,7 +18,8 @@ function addInfiniteFeed() {
         const div = document.createElement('div');
         div.innerHTML = text;
         if (div.children.length <= 0) return;
-
+        const postShareBtn = div.querySelectorAll(".post-share-btn.action-btn");
+        listenShare(postShareBtn);
         for (const child of div.children) {
             const menuChild = child.querySelector('.post-menu');
             if (!menuChild) continue;
@@ -51,7 +52,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const postMenus = getPostMenus();
         postMenus.forEach(menu => menu.nextElementSibling.classList.add('menu-hidden'));
     });
+
+    const postShareBtn = document.querySelectorAll(".post-share-btn.action-btn");
+    listenShare(postShareBtn);
 });
+
+function listenShare(buttons) {
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const postId = btn.value;
+            copyToClipboard(`${window.location.origin}/post?id=${postId}`);
+        });
+    });
+}
+
+function copyToClipboard(value) {
+    const tempInput = document.createElement("input");
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.value = value;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+}
 
 function showMenu(menu) {
     hideOthersMenu(menu);

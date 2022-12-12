@@ -5,13 +5,12 @@ use Src\Controllers\comments\GetComments;
 
 $title = 'Post';
 $css = ['post-page.css', 'post.css', 'comment.css'];
-$js = ['anchors.js'];
+$js = ['anchors.js', 'posts.js'];
 
 ob_start();
 require_once 'components/toolbar.php';
 
-global $post;
-global $connected_user;
+global $post, $connected_user;
 $comments = (new GetComments())->execute($post->id);
 ?>
 	<main class="post-page-container">

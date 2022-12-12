@@ -13,7 +13,6 @@ global $trends;
 
 $title = 'Instachat | Tendances - ' . $searched_trend;
 ?>
-
 	<main class="searched-trend-container">
 		<div class="title">
 			<h1>Tendances - <?= htmlspecialchars($searched_trend) ?></h1>
@@ -35,7 +34,6 @@ $title = 'Instachat | Tendances - ' . $searched_trend;
 			?>
 		</div>
 	</main>
-
 <?php
 require_once 'components/trends.php';
 $content = ob_get_clean();

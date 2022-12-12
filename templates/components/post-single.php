@@ -7,6 +7,7 @@ use Src\Controllers\comments\GetComments;
 
 $user_controller = new GetUser();
 
+
 global $post;
 global $connected_user;
 $comments = (new GetComments())->execute($post->id);

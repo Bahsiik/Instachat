@@ -8,6 +8,7 @@ use Src\Controllers\comments\GetComments;
 
 $user_controller = new GetUser();
 
+
 global $post;
 global $connected_user;
 $comments = (new GetComments())->execute($post->id);
@@ -84,10 +85,10 @@ $user = $user_controller->execute($post->authorId);
 				?>
 				</span>
 			</button>
-			<button class="post-share-btn action-btn">
+			<button class="post-share-btn action-btn" value="<?=$post->id?>">
 				<span class="material-symbols-outlined action-btn-color">ios_share</span>
 			</button>
-			<button class="post-reaction-btn action-btn">
+			<button class="post-reaction-btn action-btn" >
 				<span class="material-symbols-outlined action-btn-color">add_reaction</span>
 			</button>
 		</div>
