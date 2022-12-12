@@ -22,6 +22,7 @@ $comments = (new GetComments())->execute($post->id);
 		require_once 'components/post-single.php' ?>
 		<div class='comments'>
 			<?php
+			require_once 'components/comment-create.php';
 			if (count($comments) > 0) {
 				global $comment;
 				foreach ($comments as $comment) require 'components/comment.php';

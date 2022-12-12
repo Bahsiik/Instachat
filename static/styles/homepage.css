@@ -105,7 +105,6 @@
 	border-radius: 2rem;
 	color: var(--bg-secondary);
 	cursor: pointer;
-	font-style: normal;
 	font-weight: 700;
 	padding: .5rem 0;
 	transition: all .3s ease-in-out;

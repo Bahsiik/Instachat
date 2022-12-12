@@ -23,6 +23,8 @@
 
 .comment-content {
 	margin: 0 0 .2rem;
+	max-width: 85%;
+	word-wrap: break-word;
 }
 
 .comment-avatar img {
@@ -90,4 +92,49 @@
 
 .comment-vote.active > .material-symbols-outlined {
 	color: var(--accent-color);
+}
+
+.create-comment {
+	align-items: center;
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	padding: 1rem 0;
+}
+
+.user-avatar > img {
+	--size: 3rem;
+	border-radius: 100vmax;
+	height: var(--size);
+	object-fit: contain;
+	width: var(--size);
+}
+
+.chat-area {
+	background-color: transparent;
+	border: none;
+	box-sizing: border-box;
+	color: var(--input-placeholder);
+	margin-bottom: 16px;
+	min-height: 49px;
+	overflow: hidden;
+	resize: none;
+	transition: all .3s;
+	width: 85%;
+}
+
+.chat-area:focus {
+	color: var(--fg-primary);
+	outline: none !important;
+}
+
+.chat-btn {
+	background: var(--gradient-v);
+	background-repeat: no-repeat;
+	border: none;
+	border-radius: 2rem;
+	color: var(--bg-secondary);
+	cursor: pointer;
+	font-weight: 700;
+	padding: .5rem 1rem;
+	transition: all .3s ease-in-out;
 }
