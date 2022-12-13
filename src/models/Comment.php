@@ -76,8 +76,8 @@ class CommentRepository {
 	 * @param float $post_id
 	 * @return Array<Comment>
 	 */
-	public function getCommentsByPost(float $post_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE post_id = :post_id AND deleted = FALSE ORDER BY creation_date DESC');
+	public function getCommentsByPost(float $post_id, int $offset): array {
+		$statement = $this->databaseConnection->prepare("SELECT * FROM comments WHERE post_id = :post_id AND deleted = FALSE ORDER BY creation_date DESC LIMIT 5 OFFSET $offset");
 		$statement->execute(compact('post_id'));
 		$comments = [];
 
@@ -86,6 +86,12 @@ class CommentRepository {
 		}
 
 		return $comments;
+	}
+
+	public function countCommentsByPost(float $post_id): int {
+		$statement = $this->databaseConnection->prepare('SELECT COUNT(*) FROM comments WHERE post_id = :post_id AND deleted = FALSE');
+		$statement->execute(compact('post_id'));
+		return $statement->fetchColumn();
 	}
 
 	/**

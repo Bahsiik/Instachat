@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-use Src\Controllers\comments\GetComments;
+use Src\Controllers\comments\GetCommentsFeed;
 
 $title = 'Post';
 $css = ['post-page.css', 'post.css', 'comment.css'];
-$js = ['anchors.js', 'posts.js', 'popup.js', 'comments.js'];
+$js = ['anchors.js', 'posts.js', 'popup.js', 'fetch-feed.js', 'comments.js'];
 
 ob_start();
 require_once 'components/toolbar.php';
 
 global $post, $connected_user;
-$comments = (new GetComments())->execute($post->id);
+$comments = (new GetCommentsFeed())->execute($post->id);
 ?>
 	<main class="post-page-container">
 		<div class="title">

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
+use Controllers\comments\CountComments;
 use Controllers\Users\GetUser;
 use Models\Emotion;
-use Src\Controllers\comments\GetComments;
 
 $user_controller = new GetUser();
 
 
 global $post;
 global $connected_user;
-$comments = (new GetComments())->execute($post->id);
+$comments_count = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
 ?>
 <article class="post-container" data-post-id="<?= $post->id ?>">
@@ -68,7 +68,7 @@ $user = $user_controller->execute($post->authorId);
 		<div class="post-bottom-info subtitle">
 
 			<p class="post-replies">
-				<span class="bold"><?= count($comments) ?></span>
+				<span class="bold"><?= $comments_count ?></span>
 				Réponses
 			</p>
 			<p class="post-reactions">
@@ -81,7 +81,7 @@ $user = $user_controller->execute($post->authorId);
 				<span class="material-symbols-outlined action-btn-color">chat_bubble</span>
 				<span class="post-comment-count">
 					<?php
-					if (count($comments) > 0) echo count($comments);
+					if ($comments_count > 0) echo $comments_count;
 					?>
 				</span>
 			</button>

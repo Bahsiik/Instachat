@@ -1,44 +1,22 @@
-function getLastPost() {
-    return document.querySelector('.post-container:last-child');
-}
+function fetchPosts(feedContainer) {
+    const fetchFeed = new FetchFeed("/getFeed?offset=", feedContainer);
+    fetchFeed.addScripts(elements => {
+        twemoji.parse(elements);
 
-function addInfiniteFeed() {
-    const feedContainer = document.querySelector('.feed-container');
-    let offset = 5;
+        const menuButtons = document.querySelectorAll('.post-menu');
+        menuButtons.forEach(btn => btn.addEventListener('click', () => showMenu(btn)));
 
-    const observer = new IntersectionObserver(async entries => {
-        if (!entries[0].isIntersecting) return;
-
-        const url = `${window.location.origin}/getFeed?offset=${offset}`;
-        const request = await fetch(url, {
-            method: 'GET',
-            credentials: 'include',
-        });
-        const text = await request.text();
-        const div = document.createElement('div');
-        div.innerHTML = text;
-        if (div.children.length <= 0) return;
-        const postShareBtn = div.querySelectorAll(".post-share-btn.action-btn");
-        listenShare(postShareBtn);
-        for (const child of div.children) {
-            const menuChild = child.querySelector('.post-menu');
-            if (!menuChild) continue;
-            menuChild.addEventListener('click', () => showMenu(menuChild));
-            addClickEvent(child);
-        }
-
-        observer.unobserve(getLastPost());
-        feedContainer.append(...div.children);
-        observer.observe(getLastPost());
-        twemoji.parse(document.body);
-        offset += 5;
+        const postShareButtons = document.querySelectorAll(".post-share-btn.action-btn");
+        listenShare(postShareButtons);
     });
 
-    observer.observe(getLastPost());
+    fetchFeed.addElementScripts(child => addClickEvent(child));
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
-    addInfiniteFeed();
+    const feedContainer = document.querySelector('.feed-container');
+    if (feedContainer) fetchPosts(feedContainer);
 
     const posts = document.querySelectorAll('.post-container');
     posts.forEach(addClickEvent);

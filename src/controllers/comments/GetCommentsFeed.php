@@ -6,11 +6,12 @@ namespace Src\Controllers\comments;
 use Models\Comment;
 use Models\CommentRepository;
 
-class GetComments {
+class GetCommentsFeed {
 	/**
-	 * @return Comment
+	 * @return Comment[]
 	 */
 	public function execute(float $post_id): array {
-		return (new CommentRepository())->getCommentsByPost($post_id);
+		$offset = (int)($_GET['offset'] ?? 0);
+		return (new CommentRepository())->getCommentsByPost($post_id, $offset);
 	}
 }

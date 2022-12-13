@@ -2,8 +2,9 @@
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
 require_once 'src/controllers/comments/AddComment.php';
+require_once 'src/controllers/comments/CountComments.php';
 require_once 'src/controllers/comments/DownVoteComment.php';
-require_once 'src/controllers/comments/GetComments.php';
+require_once 'src/controllers/comments/GetCommentsFeed.php';
 require_once 'src/controllers/comments/GetCommentVotes.php';
 require_once 'src/controllers/comments/UnVoteComment.php';
 require_once 'src/controllers/comments/UpVoteComment.php';
@@ -78,6 +79,7 @@ use Controllers\Users\UpdatePreferences;
 use Controllers\Users\UpdateUserInformation;
 use Models\User;
 use Src\Controllers\comments\DownVoteComment;
+use Src\Controllers\comments\GetCommentsFeed;
 use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
 
@@ -121,6 +123,18 @@ try {
 			global $post;
 			foreach ($posts as $post) {
 				require 'templates/components/post.php';
+			}
+
+			exit();
+
+		case 'comments':
+			redirect_if_method_not('GET', '/');
+			$post_id = (float)($_GET['post-id'] ?? 0);
+
+			$comments = (new GetCommentsFeed())->execute($post_id);
+			global $comment;
+			foreach ($comments as $comment) {
+				require 'templates/components/comment.php';
 			}
 
 			exit();
