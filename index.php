@@ -286,6 +286,8 @@ try {
 			if ($second_segment === null) redirect("/profile/$connected_user->username");
 			$user = (new GetUserByUsername())->execute($second_segment);
 			if ($user === null) redirect('/');
+			$data = writeLog('PROFILE-PAGE', "[USER-NAME:{$user->username}] [USER-ID:{$user->id}]");
+			file_put_contents($filename, $data, FILE_APPEND);
 
 			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
