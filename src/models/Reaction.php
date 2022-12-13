@@ -16,15 +16,15 @@ class Reaction {
 	public array $users;
 
 	public function __construct(public float $id, public float $postId, public string $emoji, ?string $users) {
-		$this->users = isset($users) ? explode(',', $users) : [];
-	}
-
-	public function display(): string {
-		return "<span class='reaction' data-id='$this->id' data-post-id='$this->postId'>$this->emoji {$this->getCount()}</span>";
+		$this->users = isset($users) ? array_map(static fn($u) => (float)$u, explode(',', $users)) : [];
 	}
 
 	public function getCount(): int {
 		return count($this->users);
+	}
+
+	public function hasReacted(float $user_id): bool {
+		return in_array($user_id, $this->users, true);
 	}
 }
 

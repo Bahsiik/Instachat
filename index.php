@@ -51,8 +51,6 @@ require_once 'src/models/Reaction.php';
 require_once 'src/models/Votes.php';
 
 use Controllers\Blocked\BlockUser;
-use Controllers\Blocked\GetBlockedUsers;
-use Controllers\Blocked\IsBlocked;
 use Controllers\comments\AddComment;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
@@ -180,7 +178,7 @@ try {
 
 		case 'chat':
 			redirect_if_method_not('POST', '/');
-			$is_there_image = (strlen($_FILES['image-content']['tmp_name']) > 0) ? 'true' : 'false';
+			$is_there_image = strlen($_FILES['image-content']['tmp_name']) > 0 ? 'true' : 'false';
 			$data = writeLog('ADD-POST', "[USER:{$connected_user->username}] [POST-CONTENT:{$_POST['content']}, POST-IMAGE:{$is_there_image}]");
 			file_put_contents($filename, $data, FILE_APPEND);
 			(new AddPost())->execute($connected_user, $_POST);
@@ -196,9 +194,12 @@ try {
 		case 'delete':
 			redirect_if_method_not('POST', '/');
 			$type = strtoupper($_GET['type']);
-			$get_id = ($type == 'POST') ? $_POST['post_id'] : (($type == 'COMMENT') ? $_POST['comment_id'] :
-				(($type == 'USER') ? $connected_user->id : (($type == 'REACTION') ?
-					$_POST['post_id'] : null)));
+			$get_id = match ($type) {
+				'POST', 'REACTION' => $_POST['post_id'],
+				'COMMENT' => $_POST['comment_id'],
+				'USER' => $connected_user->id,
+				default => null
+			};
 			$data = writeLog("DELETE-{$type}", "[{$type}-ID:{$get_id}]");
 			file_put_contents($filename, $data, FILE_APPEND);
 			(new Delete())->execute(array_merge($_POST, ['type' => $_GET['type'] ?? '']));

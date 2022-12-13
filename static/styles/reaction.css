@@ -1,0 +1,36 @@
+.reactions {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+}
+
+.reaction {
+	align-items: center;
+	background: var(--bg-quaternary);
+	border: 1px solid var(--border);
+	border-radius: 100vmax;
+	color: var(--fg-primary);
+	cursor: pointer;
+	display: flex;
+	gap: .5rem;
+	margin: 0 4px;
+	padding: .5rem .8rem;
+	transition: all .2s ease-in-out;
+}
+
+.reaction.reacted {
+	background: var(--react-bg);
+	border: 1px solid var(--react-border);
+	color: var(--react-fg);
+}
+
+.reaction:hover {
+	background: var(--bg-secondary);
+	border-color: var(--fg-secondary);
+}
+
+.reaction .emoji {
+	--size: 1.4rem;
+	height: var(--size);
+	width: var(--size);
+}

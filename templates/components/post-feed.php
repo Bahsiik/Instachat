@@ -10,8 +10,8 @@ use Src\Controllers\Reactions\GetReactionsByPost;
 $user_controller = new GetUser();
 
 global $connected_user;
-global $reactions;
 global $post;
+global $reactions;
 $comments = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
 $reactions = (new GetReactionsByPost())->execute($post->id);
@@ -46,7 +46,7 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 			$author_id = $post->authorId;
 			$id = $post->id;
 			$type = 'post';
-			require('templates/components/context-menu.php');
+			require 'templates/components/context-menu.php';
 			?>
 		</div>
 		<div class="post-content">
@@ -76,7 +76,7 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 				<span class="material-symbols-outlined action-btn-color">add_reaction</span>
 			</button>
 			<?php
-			require_once 'reactions.php' ?>
+			require 'reactions.php' ?>
 		</div>
 	</div>
 </article>
