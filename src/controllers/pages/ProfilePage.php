@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Controllers\Pages;
 
-require_once('src/controllers/reactions/GetReactionsByAuthorId.php');
+require_once 'src/controllers/reactions/GetReactionsByAuthorId.php';
 
 use Controllers\Reaction\GetReactionsByAuthorId;
 
@@ -11,7 +12,6 @@ class ProfilePage {
 		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $reactions_list;
 
 		$reactions_list = (new GetReactionsByAuthorId())->execute($user->id);
-
 
 		if ($connected_user->id !== $user->id) {
 			foreach ($friend_list as $friend) {
@@ -33,6 +33,6 @@ class ProfilePage {
 				}
 			}
 		}
-		require_once('templates/profile.php');
+		require_once 'templates/profile.php';
 	}
 }

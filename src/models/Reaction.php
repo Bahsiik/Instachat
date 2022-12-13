@@ -3,15 +3,29 @@ declare(strict_types=1);
 
 namespace Models;
 
-require_once('src/lib/DatabaseConnection.php');
+require_once 'src/lib/DatabaseConnection.php';
 
 use Database\DatabaseConnection;
 use PDO;
 
 class Reaction {
-	public string $emoji;
-	public float $id;
-	public float $postId;
+
+	/**
+	 * @var Array<float>
+	 */
+	public array $users;
+
+	public function __construct(public float $id, public float $postId, public string $emoji, string $users) {
+		$this->users = explode(',', $users);
+	}
+
+	public function getCount(): int {
+		return count($this->users);
+	}
+
+	public function display(int $count): string {
+		return "<span class='reaction' data-id='$this->id' data-post-id='$this->postId'>$this->emoji $count</span>";
+	}
 }
 
 class ReactionsRepository {
@@ -52,14 +66,26 @@ class ReactionsRepository {
 	 * @return Array<Reaction>
 	 */
 	public function getReactionsByPostId(float $post_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM reactions WHERE post_id = :post_id');
+		$statement = $this->databaseConnection->prepare('SELECT reactions.*, GROUP_CONCAT(reaction_users.user_id) as users
+			FROM reactions
+			LEFT JOIN reaction_users ON reactions.id = reaction_users.reaction_id
+			WHERE reactions.id = 3
+			GROUP BY reactions.id;
+		');
 		$statement->execute(compact('post_id'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Reaction::class);
+		$reactions = $statement->fetch(PDO::FETCH_ASSOC);
+		return array_map(static fn($reaction) => new Reaction(...array_values($reactions)), $reactions);
 	}
 
+	/**
+	 * @param float $author_id
+	 * @return Array<Reaction>
+	 */
 	public function getReactionsByAuthorId(float $author_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM reactions WHERE id IN (SELECT reaction_id FROM reaction_users WHERE user_id = :author_id)');
+		$author = (string)$author_id;
+		$statement = $this->databaseConnection->prepare("SELECT reactions.*, '$author' FROM reactions WHERE id IN (SELECT reaction_id FROM reaction_users WHERE user_id = :author_id)");
 		$statement->execute(compact('author_id'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Reaction::class);
+		$reactions = $statement->fetchAll(PDO::FETCH_ASSOC);
+		return array_map(static fn($reaction) => new Reaction(...array_values($reaction)), $reactions);
 	}
 }
