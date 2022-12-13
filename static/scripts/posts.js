@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (feedContainer) fetchPosts(feedContainer);
 
 	const posts = document.querySelectorAll('.post-container');
-	posts.forEach(addClickEvent);
+	if (!window.location.href.includes('/post?id=')) {
+		posts.forEach(addClickEvent);
+	}
 
 	const postMenus = getPostMenus();
 	postMenus.forEach(menu => menu.addEventListener('click', () => showMenu(menu)));
