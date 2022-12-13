@@ -16,6 +16,10 @@
 	gap: 2rem;
 }
 
+.profile-info > h2 {
+	font-size: 3rem;
+}
+
 .profile-info-avatar > img {
 	border-radius: 50%;
 	height: 150px;
@@ -73,7 +77,7 @@
 
 .profile-actions {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	gap: 1rem;
 
 }
@@ -86,6 +90,10 @@
 	font-size: 1.5rem;
 	justify-content: center;
 	width: 25px;
+}
+
+.profile-actions > form > .block {
+	color: var(--input-invalid);
 }
 
 .profile-actions > form > button:hover {
@@ -108,7 +116,13 @@
 	background-color: var(--bg-quinternary);
 	border-radius: 16px;
 	height: fit-content;
-	width: 50rem;
+
+}
+
+.profile-bottom-container > h2 {
+	width: 100%;
+	text-align: center;
+	font-size: 1.7rem;
 }
 
 .post-container {

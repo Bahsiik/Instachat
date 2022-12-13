@@ -52,4 +52,10 @@ class BlockedRepository {
 		$statement->execute(compact('blocker_id'));
 		return $statement->fetchAll(PDO::FETCH_CLASS, Blocked::class);
 	}
+
+	public function isBlocked(float $blocker_id, float $blocked_id): bool {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocker_id = :blocker_id AND blocked_id = :blocked_id');
+		$statement->execute(compact('blocker_id', 'blocked_id'));
+		return $statement->rowCount() > 0;
+	}
 }

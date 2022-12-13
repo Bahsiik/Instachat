@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
+require_once 'src/controllers/blocked/BlockUser.php';
+require_once 'src/controllers/blocked/GetBlockedUsers.php';
+require_once 'src/controllers/blocked/IsBlocked.php';
 require_once 'src/controllers/comments/AddComment.php';
 require_once 'src/controllers/comments/CountComments.php';
 require_once 'src/controllers/comments/DownVoteComment.php';
@@ -47,6 +50,9 @@ require_once 'src/models/Post.php';
 require_once 'src/models/Reaction.php';
 require_once 'src/models/Votes.php';
 
+use Controllers\Blocked\BlockUser;
+use Controllers\Blocked\GetBlockedUsers;
+use Controllers\Blocked\IsBlocked;
 use Controllers\comments\AddComment;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
@@ -289,24 +295,21 @@ try {
 			if ($user === null) redirect('/');
 			$data = writeLog('PROFILE-PAGE', "[USER-NAME:{$user->username}] [USER-ID:{$user->id}]");
 			file_put_contents($filename, $data, FILE_APPEND);
-
 			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
 				global $post;
 				foreach ($user_posts as $post) require 'templates/components/post-feed.php';
 				exit();
 			}
-
 			redirect_if_method_not('GET', '/');
-
-			global $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $trends;
-
-			$friend_list = (new GetFriends())->execute($user);
-			$friend_requests = (new GetFriendRequests())->execute($connected_user);
-			$sent_requests = (new GetSentRequests())->execute($connected_user);
-			$user_posts = (new GetPostsByUser())->execute($user->id);
-			$trends = (new GetTrends())->execute();
 			(new ProfilePage())->execute();
+			break;
+
+		case 'block-user':
+			redirect_if_method_not('POST', '/');
+			$data = writeLog('BLOCK-USER', "[USER-ID:{$connected_user->id}] [BLOCKED-USER-ID:{$_POST['blocked_id']}]");
+			file_put_contents($filename, $data, FILE_APPEND);
+			(new BlockUser())->execute($connected_user, $_POST);
 			break;
 
 		case 'up-vote':
