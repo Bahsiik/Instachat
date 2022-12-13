@@ -23,3 +23,13 @@ function redirect_if_method_not(string $route_type, string $url): void {
 function selectToolbarItem(string $route): string {
 	return $_SERVER['REQUEST_URI'] === $route ? 'toolbar-item-selected' : '';
 }
+
+function writeLog(string $page_name, string $extra_content = ''): string {
+	global $connected_user;
+	$user = $connected_user === null ? 'UNKNOWN' : $connected_user->username;
+	$date = date('Y-m-d H:i:s');
+	$method = $_SERVER['REQUEST_METHOD'];
+	$uri = $_SERVER['REQUEST_URI'];
+	$ip_addr = $_SERVER['REMOTE_ADDR'];
+	return "[$date] [$page_name] [$user:$ip_addr] : $method $uri $extra_content \n";
+}
