@@ -15,8 +15,8 @@ class Reaction {
 	 */
 	public array $users;
 
-	public function __construct(public float $id, public float $postId, public string $emoji, string $users) {
-		$this->users = explode(',', $users);
+	public function __construct(public float $id, public float $postId, public string $emoji, ?string $users) {
+		$this->users = isset($users) ? explode(',', $users) : [];
 	}
 
 	public function display(): string {
@@ -69,12 +69,12 @@ class ReactionsRepository {
 		$statement = $this->databaseConnection->prepare('SELECT reactions.*, GROUP_CONCAT(reaction_users.user_id) AS users
 			FROM reactions
 			LEFT JOIN reaction_users ON reactions.id = reaction_users.reaction_id
-			WHERE reactions.id = :post_id
+			WHERE reactions.post_id = :post_id
 			GROUP BY reactions.id;
 		');
 		$statement->execute(compact('post_id'));
 		$reactions = $statement->fetchAll(PDO::FETCH_ASSOC);
-		return array_map(static fn($reaction) => new Reaction(...array_values($reactions)), $reactions);
+		return array_map(static fn($reaction) => new Reaction(...array_values($reaction)), $reactions);
 	}
 
 	/**
