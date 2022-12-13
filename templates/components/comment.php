@@ -83,7 +83,7 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 				</button>
 
 				<button class="comment-share action-btn" type='button' data-link="<?= $comment->getLink() ?>">
-					<span class="material-symbols-outlined action-btn-color">ios_share</span>
+					<span class="material-symbols-outlined action-btn-color">link</span>
 				</button>
 			</div>
 		</form>
