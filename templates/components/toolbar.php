@@ -42,13 +42,13 @@ global $second_segment ?>
 			     alt="avatar">
 		</a>
 		<div class="user-names-container">
-			<a href="/profile/<?= $connected_user->username ?>">
-                <span class="user-display-name">
+			<a href="/profile/<?= $connected_user->username ?>" class="user-display-name">
+                <span>
                 <?= $connected_user->getDisplayOrUsername() ?>
                 </span>
 			</a>
-			<a href="/profile/<?= $connected_user->username ?>">
-			<span class="user-username">
+			<a href="/profile/<?= $connected_user->username ?>" class="user-username">
+			<span>
 					<?php
 					$username = htmlspecialchars($connected_user->username);
 					echo "@$username"
