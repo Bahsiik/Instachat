@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-function format_date_time_diff(DateTime $date, string $prefix = ""): void {
+function format_date_time_diff(DateTime $date, string $prefix = ''): void {
 	$current_date = new DateTime();
 	$diff = $current_date->diff($date);
 	$date_only_formatter = IntlDateFormatter::create(
@@ -34,13 +34,18 @@ function format_date_time(DateTime $date): void {
 		IntlDateFormatter::GREGORIAN,
 		'd MMMM yyyy'
 	);
-	$time_only_formatter = IntlDateFormatter::create(
+
+	echo $date_only_formatter->format($date);
+}
+
+function format_date_time_full(DateTime $date): void {
+	$date_only_formatter = IntlDateFormatter::create(
 		'fr_FR',
 		IntlDateFormatter::FULL,
 		IntlDateFormatter::FULL,
 		'Europe/Paris',
 		IntlDateFormatter::GREGORIAN,
-		'H:mm'
+		'd MMMM yyyy à H:mm:ss'
 	);
 
 	echo $date_only_formatter->format($date);

@@ -22,9 +22,9 @@ require_once 'components/toolbar.php';
 			<div class="options-choices-container">
 				<?php
 				$options = [
-					'Informations du compte' => 'Afficher les informations de votre compte, comme votre numéro de téléphone et votre adresse email.',
+					'Informations du compte' => 'Afficher les informations de votre compte (Ex: nom d\'utilisateur, adresse e-mail...)',
 					'Changer de mot de passe' => 'Changer de mot de passe à tout moment.',
-					'Masquer et bloquer' => 'Gérer les comptes et mots que vous avez bloqués ou masqués.',
+					'Masqués et bloqués' => 'Gérer les comptes et mots que vous avez bloqués ou masqués.',
 					'Affichage' => "Gérer la taille de police et l'arrière-plan.",
 					'Ressources supplémentaires' => 'Informations utiles sur les divers produits du service Instachat.',
 				];
@@ -88,29 +88,9 @@ require_once 'components/toolbar.php';
 						>
 					</label>
 
-					<?php
-					$date_formatter = IntlDateFormatter::create(
-						'fr_FR',
-						IntlDateFormatter::FULL,
-						IntlDateFormatter::FULL,
-						'Europe/Paris',
-						IntlDateFormatter::GREGORIAN,
-						'd MMMM yyyy à H:mm:ss'
-					);
-
-					$date_only_formatter = IntlDateFormatter::create(
-						'fr_FR',
-						IntlDateFormatter::FULL,
-						IntlDateFormatter::FULL,
-						'Europe/Paris',
-						IntlDateFormatter::GREGORIAN,
-						'd MMMM yyyy'
-					);
-					?>
-
 					<h3>Création du compte</h3>
 					<p class="subtitle">
-						<?= $date_formatter->format($connected_user->createdAt) ?>
+						<?= format_date_time_full($connected_user->createdAt) ?>
 					</p>
 
 					<h3>Sexe</h3>
@@ -120,7 +100,7 @@ require_once 'components/toolbar.php';
 
 					<h3>Date de naissance</h3>
 					<p class="subtitle">
-						<?= $date_only_formatter->format($connected_user->birthDate) ?>
+						<?= format_date_time($connected_user->birthDate) ?>
 					</p>
 
 					<button type="submit">Enregistrer</button>
