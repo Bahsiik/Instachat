@@ -230,8 +230,9 @@ try {
 			break;
 
 		case 'profile':
-			if ($second_segment === null) redirect('/');
+			if ($second_segment === null) redirect("/profile/$connected_user->username");
 			$user = (new GetUserByUsername())->execute($second_segment);
+			if ($user === null) redirect('/');
 
 			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
@@ -243,8 +244,6 @@ try {
 			redirect_if_method_not('GET', '/');
 
 			global $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $trends;
-			$user = (new GetUserByUsername())->execute($second_segment);
-			if ($user === null) redirect('/');
 
 			$friend_list = (new GetFriends())->execute($user);
 			$friend_requests = (new GetFriendRequests())->execute($connected_user);
