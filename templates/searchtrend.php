@@ -22,7 +22,7 @@ $title = 'Instachat | Tendances - ' . $searched_trend;
 			if (count($searched_posts) > 0) {
 				global $post;
 				foreach ($searched_posts as $post) {
-					require 'components/post.php';
+					require 'components/post-feed.php';
 				}
 			} else {
 				?>

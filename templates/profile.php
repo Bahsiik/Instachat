@@ -137,7 +137,7 @@ $title = "Instachat | $username";
 						if (count($user_posts) > 0) {
 							global $post;
 							foreach ($user_posts as $post) {
-								require 'components/post.php';
+								require 'components/post-feed.php';
 							}
 						} else {
 							?>

@@ -123,7 +123,7 @@ try {
 			$data = writeLog('FEED-PAGE');
 			file_put_contents($filename, $data, FILE_APPEND);
 			global $post;
-			foreach ($posts as $post) require 'templates/components/post.php';
+			foreach ($posts as $post) require 'templates/components/post-feed.php';
 
 			exit();
 
@@ -292,7 +292,7 @@ try {
 			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
 				global $post;
-				foreach ($user_posts as $post) require 'templates/components/post.php';
+				foreach ($user_posts as $post) require 'templates/components/post-feed.php';
 				exit();
 			}
 

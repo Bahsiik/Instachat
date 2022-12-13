@@ -61,7 +61,7 @@ global $posts; ?>
 			<?php
 			if (count($posts) > 0) {
 				global $post;
-				foreach ($posts as $post) require 'components/post.php';
+				foreach ($posts as $post) require 'components/post-feed.php';
 			} else {
 				?>
 				<div class="no-post">
