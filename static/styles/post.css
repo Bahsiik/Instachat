@@ -189,6 +189,7 @@
 	border-radius: 7px;
 	color: var(--fg-primary);
 	cursor: default;
+	max-width: 18rem;
 	padding: 16px;
 }
 

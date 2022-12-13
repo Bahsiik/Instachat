@@ -36,6 +36,13 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 				<span><?php
 					format_date_time_diff($comment->createdAt) ?></span>
 			</div>
+			<?php
+			global $author_id, $id, $type;
+			$author_id = $comment->authorId;
+			$id = $comment->id;
+			$type = 'comment';
+			require('templates/components/context-menu.php');
+			?>
 		</div>
 		<div class="comment-content">
 			<?php

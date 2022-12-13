@@ -42,29 +42,11 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 				<span class="post-emotion twemoji-load"><?= Emotion::cases()[$post->emotion->value - 1]->display() ?></span>
 			</div>
 			<?php
-			if ($connected_user->id === $post->authorId) {
-				?>
-				<div class='post-menu'>
-					<button type='submit' class='post-menu-btn action-btn'>
-						<span class='material-symbols-outlined action-btn-color'>more_horiz</span>
-					</button>
-				</div>
-				<div class='menu-container menu-hidden'>
-					<button type='button' class='menu-delete-btn'>
-						Supprimer
-						<span class='material-symbols-outlined menu-delete-symbol'>close</span>
-					</button>
-					<dialog class="delete-dialog">
-						<form action='/delete?type=post' method='post'>
-							<input type='hidden' name='post_id' value="<?= $post->id ?>">
-							<p>Êtes-vous sûr de vouloir supprimer ce post ?</p>
-							<button type="button" value="cancel" class="modal-cancel-btn">Annuler</button>
-							<button type="submit" value="delete" class="modal-delete-btn">Supprimer</button>
-						</form>
-					</dialog>
-				</div>
-				<?php
-			}
+			global $author_id, $id, $type;
+			$author_id = $post->authorId;
+			$id = $post->id;
+			$type = 'post';
+			require('templates/components/context-menu.php');
 			?>
 		</div>
 		<div class="post-content">

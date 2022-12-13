@@ -11,6 +11,7 @@ require_once 'src/controllers/users/DeleteUser.php';
 use Controllers\Posts\DeletePost;
 use Controllers\Reaction\DeleteReaction;
 use Controllers\Users\DeleteUser;
+use Models\CommentRepository;
 use RuntimeException;
 use Src\Controllers\comments\DeleteComment;
 use function strtolower;
@@ -43,8 +44,8 @@ class Delete {
 				break;
 
 			case DeleteType::COMMENT:
-				$comment_id = (float)$input['comment_id'];
-				(new DeleteComment())->execute($comment_id);
+				$comment = (new CommentRepository())->getCommentById((float)$input['comment_id']);
+				(new DeleteComment())->execute($comment);
 				break;
 
 			case DeleteType::USER:

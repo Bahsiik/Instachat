@@ -43,7 +43,7 @@
 	text-align: center;
 }
 
-.comment-info p {
+.comment-info:nth-of-type(1), .comment-info:nth-of-type(2), .comment-info:nth-of-type(3) {
 	margin: 0;
 }
 
