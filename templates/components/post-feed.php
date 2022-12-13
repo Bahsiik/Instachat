@@ -4,14 +4,17 @@ declare(strict_types=1);
 use Controllers\comments\CountComments;
 use Controllers\Users\GetUser;
 use Models\Emotion;
+use Src\Controllers\Reactions\GetReactionsByPost;
 
 
 $user_controller = new GetUser();
 
-global $post;
 global $connected_user;
+global $reactions;
+global $post;
 $comments = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
+$reactions = (new GetReactionsByPost())->execute($post->id);
 ?>
 <article class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
@@ -84,12 +87,14 @@ $user = $user_controller->execute($post->authorId);
 				?>
 				</span>
 			</button>
-			<button class="post-share-btn action-btn" value="<?=$post->id?>">
+			<button class="post-share-btn action-btn" value="<?= $post->id ?>">
 				<span class="material-symbols-outlined action-btn-color">ios_share</span>
 			</button>
 			<button class="post-reaction-btn action-btn">
 				<span class="material-symbols-outlined action-btn-color">add_reaction</span>
 			</button>
+			<?php
+			require_once 'reactions.php' ?>
 		</div>
 	</div>
 </article>

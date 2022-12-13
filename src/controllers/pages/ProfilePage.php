@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace Controllers\Pages;
 
-require_once 'src/controllers/reactions/GetReactionsByAuthorId.php';
+require_once 'src/controllers/reactions/GetReactionsByAuthor.php';
 
-use Controllers\Reaction\GetReactionsByAuthorId;
+use Controllers\Reaction\GetReactionsByAuthor;
 
 class ProfilePage {
 	public function execute(): void {
 		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $reactions_list;
 
-		$reactions_list = (new GetReactionsByAuthorId())->execute($user->id);
+		$reactions_list = (new GetReactionsByAuthor())->execute($user->id);
 
 		if ($connected_user->id !== $user->id) {
 			foreach ($friend_list as $friend) {

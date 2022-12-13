@@ -29,6 +29,7 @@ require_once 'src/controllers/posts/GetFeed.php';
 require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/posts/GetPostContaining.php';
 require_once 'src/controllers/posts/GetPostsByUser.php';
+require_once 'src/controllers/reactions/GetReactionsByPost.php';
 require_once 'src/controllers/users/CreateUser.php';
 require_once 'src/controllers/users/GetConnectedUser.php';
 require_once 'src/controllers/users/GetUser.php';

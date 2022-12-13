@@ -6,9 +6,7 @@ namespace Controllers\Reaction;
 use Models\Reaction;
 use Models\ReactionsRepository;
 
-require_once 'src/models/Reaction.php';
-
-class GetReactionsByAuthorId {
+class GetReactionsByAuthor {
 	/**
 	 * @param float $author_id
 	 * @return Array<Reaction>

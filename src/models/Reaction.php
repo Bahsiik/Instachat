@@ -19,12 +19,12 @@ class Reaction {
 		$this->users = explode(',', $users);
 	}
 
-	public function getCount(): int {
-		return count($this->users);
+	public function display(): string {
+		return "<span class='reaction' data-id='$this->id' data-post-id='$this->postId'>$this->emoji {$this->getCount()}</span>";
 	}
 
-	public function display(int $count): string {
-		return "<span class='reaction' data-id='$this->id' data-post-id='$this->postId'>$this->emoji $count</span>";
+	public function getCount(): int {
+		return count($this->users);
 	}
 }
 
@@ -66,14 +66,14 @@ class ReactionsRepository {
 	 * @return Array<Reaction>
 	 */
 	public function getReactionsByPostId(float $post_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT reactions.*, GROUP_CONCAT(reaction_users.user_id) as users
+		$statement = $this->databaseConnection->prepare('SELECT reactions.*, GROUP_CONCAT(reaction_users.user_id) AS users
 			FROM reactions
 			LEFT JOIN reaction_users ON reactions.id = reaction_users.reaction_id
-			WHERE reactions.id = 3
+			WHERE reactions.id = :post_id
 			GROUP BY reactions.id;
 		');
 		$statement->execute(compact('post_id'));
-		$reactions = $statement->fetch(PDO::FETCH_ASSOC);
+		$reactions = $statement->fetchAll(PDO::FETCH_ASSOC);
 		return array_map(static fn($reaction) => new Reaction(...array_values($reactions)), $reactions);
 	}
 
