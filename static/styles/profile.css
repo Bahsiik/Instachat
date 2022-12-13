@@ -23,18 +23,21 @@
 }
 
 .profile-info-middle {
-	width: 10rem;
+	max-width: 10rem;
 }
 
 .profile-info-username > .display-name {
 	font-size: 1.5rem;
 	font-weight: 600;
 	margin: 0;
+	overflow-wrap: break-word;
 }
 
 .profile-info-username > .username {
 	color: var(--fg-secondary);
 	margin: 0;
+	max-width: 9rem;
+	overflow-wrap: break-word;
 }
 
 .profile-info-inscription-date {
