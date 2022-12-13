@@ -129,7 +129,7 @@ class PostRepository {
 		$posts = $statement->fetchAll(PDO::FETCH_COLUMN);
 		$words = [];
 		foreach ($posts as $post) {
-			$unique_words = array_filter(array_unique(explode(' ', $post)), fn($word) => preg_match('/^[^A-Za-z0-9]+$/', $word) === 0);
+			$unique_words = array_filter(array_unique(preg_split("/[\s,]+/", $post)), fn($word) => preg_match('/^[^A-Za-z0-9]+$/', $word) === 0);
 			$words = array_merge($words, $unique_words);
 		}
 		$words = array_filter($words, fn($word) => strlen($word) > 3);
@@ -141,12 +141,12 @@ class PostRepository {
 	}
 
 	public function getPostContaining(string $content): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE ORDER BY creation_date DESC');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE AND creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY creation_date DESC');
 		$statement->execute(['content' => "%$content%"]);
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$words = explode(' ', $post['content']);
+			$words = preg_split("/[\s,]+/", $post['content']);
 			$words = array_map(fn($word) => strtolower($word), $words);
 			if (in_array(strtolower($content), $words)) {
 				$posts[] = new Post(...array_values($post));
