@@ -66,10 +66,10 @@ require_once 'components/toolbar.php';
 					<label>Nom Affiché
 						<input
 							autocomplete="name"
-							maxlength="48"
+							maxlength="30"
 							minlength="2"
 							name="display-name"
-							pattern="[\_\-a-zA-Z0-9]{2,48}"
+							pattern="[\_\-a-zA-Z0-9]{2,30}"
 							placeholder="<?= htmlspecialchars($connected_user->username) ?>"
 							type="text"
 							value="<?= htmlspecialchars($connected_user->display_name ?? '') ?>"

@@ -7,7 +7,7 @@ create table users
     avatar       mediumblob                       null,
     created_date timestamp        default (now()) not null,
     birth_date   date                             not null,
-    display_name varchar(48)                      null,
+    display_name varchar(30)                      null,
     fontsize     tinyint unsigned default (0)     not null,
     color        tinyint unsigned default (0)     not null,
     background   tinyint unsigned default (0)     not null,

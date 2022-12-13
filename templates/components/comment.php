@@ -31,6 +31,7 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 		<div class="comment-info">
 			<p class="comment-display-name"><?= $comment_user->getDisplayOrUsername() ?></p>
 			<p class="comment-username">@<?= htmlspecialchars($comment_user->username) ?></p>
+			<p class="subtitle">·</p>
 			<div class="comment-date subtitle">
 				<span><?php
 					format_date_time_diff($comment->createdAt) ?></span>

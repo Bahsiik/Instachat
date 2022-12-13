@@ -29,6 +29,8 @@ class UpdateUserInformation {
 			}
 		}
 
+		if ($display_name === '') $display_name = null;
+
 		$new_user = clone $connected_user;
 		$new_user->display_name = $display_name;
 		$new_user->username = $username;
