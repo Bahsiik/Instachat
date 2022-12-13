@@ -15,8 +15,10 @@ $comments = (new GetCommentsFeed())->execute($post->id);
 ?>
 	<main class="post-page-container">
 		<div class="title">
-			<span class="material-symbols-outlined">arrow_back</span>
-			<h2>Chat</h2>
+			<a class="arrow-back" href="/">
+				<span class="material-symbols-outlined">arrow_back</span>
+				<h2>Chat</h2>
+			</a>
 		</div>
 		<?php
 		require_once 'components/post-single.php' ?>
