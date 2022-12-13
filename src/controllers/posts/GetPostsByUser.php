@@ -12,6 +12,6 @@ class GetPostsByUser {
 	 * @return Array<Post>
 	 */
 	public function execute(float $id): array {
-		return (new PostRepository())->getPostsByUser($id);
+		return (new PostRepository())->getPostsByUser($id, (int)($_GET['offset'] ?? 0));
 	}
 }

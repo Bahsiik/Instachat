@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 $css = ['profile.css', 'post.css'];
-$js[] = 'posts.js';
-
+$js = ['fetch-feed.js', 'profile.js', 'posts.js'];
 
 ob_start();
 require_once 'components/toolbar.php';
 
-global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts,$reactions_list;
+global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $reactions_list;
+$username = htmlspecialchars($user->username);
 
-$title = 'Instachat | ' . $username = htmlspecialchars($user->username);
+$title = "Instachat | $username";
 ?>
 	<main class="profile-container">
 		<div class="title">
@@ -24,11 +24,11 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 				<div class="profile-info-middle">
 					<div class="profile-info-username">
 						<p class="display-name"><?= $user->display_name !== null ? htmlspecialchars($user->display_name) : $username ?></p>
-						<p class="username"><?= '@' . $username ?></p>
+						<p class="username">@<?= $username ?></p>
 					</div>
 					<div class="profile-info-inscription-date">
 						<p class="inscription-date">Membre depuis le</p>
-						<p class="inscription-date"><?=
+						<p class="inscription-date"><?php
 							format_date_time($user->createdAt) ?></p>
 					</div>
 				</div>
@@ -46,15 +46,15 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					<div class="profile-info-data">
 						<div class="profile-info-data-content">
 							<p class="friends-number"><?= count($friend_list) ?> </p>
-							<p class="friends-text"> <?= count($friend_list) <= 1 ? 'ami' : 'amis' ?> </p>
+							<p class="friends-text">ami<?= count($friend_list) > 1 ? 's' : '' ?> </p>
 						</div>
 						<div class="profile-info-data-content">
 							<p class="posts-number"> <?= count($user_posts) ?> </p>
-							<p class="posts-text"><?= count($user_posts) <= 1 ? 'chat' : 'chats' ?></p>
+							<p class="posts-text">chat<?= count($user_posts) > 1 ? 's' : '' ?></p>
 						</div>
 						<div class="profile-info-data-content">
 							<p class="reactions-number"><?= count($reactions_list) ?></p>
-							<p class="reactions-text"><?= count($reactions_list) <= 1 ? 'réaction' : 'réactions' ?></p>
+							<p class="reactions-text">réaction<?= count($reactions_list) > 1 ? 's' : '' ?></p>
 						</div>
 					</div>
 				</div>
@@ -105,8 +105,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					<form action="/cancel-friend" method="post">
 						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
 						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-						<button class="material-symbols-outlined cancel" type="submit"
-						        title="Annuler votre demande d'ami">close
+						<button class="material-symbols-outlined cancel" title="Annuler votre demande d'ami" type="submit">close
 						</button>
 					</form>
 				</div>
@@ -117,8 +116,7 @@ $title = 'Instachat | ' . $username = htmlspecialchars($user->username);
 					<form action="/send-friend-request" method="post">
 						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
 						<input type="hidden" name="redirect" value="/profile/<?= $user->username ?>">
-						<button class="material-symbols-outlined cancel" type="submit"
-						        title="Envoyer une demande d'ami">person_add
+						<button class="material-symbols-outlined cancel" title="Envoyer une demande d'ami" type="submit">person_add
 						</button>
 					</form>
 				</div>

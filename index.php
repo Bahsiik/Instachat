@@ -101,13 +101,9 @@ try {
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
 	if ($connected_user !== null && $method === 'GET') {
 		$_SESSION['expire'] = time() + 3600;
-		if (time() > $_SESSION['expire']) {
-			session_destroy();
-		}
+		if (time() > $_SESSION['expire']) session_destroy();
 	}
-	if ($connected_user === null && $first_segment !== 'create' && $method === 'GET') {
-		redirect('/create');
-	}
+	if ($connected_user === null && $first_segment !== 'create' && $method === 'GET') redirect('/create');
 
 	switch ($first_segment) {
 		default:
@@ -121,9 +117,7 @@ try {
 			redirect_if_method_not('GET', '/');
 			$posts = (new GetFeed())->execute($connected_user);
 			global $post;
-			foreach ($posts as $post) {
-				require 'templates/components/post.php';
-			}
+			foreach ($posts as $post) require 'templates/components/post.php';
 
 			exit();
 
@@ -133,9 +127,7 @@ try {
 
 			$comments = (new GetCommentsFeed())->execute($post_id);
 			global $comment;
-			foreach ($comments as $comment) {
-				require 'templates/components/comment.php';
-			}
+			foreach ($comments as $comment) require 'templates/components/comment.php';
 
 			exit();
 
@@ -147,8 +139,7 @@ try {
 			break;
 
 		case 'create':
-			if ($method === 'GET') (new AuthentificationPage())->execute();
-			else (new CreateUser())->execute($_POST);
+			if ($method === 'GET') (new AuthentificationPage())->execute(); else (new CreateUser())->execute($_POST);
 			break;
 
 		case 'login':
@@ -235,27 +226,32 @@ try {
 			$searched_trend = $_GET['trend'];
 			$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 			$trends = (new GetTrends())->execute();
-			if (isset($trends[$searched_trend])) (new SearchTrendPage())->execute();
-			else redirect('/');
+			if (isset($trends[$searched_trend])) (new SearchTrendPage())->execute(); else redirect('/');
 			break;
 
 		case 'profile':
-			if ($second_segment == null) {
-				redirect('/');
-			} else {
-				redirect_if_method_not('GET', '/');
-				global $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $trends;
-				$user = (new GetUserByUsername())->execute($second_segment);
-				if ($user == null) {
-					redirect('/');
-				}
-				$friend_list = (new GetFriends())->execute($user);
-				$friend_requests = (new GetFriendRequests())->execute($connected_user);
-				$sent_requests = (new GetSentRequests())->execute($connected_user);
+			if ($second_segment === null) redirect('/');
+			$user = (new GetUserByUsername())->execute($second_segment);
+
+			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
-				$trends = (new GetTrends())->execute();
-				(new ProfilePage())->execute();
+				global $post;
+				foreach ($user_posts as $post) require 'templates/components/post.php';
+				exit();
 			}
+
+			redirect_if_method_not('GET', '/');
+
+			global $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $trends;
+			$user = (new GetUserByUsername())->execute($second_segment);
+			if ($user === null) redirect('/');
+
+			$friend_list = (new GetFriends())->execute($user);
+			$friend_requests = (new GetFriendRequests())->execute($connected_user);
+			$sent_requests = (new GetSentRequests())->execute($connected_user);
+			$user_posts = (new GetPostsByUser())->execute($user->id);
+			$trends = (new GetTrends())->execute();
+			(new ProfilePage())->execute();
 			break;
 
 		case 'up-vote':
