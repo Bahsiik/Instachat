@@ -3,7 +3,7 @@
 	--bg-quaternary: #ededed;
 	--bg-secondary: #f5f5f5;
 	--bg-ternary: #dcdcdc;
-	--border: #e1e1e1;
+	--border: #d0d0d0;
 	--fg-primary: #000000;
 	--fg-secondary: #869595;
 	--input-invalid: #ff5555;
@@ -11,7 +11,7 @@
 	--input-placeholder: #959799;
 	--input-radio: #3e8bff;
 	--input-valid: #4cff4c;
-	--react-bg: #8996c8;
-	--react-border: #3d5362;
-	--react-fg: #9747ff;
+	--react-bg: #e2d6ff;
+	--react-border: #52419e;
+	--react-fg: #3a1064;
 }
