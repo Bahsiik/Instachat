@@ -50,7 +50,7 @@ class ReactionsRepository {
 		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
 	}
 
-	public function deleteReaction(float $post_id, float $user_id, string $emoji): void {
+	public function deleteReaction(float $post_id, float $user_id, string $emoji): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			DELETE reaction_users
 			FROM reaction_users
@@ -58,7 +58,7 @@ class ReactionsRepository {
 			WHERE reactions.post_id = :post_id AND reactions.emoji = :emoji AND reaction_users.user_id = :user_id;
 		SQL
 		);
-		$statement->execute(compact('post_id', 'emoji', 'user_id'));
+		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
 	}
 
 	/**
