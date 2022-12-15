@@ -87,6 +87,8 @@ button[type='submit']:hover {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding: 1rem 0;
+	border-bottom: 1px solid var(--border);
 }
 
 .blocked-user > form > button {
