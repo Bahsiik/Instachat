@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Lib\Utils;
 
 use Models\User;
+use function file_put_contents;
+use const FILE_APPEND;
 
 const LOGO_LINK = '/static/images/logo-';
 
@@ -24,12 +26,15 @@ function selectToolbarItem(string $route): string {
 	return $_SERVER['REQUEST_URI'] === $route ? 'toolbar-item-selected' : '';
 }
 
-function writeLog(string $page_name, string $extra_content = ''): string {
+const LOG_FILE = 'log.txt';
+
+function writeLog(string $page_name, string $extra_content = ''): void {
 	global $connected_user;
 	$user = $connected_user === null ? 'UNKNOWN' : $connected_user->username;
 	$date = date('Y-m-d H:i:s');
 	$method = $_SERVER['REQUEST_METHOD'];
 	$uri = $_SERVER['REQUEST_URI'];
 	$ip_addr = $_SERVER['REMOTE_ADDR'];
-	return "[$date] [$page_name] [$user:$ip_addr] : $method $uri $extra_content \n";
+	$data = "[$date] [$page_name] [$user:$ip_addr] : $method $uri $extra_content \n";
+	file_put_contents(LOG_FILE, $data, FILE_APPEND);
 }

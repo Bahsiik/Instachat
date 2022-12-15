@@ -34,8 +34,8 @@ enum DeleteType: int {
 }
 
 class Delete {
-	public function execute(array $input): void {
-		$type = DeleteType::fromName($input['type']) ?? throw new RuntimeException('Invalid input');
+	public function execute(array $input, string $type): void {
+		$type = DeleteType::fromName($type) ?? throw new RuntimeException('Invalid input');
 
 		switch ($type) {
 			case DeleteType::POST:

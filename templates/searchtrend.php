@@ -11,7 +11,7 @@ global $searched_posts;
 global $searched_trend;
 global $trends;
 
-$title = 'Instachat | Tendances - ' . $searched_trend;
+$title = "Instachat | Tendances - $searched_trend";
 ?>
 	<main class="searched-trend-container">
 		<div class="title">
