@@ -334,9 +334,11 @@ try {
 			(new DownVoteComment())->execute($connected_user, $_POST);
 			break;
 	}
-} catch (Exception $exception) {
+} catch (Throwable $exception) {
 	echo '<pre>';
-	echo 'Exception: ' . $exception->getMessage();
+	$exception_type = $exception::class;
+	echo "$exception_type: {$exception->getMessage()}<br>";
+	echo "{$exception->getTraceAsString()}<br>";
 	$previous = $exception->getPrevious();
 
 	while ($previous !== null) {
