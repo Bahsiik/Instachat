@@ -13,6 +13,6 @@ class AddComment {
 		$post_id = (float)$input['post-id'];
 		$reply_to = isset($input['reply-to']) ? (float)$input['reply-to'] : null;
 		(new CommentRepository())->addComment($content, $post_id, $user->id, $reply_to);
-		redirect("/post?id=$post_id");
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 }

@@ -11,6 +11,6 @@ class DeleteComment {
 	public function execute(Comment $comment): void {
 		$comment_id = $comment->id;
 		(new CommentRepository())->deleteCommentById($comment_id);
-		redirect('/post?id=' . $comment->postId);
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 }
