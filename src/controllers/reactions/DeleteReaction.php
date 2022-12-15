@@ -3,14 +3,11 @@ declare(strict_types=1);
 
 namespace Controllers\Reaction;
 
-use Models\Post;
 use Models\ReactionsRepository;
 use Models\User;
 
 class DeleteReaction {
-	public function execute(Post|float $id, User|float $user, string $emoji): void {
-		$post_id = $id instanceof Post ? $id->id : $id;
-		$user_id = $user instanceof User ? $user->id : $user;
-		(new ReactionsRepository())->deleteReaction($post_id, $user_id, $emoji);
+	public function execute(User $connected_user, float $reaction_id): void {
+		(new ReactionsRepository())->removeUserReaction($reaction_id, $connected_user->id);
 	}
 }

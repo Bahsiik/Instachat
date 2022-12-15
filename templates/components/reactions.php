@@ -4,15 +4,15 @@ declare(strict_types=1);
 global $reactions;
 global $connected_user;
 ?>
-<div class="reactions">
+<form class="reactions" method="post">
 	<?php
 	foreach ($reactions as $reaction) {
+		$reacted = $reaction->hasReacted($connected_user->id);
 		?>
-		<span class='reaction <?= $reaction->hasReacted($connected_user->id) ? 'reacted' : '' ?>' data-id='<?= $reaction->id ?>'
-		      data-post-id='<?= $reaction->postId ?>'>
+		<button class='reaction <?= $reacted ? 'reacted' : '' ?>' formaction="<?= $reacted ? 'un-react' : 'react' ?>?id=<?= $reaction->id ?>">
 			<?= $reaction->emoji . $reaction->getCount() ?>
-		</span>
+		</button>
 		<?php
 	}
 	?>
-</div>
+</form>

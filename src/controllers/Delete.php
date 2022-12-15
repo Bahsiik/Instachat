@@ -9,9 +9,10 @@ require_once 'src/controllers/reactions/DeleteReaction.php';
 require_once 'src/controllers/users/DeleteUser.php';
 
 use Controllers\Posts\DeletePost;
-use Controllers\Reaction\DeleteReaction;
+use Controllers\Reaction\UnReact;
 use Controllers\Users\DeleteUser;
 use Models\CommentRepository;
+use Models\User;
 use RuntimeException;
 use Src\Controllers\comments\DeleteComment;
 use function strtolower;
@@ -34,7 +35,7 @@ enum DeleteType: int {
 }
 
 class Delete {
-	public function execute(array $input, string $type): void {
+	public function execute(User $connected_user, array $input, string $type): void {
 		$type = DeleteType::fromName($type) ?? throw new RuntimeException('Invalid input');
 
 		switch ($type) {
@@ -45,19 +46,17 @@ class Delete {
 
 			case DeleteType::COMMENT:
 				$comment = (new CommentRepository())->getCommentById((float)$input['comment_id']);
+				if ($comment === null) throw new RuntimeException('Invalid input');
 				(new DeleteComment())->execute($comment);
 				break;
 
 			case DeleteType::USER:
-				global $connected_user;
 				(new DeleteUser())->execute($connected_user, $input);
 				break;
 
 			case DeleteType::REACTION:
-				$post_id = (float)$input['post_id'];
-				$user_id = (float)$input['user_id'];
-				$emoji = $input['emoji'];
-				(new DeleteReaction())->execute($post_id, $user_id, $emoji);
+				$reaction_id = (float)$input['id'];
+				(new UnReact())->execute($connected_user, $reaction_id);
 				break;
 		}
 	}

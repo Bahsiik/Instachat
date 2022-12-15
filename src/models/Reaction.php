@@ -50,15 +50,24 @@ class ReactionsRepository {
 		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
 	}
 
-	public function deleteReaction(float $post_id, float $user_id, string $emoji): bool {
+	public function addUserReaction(float $reaction_id, float $user_id) {
 		$statement = $this->databaseConnection->prepare(<<<SQL
-			DELETE reaction_users
-			FROM reaction_users
-			JOIN reactions ON reactions.id = reaction_users.reaction_id
-			WHERE reactions.post_id = :post_id AND reactions.emoji = :emoji AND reaction_users.user_id = :user_id;
+			INSERT INTO reaction_users (reaction_id, user_id)
+			VALUES (:reaction_id, :user_id);
 		SQL
 		);
-		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
+		return $statement->execute(compact('reaction_id', 'user_id'));
+	}
+
+	public function removeUserReaction(float $reaction_id, float $user_id) {
+		$statement = $this->databaseConnection->prepare(<<<SQL
+			DELETE FROM reaction_users
+			WHERE reaction_id = :reaction_id AND user_id = :user_id;
+			DELETE FROM reactions
+			WHERE id = :reaction_id AND NOT EXISTS (SELECT * FROM reaction_users WHERE reaction_id = :reaction_id);
+		SQL
+		);
+		return $statement->execute(compact('reaction_id', 'user_id'));
 	}
 
 	/**

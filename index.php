@@ -32,8 +32,12 @@ require_once 'src/controllers/posts/GetFeed.php';
 require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/posts/GetPostContaining.php';
 require_once 'src/controllers/posts/GetPostsByUser.php';
+require_once 'src/controllers/reactions/AddReaction.php';
+require_once 'src/controllers/reactions/CreateReaction.php';
+require_once 'src/controllers/reactions/DeleteReaction.php';
 require_once 'src/controllers/reactions/GetReactionsByPost.php';
 require_once 'src/controllers/reactions/CreateReaction.php';
+require_once 'src/controllers/reactions/UnReact.php';
 require_once 'src/controllers/users/CreateUser.php';
 require_once 'src/controllers/users/GetConnectedUser.php';
 require_once 'src/controllers/users/GetUser.php';
@@ -77,6 +81,8 @@ use Controllers\Posts\GetPostContaining;
 use Controllers\Posts\GetPostsByUser;
 use Controllers\Posts\GetTrends;
 use Controllers\Reaction\CreateReaction;
+use Controllers\Reaction\UnReact;
+use Controllers\Reactions\AddReaction;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
 use Controllers\Users\GetUserByUsername;
@@ -200,7 +206,7 @@ try {
 			};
 			writeLog("DELETE-$type", "[$type-ID:$id]");
 
-			(new Delete())->execute($_POST, $type);
+			(new Delete())->execute($connected_user, $_POST, $type);
 			break;
 
 		case 'createReaction':
@@ -344,6 +350,20 @@ try {
 
 			(new DownVoteComment())->execute($connected_user, $_POST);
 			break;
+
+		case 'react':
+			redirect_if_method_not('POST', '/');
+			writeLog('REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
+
+			(new AddReaction())->execute($connected_user, (float)$_GET['id']);
+			redirect($_SERVER['HTTP_REFERER']);
+
+		case 'un-react':
+			redirect_if_method_not('POST', '/');
+			writeLog('UN-REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
+
+			(new UnReact())->execute($connected_user, (float)$_GET['id']);
+			redirect($_SERVER['HTTP_REFERER']);
 	}
 } catch (Throwable $exception) {
 	echo '<pre>';

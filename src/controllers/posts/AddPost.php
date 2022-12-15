@@ -10,7 +10,7 @@ use function Lib\Utils\redirect;
 
 class AddPost {
 	public function execute(User $connected_user, array $input): void {
-		if (strlen($_FILES['image-content']['tmp_name']) > 0) {
+		if ($_FILES['image-content']['tmp_name'] !== '') {
 			$image_src = $_FILES;
 			$image_tmp = $image_src['image-content']['tmp_name'];
 			$image_base64 = base64_encode(file_get_contents($image_tmp));
