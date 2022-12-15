@@ -35,6 +35,15 @@ class ReactionsRepository {
 		$this->databaseConnection = (new DatabaseConnection())->getConnection();
 	}
 
+	public function addUserReaction(float $reaction_id, float $user_id) {
+		$statement = $this->databaseConnection->prepare(<<<SQL
+			INSERT INTO reaction_users (reaction_id, user_id)
+			VALUES (:reaction_id, :user_id);
+		SQL
+		);
+		return $statement->execute(compact('reaction_id', 'user_id'));
+	}
+
 	public function createReaction(float $post_id, string $emoji, float $user_id): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			INSERT INTO reactions (post_id, emoji)
@@ -48,15 +57,6 @@ class ReactionsRepository {
 		SQL
 		);
 		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
-	}
-
-	public function addUserReaction(float $reaction_id, float $user_id) {
-		$statement = $this->databaseConnection->prepare(<<<SQL
-			INSERT INTO reaction_users (reaction_id, user_id)
-			VALUES (:reaction_id, :user_id);
-		SQL
-		);
-		return $statement->execute(compact('reaction_id', 'user_id'));
 	}
 
 	public function removeUserReaction(float $reaction_id, float $user_id) {

@@ -209,14 +209,12 @@ try {
 			(new Delete())->execute($connected_user, $_POST, $type);
 			break;
 
-		case 'createReaction':
+		case 'create-reaction':
 			redirect_if_method_not('GET', '/');
-			$post_id = ($_GET['postId']);
-			$emoji = ($_GET['emoji']);
-			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:$post_id] [EMOJI:$emoji]");
-			(new CreateReaction())->execute($connected_user, $post_id, $emoji);
-			break;
+			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:{$_GET['post-id']}] [EMOJI:{$_GET['emoji']}]");
 
+			(new CreateReaction())->execute($connected_user, $_GET);
+			break;
 
 		case 'options':
 			writeLog('OPTIONS-PAGE');
