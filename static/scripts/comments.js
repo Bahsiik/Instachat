@@ -1,3 +1,5 @@
+import FetchFeed from "./fetch-feed.js";
+
 document.addEventListener('DOMContentLoaded', () => {
 	const postId = document.querySelector('article.post-container').dataset.postId;
 	const fetchFeed = new FetchFeed(`/comments?post-id=${postId}&offset=`, document.querySelector('.comments'));

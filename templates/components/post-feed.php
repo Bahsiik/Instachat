@@ -72,7 +72,7 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 			<button class="post-share-btn action-btn" value="<?= $post->id ?>">
 				<span class="material-symbols-outlined action-btn-color">link</span>
 			</button>
-			<button class="post-reaction-btn action-btn">
+			<button class="post-reaction-btn action-btn" value="<?= $post->id ?>">
 				<span class="material-symbols-outlined action-btn-color">add_reaction</span>
 			</button>
 			<?php

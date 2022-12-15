@@ -9,8 +9,8 @@ use function Lib\Utils\display_icon;
 	<head>
 		<meta charset="UTF-8">
 		<meta
-				name="viewport"
-				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel='icon' href='<?= display_icon($connected_user ?? null) ?>'>
@@ -29,19 +29,27 @@ use function Lib\Utils\display_icon;
 			<?php
 		}
 
-		if (isset($js)) {
-			foreach ($js as $js_file) { ?>
-				<script defer src="../static/scripts/<?= $js_file ?>"></script>
+		if (isset($js_modules)) {
+			foreach ($js_modules as $module) { ?>
+				<script defer type="module" src="<?= $module ?>"></script>
 				<?php
 			}
-		} ?>
+		}
+
+		if (isset($js)) {
+			foreach ($js as $js_file) { ?>
+				<script defer type="module" src="../static/scripts/<?= $js_file ?>"></script>
+				<?php
+			}
+		}
+		?>
 		<title><?= $title ?? '' ?></title>
 		<script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
 		<script src="https://twemoji.maxcdn.com/v/14.0.2/twemoji.min.js"
 		        integrity="sha384-32KMvAMS4DUBcQtHG6fzADguo/tpN1Nh6BAJa2QqZc6/i0K+YPQE+bWiqBRAWuFs"
 		        crossorigin="anonymous"></script>
 		<script>
-            document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body));
+			document.addEventListener('DOMContentLoaded', () => twemoji.parse(document.body));
 		</script>
 	</head>
 	<body>

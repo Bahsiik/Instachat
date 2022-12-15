@@ -6,7 +6,8 @@ use function Lib\Utils\display_icon;
 
 $title = 'Instachat';
 $css = ['homepage.css', 'post.css', 'reaction.css'];
-$js = ['homepage.js', 'posts.js', 'popup.js', 'fetch-feed.js'];
+$js = ['pickEmoji.js', 'homepage.js', 'posts.js', 'popup.js', 'fetch-feed.js'];
+$js_modules = ['https://unpkg.com/@picmo/renderer-twemoji@latest/dist/umd/index.js'];
 
 ob_start();
 require_once 'components/toolbar.php';

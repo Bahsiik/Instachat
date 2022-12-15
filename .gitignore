@@ -5,6 +5,6 @@
 ### Composer template
 
 composer.phar
-/vendor/
+/vendor
 
 log.txt

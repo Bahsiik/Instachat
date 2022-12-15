@@ -1,3 +1,6 @@
+import FetchFeed from "./fetch-feed.js";
+import {pickEmoji} from "./pickEmoji.js";
+
 function fetchPosts(feedContainer) {
 	const fetchFeed = new FetchFeed("/getFeed?offset=", feedContainer);
 	fetchFeed.addScripts(elements => {
@@ -35,6 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const postShareBtn = document.querySelectorAll(".post-share-btn.action-btn");
 	listenShare(postShareBtn);
+
+	const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
+	postReactionBtn.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			pickEmoji(btn)
+		});
+	});
 });
 
 function listenShare(buttons) {

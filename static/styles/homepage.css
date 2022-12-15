@@ -159,3 +159,7 @@
 	background-color: var(--accent-transparent);
 	cursor: pointer;
 }
+
+.hidden {
+	display: none;
+}

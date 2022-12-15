@@ -35,7 +35,7 @@ class ReactionsRepository {
 		$this->databaseConnection = (new DatabaseConnection())->getConnection();
 	}
 
-	public function addReaction(float $post_id, string $emoji, float $user_id): bool {
+	public function createReaction(float $post_id, string $emoji, float $user_id): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			INSERT INTO reactions (post_id, emoji)
 			VALUES (:post_id, :emoji)

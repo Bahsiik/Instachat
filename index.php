@@ -33,6 +33,7 @@ require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/posts/GetPostContaining.php';
 require_once 'src/controllers/posts/GetPostsByUser.php';
 require_once 'src/controllers/reactions/GetReactionsByPost.php';
+require_once 'src/controllers/reactions/CreateReaction.php';
 require_once 'src/controllers/users/CreateUser.php';
 require_once 'src/controllers/users/GetConnectedUser.php';
 require_once 'src/controllers/users/GetUser.php';
@@ -75,6 +76,7 @@ use Controllers\Posts\GetFeed;
 use Controllers\Posts\GetPostContaining;
 use Controllers\Posts\GetPostsByUser;
 use Controllers\Posts\GetTrends;
+use Controllers\Reaction\CreateReaction;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
 use Controllers\Users\GetUserByUsername;
@@ -200,6 +202,15 @@ try {
 
 			(new Delete())->execute($_POST, $type);
 			break;
+
+		case 'createReaction':
+			redirect_if_method_not('POST', '/');
+			$post_id = ($_GET['postId']);
+			$emoji = ($_GET['emoji']);
+			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:$post_id] [EMOJI:$emoji]");
+			(new CreateReaction())->execute($connected_user, $post_id, $emoji);
+			break;
+
 
 		case 'options':
 			writeLog('OPTIONS-PAGE');

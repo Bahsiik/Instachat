@@ -1,4 +1,4 @@
-class FetchFeed {
+export default class FetchFeed {
 	url;
 	offset;
 	feedContainer;
