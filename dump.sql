@@ -141,4 +141,3 @@ create table sessions
         foreign key (user_id) references users (id)
 )
     engine = InnoDB;
-
