@@ -7,9 +7,7 @@ $js[] = 'posts.js';
 ob_start();
 require_once 'components/toolbar.php';
 
-global $searched_posts;
-global $searched_trend;
-global $trends;
+global $searched_posts, $searched_trend;
 
 $title = "Instachat | Tendances - $searched_trend";
 ?>

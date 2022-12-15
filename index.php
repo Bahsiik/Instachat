@@ -289,12 +289,10 @@ try {
 
 		case 'search-trend':
 			redirect_if_method_not('GET', '/');
-			global $searched_trend, $searched_posts, $trends;
+			global $searched_trend, $trends;
 			$searched_trend = $_GET['trend'];
-			$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 			$trends = (new GetTrends())->execute();
 			writeLog('SEARCH-TREND-PAGE', "[TREND:$searched_trend]");
-
 			if (isset($trends[$searched_trend])) (new SearchTrendPage())->execute();
 			else redirect('/');
 			break;
