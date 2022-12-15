@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handlePasswordChange() {
-	let newPassword = document.querySelector('#new-password');
-	let confirmPassword = document.querySelector('#confirm-password');
+	const newPassword = document.querySelector('#new-password');
+	const confirmPassword = document.querySelector('#confirm-password');
 
 	newPassword.addEventListener('change', () => {
 		confirmPassword.setCustomValidity(newPassword.value === confirmPassword.value ? '' : 'Le mot de passe ne correspond pas');
