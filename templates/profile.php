@@ -168,7 +168,7 @@ $title = "Instachat | $username";
 			<?php
 			if ($is_user_blocked) { ?>
 				<h2>Vous avez bloqué @<?= $username ?>. Par conséquent, vous ne voyez aucun contenu relatif à ce compte. Pour revoir le contenu de cet
-					utilisateur, débloquez le.</h2>
+					utilisateur, débloquez le depuis les options.</h2>
 				<?php
 			} else if ($is_connected_user_blocked) {
 				?>
