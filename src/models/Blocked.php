@@ -6,12 +6,20 @@ namespace Models;
 require_once('src/lib/DatabaseConnection.php');
 
 use Database\DatabaseConnection;
+use DateTime;
 use PDO;
 
 class Blocked {
-	public float $blockerId;
-	public float $blockedId;
-	public string $blockedWord;
+	public DateTime $blockedDate;
+
+	public function __construct(
+		public float  $blockerId,
+		public ?float  $blockedId,
+		public ?string $blockedWord,
+		string        $blockedDate,
+	) {
+		$this->blockedDate = date_create_from_format('Y-m-d H:i:s', $blockedDate);
+	}
 }
 
 class BlockedRepository {
@@ -44,13 +52,24 @@ class BlockedRepository {
 	public function getBlockedUsers(float $blocker_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocker_id = :blocker_id AND blocked_id IS NOT NULL');
 		$statement->execute(compact('blocker_id'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Blocked::class);
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$blocked[] = new Blocked(
+				$row['blocker_id'],
+				$row['blocked_id'],
+				$row['blocked_word'],
+				$row['blocked_date'],
+			);
+		}
+		return $blocked ?? [];
 	}
 
 	public function getBlockedWords(float $blocker_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocker_id = :blocker_id AND blocked_word IS NOT NULL');
 		$statement->execute(compact('blocker_id'));
-		return $statement->fetchAll(PDO::FETCH_CLASS, Blocked::class);
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$blockedWords[] = $row['blocked_word'];
+		}
+		return $blockedWords ?? [];
 	}
 
 	public function isBlocked(float $blocker_id, float $blocked_id): bool {

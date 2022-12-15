@@ -247,11 +247,7 @@ try {
 			redirect_if_method_not('GET', '/');
 			writeLog('FRIENDS-PAGE');
 
-			global $friend_list, $friend_requests, $sent_requests, $trends;
-			$friend_list = (new GetFriends())->execute($connected_user);
-			$friend_requests = (new GetFriendRequests())->execute($connected_user);
-			$sent_requests = (new GetSentRequests())->execute($connected_user);
-			$trends = (new GetTrends())->execute();
+
 
 			(new FriendPage())->execute();
 			break;

@@ -4,13 +4,16 @@ declare(strict_types=1);
 use Models\Background;
 use Models\Color;
 use Models\FontSize;
+use Controllers\Users\GetUser;
+
+$user_controller = new GetUser();
 
 $title = 'Options';
 $css[] = 'options.css';
-$js = ['options.js', 'tabbed-menu.js'];
+$js = ['options.js', 'tabbed-menu.js', 'blocked-masked-list.js'];
 
 ob_start();
-global $connected_user;
+global $connected_user, $blocked_users;
 require_once 'components/toolbar.php';
 ?>
 	<main class="options">
@@ -102,7 +105,6 @@ require_once 'components/toolbar.php';
 					<p class="subtitle">
 						<?= format_date_time($connected_user->birthDate) ?>
 					</p>
-
 					<button type="submit">Enregistrer</button>
 				</form>
 
@@ -144,16 +146,38 @@ require_once 'components/toolbar.php';
 
 				<div class="options-group">
 					<div class="tabbed-menu">
-						<div class="selected tab"><p>Masqués</p></div>
-						<div class="tab"><p>Bloqués</p></div>
+						<div class="selected tab masked" onclick="showTab(tab1)"><p>Masqués</p></div>
+						<div class="tab blocked" onclick="showTab(tab2)"><p>Bloqués</p></div>
 					</div>
 					<div class="content">
-						<form action="/mask" class="masked-words" method="post">
-							<!-- TODO -->
-						</form>
-						<form action="/block" class="blocked-users" method="post">
-							<!-- TODO -->
-						</form>
+						<div class="masked-word-list">
+
+						</div>
+						<div class="blocked-user-list hidden">
+							<?php
+							if (count($blocked_users) > 0) {
+								foreach ($blocked_users as $name => $value) {
+									$blocked_user = $user_controller->execute($value->blockedId);
+									?>
+									<div class="blocked-user">
+										<a href="/profile/<?= $blocked_user->username ?>">
+											<img src="<?= $blocked_user->displayAvatar() ?>" alt="Avatar de <?= $blocked_user->username ?>">
+											<div class="blocked_user_text">
+												<p class="username"><?= htmlspecialchars($blocked_user->username) ?></p>
+												<p class="date">Bloqué depuis <?= format_date_time_diff($value->blockedDate, "le ") ?></p>
+											</div>
+										</a>
+										<button class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+									</div>
+									<?php
+								}
+							} else {
+								?>
+								<h2 class="empty-list">Aucun utilisateur bloqué</h2>
+								<?php
+							}
+							?>
+						</div>
 					</div>
 				</div>
 

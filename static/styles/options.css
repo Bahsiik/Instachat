@@ -76,6 +76,61 @@ button[type='submit']:hover {
 	display: none;
 }
 
+.content {
+	background-color: var(--bg-quinternary);
+	border-radius: 0 0 16px 16px;
+	padding: 2rem 3rem;
+}
+
+.blocked-user {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.blocked-user > button {
+	background: transparent;
+	border: none;
+	color: var(--input-invalid);;
+	cursor: pointer;
+}
+
+.blocked-user > a {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+}
+
+.blocked-user > a > img {
+	border-radius: 61px;
+	height: 48px;
+	object-fit: contain;
+	width: 48px;
+}
+
+.blocked-user > a > .blocked_user_text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.blocked-user > a > .blocked_user_text > p {
+	color: var(--fg-primary);
+	margin: 0;
+}
+
+.blocked-user > a > .blocked_user_text >  .date {
+	color: var(--fg-secondary);
+	font-size: 0.85rem;
+}
+
+.empty-list {
+	display: flex;
+	font-size: 1.5rem;
+	justify-content: center;
+}
+
 .font-options {
 	align-items: center;
 	display: flex;
@@ -254,4 +309,9 @@ div[data-option-number='4'] {
 
 .avatar-github:hover {
 	opacity: .75;
+}
+
+
+.hidden {
+	display: none;
 }
