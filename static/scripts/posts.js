@@ -1,5 +1,5 @@
 import FetchFeed from "./fetch-feed.js";
-import {pickEmoji} from "./pickEmoji.js";
+import {pickEmoji} from "./emoji-picker.js";
 import {showPopup} from "./popup.js";
 
 function fetchPosts(feedContainer) {
