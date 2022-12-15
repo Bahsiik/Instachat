@@ -1,5 +1,6 @@
 import FetchFeed from "./fetch-feed.js";
 import {pickEmoji} from "./pickEmoji.js";
+import {showPopup} from "./popup.js";
 
 function fetchPosts(feedContainer) {
 	const fetchFeed = new FetchFeed("/getFeed?offset=", feedContainer);
@@ -12,17 +13,12 @@ function fetchPosts(feedContainer) {
 		const postShareButtons = document.querySelectorAll(".post-share-btn.action-btn");
 		listenShare(postShareButtons);
 
-		// const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
-		// postReactionBtn.forEach((btn) => {
-		// 	btn.addEventListener('click', () => {
-		// 		pickEmoji(btn)
-		// 	});
-		// });
+		const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
+		postReactionBtn.forEach(btn => btn.addEventListener('click', async () => await pickEmoji(btn)));
 	});
 
 	fetchFeed.addElementScripts(child => addClickEvent(child));
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
 	const feedContainer = document.querySelector('.feed-container');
@@ -47,11 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	listenShare(postShareBtn);
 
 	const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
-	postReactionBtn.forEach((btn) => {
-		btn.addEventListener('click', () => {
-			pickEmoji(btn)
-		});
-	});
+	postReactionBtn.forEach(btn => btn.addEventListener('click', async () => await pickEmoji(btn)));
 });
 
 function listenShare(buttons) {

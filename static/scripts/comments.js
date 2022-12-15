@@ -1,4 +1,5 @@
 import FetchFeed from "./fetch-feed.js";
+import {showPopup} from "./popup";
 
 document.addEventListener('DOMContentLoaded', () => {
 	const postId = document.querySelector('article.post-container').dataset.postId;
@@ -8,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const commentCharacterCount = document.querySelector('.comment-chat-count-number');
 	const commentCharacterCountMax = document.querySelector('.comment-chat-count-max');
 	const commentChatButton = document.querySelector('.comment-chat-btn');
-	const commentForm = document.querySelector('.create-comment');
 
 	fetchFeed.addScripts(elements => twemoji.parse(elements));
 
@@ -43,10 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	commentChatArea.addEventListener('input', updateCharacterCount);
-
-	commentChatArea.addEventListener('input', () => updateChatButton());
-
 	function updateChatButton() {
 		if (inputIsValid(commentChatArea)) commentChatButton.removeAttribute('disabled');
 		else commentChatButton.setAttribute('disabled', '');
@@ -61,6 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		return commentChatArea.value.length >= 2;
 	}
+
+	commentChatArea.addEventListener('input', () => {
+		updateCharacterCount();
+		updateChatButton()
+	});
 });
 
 async function copyToClipboard(text) {
