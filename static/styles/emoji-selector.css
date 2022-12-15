@@ -1,0 +1,43 @@
+div.picmo-picker.emoji-picker {
+	--background-color: var(--bg-primary);
+	--border-color: var(--border);
+	--category-name-background-color: var(--bg-primary);
+	--category-name-text-color: var(--fg-primary);
+	--category-tab-active-color: var(--fg-primary);
+	--category-tab-color: var(--fg-secondary);
+	--error-color: var(--input-invalid);
+	--error-color-dark: var(--input-invalid);
+	--focus-indicator-color: var(--fg-primary);
+	--hover-background-color: var(--bg-ternary);
+	--placeholder-background-color: var(--input-placeholder);
+	--preview-background-color: var(--bg-secondary);
+	--search-background-color: var(--bg-quaternary);
+	--search-focus-background-color: var(--bg-quaternary);
+	--search-height: 3rem;
+	--search-icon-color: var(--fg-secondary);
+	--search-placeholder-color: var(--input-placeholder);
+	--secondary-background-color: var(--bg-secondary);
+	--secondary-text-color: var(--fg-primary);
+	--tag-background-color: var(--bg-ternary);
+	--text-color: var(--fg-primary);
+	--ui-font: var(--font);
+}
+
+.popupContainer button.closeButton {
+	background: var(--input-invalid);
+	transition: scale .2s ease-in-out;
+}
+
+.popupContainer button.closeButton:hover {
+	background: var(--input-invalid);
+	scale: 1.05;
+}
+
+.categoryTab.categoryTabActive > .categoryButton {
+	background: none !important;
+	border: none !important;
+}
+
+.picmo-picker .searchField {
+	padding-bottom: 0;
+}

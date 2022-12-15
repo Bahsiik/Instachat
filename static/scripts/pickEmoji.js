@@ -12,6 +12,7 @@ async function getPicker() {
 	if (picker) return picker;
 	const {TwemojiRenderer: twemojiRenderer} = await import('https://unpkg.com/@picmo/renderer-twemoji@latest/dist/index.js?module', {type: 'module'});
 	picker = createPopup({
+			className: 'emoji-picker',
 			renderer: new twemojiRenderer('png'),
 			i18n: {
 				"categories.activities": "Activités",
