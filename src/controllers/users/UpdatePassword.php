@@ -14,12 +14,14 @@ class UpdatePassword {
 		$new_password = $input['new-password'] ?? throw new RuntimeException('Invalid input');
 		$confirm_password = $input['confirm-password'] ?? throw new RuntimeException('Invalid input');
 
-		if ($new_password !== $confirm_password) {
-			throw new RuntimeException('Passwords do not match');
+		$is_password_valid = (new UserRepository())->checkHash($connected_user->username, $old_password);
+
+		if (!$is_password_valid) {
+			throw new RuntimeException('Invalid password');
 		}
 
-		if (!password_verify($old_password, $connected_user->password)) {
-			throw new RuntimeException('Invalid password');
+		if ($new_password !== $confirm_password) {
+			throw new RuntimeException('Passwords do not match');
 		}
 
 		$new_user = clone $connected_user;

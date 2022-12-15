@@ -17,8 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handlePasswordChange() {
-	const newPassword = document.querySelector('#new-password');
-	const confirmPassword = document.querySelector('#confirm-password');
+	let newPassword = document.querySelector('#new-password');
+	let confirmPassword = document.querySelector('#confirm-password');
 
-	newPassword.addEventListener('input', () => confirmPassword.setCustomValidity(newPassword.value === confirmPassword.value ? '' : 'Le mot de passe ne correspond pas'));
+	newPassword.addEventListener('change', () => {
+		confirmPassword.setCustomValidity(newPassword.value === confirmPassword.value ? '' : 'Le mot de passe ne correspond pas');
+	});
+	confirmPassword.addEventListener('change', () => {
+		confirmPassword.setCustomValidity(newPassword.value === confirmPassword.value ? '' : 'Le mot de passe ne correspond pas');
+	});
 }

@@ -18,6 +18,10 @@
 	width: 100%;
 }
 
+.post-single {
+	cursor: default !important;
+}
+
 .post-main {
 	display: flex;
 	flex-flow: column;

@@ -14,7 +14,7 @@ $comments_count = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
 $reactions = (new GetReactionsByPost())->execute($post->id);
 ?>
-<article class="post-container" data-post-id="<?= $post->id ?>">
+<article class="post-container post-single" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
 		<img src="<?= $user->displayAvatar() ?>" alt="avatar">
 	</div>

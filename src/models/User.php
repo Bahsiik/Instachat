@@ -244,7 +244,7 @@ class UserRepository {
 			'avatar' => $user->avatar?->data,
 			'background' => $user->background->value,
 			'bio' => $user->bio,
-			'birth_date' => $user->birthDate->getTimestamp(),
+			'birth_date' => $user->birthDate->format('Y-m-d'),
 			'color' => $user->color->value,
 			'display_name' => $user->display_name,
 			'email' => $user->email,
@@ -254,6 +254,8 @@ class UserRepository {
 			'username' => $user->username,
 			'id' => $user->id,
 		]);
+
+		var_dump($result);
 
 
 		return $result === false ? throw new RuntimeException('Could not update user') : true;
