@@ -14,7 +14,7 @@ use function Lib\Utils\display_icon;
 		>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel='icon' href='<?= display_icon($connected_user ?? null) ?>'>
-		<link rel='stylesheet' href='../static/styles/style.css'>
+		<link rel='stylesheet' href='/static/styles/style.css'>
 
 		<?php
 		global $connected_user;
@@ -25,20 +25,13 @@ use function Lib\Utils\display_icon;
 		}
 
 		foreach ($css as $css_file) { ?>
-			<link rel="stylesheet" href="../static/styles/<?= $css_file ?>">
+			<link rel="stylesheet" href="/static/styles/<?= $css_file ?>">
 			<?php
-		}
-
-		if (isset($js_modules)) {
-			foreach ($js_modules as $module) { ?>
-				<script defer type="module" src="<?= $module ?>"></script>
-				<?php
-			}
 		}
 
 		if (isset($js)) {
 			foreach ($js as $js_file) { ?>
-				<script defer type="module" src="../static/scripts/<?= $js_file ?>"></script>
+				<script defer type="module" src="/static/scripts/<?= $js_file ?>"></script>
 				<?php
 			}
 		}
