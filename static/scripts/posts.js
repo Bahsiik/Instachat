@@ -11,6 +11,13 @@ function fetchPosts(feedContainer) {
 
 		const postShareButtons = document.querySelectorAll(".post-share-btn.action-btn");
 		listenShare(postShareButtons);
+
+		// const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
+		// postReactionBtn.forEach((btn) => {
+		// 	btn.addEventListener('click', () => {
+		// 		pickEmoji(btn)
+		// 	});
+		// });
 	});
 
 	fetchFeed.addElementScripts(child => addClickEvent(child));

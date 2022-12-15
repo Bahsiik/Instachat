@@ -204,7 +204,7 @@ try {
 			break;
 
 		case 'createReaction':
-			redirect_if_method_not('POST', '/');
+			redirect_if_method_not('GET', '/');
 			$post_id = ($_GET['postId']);
 			$emoji = ($_GET['emoji']);
 			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:$post_id] [EMOJI:$emoji]");

@@ -35,7 +35,6 @@ export const picker = createPopup({
 picker.addEventListener('emoji:select', async event => {
 	const postId = picker.referenceElement.value;
 	const emoji = event.emoji;
-	console.log(`/addReaction?postId=${postId}&emoji=${emoji}`);
 	window.location.href = `/createReaction?postId=${postId}&emoji=${emoji}`;
 });
 
