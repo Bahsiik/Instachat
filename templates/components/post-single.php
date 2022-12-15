@@ -9,9 +9,7 @@ use Src\Controllers\Reactions\GetReactionsByPost;
 $user_controller = new GetUser();
 
 
-global $connected_user;
-global $post;
-global $reactions;
+global $connected_user, $post, $post_reactions_list, $reactions;
 $comments_count = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
 $reactions = (new GetReactionsByPost())->execute($post->id);
@@ -72,11 +70,15 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 
 			<p class="post-replies">
 				<span class="bold"><?= $comments_count ?></span>
-				Réponses
+				<?php
+				$comments_count > 1 ? print 'réponses' : print 'réponse';
+				?>
 			</p>
 			<p class="post-reactions">
-				<span class="bold"><?= 0 ?></span>
-				Réactions
+				<span class="bold"><?= count($post_reactions_list) ?></span>
+				<?php
+				count($post_reactions_list) > 1 ? print 'réactions' : print 'réaction';
+				?>
 			</p>
 		</div>
 		<div class="post-action-buttons">
