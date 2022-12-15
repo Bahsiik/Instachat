@@ -12,10 +12,6 @@
 	padding: 2rem 7rem;
 }
 
-.content > .hidden {
-	display: none;
-}
-
 .friend {
 	border-bottom: 1px solid var(--border);
 	display: flex;

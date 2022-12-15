@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
+use Controllers\Users\GetUser;
 use Models\Background;
 use Models\Color;
 use Models\FontSize;
-use Controllers\Users\GetUser;
 
 $user_controller = new GetUser();
 
@@ -93,7 +93,8 @@ require_once 'components/toolbar.php';
 
 					<h3>Création du compte</h3>
 					<p class="subtitle">
-						<?= format_date_time_full($connected_user->createdAt) ?>
+						<?php
+						format_date_time_full($connected_user->createdAt) ?>
 					</p>
 
 					<h3>Sexe</h3>
@@ -103,7 +104,8 @@ require_once 'components/toolbar.php';
 
 					<h3>Date de naissance</h3>
 					<p class="subtitle">
-						<?= format_date_time($connected_user->birthDate) ?>
+						<?php
+						format_date_time($connected_user->birthDate) ?>
 					</p>
 					<button type="submit">Enregistrer</button>
 				</form>
@@ -164,7 +166,8 @@ require_once 'components/toolbar.php';
 											<img src="<?= $blocked_user->displayAvatar() ?>" alt="Avatar de <?= $blocked_user->username ?>">
 											<div class="blocked_user_text">
 												<p class="username"><?= htmlspecialchars($blocked_user->username) ?></p>
-												<p class="date">Bloqué depuis <?= format_date_time_diff($value->blockedDate, "le ") ?></p>
+												<p class="date">Bloqué depuis <?php
+													format_date_time_diff($value->blockedDate, 'le ') ?></p>
 											</div>
 										</a>
 										<form action="/unblock-user" method="post">

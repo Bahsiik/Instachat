@@ -15,18 +15,18 @@ require_once 'components/toolbar.php';
 
 global $connected_user, $friend_list, $friend_requests, $sent_requests;
 ?>
-	<main class="friends-tab-container">
-		<div class="tabbed-menu">
-			<div class="selected tab friends" onclick="showTab(tab1)"><p>Amis</p></div>
-			<div class="tab waitings" onclick="showTab(tab2)"><p>Demandes</p></div>
-			<div class="tab requests" onclick="showTab(tab3)"><p>Requêtes</p></div>
+	<main class="friends-tab-container tabbed-menu">
+		<div class="tabs">
+			<div class="tab friends selected"><p>Amis</p></div>
+			<div class="tab waitings"><p>Demandes</p></div>
+			<div class="tab requests"><p>Requêtes</p></div>
 		</div>
 		<div class="content">
-			<div class="friends-list">
+			<div class="friends-list selected">
 				<?php
 				if (count($friend_list) > 0) {
 					foreach ($friend_list as $name => $value) {
-						$friend_id = $connected_user->id == $value->requesterId ? $value->requestedId : $value->requesterId;
+						$friend_id = $connected_user->id === $value->requesterId ? $value->requestedId : $value->requesterId;
 						$friend = $friend_controller->execute($friend_id);
 						?>
 						<div class="friend">
@@ -44,7 +44,7 @@ global $connected_user, $friend_list, $friend_requests, $sent_requests;
 									</div>
 									<div class="friendship-term">
 										<p>Amis depuis <?php
-											format_date_time_diff($value->responseDate, "le ") ?></p>
+											format_date_time_diff($value->responseDate, 'le ') ?></p>
 									</div>
 								</div>
 							</div>
@@ -68,11 +68,11 @@ global $connected_user, $friend_list, $friend_requests, $sent_requests;
 				?>
 			</div>
 
-			<div class="waiting-list hidden">
+			<div class="waiting-list">
 				<?php
 				if (count($friend_requests) > 0) {
 					foreach ($friend_requests as $name => $value) {
-						$friend_id = $connected_user->id == $value->requesterId ? $value->requestedId : $value->requesterId;
+						$friend_id = $connected_user->id === $value->requesterId ? $value->requestedId : $value->requesterId;
 						$friend = $friend_controller->execute($friend_id);
 						?>
 						<div class="friend">
@@ -118,13 +118,13 @@ global $connected_user, $friend_list, $friend_requests, $sent_requests;
 				?>
 			</div>
 
-			<div class="requests-list hidden">
+			<div class="requests-list">
 				<?php
 				if (count($sent_requests) > 0) {
 
 
 					foreach ($sent_requests as $name => $value) {
-						$friend_id = $connected_user->id == $value->requesterId ? $value->requestedId : $value->requesterId;
+						$friend_id = $connected_user->id === $value->requesterId ? $value->requestedId : $value->requesterId;
 						$friend = $friend_controller->execute($friend_id);
 						?>
 						<div class="friend">

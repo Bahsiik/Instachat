@@ -163,7 +163,7 @@ input[type='email']:-webkit-autofill:hover {
 	-webkit-text-fill-color: var(--fg-primary) !important;
 }
 
-.tabbed-menu {
+.tabs {
 	--border-radius: 16px;
 	--height: 3rem;
 	align-items: center;
@@ -177,7 +177,7 @@ input[type='email']:-webkit-autofill:hover {
 	overflow: hidden;
 }
 
-.tabbed-menu > .tab {
+.tabs > .tab {
 	align-items: center;
 	box-sizing: border-box;
 	display: flex;
@@ -189,21 +189,25 @@ input[type='email']:-webkit-autofill:hover {
 	transition: all .3s ease-in-out;
 }
 
-.tabbed-menu > .tab:not(.selected) + .tab:not(:first-child) > p {
+.tabbed-menu > .content > div:not(.selected) {
+	display: none;
+}
+
+.tabs > .tab:not(.selected) + .tab:not(:first-child) > p {
 	border-left: 2px solid var(--bg-quaternary);
 }
 
-.tabbed-menu > .selected {
+.tabs > .selected {
 	background-color: var(--bg-quaternary);
 	font-weight: 700;
 }
 
-.tabbed-menu > div:not(.selected):hover {
+.tabs > div:not(.selected):hover {
 	cursor: pointer;
 	font-weight: 700;
 }
 
-.tabbed-menu > div > p {
+.tabs > div > p {
 	--height: 2rem;
 	flex: 1;
 	height: var(--height);
