@@ -151,7 +151,7 @@ require_once 'components/toolbar.php';
 					</div>
 					<div class="content">
 						<div class="masked-word-list">
-
+							<h2 class="empty-list">Aucun mot masqué</h2>
 						</div>
 						<div class="blocked-user-list hidden">
 							<?php
@@ -167,7 +167,11 @@ require_once 'components/toolbar.php';
 												<p class="date">Bloqué depuis <?= format_date_time_diff($value->blockedDate, "le ") ?></p>
 											</div>
 										</a>
-										<button class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+										<form action="/unblock-user" method="post">
+											<input name="blocked_id" type="hidden" value="<?= $blocked_user->id ?>">
+											<input name="redirect" type="hidden" value="/options">
+											<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+										</form>
 									</div>
 									<?php
 								}

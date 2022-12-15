@@ -83,16 +83,15 @@ button[type='submit']:hover {
 }
 
 .blocked-user {
+	align-items: center;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
 
-.blocked-user > button {
-	background: transparent;
+.blocked-user > form > button {
+	background: var(--input-invalid);
 	border: none;
-	color: var(--input-invalid);;
-	cursor: pointer;
 }
 
 .blocked-user > a {
@@ -111,8 +110,8 @@ button[type='submit']:hover {
 .blocked-user > a > .blocked_user_text {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	gap: 0.5rem;
+	justify-content: center;
 }
 
 .blocked-user > a > .blocked_user_text > p {
@@ -120,7 +119,7 @@ button[type='submit']:hover {
 	margin: 0;
 }
 
-.blocked-user > a > .blocked_user_text >  .date {
+.blocked-user > a > .blocked_user_text > .date {
 	color: var(--fg-secondary);
 	font-size: 0.85rem;
 }

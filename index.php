@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
 require_once 'src/controllers/blocked/BlockUser.php';
+require_once 'src/controllers/blocked/UnblockUser.php';
 require_once 'src/controllers/blocked/GetBlockedUsers.php';
 require_once 'src/controllers/blocked/IsBlocked.php';
 require_once 'src/controllers/comments/AddComment.php';
@@ -56,6 +57,7 @@ require_once 'src/models/Reaction.php';
 require_once 'src/models/Votes.php';
 
 use Controllers\Blocked\BlockUser;
+use Controllers\Blocked\UnblockUser;
 use Controllers\comments\AddComment;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
@@ -218,7 +220,6 @@ try {
 
 		case 'options':
 			writeLog('OPTIONS-PAGE');
-
 			(new OptionsPage())->execute();
 			break;
 
@@ -246,7 +247,6 @@ try {
 		case 'friends':
 			redirect_if_method_not('GET', '/');
 			writeLog('FRIENDS-PAGE');
-
 
 
 			(new FriendPage())->execute();
@@ -322,6 +322,13 @@ try {
 			writeLog('BLOCK-USER', "[USER-ID:$connected_user->id] [BLOCKED-USER-ID:{$_POST['blocked_id']}]");
 
 			(new BlockUser())->execute($connected_user, $_POST);
+			break;
+
+		case 'unblock-user':
+			redirect_if_method_not('POST', '/');
+			writeLog('UNBLOCK-USER', "[USER-ID:$connected_user->id] [UNBLOCKED-USER-ID:{$_POST['blocked_id']}]");
+
+			(new UnblockUser())->execute($connected_user, $_POST);
 			break;
 
 		case 'up-vote':
