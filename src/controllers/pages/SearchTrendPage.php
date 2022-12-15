@@ -15,6 +15,9 @@ class SearchTrendPage {
 
 		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
 
+		$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
+
+
 		foreach ($searched_posts as $key => $post) {
 			foreach ($blocked_users as $blocked_user) {
 				if ($post->authorId === $blocked_user->blockedId) {
@@ -23,7 +26,6 @@ class SearchTrendPage {
 			}
 		}
 
-		$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 
 		require_once 'templates/searchtrend.php';
 	}
