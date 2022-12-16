@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Src\Controllers\comments\GetCommentsFeed;
 
 $title = 'Post';
-$css = ['post-page.css', 'post.css', 'comment.css', 'reaction.css'];
+$css = ['post-page.css', 'post.css', 'comment.css', 'reaction.css', 'chat-container.css'];
 $js = ['anchors.js', 'posts.js', 'popup.js', 'fetch-feed.js', 'comments.js'];
 
 ob_start();

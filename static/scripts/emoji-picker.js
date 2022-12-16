@@ -1,6 +1,9 @@
-import {globalConfig} from 'https://unpkg.com/picmo@latest/dist/index.js';
 // noinspection ES6UnusedImports
 import {createPopup, PopupPickerController} from 'https://unpkg.com/@picmo/popup-picker@latest/dist/index.js?module';
+import {TwemojiRenderer} from "https://unpkg.com/@picmo/renderer-twemoji@latest/dist/index.js?module";
+import {globalConfig} from 'https://unpkg.com/picmo@latest/dist/index.js';
+
+ù;
 
 /**
  * @type {PopupPickerController}
@@ -10,20 +13,19 @@ globalConfig.injectStyles = false;
 
 async function getPicker() {
 	if (picker) return picker;
-	const {TwemojiRenderer: twemojiRenderer} = await import('https://unpkg.com/@picmo/renderer-twemoji@latest/dist/index.js?module', {type: 'module'});
 	picker = createPopup({
-			className: 'emoji-picker',
-			renderer: new twemojiRenderer('png'),
-			i18n: {
-				"categories.activities": "Activités",
-				'categories.animals-nature': 'Animaux & Nature',
-				'categories.custom': 'Personnalisé',
-				'categories.flags': 'Drapeaux',
-				'categories.food-drink': 'Nourriture & Boissons',
-				'categories.objects': 'Objets',
-				'categories.people-body': 'Personnes & Corps',
-				'categories.recents': 'Récents',
-				'categories.smileys-emotion': 'Smileys & Émotions',
+		className: 'emoji-picker',
+		renderer: TwemojiRenderer,
+		i18n: {
+			"categories.activities": "Activités",
+			'categories.animals-nature': 'Animaux & Nature',
+			'categories.custom': 'Personnalisé',
+			'categories.flags': 'Drapeaux',
+			'categories.food-drink': 'Nourriture & Boissons',
+			'categories.objects': 'Objets',
+			'categories.people-body': 'Personnes & Corps',
+			'categories.recents': 'Récents',
+			'categories.smileys-emotion': 'Smileys & Émotions',
 				'categories.symbols': 'Symboles',
 				'categories.travel-places': 'Voyages & Lieux',
 				'error.load': 'Impossible de charger les émojis',

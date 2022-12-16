@@ -1,9 +1,12 @@
 <?php
 declare(strict_types=1);
 
+use Models\Emotion;
+use function Lib\Utils\display_icon;
 use function Lib\Utils\selectToolbarItem;
 
 $css[] = 'toolbar.css';
+$css[] = 'chat-container.css';
 
 global $connected_user;
 global $second_segment ?>
@@ -34,7 +37,59 @@ global $second_segment ?>
 			<span class="<?= selectToolbarItem('/options') ?>">Options</span>
 
 		</a>
-		<button class="chat-btn">Chat</button>
+		<button class="toolbar-chat-btn">Chat</button>
+
+
+		<dialog class='chat-dialog'>
+			<div class='chat-container chat-container-dialog'>
+				<div class="chat-header">
+					<button class="close-chat-dialog-btn action-btn">
+						<span class="material-symbols-outlined action-btn-color ">close</span>
+					</button>
+				</div>
+				<div class="chat-content">
+					<div class='chat-avatar'>
+						<a href="/profile/<?= $connected_user->username ?>">
+							<img src="<?= display_icon($connected_user) ?>" alt='avatar'>
+						</a>
+					</div>
+					<div class='chat-right'>
+						<form class='post-form' action='/chat' method='post' enctype='multipart/form-data'>
+                    <textarea class='chat-area' placeholder='Chatter quelque chose...' name='content'
+                              maxlength='400'></textarea>
+							<div class='chat-form-image-container'></div>
+							<div class='chat-form-bottom'>
+								<input type='file' class='chat-image-input' name='image-content' hidden>
+								<button class='chat-image-btn' type='button'>
+									<span class='material-symbols-outlined chat-action-buttons-color'>image</span>
+								</button>
+								<div class='emotions'>
+									<?php
+									for ($i = 1; $i < count(Emotion::cases()) + 1; $i++) {
+										?>
+										<label>
+											<input type="radio" name="emotion" class="emotion"
+											       value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
+											<span
+												class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
+										</label>
+										<?php
+									}
+									?>
+								</div>
+								<button class="chat-btn" type="submit" disabled>Chat</button>
+								<div class="chat-count">
+									<span class="chat-count-number">0</span>
+									<span class="chat-count-max">/ 400</span>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</dialog>
+
+
 	</div>
 	<div class="user-info">
 		<a href="/profile/<?= $connected_user->username ?>">

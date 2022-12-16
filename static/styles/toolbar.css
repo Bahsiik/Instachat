@@ -47,7 +47,7 @@
 	background-color: var(--bg-ternary);
 }
 
-.toolbar-container .chat-btn {
+.toolbar-chat-btn {
 	align-self: center;
 	background: var(--gradient-v);
 	background-repeat: no-repeat;
@@ -63,7 +63,7 @@
 	width: 100%;
 }
 
-.toolbar-container .chat-btn:hover {
+.toolbar-chat-btn:hover {
 	color: var(--fg-primary);
 	transform: scale(1.05);
 }
@@ -105,11 +105,11 @@
 }
 
 .user-username, .user-display-name {
-	padding: 0px;
-	width: 7rem;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
 	margin-right: 5px;
+	overflow-x: hidden;
+	padding: 0px;
+	text-overflow: ellipsis;
+	width: 7rem;
 }
 
 .user-username {

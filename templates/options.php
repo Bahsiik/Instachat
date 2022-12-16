@@ -9,7 +9,7 @@ use Models\FontSize;
 $user_controller = new GetUser();
 
 $title = 'Options';
-$css[] = 'options.css';
+$css = ['options.css', 'toolbar.css', 'chat-container.css'];
 $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();

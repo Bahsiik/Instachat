@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$css = ['profile.css', 'post.css', 'reaction.css'];
+$css = ['profile.css', 'post.css', 'reaction.css', 'toolbar.css'];
 $js = ['fetch-feed.js', 'profile.js', 'posts.js'];
 
 ob_start();

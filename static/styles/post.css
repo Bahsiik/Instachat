@@ -189,7 +189,7 @@
 	object-fit: contain;
 }
 
-.delete-dialog {
+.delete-dialog, .chat-dialog {
 	background-color: var(--bg-quinternary);
 	border: none;
 	border-radius: 7px;
@@ -199,13 +199,13 @@
 	padding: 16px;
 }
 
-.delete-dialog::backdrop {
+.chat-dialog {
+	background-color: var(--bg-primary);
+	max-width: 50rem;
+}
+
+.delete-dialog::backdrop, .chat-dialog::backdrop {
 	background-color: rgba(0, 0, 0, 0.5);
-	bottom: 0;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
 }
 
 .modal-cancel-btn, .modal-delete-btn {

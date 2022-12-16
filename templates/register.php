@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $title = 'Register';
-$css[] = 'register.css';
+$css = ['register.css'];
 $js = ['register.js'];
 
 ob_start();
