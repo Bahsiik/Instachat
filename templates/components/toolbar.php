@@ -7,6 +7,7 @@ use function Lib\Utils\selectToolbarItem;
 
 $css[] = 'toolbar.css';
 $css[] = 'chat-container.css';
+$css[] = 'post.css';
 
 global $connected_user;
 global $second_segment ?>

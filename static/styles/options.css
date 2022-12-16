@@ -2,7 +2,7 @@
 	color: var(--input-invalid);
 }
 
-button[type='submit'] {
+.option-button {
 	background-color: var(--input-radio);
 	border: 1px solid var(--input-radio);
 	border-radius: 10px;

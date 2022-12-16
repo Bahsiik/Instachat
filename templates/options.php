@@ -9,7 +9,7 @@ use Models\FontSize;
 $user_controller = new GetUser();
 
 $title = 'Options';
-$css = ['options.css', 'toolbar.css', 'chat-container.css'];
+$css = ['options.css', 'toolbar.css'];
 $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
@@ -107,7 +107,7 @@ require_once 'components/toolbar.php';
 						<?php
 						format_date_time($connected_user->birthDate) ?>
 					</p>
-					<button type="submit">Enregistrer</button>
+					<button type="submit" class="option-button">Enregistrer</button>
 				</form>
 
 				<form action="/update-password" class="options-group" method="post">
@@ -143,7 +143,7 @@ require_once 'components/toolbar.php';
 						       type="password">
 					</label>
 
-					<button type="submit">Confirmer</button>
+					<button type="submit" class="option-button">Confirmer</button>
 				</form>
 
 				<div class="options-group">
@@ -158,7 +158,7 @@ require_once 'components/toolbar.php';
 							       required
 							       type="text">
 						</label>
-						<button type="submit">Confirmer</button>
+						<button type="submit" class='option-button'>Confirmer</button>
 					</form>
 					<div class="tabbed-menu">
 						<div class="tabs">
@@ -184,7 +184,9 @@ require_once 'components/toolbar.php';
 											<form action="/unblock-user" method="post">
 												<input name="blocked_id" type="hidden" value="<?= $blocked_user->id ?>">
 												<input name="redirect" type="hidden" value="/options">
-												<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+												<button type="submit" class="material-symbols-outlined cancel option-button" title="Débloquer cet utilisateur">
+													close
+												</button>
 											</form>
 										</div>
 										<?php
@@ -205,7 +207,9 @@ require_once 'components/toolbar.php';
 											<p><?= htmlspecialchars($value->blockedWord) ?></p>
 											<form action="/unblock-word" method="post">
 												<input type="hidden" name="blocked-word" value="<?= htmlspecialchars($value->blockedWord) ?>">
-												<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+												<button type="submit" class="material-symbols-outlined cancel option-button" title="Débloquer cet utilisateur">
+													close
+												</button>
 											</form>
 										</div>
 										<?php
@@ -278,7 +282,7 @@ require_once 'components/toolbar.php';
 						?>
 					</div>
 
-					<button type="submit">Enregistrer</button>
+					<button type="submit" class='option-button'>Enregistrer</button>
 				</form>
 
 				<div class="options-group">
@@ -330,7 +334,7 @@ require_once 'components/toolbar.php';
 						<input autocomplete="current-password" name="password" maxlength="64" minlength="4" placeholder="Mot de passe"
 						       required type="password">
 					</label>
-					<button type="submit" class="delete-account">Supprimer mon compte</button>
+					<button type="submit" class="delete-account option-button">Supprimer mon compte</button>
 				</form>
 			</div>
 		</div>
