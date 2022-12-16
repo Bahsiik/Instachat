@@ -39,6 +39,10 @@ input, textarea, button, select, optgroup, option {
 	font-family: unset;
 }
 
+*::-webkit-scrollbar {
+	width: 0;
+}
+
 .material-symbols-outlined {
 	user-select: none;
 }
