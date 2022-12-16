@@ -83,7 +83,6 @@ button[type='submit']:hover {
 .content {
 	background-color: var(--bg-quinternary);
 	border-radius: 0 0 16px 16px;
-	max-width: 22rem;
 	padding: 2rem 3rem;
 }
 
