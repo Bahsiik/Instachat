@@ -335,7 +335,7 @@ try {
 
 		case 'block-word':
 			redirect_if_method_not('POST', '/');
-			writeLog('BLOCK-WORD', "[USER-ID:$connected_user->id] [BLOCKED-WORD:{$_POST['blocked_word']}]");
+			writeLog('BLOCK-WORD', "[USER-ID:$connected_user->id] [BLOCKED-WORD:{$_POST['blocked-word']}]");
 			(new BlockWord())->execute($connected_user, $_POST);
 			break;
 
