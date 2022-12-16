@@ -3,8 +3,6 @@ import {createPopup, PopupPickerController} from 'https://unpkg.com/@picmo/popup
 import {TwemojiRenderer} from "https://unpkg.com/@picmo/renderer-twemoji@latest/dist/index.js?module";
 import {globalConfig} from 'https://unpkg.com/picmo@latest/dist/index.js';
 
-ù;
-
 /**
  * @type {PopupPickerController}
  */
