@@ -5,7 +5,6 @@ use Controllers\Users\GetUser;
 use Models\Background;
 use Models\Color;
 use Models\FontSize;
-use Controllers\Users\GetUser;
 
 $user_controller = new GetUser();
 
@@ -162,11 +161,13 @@ require_once 'components/toolbar.php';
 						<button type="submit">Confirmer</button>
 					</form>
 					<div class="tabbed-menu">
-						<div class="selected tab masked" onclick="showTab(tab1)"><p>Mots masqués</p></div>
-						<div class="tab blocked" onclick="showTab(tab2)"><p>Comptes bloqués</p></div>
+						<div class="tabs">
+							<div class="selected tab masked" onclick="showTab(tab1)"><p>Mots masqués</p></div>
+							<div class="tab blocked" onclick="showTab(tab2)"><p>Comptes bloqués</p></div>
+						</div>
 					</div>
 					<div class="content">
-						<div class="masked-word-list">
+						<div class="blocked-word-list">
 							<?php
 							if (count($blocked_words) > 0) {
 								foreach ($blocked_words as $name => $value) {
@@ -196,7 +197,7 @@ require_once 'components/toolbar.php';
 									<div class="blocked-user">
 										<a href="/profile/<?= $blocked_user->username ?>">
 											<img src="<?= $blocked_user->displayAvatar() ?>" alt="Avatar de <?= $blocked_user->username ?>">
-											<div class="blocked_user_text">
+											<div class="blocked-user-text">
 												<p class="username"><?= htmlspecialchars($blocked_user->username) ?></p>
 												<p class="date">Bloqué depuis <?php
 													format_date_time_diff($value->blockedDate, 'le ') ?></p>
