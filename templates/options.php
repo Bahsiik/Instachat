@@ -10,7 +10,7 @@ $user_controller = new GetUser();
 
 $title = 'Options';
 $css[] = 'options.css';
-$js = ['options.js', 'tabbed-menu.js', 'blocked-masked-list.js'];
+$js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
 global $connected_user, $blocked_users, $blocked_words;
@@ -162,63 +162,64 @@ require_once 'components/toolbar.php';
 					</form>
 					<div class="tabbed-menu">
 						<div class="tabs">
-							<div class="selected tab masked" onclick="showTab(tab1)"><p>Mots masqués</p></div>
-							<div class="tab blocked" onclick="showTab(tab2)"><p>Comptes bloqués</p></div>
+							<div class="tab blocked selected"><p>Comptes bloqués</p></div>
+							<div class="tab masked"><p>Mots masqués</p></div>
 						</div>
-					</div>
-					<div class="content">
-						<div class="blocked-word-list">
-							<?php
-							if (count($blocked_words) > 0) {
-								foreach ($blocked_words as $name => $value) {
+						<div class="content">
+							<div class="blocked-user-list selected">
+								<?php
+								if (count($blocked_users) > 0) {
+									foreach ($blocked_users as $name => $value) {
+										$blocked_user = $user_controller->execute($value->blockedId);
+										?>
+										<div class="blocked-user">
+											<a href="/profile/<?= $blocked_user->username ?>">
+												<img src="<?= $blocked_user->displayAvatar() ?>" alt="Avatar de <?= $blocked_user->username ?>">
+												<div class="blocked-user-text">
+													<p class="username"><?= htmlspecialchars($blocked_user->username) ?></p>
+													<p class="date">Bloqué depuis <?php
+														format_date_time_diff($value->blockedDate, 'le ') ?></p>
+												</div>
+											</a>
+											<form action="/unblock-user" method="post">
+												<input name="blocked_id" type="hidden" value="<?= $blocked_user->id ?>">
+												<input name="redirect" type="hidden" value="/options">
+												<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+											</form>
+										</div>
+										<?php
+									}
+								} else {
 									?>
-									<div class="blocked-word">
-										<p><?= htmlspecialchars($value->blockedWord) ?></p>
-										<form action="/unblock-word" method="post">
-											<input type="hidden" name="blocked-word" value="<?= htmlspecialchars($value->blockedWord) ?>">
-											<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
-										</form>
-									</div>
+									<h2 class="empty-list">Aucun utilisateur bloqué</h2>
 									<?php
 								}
-							} else {
 								?>
-								<h2 class="empty-list">Aucun mot masqué</h2>
+							</div>
+							<div class="blocked-word-list">
 								<?php
-							}
-							?>
-						</div>
-						<div class="blocked-user-list hidden">
-							<?php
-							if (count($blocked_users) > 0) {
-								foreach ($blocked_users as $name => $value) {
-									$blocked_user = $user_controller->execute($value->blockedId);
+								if (count($blocked_words) > 0) {
+									foreach ($blocked_words as $name => $value) {
+										?>
+										<div class="blocked-word">
+											<p><?= htmlspecialchars($value->blockedWord) ?></p>
+											<form action="/unblock-word" method="post">
+												<input type="hidden" name="blocked-word" value="<?= htmlspecialchars($value->blockedWord) ?>">
+												<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+											</form>
+										</div>
+										<?php
+									}
+								} else {
 									?>
-									<div class="blocked-user">
-										<a href="/profile/<?= $blocked_user->username ?>">
-											<img src="<?= $blocked_user->displayAvatar() ?>" alt="Avatar de <?= $blocked_user->username ?>">
-											<div class="blocked-user-text">
-												<p class="username"><?= htmlspecialchars($blocked_user->username) ?></p>
-												<p class="date">Bloqué depuis <?php
-													format_date_time_diff($value->blockedDate, 'le ') ?></p>
-											</div>
-										</a>
-										<form action="/unblock-user" method="post">
-											<input name="blocked_id" type="hidden" value="<?= $blocked_user->id ?>">
-											<input name="redirect" type="hidden" value="/options">
-											<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
-										</form>
-									</div>
+									<h2 class="empty-list">Aucun mot masqué</h2>
 									<?php
 								}
-							} else {
 								?>
-								<h2 class="empty-list">Aucun utilisateur bloqué</h2>
-								<?php
-							}
-							?>
+							</div>
 						</div>
 					</div>
+
 				</div>
 
 				<form action="/update-preferences" class="options-group" method="post">
