@@ -5,6 +5,7 @@ use Controllers\Users\GetUser;
 use Models\Background;
 use Models\Color;
 use Models\FontSize;
+use Controllers\Users\GetUser;
 
 $user_controller = new GetUser();
 
@@ -13,7 +14,7 @@ $css[] = 'options.css';
 $js = ['options.js', 'tabbed-menu.js', 'blocked-masked-list.js'];
 
 ob_start();
-global $connected_user, $blocked_users;
+global $connected_user, $blocked_users, $blocked_words;
 require_once 'components/toolbar.php';
 ?>
 	<main class="options">
@@ -147,13 +148,44 @@ require_once 'components/toolbar.php';
 				</form>
 
 				<div class="options-group">
+					<form class="block-word" action="/block-word" method="post">
+						<label>Masquer un mot
+							<input autocomplete="off"
+							       maxlength="100"
+							       minlength="2"
+							       id="block-word"
+							       name="blocked-word"
+							       placeholder="Masquer un mot"
+							       required
+							       type="text">
+						</label>
+						<button type="submit">Confirmer</button>
+					</form>
 					<div class="tabbed-menu">
-						<div class="selected tab masked" onclick="showTab(tab1)"><p>Masqués</p></div>
-						<div class="tab blocked" onclick="showTab(tab2)"><p>Bloqués</p></div>
+						<div class="selected tab masked" onclick="showTab(tab1)"><p>Mots masqués</p></div>
+						<div class="tab blocked" onclick="showTab(tab2)"><p>Comptes bloqués</p></div>
 					</div>
 					<div class="content">
 						<div class="masked-word-list">
-							<h2 class="empty-list">Aucun mot masqué</h2>
+							<?php
+							if (count($blocked_words) > 0) {
+								foreach ($blocked_words as $name => $value) {
+									?>
+									<div class="blocked-word">
+										<p><?= htmlspecialchars($value->blockedWord) ?></p>
+										<form action="/unblock-word" method="post">
+											<input type="hidden" name="blocked-word" value="<?= htmlspecialchars($value->blockedWord) ?>">
+											<button type="submit" class="material-symbols-outlined cancel" title="Débloquer cet utilisateur">close</button>
+										</form>
+									</div>
+									<?php
+								}
+							} else {
+								?>
+								<h2 class="empty-list">Aucun mot masqué</h2>
+								<?php
+							}
+							?>
 						</div>
 						<div class="blocked-user-list hidden">
 							<?php
@@ -296,7 +328,7 @@ require_once 'components/toolbar.php';
 						<input autocomplete="current-password" name="password" maxlength="64" minlength="4" placeholder="Mot de passe"
 						       required type="password">
 					</label>
-					<button class="delete-account">Supprimer mon compte</button>
+					<button type="submit" class="delete-account">Supprimer mon compte</button>
 				</form>
 			</div>
 		</div>

@@ -3,6 +3,8 @@ declare(strict_types=1);
 require_once 'src/controllers/Delete.php';
 require_once 'src/controllers/blocked/BlockUser.php';
 require_once 'src/controllers/blocked/UnblockUser.php';
+require_once 'src/controllers/blocked/BlockWord.php';
+require_once 'src/controllers/blocked/UnblockWord.php';
 require_once 'src/controllers/blocked/GetBlockedUsers.php';
 require_once 'src/controllers/blocked/IsBlocked.php';
 require_once 'src/controllers/comments/AddComment.php';
@@ -57,7 +59,9 @@ require_once 'src/models/Reaction.php';
 require_once 'src/models/Votes.php';
 
 use Controllers\Blocked\BlockUser;
+use Controllers\Blocked\BlockWord;
 use Controllers\Blocked\UnblockUser;
+use Controllers\Blocked\UnblockWord;
 use Controllers\comments\AddComment;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
@@ -327,6 +331,18 @@ try {
 			writeLog('UNBLOCK-USER', "[USER-ID:$connected_user->id] [UNBLOCKED-USER-ID:{$_POST['blocked_id']}]");
 
 			(new UnblockUser())->execute($connected_user, $_POST);
+			break;
+
+		case 'block-word':
+			redirect_if_method_not('POST', '/');
+			writeLog('BLOCK-WORD', "[USER-ID:$connected_user->id] [BLOCKED-WORD:{$_POST['blocked_word']}]");
+			(new BlockWord())->execute($connected_user, $_POST);
+			break;
+
+		case 'unblock-word':
+			redirect_if_method_not('POST', '/');
+			writeLog('UNBLOCK-WORD', "[USER-ID:$connected_user->id] [UNBLOCKED-WORD:{$_POST['blocked-word']}]");
+			(new UnblockWord())->execute($connected_user, $_POST);
 			break;
 
 		case 'up-vote':

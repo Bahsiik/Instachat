@@ -67,9 +67,14 @@ class BlockedRepository {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocker_id = :blocker_id AND blocked_word IS NOT NULL');
 		$statement->execute(compact('blocker_id'));
 		while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$blockedWords[] = $row['blocked_word'];
+			$blocked[] = new Blocked(
+				$row['blocker_id'],
+				$row['blocked_id'],
+				$row['blocked_word'],
+				$row['blocked_date'],
+			);
 		}
-		return $blockedWords ?? [];
+		return $blocked ?? [];
 	}
 
 	public function isBlocked(float $blocker_id, float $blocked_id): bool {

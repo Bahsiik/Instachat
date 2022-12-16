@@ -76,22 +76,54 @@ button[type='submit']:hover {
 	display: none;
 }
 
+.tabbed-menu {
+	margin-top: 1rem;
+}
+
 .content {
 	background-color: var(--bg-quinternary);
 	border-radius: 0 0 16px 16px;
+	max-width: 22rem;
 	padding: 2rem 3rem;
 }
 
-.blocked-user {
+.block-word {
 	align-items: center;
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 1rem 0;
-	border-bottom: 1px solid var(--border);
+	justify-content: space-around;
 }
 
-.blocked-user > form > button {
+.block-word > button {
+	margin-top: 1.1rem;
+}
+
+
+.blocked-word {
+	align-items: center;
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	height: 80px;
+	justify-content: space-between;
+	padding: 0.5rem 0;
+}
+
+.blocked-word > p {
+	max-width: 14rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+.blocked-user {
+	align-items: center;
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	height: 80px;
+	justify-content: space-between;
+	padding: 0.5rem 0;
+}
+
+.content button {
 	background: var(--input-invalid);
 	border: none;
 }
@@ -109,19 +141,19 @@ button[type='submit']:hover {
 	width: 48px;
 }
 
-.blocked-user > a > .blocked_user_text {
+.blocked-user > a > .blocked-user-text {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	justify-content: center;
 }
 
-.blocked-user > a > .blocked_user_text > p {
+.blocked-user > a > .blocked-user-text > p {
 	color: var(--fg-primary);
 	margin: 0;
 }
 
-.blocked-user > a > .blocked_user_text > .date {
+.blocked-user > a > .blocked-user-text > .date {
 	color: var(--fg-secondary);
 	font-size: 0.85rem;
 }
