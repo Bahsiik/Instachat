@@ -46,6 +46,7 @@ export default class FetchFeed {
 		div.innerHTML = text;
 
 		if (div.children.length <= 0) return;
+		this.scripts.forEach(script => script(div));
 
 		for (const child of div.children) {
 			this.elementsScripts.forEach(script => script(child));
@@ -54,7 +55,6 @@ export default class FetchFeed {
 		this.observer.unobserve(this.targetElement);
 		this.feedContainer.append(...div.children);
 		this.observer.observe(this.targetElement);
-		this.scripts.forEach(script => script(div));
 		this.offset += 5;
 	}
 }

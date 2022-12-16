@@ -7,13 +7,13 @@ function fetchPosts(feedContainer) {
 	fetchFeed.addScripts(elements => {
 		twemoji.parse(elements);
 
-		const menuButtons = document.querySelectorAll('.post-menu');
+		const menuButtons = elements.querySelectorAll('.post-menu');
 		menuButtons.forEach(btn => btn.addEventListener('click', () => showMenu(btn)));
 
-		const postShareButtons = document.querySelectorAll(".post-share-btn.action-btn");
+		const postShareButtons = elements.querySelectorAll(".post-share-btn.action-btn");
 		listenShare(postShareButtons);
 
-		const postReactionBtn = document.querySelectorAll('.post-reaction-btn');
+		const postReactionBtn = elements.querySelectorAll('.post-reaction-btn');
 		postReactionBtn.forEach(btn => btn.addEventListener('click', async () => await pickEmoji(btn)));
 	});
 
