@@ -6,6 +6,10 @@ namespace Controllers\Posts;
 use Models\Post;
 use Models\PostRepository;
 
+/**
+ * Class GetPostsByUser is a controller that gets the posts of a user
+ * @package Controllers\Posts
+ */
 class GetPostsByUser {
 	/**
 	 * @param float $id

@@ -3,16 +3,21 @@ declare(strict_types=1);
 
 namespace Controllers\Posts;
 
-require_once('src/models/Post.php');
+require_once 'src/models/Post.php';
 
 use Controllers\Blocked\GetBlockedWords;
-use Models\Post;
 use Models\PostRepository;
 use Models\User;
 
+/**
+ * Class GetFeed is a controller that gets the feed of a user
+ * @package Controllers\Posts
+ */
 class GetFeed {
 	/**
-	 * @return Array<Post>
+	 * execute is the function that gets the feed of a user
+	 * @param User $user - the user to get the feed of
+	 * @return array - the feed of the user
 	 */
 	public function execute(User $user): array {
 		$posts = (new PostRepository())->getFeed($user->id, (int)($_GET['offset'] ?? 0));

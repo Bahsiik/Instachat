@@ -8,7 +8,17 @@ use Models\User;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class AddPost is a controller that adds a post
+ * @package Controllers\Posts
+ */
 class AddPost {
+	/**
+	 * execute is the function that adds a post
+	 * @param User $connected_user - the user that adds the post
+	 * @param array $input - the data of the post
+	 * @return void - redirects to the user page
+	 */
 	public function execute(User $connected_user, array $input): void {
 		if ($_FILES['image-content']['tmp_name'] !== '') {
 			$image_src = $_FILES;
