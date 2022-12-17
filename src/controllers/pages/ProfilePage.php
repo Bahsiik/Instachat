@@ -13,6 +13,7 @@ require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/reactions/GetReactionsByAuthor.php';
 
 
+use Controllers\Blocked\GetBlockedWords;
 use Controllers\Blocked\IsBlocked;
 use Controllers\Friends\GetFriendRequests;
 use Controllers\Friends\GetFriends;
@@ -31,7 +32,7 @@ class ProfilePage {
 	 * @return void - the profile page
 	 */
 	public function execute(): void {
-		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $is_connected_user_blocked, $is_user_blocked, $friendship, $reactions_list, $trends;
+		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $is_connected_user_blocked, $is_user_blocked, $friendship, $reactions_list, $blocked_words, $trends;
 
 		$friend_list = (new GetFriends())->execute($user);
 		$friend_requests = (new GetFriendRequests())->execute($connected_user);
@@ -62,6 +63,13 @@ class ProfilePage {
 				}
 			}
 		}
+
+		$blocked_words = (new GetBlockedWords())->execute($connected_user);
+
+		foreach ($user_posts as $key => $post) {
+			foreach ($blocked_words as $blocked_word) if (mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false && $post->authorId !== $connected_user->id) unset($user_posts[$key]);
+		}
+
 		require_once 'templates/profile.php';
 	}
 }
