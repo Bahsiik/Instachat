@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 use function Lib\Utils\display_icon;
 
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,7 +39,7 @@ use function Lib\Utils\display_icon;
 			}
 		}
 		?>
-		<title><?= $title ?? '' ?></title>
+		<title>Instachat | <?= $title ?? '' ?></title>
 		<script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
 		<script
 			crossorigin="anonymous"
