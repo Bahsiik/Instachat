@@ -47,8 +47,9 @@ require_once 'src/controllers/users/LoginUser.php';
 require_once 'src/controllers/users/UpdatePassword.php';
 require_once 'src/controllers/users/UpdatePreferences.php';
 require_once 'src/controllers/users/UpdateUserInformation.php';
-require_once 'src/lib/utils.php';
+require_once 'src/lib/UserException.php';
 require_once 'src/lib/dateUtils.php';
+require_once 'src/lib/utils.php';
 require_once 'src/models/Blocked.php';
 require_once 'src/models/Comment.php';
 require_once 'src/models/Friend.php';
@@ -90,6 +91,7 @@ use Controllers\Users\LoginUser;
 use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
 use Controllers\Users\UpdateUserInformation;
+use Lib\UserException;
 use Models\User;
 use Src\Controllers\comments\DownVoteComment;
 use Src\Controllers\comments\GetCommentsFeed;
@@ -112,12 +114,11 @@ try {
 	/**
 	 * @var User $connected_user
 	 */
-	global $connected_user;
+	global $connected_user, $user_error;
 	$connected_user = (new GetConnectedUser())->execute($_SESSION);
-	if ($connected_user !== null && $method === 'GET') {
-		$_SESSION['expire'] = time() + 3600;
-		if (time() > $_SESSION['expire']) session_destroy();
-	}
+	$user_error = $_SESSION['error'] ?? null;
+	$user_error_str = $user_error?->getMessage();
+
 	if ($connected_user === null && $first_segment !== LOGIN_ROUTE && $method === 'GET') redirect(LOGIN_ROUTE);
 
 	switch ($first_segment) {
@@ -378,14 +379,21 @@ try {
 
 			(new UpdateUserInformation())->execute($connected_user, $_POST);
 			break;
-
 	}
-} catch (Throwable $exception) {
+
+	$_SESSION['error'] = null;
+
+} catch (UserException $user_error) {
+	writeLog('CONTROLLER-EXCEPTION', "[MESSAGE:{$user_error->getMessage()}]");
+	$_SESSION['error'] = $user_error;
+	redirect($_SERVER['HTTP_REFERER']);
+
+} catch (Throwable $user_error) {
 	echo '<pre>';
-	$exception_type = $exception::class;
-	echo "$exception_type: {$exception->getMessage()}<br>";
-	echo "{$exception->getTraceAsString()}<br>";
-	$previous = $exception->getPrevious();
+	$exception_type = $user_error::class;
+	echo "$exception_type: {$user_error->getMessage()}<br>";
+	echo "{$user_error->getTraceAsString()}<br>";
+	$previous = $user_error->getPrevious();
 
 	while ($previous !== null) {
 		echo '<br>Previous: ' . $previous->getMessage();

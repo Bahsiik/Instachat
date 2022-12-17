@@ -5,8 +5,8 @@ namespace Controllers\Users;
 
 require_once 'src/models/User.php';
 
+use Lib\UserException;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -20,17 +20,14 @@ class LoginUser {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(array $input): void {
-		$log_in = ['email', 'password'];
-		foreach ($log_in as $value) {
-			if (!isset($input[$value])) throw new RuntimeException('Invalid input');
-		}
+		if (!isset($input['email'], $input['password'])) throw new UserException('Identifiants manquants');
 
 		$user_id = (new UserRepository())->loginUser($input['email'], $input['password']);
 		if ($user_id !== null) {
 			$_SESSION['user_id'] = $user_id->id;
 			redirect('/');
-		} else {
-			redirect('/create');
 		}
+
+		throw new UserException('Mauvais identifiant ou mot de passe');
 	}
 }

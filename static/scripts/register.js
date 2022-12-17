@@ -1,16 +1,24 @@
+const rightPanelActive = 'right-panel-active';
+
+function changeRoute(url) {
+	window.history.pushState({}, '', url);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	const signUpButton = document.querySelector('#signUp');
 	const signInButton = document.querySelector('#signIn');
 	const container = document.querySelector('#container');
 	const usernameInput = document.querySelector('input[name="username"]');
 
+	if (container.classList.contains(rightPanelActive)) changeRoute('/register');
+
 	signUpButton.addEventListener('click', () => {
-		container.classList.add('right-panel-active');
-		window.history.pushState({}, '', '/register');
+		container.classList.add(rightPanelActive);
+		changeRoute('/register');
 	});
 	signInButton.addEventListener('click', () => {
-		container.classList.remove('right-panel-active');
-		window.history.pushState({}, '', '/login');
+		container.classList.remove(rightPanelActive);
+		changeRoute('/login');
 	});
 
 	usernameInput.addEventListener('input', () => {

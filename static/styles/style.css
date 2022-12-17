@@ -76,6 +76,11 @@ input, textarea, button, select, optgroup, option {
 	color: var(--fg-secondary);
 }
 
+.error {
+	color: var(--input-invalid);
+	padding: .5rem;
+}
+
 fieldset {
 	border: var(--input-border-width) solid var(--input-color);
 	border-radius: var(--input-border-radius);

@@ -4,10 +4,12 @@ declare(strict_types=1);
 $title = 'Register';
 $css = ['register.css'];
 $js = ['register.js'];
+global $login_error, $register_error;
+$has_register_error = isset($register_error);
 
 ob_start();
 ?>
-	<main class="container" id="container">
+	<main class="container<?= $has_register_error ? ' right-panel-active' : '' ?>" id="container">
 		<div class="form-container sign-up-container">
 			<form action="/create-user" method="post">
 				<h1>Créer un compte</h1>
@@ -61,6 +63,7 @@ ob_start();
 					<input id="birthdate" name="birthdate" required type="date">
 				</fieldset>
 				<button type="submit">S'identifier</button>
+				<span class='error'><?= $register_error ?></span>
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
@@ -82,6 +85,7 @@ ob_start();
 					/>
 				</label>
 				<button>Se connecter</button>
+				<span class="error"><?= $login_error ?></span>
 			</form>
 		</div>
 		<div class="overlay-container">

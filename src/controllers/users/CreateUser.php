@@ -5,8 +5,8 @@ namespace Controllers\Users;
 
 require_once 'src/models/User.php';
 
+use Lib\UserException;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -20,17 +20,13 @@ class CreateUser {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(array $input): void {
-		$sign_in = ['username', 'email', 'password', 'gender', 'birthdate'];
-		foreach ($sign_in as $value) {
-			if (!isset($input[$value])) throw new RuntimeException('Invalid input');
-		}
+		if (!isset($input['username'], $input['email'], $input['password'], $input['gender'], $input['birthdate'])) throw new UserException('Identifiants manquants', 1);
+
 		$user_exist = (new UserRepository())->isUserAlreadyRegistered($input['email'], $input['username']);
-		if ($user_exist) {
-			echo 'User already exists';
-			redirect('/');
-		}
+		if ($user_exist) throw new UserException('Un utilisateur avec ce nom ou cet email existe déjà', 1);
+
 		$birth_date = date_create($input['birthdate']);
 		(new UserRepository())->createUser($input['username'], $input['email'], $input['password'], $input['gender'], $birth_date);
-		redirect('/create');
+		redirect('/login');
 	}
 }

@@ -129,7 +129,7 @@ class PostRepository {
 		$posts = $statement->fetchAll(PDO::FETCH_COLUMN);
 		$words = [];
 		foreach ($posts as $post) {
-			$unique_words = array_filter(array_unique(preg_split("/[\s,]+/", $post)), fn($word) => preg_match('/^[^A-Za-z0-9]+$/', $word) === 0);
+			$unique_words = array_filter(array_unique(preg_split('/[\s,]+/', $post)), fn($word) => preg_match('/^[^A-Za-z0-9]+$/', $word) === 0);
 			$words = array_merge($words, $unique_words);
 		}
 		$words = array_filter($words, fn($word) => strlen($word) > 3);
@@ -147,7 +147,7 @@ class PostRepository {
 		$posts = [];
 
 		while ($post = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$words = preg_split("/[\s,]+/", $post['content']);
+			$words = preg_split('/[\s,]+/', $post['content']);
 			$words = array_map(fn($word) => strtolower($word), $words);
 			if (in_array(strtolower($content), $words)) {
 				$posts[] = new Post(...array_values($post));
