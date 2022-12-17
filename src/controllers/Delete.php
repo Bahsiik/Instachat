@@ -27,7 +27,7 @@ enum DeleteType: int {
 	case REACTION = 3;
 
 	/**
-	 * fromString is a function that converts a string to a DeleteType
+	 * fromName is a function that returns the DeleteType from a string
 	 * @param string $name - the name of the DeleteType
 	 * @return ?DeleteType - the DeleteType or null if not found
 	 */

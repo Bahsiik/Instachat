@@ -1,7 +1,12 @@
 <?php
 declare(strict_types=1);
 
-
+/**
+ * format_date_time_diff is the function that formats a date time diff
+ * @param DateTime $date - the date to format
+ * @param string $prefix - the prefix of the date
+ * @return void - echo the formatted date
+ */
 function format_date_time_diff(DateTime $date, string $prefix = ''): void {
 	$current_date = new DateTime();
 	$diff = $current_date->diff($date);
@@ -25,6 +30,11 @@ function format_date_time_diff(DateTime $date, string $prefix = ''): void {
 	}
 }
 
+/**
+ * format_date_time is the function that formats a date
+ * @param DateTime $date - the date to format
+ * @return void - echo the formatted date
+ */
 function format_date_time(DateTime $date): void {
 	$date_only_formatter = IntlDateFormatter::create(
 		'fr_FR',
@@ -38,6 +48,11 @@ function format_date_time(DateTime $date): void {
 	echo $date_only_formatter->format($date);
 }
 
+/**
+ * format_date_time_full is the function that formats a date & time
+ * @param DateTime $date - the date to format
+ * @return void - echo the formatted date
+ */
 function format_date_time_full(DateTime $date): void {
 	$date_only_formatter = IntlDateFormatter::create(
 		'fr_FR',
