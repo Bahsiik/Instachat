@@ -1,3 +1,5 @@
+import {updateCharacterCount} from "./RGB.js";
+
 /**
  * @param chatArea {HTMLTextAreaElement}
  * @param imageInput {HTMLInputElement}
@@ -11,11 +13,13 @@ function inputsAreValid(chatArea, imageInput) {
 			alert("L'image est trop lourde. Elle ne doit pas dépasser 16 Mo.");
 			return false;
 		}
+
 		if (!image.type.startsWith('image/')) {
 			alert("Le fichier n'est pas une image.");
 			return false;
 		}
-		if (!image.type.endsWith('jpeg') && !image.type.endsWith('png') && !image.type.endsWith('jpg')) {
+
+		if (!['jpg', 'jpeg', 'png'].some(ext => image.name.endsWith(ext))) {
 			alert("Le format de l'image n'est pas supporté. Les formats supportés sont : jpeg, jpg et png.");
 			return false;
 		}
@@ -37,42 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	const chatContainers = document.querySelectorAll('.chat-container');
 	chatContainers.forEach(chatContainer => {
 		const chatArea = chatContainer.querySelector('.chat-area');
-		const characterCount = chatContainer.querySelector('.chat-count-number');
-		const characterCountMax = chatContainer.querySelector('.chat-count-max');
-		const chatBtn = chatContainer.querySelector('.chat-btn');
-		const chatDialog = chatContainer.querySelector('.chat-dialog');
+		const characterCount = chatContainer.querySelector('.chat-count');
 		const form = chatContainer.querySelector('.post-form');
 		const imageInput = chatContainer.querySelector('.chat-image-input');
 		const chatFormBottom = chatContainer.querySelector('.chat-form-bottom');
 		const chatButton = chatFormBottom.querySelector('.chat-btn');
 		const imageButton = chatContainer.querySelector('.chat-image-btn');
 
-		class RGB {
-			constructor(r, g, b) {
-				this.r = r;
-				this.g = g;
-				this.b = b;
-			}
-		}
+		chatArea.addEventListener('input', () => {
+			updateCharacterCount(chatArea.value, characterCount, 400);
+			updateChatButton();
+		});
 
-		function updateCharacterCount() {
-			const text = chatArea.value;
-			characterCount.innerHTML = text.length;
-			if (text.length === 0) {
-				characterCount.style.color = 'white';
-				characterCountMax.style.color = 'white';
-			} else {
-				const color = text.length <= 100
-					? new RGB(255, 255, 255 - (text.length / 100) * 255)
-					: new RGB(255, 255 - ((text.length - 100) / 300) * 255, 0);
-				characterCount.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-				characterCountMax.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-			}
-		}
-
-		chatArea.addEventListener('input', updateCharacterCount);
-
-		chatArea.addEventListener('input', () => updateChatButton());
 		imageInput.addEventListener('change', () => updateChatButton());
 
 		function updateChatButton() {
@@ -135,11 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const chatDialog = document.querySelector('.chat-dialog');
 	const chatDialogCloseBtn = document.querySelector('.close-chat-dialog-btn');
 
-	chatBtn.addEventListener('click', () => {
-		chatDialog.showModal();
-	});
+	chatBtn.addEventListener('click', () => chatDialog.showModal());
 
-	chatDialogCloseBtn.addEventListener('click', () => {
-		chatDialog.close();
-	});
+	chatDialogCloseBtn.addEventListener('click', () => chatDialog.close());
 });

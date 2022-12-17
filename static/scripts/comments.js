@@ -1,13 +1,13 @@
 import FetchFeed from "./fetch-feed.js";
-import {showPopup} from "./popup";
+import {showPopup} from "./popup.js";
+import {updateCharacterCount} from "./RGB.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	const postId = document.querySelector('article.post-container').dataset.postId;
 	const fetchFeed = new FetchFeed(`/comments?post-id=${postId}&offset=`, document.querySelector('.comments'));
 
 	const commentChatArea = document.querySelector('.comment-chat-area');
-	const commentCharacterCount = document.querySelector('.comment-chat-count-number');
-	const commentCharacterCountMax = document.querySelector('.comment-chat-count-max');
+	const commentCharacterCount = document.querySelector('.comment-chat-count');
 	const commentChatButton = document.querySelector('.comment-chat-btn');
 
 	fetchFeed.addScripts(elements => twemoji.parse(elements));
@@ -19,29 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			await copyToClipboard(window.location.origin + link);
 		}
 	});
-
-	class RGB {
-		constructor(r, g, b) {
-			this.r = r;
-			this.g = g;
-			this.b = b;
-		}
-	}
-
-	function updateCharacterCount() {
-		const text = commentChatArea.value;
-		commentCharacterCount.innerHTML = text.length;
-		if (text.length === 0) {
-			commentCharacterCount.style.color = 'white';
-			commentCharacterCountMax.style.color = 'white';
-		} else {
-			const color = text.length <= 50
-				? new RGB(255, 255, 255 - (text.length / 30) * 255)
-				: new RGB(255, 255 - ((text.length - 40) / 90) * 255, 0);
-			commentCharacterCount.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-			commentCharacterCountMax.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
-		}
-	}
 
 	function updateChatButton() {
 		if (inputIsValid(commentChatArea)) commentChatButton.removeAttribute('disabled');
@@ -59,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	commentChatArea.addEventListener('input', () => {
-		updateCharacterCount();
+		updateCharacterCount(commentChatArea.value, commentCharacterCount, 120);
 		updateChatButton()
 	});
 });
