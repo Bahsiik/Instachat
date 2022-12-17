@@ -12,19 +12,36 @@ ob_start();
 			<form action="/create-user" method="post">
 				<h1>Créer un compte</h1>
 				<label>Email
-					<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
+					<input autocomplete='new-email' maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
 				</label>
 
 				<label>Pseudo
-					<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text" pattern="[a-zA-Z0-9_]{2,20}"/>
+					<input
+						autocomplete="new-username"
+						maxlength="20"
+						minlength="2"
+						name="username"
+						placeholder="Pseudo"
+						required
+						type="text"
+						pattern="[a-zA-Z0-9_]{2,20}"
+					/>
 				</label>
 
 				<label>Mot de passe
-					<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
+					<input autocomplete="new-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
 				</label>
 
 				<label>Confirmez mot de passe
-					<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe" required type="password"/>
+					<input
+						autocomplete="new-password"
+						maxlength="64"
+						minlength="4"
+						name="confirm-password"
+						placeholder="Confirmer mot de passe"
+						required
+						type="password"
+					/>
 				</label>
 
 				<fieldset class="padding">
@@ -50,10 +67,19 @@ ob_start();
 			<form action="/login" method="post">
 				<h1>Se connecter</h1>
 				<label>Email ou pseudo
-					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
+					<input autocomplete="email username" maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
 				</label>
 				<label>Mot de passe
-					<input class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
+					<input
+						autocomplete="current-password"
+						class="login-password"
+						maxlength="64"
+						minlength="4"
+						name="password"
+						placeholder="Mot de passe"
+						required
+						type="password"
+					/>
 				</label>
 				<button>Se connecter</button>
 			</form>
