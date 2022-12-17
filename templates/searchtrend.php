@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$css = ['searchtrend.css', 'post.css', 'reaction.css'];
+$css = ['searchtrend.css', 'reaction.css'];
 $js = ['posts.js'];
 
 ob_start();
