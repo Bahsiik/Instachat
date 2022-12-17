@@ -2,19 +2,25 @@
 	color: var(--input-invalid);
 }
 
-.option-button {
-	background-color: var(--input-radio);
-	border: 1px solid var(--input-radio);
+.save-options-btn {
+	--btn-color: var(--input-radio);
+	background-color: var(--btn-color);
+	border: 1px solid var(--btn-color);
 	border-radius: 10px;
 	color: var(--fg-primary);
 	cursor: pointer;
 	font-size: 1.1rem;
+	margin-top: 1.5rem;
 	padding: 8px 16px;
 	transition: all 0.2s ease-in-out;
 }
 
-button[type='submit']:hover {
+.save-options-btn:hover {
 	transform: scale(1.05);
+}
+
+.delete-account-btn {
+	--btn-color: var(--input-invalid);
 }
 
 .options {
@@ -96,7 +102,6 @@ button[type='submit']:hover {
 	margin-top: 1.1rem;
 }
 
-
 .blocked-word {
 	align-items: center;
 	border-bottom: 1px solid var(--border);
@@ -111,7 +116,6 @@ button[type='submit']:hover {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
 
 .blocked-user {
 	align-items: center;
@@ -292,7 +296,6 @@ div[data-option-number='4'] {
 .avatar-github:hover {
 	opacity: .75;
 }
-
 
 .hidden {
 	display: none;

@@ -106,7 +106,7 @@ require_once 'components/navbar.php';
 						<?php
 						format_date_time($connected_user->birthDate) ?>
 					</p>
-					<button type="submit" class="option-button">Enregistrer</button>
+					<button type="submit" class="save-options-btn">Enregistrer</button>
 				</form>
 
 				<form action="/update-password" class="options-group" method="post">
@@ -142,7 +142,7 @@ require_once 'components/navbar.php';
 						       type="password">
 					</label>
 
-					<button type="submit" class="option-button">Confirmer</button>
+					<button type="submit" class="save-options-btn">Confirmer</button>
 				</form>
 
 				<div class="options-group">
@@ -157,7 +157,7 @@ require_once 'components/navbar.php';
 							       required
 							       type="text">
 						</label>
-						<button type="submit" class='option-button'>Confirmer</button>
+						<button type="submit" class='save-options-btn'>Confirmer</button>
 					</form>
 					<div class="tabbed-menu">
 						<div class="tabs">
@@ -183,7 +183,8 @@ require_once 'components/navbar.php';
 											<form action="/unblock-user" method="post">
 												<input name="blocked_id" type="hidden" value="<?= $blocked_user->id ?>">
 												<input name="redirect" type="hidden" value="/options">
-												<button type="submit" class="material-symbols-outlined cancel option-button" title="Débloquer cet utilisateur">
+												<button type="submit" class="material-symbols-outlined cancel save-options-btn"
+												        title="Débloquer cet utilisateur">
 													close
 												</button>
 											</form>
@@ -206,7 +207,8 @@ require_once 'components/navbar.php';
 											<p><?= htmlspecialchars($value->blockedWord) ?></p>
 											<form action="/unblock-word" method="post">
 												<input type="hidden" name="blocked-word" value="<?= htmlspecialchars($value->blockedWord) ?>">
-												<button type="submit" class="material-symbols-outlined cancel option-button" title="Débloquer cet utilisateur">
+												<button type="submit" class="material-symbols-outlined cancel save-options-btn"
+												        title="Débloquer cet utilisateur">
 													close
 												</button>
 											</form>
@@ -262,7 +264,7 @@ require_once 'components/navbar.php';
 						?>
 					</div>
 
-					<button type="submit" class='option-button'>Enregistrer</button>
+					<button type="submit" class='save-options-btn'>Enregistrer</button>
 				</form>
 
 				<div class="options-group">
@@ -314,7 +316,7 @@ require_once 'components/navbar.php';
 						<input autocomplete="current-password" name="password" maxlength="64" minlength="4" placeholder="Mot de passe"
 						       required type="password">
 					</label>
-					<button type="submit" class="delete-account option-button">Supprimer mon compte</button>
+					<button type="submit" class="save-options-btn delete-account-btn">Supprimer mon compte</button>
 				</form>
 			</div>
 		</div>
