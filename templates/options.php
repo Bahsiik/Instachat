@@ -20,8 +20,6 @@ $has_error = $user_error === null ? ' active' : '';
 $user_info_tab = $user_info_error ? ' active' : $has_error;
 $selected_index = $user_error?->getCode() ?? 0;
 
-var_dump($selected_index);
-
 require_once 'components/navbar.php';
 ?>
 	<main class="options">
