@@ -58,7 +58,7 @@ require_once 'components/navbar.php';
 							maxlength="20"
 							minlength="2"
 							name="username"
-							pattern="[\_\-a-zA-Z0-9]{2,20}"
+							pattern="[_\-a-zA-Z0-9]{2,20}"
 							placeholder="Nom d'utilisateur"
 							required
 							type="text"
@@ -71,7 +71,7 @@ require_once 'components/navbar.php';
 							maxlength="30"
 							minlength="2"
 							name="display-name"
-							pattern="[\_\-a-zA-Z0-9]{2,30}"
+							pattern="[_\-a-zA-Z0-9]{2,30}"
 							placeholder="<?= htmlspecialchars($connected_user->username) ?>"
 							type="text"
 							value="<?= htmlspecialchars($connected_user->display_name ?? '') ?>"
@@ -233,7 +233,7 @@ require_once 'components/navbar.php';
 						for ($i = 0; $i < $count; $i++) {
 							$color = Color::cases()[$i];
 							$selected = $color === $connected_user->color ? ' checked' : '';
-							$name = $color->lowercaseName();
+							$name = "color-{$color->lowercaseName()}";
 							echo <<<HTML
 								<input id="$name" hidden name="color" type="radio" value="$i"$selected>
 								<label class="$name" for="$name"></label>
@@ -249,7 +249,7 @@ require_once 'components/navbar.php';
 							$is_current = $background === $connected_user->background;
 							$selected = $is_current ? ' selected' : '';
 							$checked = $is_current ? ' checked' : '';
-							$name = strtolower($background->name);
+							$name = 'bg-' . strtolower($background->name);
 							$french_name = Background::frenchName($background);
 							echo <<<HTML
 							<div class="background-option $name">

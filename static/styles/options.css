@@ -183,19 +183,19 @@ button[type='submit']:hover {
 	border: 2px solid var(--fg-primary);
 }
 
-.color-options > .orange {
+.color-options > .color-orange {
 	background: linear-gradient(var(--gradient-angle), #fd2b55, #f8f004);
 }
 
-.color-options > .purple {
+.color-options > .color-purple {
 	background: linear-gradient(var(--gradient-angle), #2b4dfd, #aa04f8);
 }
 
-.color-options > .blue {
+.color-options > .color-blue {
 	background: linear-gradient(var(--gradient-angle), #6e2bfd, #00ffd1);
 }
 
-.color-options > .gray {
+.color-options > .color-gray {
 	background: linear-gradient(var(--gradient-angle), #e6dff7, #303030);
 }
 
@@ -215,17 +215,17 @@ button[type='submit']:hover {
 	justify-content: center;
 }
 
-.background-option.light {
+.background-option.bg-light {
 	background-color: #ffffff;
 	color: #000000;
 }
 
-.background-option.gray {
+.background-option.bg-gray {
 	background-color: #252525;
 	color: #ffffff;
 }
 
-.background-option.black {
+.background-option.bg-black {
 	background-color: #000000;
 	color: #ffffff;
 }
