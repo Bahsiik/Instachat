@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $css = ['profile.css', 'reaction.css', 'navbar.css'];
-$js = ['fetch-feed.js', 'profile.js', 'posts.js'];
+$js = ['fetch-feed.js', 'profile.js', 'posts.js', 'tabbed-menu.js'];
 
 ob_start();
 require_once 'components/navbar.php';
@@ -176,14 +176,14 @@ $title = "Instachat | $username";
 				<?php
 			} else {
 				?>
-				<div class="profile-list-container">
-					<div class="tabbed-menu">
-						<div class="selected tab chats" onclick="showTab(tab1)"><p>Chats</p></div>
-						<div class="tab comments" onclick="showTab(tab2)"><p>Commentaires</p></div>
-						<div class="tab reactions" onclick="showTab(tab3)"><p>Réactions</p></div>
+				<div class="profile-list-container tabbed-menu">
+					<div class="tabs">
+						<div class="tab chats selected "><p>Chats</p></div>
+						<div class="tab comments"><p>Commentaires</p></div>
+						<div class="tab reactions"><p>Réactions</p></div>
 					</div>
-					<div class="tab-content">
-						<div class="user-post-container">
+					<div class="content">
+						<div class="user-post-container selected">
 							<?php
 							if (count($user_posts) > 0) {
 								global $post;
@@ -198,6 +198,12 @@ $title = "Instachat | $username";
 								<?php
 							}
 							?>
+						</div>
+						<div class="user-comment-container">
+							aucun commentaire
+						</div>
+						<div class="user-reaction-container">
+							aucune réaction
 						</div>
 					</div>
 				</div>
