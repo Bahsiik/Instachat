@@ -1,9 +1,9 @@
-import FetchFeed from "./fetch-feed.js";
 import {pickEmoji} from "./emoji-picker.js";
+import FetchFeed from "./fetch-feed.js";
 import {showPopup} from "./popup.js";
 
 function fetchPosts(feedContainer) {
-	const fetchFeed = new FetchFeed("/getFeed?offset=", feedContainer);
+	const fetchFeed = new FetchFeed("/feed?offset=", feedContainer);
 	fetchFeed.addScripts(elements => {
 		twemoji.parse(elements);
 

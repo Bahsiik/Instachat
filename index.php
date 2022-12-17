@@ -226,7 +226,7 @@ try {
 			(new DownVoteComment())->execute($connected_user, $_POST);
 			break;
 
-		case 'getFeed':
+		case 'feed':
 			redirect_if_method_not('GET', '/');
 			$posts = (new GetFeed())->execute($connected_user);
 			writeLog('FEED-PAGE');
