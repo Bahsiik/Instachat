@@ -22,8 +22,8 @@ class UpdatePreferences {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(User $connected_user, array $input): void {
-		$background = $input['background'] ?? throw new UserException('Couleur de fond manquante', 2);
-		$color = $input['color'] ?? throw new UserException('Thème de couleur manquant', 2);
+		$background = $input['background'] ?? throw new UserException('Couleur de fond manquante', 3);
+		$color = $input['color'] ?? throw new UserException('Thème de couleur manquant', 3);
 
 		$new_user = clone $connected_user;
 		$new_user->background = Background::fromInt((int)$background);

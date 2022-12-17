@@ -78,7 +78,7 @@ input, textarea, button, select, optgroup, option {
 
 .error {
 	color: var(--input-invalid);
-	padding: .5rem;
+	padding: .5rem 0;
 }
 
 fieldset {

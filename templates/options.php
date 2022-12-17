@@ -12,7 +12,16 @@ $css = ['options.css', 'navbar.css'];
 $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
-global $connected_user, $blocked_users, $blocked_words;
+global $connected_user, $user_error, $blocked_users, $blocked_words, $user_info_error, $user_password_error, $user_preferences_error, $user_delete_error;
+$user_password_tab = $user_password_error ? ' active' : '';
+$user_preferences_tab = $user_preferences_error ? ' active' : '';
+$user_delete_tab = $user_delete_error ? ' active' : '';
+$has_error = $user_error === null ? ' active' : '';
+$user_info_tab = $user_info_error ? ' active' : $has_error;
+$selected_index = $user_error?->getCode() ?? 0;
+
+var_dump($selected_index);
+
 require_once 'components/navbar.php';
 ?>
 	<main class="options">
@@ -24,15 +33,16 @@ require_once 'components/navbar.php';
 			<div class="options-choices-container">
 				<?php
 				$options = [
-					'Informations du compte' => 'Afficher les informations de votre compte (Ex: nom d\'utilisateur, adresse e-mail...)',
+					'Informations du compte' => "Afficher les informations de votre compte (Ex: nom d'utilisateur, adresse e-mail...)",
 					'Changer de mot de passe' => 'Changer de mot de passe à tout moment.',
 					'Masqués et bloqués' => 'Gérer les comptes et mots que vous avez bloqués ou masqués.',
 					'Affichage' => "Gérer la taille de police et l'arrière-plan.",
 					'Ressources supplémentaires' => 'Informations utiles sur les divers produits du service Instachat.',
 				];
 
+				$index = 0;
 				foreach ($options as $option => $description) { ?>
-					<div class="option">
+					<div class="option<?= $index === $selected_index ? ' selected' : '' ?>">
 						<div class="option-title">
 							<h2><?= $option ?></h2>
 							<p class="subtitle"><?= $description ?></p>
@@ -40,9 +50,10 @@ require_once 'components/navbar.php';
 						<span class="material-symbols-outlined arrow">navigate_next</span>
 					</div>
 					<?php
+					$index++;
 				} ?>
 
-				<div class="option">
+				<div class="option<?= $index === $selected_index ? ' selected' : '' ?>">
 					<div class="option-title">
 						<h2 class="danger">Supprimer le compte</h2>
 					</div>
@@ -51,7 +62,7 @@ require_once 'components/navbar.php';
 			</div>
 
 			<div class="options-form">
-				<form action="/update-user-information" class="options-group active" method="post">
+				<form action="/update-user-information" class="options-group<?= $user_info_tab ?>" method="post">
 					<label>Nom d'utilisateur
 						<input
 							autocomplete="username"
@@ -107,9 +118,10 @@ require_once 'components/navbar.php';
 						format_date_time($connected_user->birthDate) ?>
 					</p>
 					<button type="submit" class="save-options-btn">Enregistrer</button>
+					<p class="error"><?= $user_info_error ?></p>
 				</form>
 
-				<form action="/update-password" class="options-group" method="post">
+				<form action="/update-password" class="options-group<?= $user_password_tab ?>" method="post">
 					<input autocomplete="username" name="username" type="hidden" value="<?= htmlspecialchars($connected_user->username) ?>">
 
 					<label>Ancien mot de passe
@@ -143,6 +155,7 @@ require_once 'components/navbar.php';
 					</label>
 
 					<button type="submit" class="save-options-btn">Confirmer</button>
+					<p class="error"><?= $user_password_error ?></p>
 				</form>
 
 				<div class="options-group">
@@ -224,10 +237,9 @@ require_once 'components/navbar.php';
 							</div>
 						</div>
 					</div>
-
 				</div>
 
-				<form action="/update-preferences" class="options-group" method="post">
+				<form action="/update-preferences" class="options-group<?= $user_preferences_tab ?>" method="post">
 					<h3>Couleurs</h3>
 					<div class="color-options">
 						<?php
@@ -265,6 +277,7 @@ require_once 'components/navbar.php';
 					</div>
 
 					<button type="submit" class='save-options-btn'>Enregistrer</button>
+					<p class="error"> <?= $user_preferences_error ?></p>
 				</form>
 
 				<div class="options-group">
@@ -304,7 +317,7 @@ require_once 'components/navbar.php';
 					</ul>
 				</div>
 
-				<form action="/delete?type=user" class="options-group" method="post">
+				<form action="/delete?type=user" class="options-group<?= $user_delete_tab ?>" method="post">
 					<h3>Supprimer mon compte</h3>
 					<p class="subtitle">Cette action est irreversible et supprimera tous vos chats, réactions et
 						commentaires et vous déconnectera
@@ -317,6 +330,7 @@ require_once 'components/navbar.php';
 						       required type="password">
 					</label>
 					<button type="submit" class="save-options-btn delete-account-btn">Supprimer mon compte</button>
+					<p class="error"> <?= $user_delete_error ?> </p>
 				</form>
 			</div>
 		</div>
