@@ -47,6 +47,10 @@
 	margin: 0;
 }
 
+.comment-display-name {
+	font-weight: 700;
+}
+
 .comment-username {
 	color: var(--fg-secondary);
 }

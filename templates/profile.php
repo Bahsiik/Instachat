@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
 
-$css = ['profile.css', 'reaction.css', 'navbar.css'];
-$js = ['fetch-feed.js', 'profile.js', 'posts.js', 'tabbed-menu.js'];
+$css = ['profile.css', 'comment.css', 'reaction.css', 'navbar.css'];
+$js = ['fetch-feed.js', 'profile.js', 'posts.js', 'comments.js', 'tabbed-menu.js'];
+
+global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $user_comments, $user_reactions, $posts_reacted, $is_connected_user_blocked, $is_user_blocked, $trends;
+$username = htmlspecialchars($user->username);
+
+$title = "Instachat | $username";
 
 ob_start();
 require_once 'components/navbar.php';
 
-global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $is_connected_user_blocked, $is_user_blocked, $reactions_list, $trends;
-$username = htmlspecialchars($user->username);
-
-$title = "Instachat | $username";
 
 ?>
 	<main class="profile-container">
@@ -67,8 +68,8 @@ $title = "Instachat | $username";
 					<p class="posts-text">chat<?= count($user_posts) > 1 ? 's' : '' ?></p>
 				</div>
 				<div class="profile-info-data-content">
-					<p class="reactions-number"><?= count($reactions_list) ?></p>
-					<p class="reactions-text">réaction<?= count($reactions_list) > 1 ? 's' : '' ?></p>
+					<p class="reactions-number"><?= count($user_reactions) ?></p>
+					<p class="reactions-text">réaction<?= count($user_reactions) > 1 ? 's' : '' ?></p>
 				</div>
 			</div>
 		</div>
@@ -178,9 +179,9 @@ $title = "Instachat | $username";
 				?>
 				<div class="profile-list-container tabbed-menu">
 					<div class="tabs">
-						<div class="tab chats selected "><p>Chats</p></div>
-						<div class="tab comments"><p>Commentaires</p></div>
-						<div class="tab reactions"><p>Réactions</p></div>
+						<div class="tab selected "><p>Chats</p></div>
+						<div class="tab"><p>Commentaires</p></div>
+						<div class="tab"><p>Réactions</p></div>
 					</div>
 					<div class="content">
 						<div class="user-post-container selected">
@@ -200,10 +201,36 @@ $title = "Instachat | $username";
 							?>
 						</div>
 						<div class="user-comment-container">
-							aucun commentaire
+							<?php
+							if (count($user_comments) > 0) {
+								global $comment;
+								foreach ($user_comments as $comment) {
+									require 'components/comment.php';
+								}
+							} else {
+								?>
+								<div class="no-post">
+									<h2>Aucun commentaire trouvé</h2>
+								</div>
+								<?php
+							}
+							?>
 						</div>
 						<div class="user-reaction-container">
-							aucune réaction
+							<?php
+							if (count($posts_reacted) > 0) {
+								global $post;
+								foreach ($posts_reacted as $post) {
+									require 'components/post-feed.php';
+								}
+							} else {
+								?>
+								<div class="no-post">
+									<h2>Aucun post trouvé</h2>
+								</div>
+								<?php
+							}
+							?>
 						</div>
 					</div>
 				</div>

@@ -3,22 +3,25 @@ declare(strict_types=1);
 
 namespace Controllers\Pages;
 
-require_once 'src/controllers/reactions/GetReactionsByAuthor.php';
 require_once 'src/controllers/blocked/IsBlocked.php';
 require_once 'src/controllers/friends/GetFriends.php';
 require_once 'src/controllers/friends/GetFriendRequests.php';
 require_once 'src/controllers/friends/GetSentRequests.php';
 require_once 'src/controllers/posts/GetPostsByUser.php';
+require_once 'src/controllers/posts/GetPostsReactedByUser.php';
 require_once 'src/controllers/posts/GetTrends.php';
 require_once 'src/controllers/reactions/GetReactionsByAuthor.php';
+require_once 'src/controllers/comments/GetCommentsByAuthor.php';
 
 
 use Controllers\Blocked\GetBlockedWords;
 use Controllers\Blocked\IsBlocked;
+use Controllers\comments\GetCommentsByAuthor;
 use Controllers\Friends\GetFriendRequests;
 use Controllers\Friends\GetFriends;
 use Controllers\Friends\GetSentRequests;
 use Controllers\Posts\GetPostsByUser;
+use Controllers\Posts\GetPostsReactedByUser;
 use Controllers\Posts\GetTrends;
 use Controllers\Reaction\GetReactionsByAuthor;
 
@@ -32,15 +35,17 @@ class ProfilePage {
 	 * @return void - the profile page
 	 */
 	public function execute(): void {
-		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $is_connected_user_blocked, $is_user_blocked, $friendship, $reactions_list, $blocked_words, $trends;
+		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $user_comments, $user_reactions, $posts_reacted, $is_connected_user_blocked, $is_user_blocked, $friendship, $blocked_words, $trends;
 
 		$friend_list = (new GetFriends())->execute($user);
 		$friend_requests = (new GetFriendRequests())->execute($connected_user);
 		$sent_requests = (new GetSentRequests())->execute($connected_user);
 		$user_posts = (new GetPostsByUser())->execute($user->id);
+		$user_comments = (new GetCommentsByAuthor())->execute($user->id);
+		$user_reactions = (new GetReactionsByAuthor())->execute($user->id);
+		$posts_reacted = (new GetPostsReactedByUser())->execute($user->id);
 		$is_connected_user_blocked = (new IsBlocked())->execute($user->id, $connected_user->id);
 		$is_user_blocked = (new IsBlocked())->execute($connected_user->id, $user->id);
-		$reactions_list = (new GetReactionsByAuthor())->execute($user->id);
 		$trends = (new GetTrends())->execute();
 
 		if ($connected_user->id !== $user->id) {
