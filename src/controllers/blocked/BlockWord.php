@@ -21,7 +21,9 @@ class BlockWord {
 	 */
 	public function execute(User $connected_user, array $input): void {
 		if (!isset($input['blocked-word'])) throw new RuntimeException('Invalid input');
-		(new BlockedRepository())->blockWord($connected_user->id, $input['blocked-word']);
+		$blocked_words = (new BlockedRepository())->getBlockedWords($connected_user->id);
+		foreach ($blocked_words as $blocked_word) if ($blocked_word->blockedWord === strtolower($input['blocked-word'])) redirect('/options');
+		(new BlockedRepository())->blockWord($connected_user->id, strtolower($input['blocked-word']));
 		redirect('/options');
 	}
 }
