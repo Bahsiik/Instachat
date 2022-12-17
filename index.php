@@ -100,6 +100,8 @@ use function Lib\Utils\writeLog;
 session_start();
 date_default_timezone_set('Europe/Paris');
 
+const LOGIN_ROUTE = 'login';
+
 try {
 	$method = $_SERVER['REQUEST_METHOD'] ?? '';
 	$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -116,7 +118,7 @@ try {
 		$_SESSION['expire'] = time() + 3600;
 		if (time() > $_SESSION['expire']) session_destroy();
 	}
-	if ($connected_user === null && $first_segment !== 'create' && $method === 'GET') redirect('/create');
+	if ($connected_user === null && $first_segment !== LOGIN_ROUTE && $method === 'GET') redirect(LOGIN_ROUTE);
 
 	switch ($first_segment) {
 		default:
@@ -181,21 +183,18 @@ try {
 
 			exit();
 
-		case 'create':
-			if ($method === 'GET') {
-				writeLog('CREATE-PAGE');
-				(new AuthentificationPage())->execute();
-			} else {
-				writeLog('CREATE-USER', "[USER-USERNAME:{$_POST['username']}] [USER-EMAIL:{$_POST['email']}]");
-				(new CreateUser())->execute($_POST);
-			}
-			break;
-
 		case 'create-reaction':
 			redirect_if_method_not('GET', '/');
 			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:{$_GET['post-id']}] [EMOJI:{$_GET['emoji']}]");
 
 			(new CreateReaction())->execute($connected_user, $_GET);
+			break;
+
+		case 'create-user':
+			redirect_if_method_not('POST', '/');
+			writeLog('CREATE-USER', "[USER-USERNAME:{$_POST['username']}] [USER-EMAIL:{$_POST['email']}]");
+
+			(new CreateUser())->execute($_POST);
 			break;
 
 		case 'decline-friend':
@@ -243,11 +242,14 @@ try {
 			(new FriendPage())->execute();
 			break;
 
-		case 'login':
-			redirect_if_method_not('POST', '/');
-			writeLog('LOGIN-USER', "[USER:{$_POST['email']}]");
-
-			(new LoginUser())->execute($_POST);
+		case LOGIN_ROUTE:
+			if ($method === 'GET') {
+				writeLog('CREATE-PAGE');
+				(new AuthentificationPage())->execute();
+			} else {
+				writeLog('LOGIN-USER', "[USER:{$_POST['email']}]");
+				(new LoginUser())->execute($_POST);
+			}
 			break;
 
 		case 'logout':

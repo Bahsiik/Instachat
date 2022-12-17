@@ -14,32 +14,30 @@ global $second_segment ?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
-			<img src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="logo">
+			<img src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="logo">
 		</a>
 		<a class="toolbar-item" href="/">
-			<span
-				class="material-symbols-outlined <?= selectToolbarItem('/') ?>">home</span>
+			<span class="material-symbols-outlined <?= selectToolbarItem('/') ?>">home</span>
 			<span class="<?= selectToolbarItem('/') ?>">Accueil</span>
 		</a>
 		<?php
 		if (isset($connected_user)) { ?>
 		<a class="toolbar-item" href="/profile/<?= $connected_user->username ?>">
-			<span
-				class="material-symbols-outlined <?= selectToolbarItem('/profile/' . $second_segment) ?>">person</span>
+			<span class="material-symbols-outlined <?= selectToolbarItem("/profile/$second_segment") ?>">person</span>
 			<span class="<?= selectToolbarItem('/profile/' . $second_segment) ?>">Profil</span>
 		</a>
+
 		<a class="toolbar-item" href="/friends">
 			<span class="material-symbols-outlined <?= selectToolbarItem('/friends') ?>">group</span>
 			<span class="<?= selectToolbarItem('/friends') ?>">Amis</span>
-
 		</a>
+
 		<a class="toolbar-item" href="/options">
 			<span class="material-symbols-outlined <?= selectToolbarItem('/options') ?>">pending</span>
 			<span class="<?= selectToolbarItem('/options') ?>">Options</span>
-
 		</a>
-		<button class="toolbar-chat-btn">Chat</button>
 
+		<button class="toolbar-chat-btn">Chat</button>
 
 		<dialog class='chat-dialog'>
 			<div class='chat-container chat-container-dialog'>
@@ -56,8 +54,7 @@ global $second_segment ?>
 					</div>
 					<div class='chat-right'>
 						<form class='post-form' action='/chat' method='post' enctype='multipart/form-data'>
-                    <textarea class='chat-area' placeholder='Chatter quelque chose...' name='content'
-                              maxlength='400'></textarea>
+							<textarea class='chat-area' maxlength='400' placeholder='Chatter quelque chose...' name='content'></textarea>
 							<div class='chat-form-image-container'></div>
 							<div class='chat-form-bottom'>
 								<input type='file' class='chat-image-input' name='image-content' hidden>
@@ -89,13 +86,10 @@ global $second_segment ?>
 				</div>
 			</div>
 		</dialog>
-
-
 	</div>
 	<div class="user-info">
 		<a href="/profile/<?= $connected_user->username ?>">
-			<img class="user-avatar" src="../static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png"
-			     alt="avatar">
+			<img alt="avatar" class="user-avatar" src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png">
 		</a>
 		<div class="user-names-container">
 			<a href="/profile/<?= $connected_user->username ?>" class="user-display-name">

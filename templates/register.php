@@ -9,7 +9,7 @@ ob_start();
 ?>
 	<main class="container" id="container">
 		<div class="form-container sign-up-container">
-			<form action="/create" method="post">
+			<form action="/create-user" method="post">
 				<h1>Créer un compte</h1>
 				<label>Email
 					<input maxlength="320" minlength="5" name="email" placeholder="Email" required type="email"/>
@@ -20,13 +20,11 @@ ob_start();
 				</label>
 
 				<label>Mot de passe
-					<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required
-					       type="password"/>
+					<input maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
 				</label>
 
 				<label>Confirmez mot de passe
-					<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe"
-					       required type="password"/>
+					<input maxlength="64" minlength="4" name="confirm-password" placeholder="Confirmer mot de passe" required type="password"/>
 				</label>
 
 				<fieldset class="padding">
@@ -52,14 +50,10 @@ ob_start();
 			<form action="/login" method="post">
 				<h1>Se connecter</h1>
 				<label>Email ou pseudo
-					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required
-					       type="text"/>
+					<input maxlength="320" minlength="2" name="email" placeholder="Email ou pseudo" required type="text"/>
 				</label>
 				<label>Mot de passe
-					<input
-						class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe"
-						required type="password"
-					/>
+					<input class="login-password" maxlength="64" minlength="4" name="password" placeholder="Mot de passe" required type="password"/>
 				</label>
 				<button>Se connecter</button>
 			</form>
@@ -81,4 +75,4 @@ ob_start();
 	</main>
 <?php
 $content = ob_get_clean();
-require_once('layout.php');
+require_once 'layout.php';
