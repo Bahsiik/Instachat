@@ -81,6 +81,11 @@ class PostRepository {
 		$statement->execute(compact('id'));
 	}
 
+	/**
+	 * @param float $user_id
+	 * @param int $offset
+	 * @return Array<Post>
+	 */
 	public function getFeed(float $user_id, int $offset): array {
 		$statement = $this->databaseConnection->prepare("SELECT DISTINCT p.*
 		FROM instachat.posts p

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Controllers\Friends;
 
-require_once('src/models/Friend.php');
-
 use Models\FriendRepository;
 use Models\User;
 

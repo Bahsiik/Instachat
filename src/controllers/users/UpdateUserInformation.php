@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\Users;
 
+use Lib\UserException;
 use Models\User;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -27,16 +27,12 @@ class UpdateUserInformation {
 		$user_repository = new UserRepository();
 		if ($email !== $connected_user->email) {
 			$check_email = $user_repository->getUserByEmail($email);
-			if ($check_email) {
-				throw new RuntimeException('Email already registered');
-			}
+			if ($check_email) throw new UserException('Email déjà utilisé');
 		}
 
 		if ($username !== $connected_user->username) {
 			$check_username = $user_repository->getUserByUsername($username);
-			if ($check_username) {
-				throw new RuntimeException('Username already registered');
-			}
+			if ($check_username) throw new UserException("Nom d'utilisateur déjà utilisé");
 		}
 
 		if ($display_name === '') $display_name = null;

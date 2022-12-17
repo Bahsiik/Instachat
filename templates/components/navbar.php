@@ -10,7 +10,9 @@ $css[] = 'chat-container.css';
 $css[] = 'post.css';
 
 global $connected_user;
-global $second_segment ?>
+global $second_segment;
+$username = htmlspecialchars($connected_user->username);
+?>
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
@@ -24,7 +26,7 @@ global $second_segment ?>
 		if (isset($connected_user)) { ?>
 		<a class="toolbar-item" href="/profile/<?= $connected_user->username ?>">
 			<span class="material-symbols-outlined <?= selectToolbarItem("/profile/$second_segment") ?>">person</span>
-			<span class="<?= selectToolbarItem('/profile/' . $second_segment) ?>">Profil</span>
+			<span class="<?= selectToolbarItem("/profile/$second_segment") ?>">Profil</span>
 		</a>
 
 		<a class="toolbar-item" href="/friends">
@@ -48,7 +50,7 @@ global $second_segment ?>
 				</div>
 				<div class="chat-content">
 					<div class='chat-avatar'>
-						<a href="/profile/<?= $connected_user->username ?>">
+						<a href="/profile/<?= $username ?>">
 							<img src="<?= display_icon($connected_user) ?>" alt='avatar'>
 						</a>
 					</div>
@@ -66,10 +68,16 @@ global $second_segment ?>
 									for ($i = 1; $i < count(Emotion::cases()) + 1; $i++) {
 										?>
 										<label>
-											<input type="radio" name="emotion" class="emotion"
-											       value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
-											<span
-												class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
+											<input
+												class="emotion"
+												hidden
+												name="emotion"
+												required
+												type="radio"
+												value="<?= $i ?>"
+												<?= $i === 1 ? 'checked' : '' ?>
+											/>
+											<span class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
 										</label>
 										<?php
 									}
@@ -88,22 +96,15 @@ global $second_segment ?>
 		</dialog>
 	</div>
 	<div class="user-info">
-		<a href="/profile/<?= $connected_user->username ?>">
+		<a href="/profile/<?= $username ?>">
 			<img alt="avatar" class="user-avatar" src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png">
 		</a>
 		<div class="user-names-container">
-			<a href="/profile/<?= $connected_user->username ?>" class="user-display-name">
-                <span>
-                <?= $connected_user->getDisplayOrUsername() ?>
-                </span>
+			<a href="/profile/<?= $username ?>" class="user-display-name">
+				<span><?= $connected_user->getDisplayOrUsername() ?></span>
 			</a>
-			<a href="/profile/<?= $connected_user->username ?>" class="user-username">
-			<span>
-					<?php
-					$username = htmlspecialchars($connected_user->username);
-					echo "@$username"
-					?>
-                </span>
+			<a href="/profile/<?= $username ?>" class="user-username">
+				<span><?= "@$username" ?></span>
 			</a>
 		</div>
 		<a class="user-logout" href="/logout">

@@ -3,17 +3,11 @@ declare(strict_types=1);
 
 namespace Controllers;
 
-require_once 'src/controllers/comments/DeleteComment.php';
-require_once 'src/controllers/posts/DeletePost.php';
-require_once 'src/controllers/reactions/UnReact.php';
-require_once 'src/controllers/users/DeleteUser.php';
-
 use Controllers\Posts\DeletePost;
-use Controllers\Reaction\UnReact;
 use Controllers\Users\DeleteUser;
+use Lib\UserException;
 use Models\CommentRepository;
 use Models\User;
-use RuntimeException;
 use Src\Controllers\comments\DeleteComment;
 use function strtolower;
 
@@ -24,7 +18,6 @@ enum DeleteType: int {
 	case POST = 0;
 	case COMMENT = 1;
 	case USER = 2;
-	case REACTION = 3;
 
 	/**
 	 * fromName is a function that returns the DeleteType from a string
@@ -54,7 +47,7 @@ class Delete {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(User $connected_user, array $input, string $type): void {
-		$type = DeleteType::fromName($type) ?? throw new RuntimeException('Invalid input');
+		$type = DeleteType::fromName($type) ?? throw new UserException('Type de suppression invalide');
 
 		switch ($type) {
 			case DeleteType::POST:
@@ -64,17 +57,12 @@ class Delete {
 
 			case DeleteType::COMMENT:
 				$comment = (new CommentRepository())->getCommentById((float)$input['comment_id']);
-				if ($comment === null) throw new RuntimeException('Invalid input');
+				if ($comment === null) throw new UserException('Commentaire introuvable');
 				(new DeleteComment())->execute($comment);
 				break;
 
 			case DeleteType::USER:
 				(new DeleteUser())->execute($connected_user, $input);
-				break;
-
-			case DeleteType::REACTION:
-				$reaction_id = (float)$input['id'];
-				(new UnReact())->execute($connected_user, $reaction_id);
 				break;
 		}
 	}

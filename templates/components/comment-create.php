@@ -16,8 +16,16 @@ global $connected_user;
 	<div class="comment-chat-right">
 		<form action='/comment' class='create-comment' method='post'>
 			<input type="hidden" name="post-id" value="<?= $post->id ?>">
-			<textarea class='comment-chat-area' maxlength='120' minlength='2' name='content' placeholder='Commenter quelque chose...' required
-			          rows='3'></textarea>
+			<textarea
+				class="comment-chat-area"
+				maxlength="120"
+				minlength="2"
+				name="content"
+				placeholder="Commenter quelque chose..."
+				required
+				rows="3"
+			>
+			</textarea>
 			<div class="comment-bottom">
 				<div class="comment-chat-count">
 					<span class='comment-chat-count-number'>0</span>

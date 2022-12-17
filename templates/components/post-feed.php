@@ -14,22 +14,23 @@ global $post;
 global $reactions;
 $comments = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);
+$username = htmlspecialchars($user->username);
 $reactions = (new GetReactionsByPost())->execute($post->id);
 ?>
 <article class="post-container" data-post-id="<?= $post->id ?>">
 	<div class="post-avatar">
-		<a href="/profile/<?= $user->username ?>">
+		<a href="/profile/<?= $username ?>">
 			<img src="<?= $user->displayAvatar() ?>" alt='avatar'>
 		</a>
 	</div>
 	<div class="post-main">
 		<div class="post-info">
-			<a class="post-user-info" href="/profile/<?= $user->username ?>">
+			<a class="post-user-info" href="/profile/<?= $username ?>">
 				<p class="post-display-name">
 					<?= $user->getDisplayOrUsername() ?>
 				</p>
 				<p class="post-username">
-					<?= "@$user->username" ?>
+					<?= "@$username" ?>
 				</p>
 			</a>
 			<div class="post-dot-separator">·</div>

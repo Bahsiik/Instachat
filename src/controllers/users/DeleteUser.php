@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\Users;
 
+use Lib\UserException;
 use Models\User;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -20,9 +20,9 @@ class DeleteUser {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(User $user, array $input): void {
-		$password = $input['password'] ?? throw new RuntimeException('Invalid input');
+		$password = $input['password'] ?? throw new UserException('Identifiants manquants', 3);
 		$is_valid = (new UserRepository())->checkHash($user->email, $password);
-		if (!$is_valid) throw new RuntimeException('Invalid password');
+		if (!$is_valid) throw new UserException('Mot de passe incorrect', 3);
 
 		(new UserRepository())->deleteUserById($user->id);
 		redirect('/create');

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\comments;
 
+use Lib\UserException;
 use Models\CommentRepository;
 use Models\User;
-use RuntimeException;
 use VotesRepository;
 use function Lib\Utils\redirect;
 
@@ -21,7 +21,7 @@ class UpVoteComment {
 	 * @return void - redirects to the comment page
 	 */
 	public function execute(User $user, array $input): void {
-		$comment_id = isset($input['comment-id']) ? (float)$input['comment-id'] : throw new RuntimeException('Comment id is required');
+		$comment_id = isset($input['comment-id']) ? (float)$input['comment-id'] : throw new UserException('Le commentaire est invalide ou manquant');
 		$votes_repository = new VotesRepository();
 		$votes_repository->removeVote($comment_id, $user->id);
 		$votes_repository->addVote($comment_id, $user->id, true);

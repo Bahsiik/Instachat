@@ -28,6 +28,6 @@ class FriendPage {
 		$friend_requests = (new GetFriendRequests())->execute($connected_user);
 		$sent_requests = (new GetSentRequests())->execute($connected_user);
 		$trends = (new GetTrends())->execute();
-		require_once('templates/friends.php');
+		require_once 'templates/friends.php';
 	}
 }

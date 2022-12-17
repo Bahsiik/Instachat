@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Controllers\Users;
 
+use Lib\UserException;
 use Models\Background;
 use Models\Color;
 use Models\User;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -22,8 +22,8 @@ class UpdatePreferences {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(User $connected_user, array $input): void {
-		$background = $input['background'] ?? throw new RuntimeException('Invalid input');
-		$color = $input['color'] ?? throw new RuntimeException('Invalid input');
+		$background = $input['background'] ?? throw new UserException('Couleur de fond manquante', 2);
+		$color = $input['color'] ?? throw new UserException('Thème de couleur manquant', 2);
 
 		$new_user = clone $connected_user;
 		$new_user->background = Background::fromInt((int)$background);

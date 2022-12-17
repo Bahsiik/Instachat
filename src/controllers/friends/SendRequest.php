@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\Friends;
 
+use Lib\UserException;
 use Models\FriendRepository;
 use Models\User;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -20,7 +20,7 @@ class SendRequest {
 	 * @return void - redirects to the user page
 	 */
 	public function execute(User $connected_user, array $input): void {
-		if (!isset($input['requested_id'])) throw new RuntimeException('Invalid input');
+		if (!isset($input['requested_id'])) throw new UserException("L'utilisateur est invalide ou manquant");
 		(new FriendRepository())->sendRequest($connected_user->id, (float)$input['requested_id']);
 		redirect($input['redirect']);
 	}

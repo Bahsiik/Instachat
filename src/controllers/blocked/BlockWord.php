@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace Controllers\Blocked;
 
+use Lib\UserException;
 use Models\BlockedRepository;
 use Models\User;
-use RuntimeException;
 use function Lib\Utils\redirect;
+use function strtolower;
 
 /**
  * Class BlockWord is a controller that blocks a word
@@ -20,7 +21,7 @@ class BlockWord {
 	 * @return void - redirects to the user page
 	 */
 	public function execute(User $connected_user, array $input): void {
-		if (!isset($input['blocked-word'])) throw new RuntimeException('Invalid input');
+		if (!isset($input['blocked-word'])) throw new UserException('Le mot est invalide ou manquant');
 		$blocked_words = (new BlockedRepository())->getBlockedWords($connected_user->id);
 		foreach ($blocked_words as $blocked_word) if ($blocked_word->blockedWord === strtolower($input['blocked-word'])) redirect('/options');
 		(new BlockedRepository())->blockWord($connected_user->id, strtolower($input['blocked-word']));

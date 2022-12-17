@@ -25,8 +25,7 @@ global $posts; ?>
 			</div>
 			<div class="chat-right">
 				<form class="post-form" action="/chat" method="post" enctype="multipart/form-data">
-                    <textarea class="chat-area" placeholder="Chatter quelque chose..." name="content"
-                              maxlength="400"></textarea>
+					<textarea class="chat-area" maxlength="400" name="content" placeholder="Chatter quelque chose..."></textarea>
 					<div class="chat-form-image-container"></div>
 					<div class="chat-form-bottom">
 						<input type='file' class='chat-image-input' name="image-content" hidden>
@@ -38,10 +37,8 @@ global $posts; ?>
 							for ($i = 1; $i < count(Emotion::cases()) + 1; $i++) {
 								?>
 								<label>
-									<input type="radio" name="emotion" class="emotion"
-									       value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
-									<span
-										class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
+									<input type="radio" name="emotion" class="emotion" value="<?= $i ?>" <?= $i === 1 ? 'checked' : '' ?> required hidden/>
+									<span class="emoji-span twemoji-load"><?= Emotion::cases()[$i - 1]->display() ?></span>
 								</label>
 								<?php
 							}

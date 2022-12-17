@@ -8,7 +8,6 @@ use Src\Controllers\Reactions\GetReactionsByPost;
 
 $user_controller = new GetUser();
 
-
 global $connected_user, $post, $post_reactions_list, $reactions;
 $comments_count = (new CountComments())->execute($post->id);
 $user = $user_controller->execute($post->authorId);

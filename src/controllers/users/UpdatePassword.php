@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Controllers\Users;
 
+use Lib\UserException;
 use Models\User;
 use Models\UserRepository;
-use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
@@ -20,19 +20,14 @@ class UpdatePassword {
 	 * @return void - redirects to the home page
 	 */
 	public function execute(User $connected_user, array $input): void {
-		$old_password = $input['old-password'] ?? throw new RuntimeException('Invalid input');
-		$new_password = $input['new-password'] ?? throw new RuntimeException('Invalid input');
-		$confirm_password = $input['confirm-password'] ?? throw new RuntimeException('Invalid input');
+		$old_password = $input['old-password'] ?? throw new UserException('Ancien mot de passe manquant', 1);
+		$new_password = $input['new-password'] ?? throw new UserException('Nouveau mot de passe manquant', 1);
+		$confirm_password = $input['confirm-password'] ?? throw new UserException('Confirmation du mot de passe manquante', 1);
 
 		$is_password_valid = (new UserRepository())->checkHash($connected_user->username, $old_password);
 
-		if (!$is_password_valid) {
-			throw new RuntimeException('Invalid password');
-		}
-
-		if ($new_password !== $confirm_password) {
-			throw new RuntimeException('Passwords do not match');
-		}
+		if (!$is_password_valid) throw new UserException('Ancien mot de passe incorrect', 1);
+		if ($new_password !== $confirm_password) throw new UserException('Les mots de passe ne correspondent pas', 1);
 
 		$new_user = clone $connected_user;
 		$new_user->password = password_hash($new_password, PASSWORD_DEFAULT);

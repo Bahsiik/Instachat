@@ -41,13 +41,13 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 			$author_id = $comment->authorId;
 			$id = $comment->id;
 			$type = 'comment';
-			require('templates/components/context-menu.php');
+			require 'templates/components/context-menu.php';
 			?>
 		</div>
 		<div class="comment-content">
 			<?php
 			if ($comment->replyId !== null) {
-				$reply = ($comment_repository)->getCommentById($comment->replyId);
+				$reply = $comment_repository->getCommentById($comment->replyId);
 				$reply_user = (new GetUser())->execute($reply->authorId);
 				?>
 				<div class="comment-reply subtitle">
