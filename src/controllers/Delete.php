@@ -5,7 +5,7 @@ namespace Controllers;
 
 require_once 'src/controllers/comments/DeleteComment.php';
 require_once 'src/controllers/posts/DeletePost.php';
-require_once 'src/controllers/reactions/DeleteReaction.php';
+require_once 'src/controllers/reactions/UnReact.php';
 require_once 'src/controllers/users/DeleteUser.php';
 
 use Controllers\Posts\DeletePost;
@@ -17,12 +17,20 @@ use RuntimeException;
 use Src\Controllers\comments\DeleteComment;
 use function strtolower;
 
+/**
+ * Enum DeleteType is an enum that represents the type of the delete
+ */
 enum DeleteType: int {
 	case POST = 0;
 	case COMMENT = 1;
 	case USER = 2;
 	case REACTION = 3;
 
+	/**
+	 * fromString is a function that converts a string to a DeleteType
+	 * @param string $name - the name of the DeleteType
+	 * @return ?DeleteType - the DeleteType or null if not found
+	 */
 	public static function fromName(string $name): ?self {
 		$delete_types = self::cases();
 		foreach ($delete_types as $delete_type) {
@@ -34,7 +42,17 @@ enum DeleteType: int {
 	}
 }
 
+/**
+ * Class Delete is a controller that deletes an entity
+ * @package Controllers
+ */
 class Delete {
+	/**
+	 * execute is the function that deletes an entity
+	 * @param User $connected_user - the user that wants to delete the entity
+	 * @param array $input - the input of the request
+	 * @return void - redirects to the home page
+	 */
 	public function execute(User $connected_user, array $input, string $type): void {
 		$type = DeleteType::fromName($type) ?? throw new RuntimeException('Invalid input');
 

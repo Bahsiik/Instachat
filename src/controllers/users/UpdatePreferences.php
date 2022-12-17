@@ -10,7 +10,17 @@ use Models\UserRepository;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class UpdatePreferences is a controller that updates the preferences of a user
+ * @package Controllers\Users
+ */
 class UpdatePreferences {
+	/**
+	 * execute is the function that updates the preferences of a user
+	 * @param User $connected_user - the user to update
+	 * @param array $input - the input of the request
+	 * @return void - redirects to the home page
+	 */
 	public function execute(User $connected_user, array $input): void {
 		$background = $input['background'] ?? throw new RuntimeException('Invalid input');
 		$color = $input['color'] ?? throw new RuntimeException('Invalid input');

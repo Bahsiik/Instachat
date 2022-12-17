@@ -8,8 +8,18 @@ use Models\UserRepository;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class UpdateUserInformation is a controller that updates the information of a user
+ * @package Controllers\Users
+ */
 class UpdateUserInformation {
-	public function execute(User $connected_user, array $input) {
+	/**
+	 * execute is the function that updates the information of a user
+	 * @param User $connected_user - the user to update
+	 * @param array $input - the input of the request
+	 * @return void - redirects to the home page
+	 */
+	public function execute(User $connected_user, array $input): void {
 		$display_name = $input['display-name'] ?? $connected_user->display_name;
 		$email = $input['email'] ?? $connected_user->email;
 		$username = $input['username'] ?? $connected_user->username;
@@ -36,7 +46,7 @@ class UpdateUserInformation {
 		$new_user->username = $username;
 		$new_user->email = $email;
 
-		$valid = ($user_repository)->updateUser($new_user);
+		$valid = $user_repository->updateUser($new_user);
 		if ($valid) redirect('/options');
 	}
 }

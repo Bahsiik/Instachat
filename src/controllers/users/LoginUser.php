@@ -3,16 +3,21 @@ declare(strict_types=1);
 
 namespace Controllers\Users;
 
-require_once('src/models/User.php');
+require_once 'src/models/User.php';
 
-use Exception;
 use Models\UserRepository;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class LoginUser is a controller that logs in a user
+ * @package Controllers\Users
+ */
 class LoginUser {
 	/**
-	 * @throws Exception
+	 * execute is the function that logs in a user
+	 * @param array $input - the input of the request
+	 * @return void - redirects to the home page
 	 */
 	public function execute(array $input): void {
 		$log_in = ['email', 'password'];

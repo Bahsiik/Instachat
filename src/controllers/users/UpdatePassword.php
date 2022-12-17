@@ -8,7 +8,17 @@ use Models\UserRepository;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class UpdatePassword is a controller that updates the password of a user
+ * @package Controllers\Users
+ */
 class UpdatePassword {
+	/**
+	 * execute is the function that updates the password of a user
+	 * @param User $connected_user - the user to update
+	 * @param array $input - the input of the request
+	 * @return void - redirects to the home page
+	 */
 	public function execute(User $connected_user, array $input): void {
 		$old_password = $input['old-password'] ?? throw new RuntimeException('Invalid input');
 		$new_password = $input['new-password'] ?? throw new RuntimeException('Invalid input');
