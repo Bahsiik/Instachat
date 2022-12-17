@@ -9,7 +9,17 @@ use Models\User;
 use RuntimeException;
 use function Lib\Utils\redirect;
 
+/**
+ * Class BlockUser is a controller that blocks a user
+ * @package Controllers\Blocked
+ */
 class BlockUser {
+	/**
+	 * execute is the function that blocks a user
+	 * @param User $connected_user - the user that blocks the other user
+	 * @param array $input - the data of the user to block
+	 * @return void - redirects to the user page
+	 */
 	public function execute(User $connected_user, array $input): void {
 		if (!isset($input['blocked_id'])) throw new RuntimeException('Invalid input');
 		(new BlockedRepository())->blockUser($connected_user->id, (float)$input['blocked_id']);

@@ -8,7 +8,7 @@ use Models\User;
 use function Lib\Utils\redirect;
 
 /**
- * Class AddReaction is a controller that adds a reaction to a post
+ * Class CreateReaction is a controller that creates a reaction
  * @package Controllers\Reactions
  */
 class CreateReaction {

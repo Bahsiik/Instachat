@@ -9,7 +9,7 @@ use RuntimeException;
 use function Lib\Utils\redirect;
 
 /**
- * Class AcceptRequest is a controller that accepts a friend request
+ * Class CancelRequest is a controller that cancels a friend request
  * @package Controllers\Friends
  */
 class CancelRequest {

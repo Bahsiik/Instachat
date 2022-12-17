@@ -8,7 +8,7 @@ use Models\User;
 use function Lib\Utils\redirect;
 
 /**
- * Class AddReaction is a controller that adds a reaction to a post
+ * Class UnReact is a controller that deletes a reaction
  * @package Controllers\Reactions
  */
 class UnReact {

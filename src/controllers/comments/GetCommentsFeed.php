@@ -7,7 +7,7 @@ use Models\Comment;
 use Models\CommentRepository;
 
 /**
- * Class DeleteComment is a controller that deletes a comment
+ * Class GetCommentsFeed is a controller that gets the comments feed
  * @package Src\Controllers\comments
  */
 class GetCommentsFeed {

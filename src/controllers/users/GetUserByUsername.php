@@ -7,7 +7,7 @@ use Models\User;
 use Models\UserRepository;
 
 /**
- * Class GetUser is a controller that gets a user
+ * Class GetUserByUsername is a controller that gets a user by its username
  * @package Controllers\Users
  */
 class GetUserByUsername {
