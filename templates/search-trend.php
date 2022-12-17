@@ -5,7 +5,7 @@ $css = ['search-trend.css', 'reaction.css'];
 $js = ['posts.js'];
 
 ob_start();
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 
 global $searched_posts, $searched_trend;
 

@@ -9,7 +9,7 @@ $css = ['homepage.css', 'reaction.css'];
 $js = ['posts.js'];
 
 ob_start();
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 
 global $connected_user;
 global $posts; ?>

@@ -15,7 +15,7 @@ use function Lib\Utils\display_icon;
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel='icon' href='<?= display_icon($connected_user ?? null) ?>'>
 		<link rel='stylesheet' href='/static/styles/style.css'>
-		<script defer type="module" src="/static/scripts/toolbar.js"></script>
+		<script defer type="module" src="/static/scripts/navbar.js"></script>
 
 		<?php
 		global $connected_user;

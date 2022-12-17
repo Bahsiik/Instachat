@@ -6,11 +6,11 @@ use Controllers\Users\GetUser;
 $friend_controller = new GetUser();
 
 $title = 'Instachat | Amis';
-$css = ['friends.css', 'toolbar.css'];
+$css = ['friends.css', 'navbar.css'];
 $js = ['tabbed-menu.js', 'friends.js'];
 
 ob_start();
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 
 global $connected_user, $friend_list, $friend_requests, $sent_requests;
 ?>

@@ -8,12 +8,12 @@ use Models\Color;
 $user_controller = new GetUser();
 
 $title = 'Options';
-$css = ['options.css', 'toolbar.css'];
+$css = ['options.css', 'navbar.css'];
 $js = ['options.js', 'tabbed-menu.js'];
 
 ob_start();
 global $connected_user, $blocked_users, $blocked_words;
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 ?>
 	<main class="options">
 		<div class="title">

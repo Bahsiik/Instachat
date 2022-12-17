@@ -5,7 +5,7 @@ use Models\Emotion;
 use function Lib\Utils\display_icon;
 use function Lib\Utils\selectToolbarItem;
 
-$css[] = 'toolbar.css';
+$css[] = 'navbar.css';
 $css[] = 'chat-container.css';
 $css[] = 'post.css';
 

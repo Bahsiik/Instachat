@@ -8,7 +8,7 @@ $css = ['post-page.css', 'comment.css', 'reaction.css'];
 $js = ['anchors.js', 'posts.js', 'popup.js', 'fetch-feed.js', 'comments.js'];
 
 ob_start();
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 
 global $post, $connected_user;
 $comments = (new GetCommentsFeed())->execute($post->id);

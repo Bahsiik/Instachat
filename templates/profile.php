@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-$css = ['profile.css', 'reaction.css', 'toolbar.css'];
+$css = ['profile.css', 'reaction.css', 'navbar.css'];
 $js = ['fetch-feed.js', 'profile.js', 'posts.js'];
 
 ob_start();
-require_once 'components/toolbar.php';
+require_once 'components/navbar.php';
 
 global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $is_connected_user_blocked, $is_user_blocked, $reactions_list, $trends;
 $username = htmlspecialchars($user->username);
