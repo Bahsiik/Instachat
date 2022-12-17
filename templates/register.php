@@ -16,7 +16,7 @@ ob_start();
 				</label>
 
 				<label>Pseudo
-					<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text"/>
+					<input maxlength="20" minlength="2" name="username" placeholder="Pseudo" required type="text" pattern="[a-zA-Z0-9_]{2,20}"/>
 				</label>
 
 				<label>Mot de passe
