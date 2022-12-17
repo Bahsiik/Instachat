@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			const link = target.closest('.comment-share').dataset.link;
 			await copyToClipboard(window.location.origin + link);
 		}
+
+		if (target.closest('.comment-replies.action-btn')) {
+			console.log('replies');
+			replyButton(target.closest('.comment-replies.action-btn'));
+		}
 	});
 
 	function updateChatButton() {
@@ -40,6 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		updateChatButton()
 	});
 });
+
+/**
+ * @param button {HTMLButtonElement}
+ */
+function replyButton(button) {
+	const commentId = button.closest('form').querySelector('input[name="comment-id"]').value;
+	const replyUsername = button.closest('.comment-container').querySelector('.comment-username').textContent;
+	const reply = document.querySelector('.create-comment-reply');
+	reply.innerHTML = '';
+
+	const replySpan = document.createElement('span');
+	replySpan.classList.add('subtitle');
+	replySpan.innerHTML = `Répondre à <a class="create-comment-reply-author" href="#comment-${commentId}">${replyUsername}</a>`;
+
+	const deleteSymbol = document.createElement('span');
+	deleteSymbol.classList.add('material-symbols-outlined');
+	deleteSymbol.classList.add('chat-delete-image-symbol');
+	deleteSymbol.textContent = 'close';
+	deleteSymbol.addEventListener('click', () => reply.innerHTML = '');
+
+	const replyInput = document.createElement('input');
+	replyInput.type = 'hidden';
+	replyInput.name = 'reply-to';
+	replyInput.value = commentId;
+	reply.append(replySpan, deleteSymbol, replyInput);
+
+	const commentChatArea = document.querySelector('.comment-chat-area');
+	commentChatArea.focus();
+}
 
 async function copyToClipboard(text) {
 	await navigator.clipboard.writeText(text);

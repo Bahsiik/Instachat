@@ -15,6 +15,7 @@ global $connected_user;
 	</div>
 	<div class="comment-chat-right">
 		<form action='/comment' class='create-comment' method='post'>
+			<span class='create-comment-reply'></span>
 			<input type="hidden" name="post-id" value="<?= $post->id ?>">
 			<textarea
 				class="comment-chat-area"
@@ -24,8 +25,7 @@ global $connected_user;
 				placeholder="Commenter quelque chose..."
 				required
 				rows="3"
-			>
-			</textarea>
+			></textarea>
 			<div class="comment-bottom">
 				<div class="comment-chat-count">
 					<span class='comment-chat-count-number'>0</span>

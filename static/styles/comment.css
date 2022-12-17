@@ -17,7 +17,7 @@
 .comment-main {
 	display: flex;
 	flex-direction: column;
-	gap: .5rem;
+	gap: .4rem;
 	width: 100%;
 }
 
@@ -28,10 +28,11 @@
 }
 
 .comment-avatar img {
+	--size: 48px;
 	border-radius: 100vmax;
-	height: 48px;
+	height: var(--size);
 	object-fit: contain;
-	width: 48px;
+	width: var(--size);
 }
 
 .comment-info {
@@ -43,7 +44,7 @@
 	text-align: center;
 }
 
-.comment-info:nth-of-type(1), .comment-info:nth-of-type(2), .comment-info:nth-of-type(3) {
+.comment-info > *:not(:nth-child(5)) {
 	margin: 0;
 }
 
@@ -73,6 +74,7 @@
 .comment-reply {
 	display: flex;
 	gap: .5rem;
+	margin-bottom: .3rem;
 }
 
 .comment-reply p {
@@ -162,6 +164,15 @@
 	flex-direction: row;
 	gap: 12px;
 	padding: 1rem;
+}
+
+.create-comment-reply {
+	align-items: center;
+	display: flex;
+}
+
+.create-comment-reply-author {
+	color: var(--accent-color);
 }
 
 .comment-chat-avatar > a {

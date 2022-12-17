@@ -46,7 +46,7 @@
 	color: var(--fg-secondary);
 	font-size: 1.4rem !important;
 	margin-right: 5px;
-	padding: 5px;
+	padding: 3px;
 	transition: all .3s;
 }
 

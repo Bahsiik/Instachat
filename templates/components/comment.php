@@ -44,23 +44,23 @@ $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_r
 			require 'templates/components/context-menu.php';
 			?>
 		</div>
-		<div class="comment-content">
-			<?php
-			if ($comment->replyId !== null) {
-				$reply = $comment_repository->getCommentById($comment->replyId);
-				$reply_user = (new GetUser())->execute($reply->authorId);
-				?>
-				<div class="comment-reply subtitle">
-					<p class="comment-reply-display-name">En réponse à
-						<span class="comment-reply-author">@<?= htmlspecialchars($reply_user->username) ?></span>
-					</p>
-					<p class="comment-reply-content">
-						"<?= substr($reply->content, 0, 50) ?>"
-					</p>
-				</div>
-				<?php
-			}
+		<?php
+		if ($comment->replyId !== null) {
+			$reply = $comment_repository->getCommentById($comment->replyId);
+			$reply_user = (new GetUser())->execute($reply->authorId);
 			?>
+			<a class="comment-reply subtitle" href="#comment-<?= $reply->id ?>">
+				<p class="comment-reply-display-name">En réponse à
+					<span class="comment-reply-author">@<?= htmlspecialchars($reply_user->username) ?></span>
+				</p>
+				<p class="comment-reply-content">
+					"<?= substr($reply->content, 0, 50) ?>"
+				</p>
+			</a>
+			<?php
+		}
+		?>
+		<div class="comment-content">
 			<p class="comment-content"><?= htmlspecialchars($comment->content) ?></p>
 		</div>
 		<form method="post">
