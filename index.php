@@ -122,6 +122,7 @@ try {
 
 	switch ($first_segment) {
 		default:
+			if ($first_segment !== '') redirect('/');
 			global $posts, $trends;
 			$posts = (new GetFeed())->execute($connected_user);
 			$trends = (new GetTrends())->execute();
