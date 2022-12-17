@@ -5,6 +5,7 @@ namespace Controllers\Posts;
 
 require_once 'src/models/Post.php';
 
+use Controllers\Blocked\GetBlockedWords;
 use Models\Post;
 use Models\PostRepository;
 
@@ -18,6 +19,9 @@ class GetTrends {
 	 * @return Array<Post> - the trends
 	 */
 	public function execute(): array {
-		return (new PostRepository())->getTrends();
+		global $connected_user, $blocked_words;
+		$blocked_words_raw = (new GetBlockedWords())->execute($connected_user);
+		$blocked_words = array_map(fn($blocked_word) => $blocked_word->blockedWord, $blocked_words_raw);
+		return (new PostRepository())->getTrends($blocked_words);
 	}
 }

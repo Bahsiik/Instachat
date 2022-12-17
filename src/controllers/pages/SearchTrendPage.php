@@ -20,18 +20,19 @@ class SearchTrendPage {
 	 * @return void - the search trend page
 	 */
 	public function execute(): void {
-		global $connected_user, $searched_posts, $blocked_users, $blocked_words;
+		global $connected_user, $searched_posts, $blocked_users;
 
 		$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 
 		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
 
-		$blocked_words = (new GetBlockedWords())->execute($connected_user);
-
 
 		foreach ($searched_posts as $key => $post) {
-			foreach ($blocked_users as $blocked_user) if ($post->authorId === $blocked_user->blockedId) unset($searched_posts[$key]);
-			foreach ($blocked_words as $blocked_word) if (mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false && $post->authorId !== $connected_user->id) unset($searched_posts[$key]);
+			foreach ($blocked_users as $blocked_user) {
+				if ($post->authorId === $blocked_user->blockedId) {
+					unset($searched_posts[$key]);
+				}
+			}
 		}
 
 		require_once 'templates/search-trend.php';

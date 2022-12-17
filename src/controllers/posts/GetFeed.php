@@ -24,7 +24,11 @@ class GetFeed {
 
 		$blocked_words = (new GetBlockedWords())->execute($user);
 
-		foreach ($posts as $post) foreach ($blocked_words as $blocked_word) if (mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false && $post->authorId !== $user->id) unset($posts[array_search($post, $posts)]);
+		foreach ($posts as $post) foreach ($blocked_words as $blocked_word) {
+			if (mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false && $post->authorId !== $user->id) {
+				unset($posts[array_search($post, $posts)]);
+			}
+		}
 
 		return $posts;
 	}

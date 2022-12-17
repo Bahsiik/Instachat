@@ -123,7 +123,7 @@ class PostRepository {
 		return $posts;
 	}
 
-	public function getTrends(): array {
+	public function getTrends(array $blocked_words): array {
 		$statement = $this->databaseConnection->prepare('SELECT content FROM posts WHERE creation_date > DATE_SUB(NOW(), INTERVAL 1 DAY) AND deleted = FALSE');
 		$statement->execute();
 		$posts = $statement->fetchAll(PDO::FETCH_COLUMN);
@@ -134,6 +134,7 @@ class PostRepository {
 		}
 		$words = array_filter($words, fn($word) => strlen($word) > 3);
 		$words = array_map(fn($word) => strtolower($word), $words);
+		$words = array_diff($words, $blocked_words);
 		$words = array_map('ucfirst', $words);
 		$words = array_count_values($words);
 		arsort($words);
