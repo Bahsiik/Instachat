@@ -245,6 +245,7 @@ try {
 
 		case LOGIN_ROUTE:
 			if ($method === 'GET') {
+				if ($connected_user) redirect('/');
 				writeLog('CREATE-PAGE');
 				(new AuthentificationPage())->execute();
 			} else {
