@@ -106,6 +106,21 @@ class BlockedRepository {
 		return $blocked ?? [];
 	}
 
+
+	public function getBlockers(float $blocked_id): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocked_id = :blocked_id AND blocked_id IS NOT NULL');
+		$statement->execute(compact('blocked_id'));
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$blocked[] = new Blocked(
+				$row['blocker_id'],
+				$row['blocked_id'],
+				$row['blocked_word'],
+				$row['blocked_date'],
+			);
+		}
+		return $blocked ?? [];
+	}
+
 	/**
 	 * getBlockedWords is the function that gets the blocked words of a user
 	 * @param float $blocker_id - the id of the user that blocks the words
