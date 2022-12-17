@@ -2,6 +2,7 @@
 	align-items: center;
 	display: flex;
 	flex-direction: row;
+	padding-bottom: .8rem;
 }
 
 .reaction {

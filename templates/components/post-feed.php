@@ -75,8 +75,9 @@ $reactions = (new GetReactionsByPost())->execute($post->id);
 			<button class="post-reaction-btn action-btn" value="<?= $post->id ?>">
 				<span class="material-symbols-outlined action-btn-color">add_reaction</span>
 			</button>
-			<?php
-			require 'reactions.php' ?>
+
 		</div>
+		<?php
+		require 'reactions.php' ?>
 	</div>
 </article>
