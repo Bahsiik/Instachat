@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Models;
 
-require_once('src/lib/DatabaseConnection.php');
+require_once 'src/lib/DatabaseConnection.php';
 
 use Database\DatabaseConnection;
 use DateTime;
@@ -60,29 +60,12 @@ enum Background: int {
 	}
 }
 
-enum FontSize: int {
-	case Small = 0;
-	case Medium = 1;
-	case Large = 2;
-	case ExtraLarge = 3;
-
-	public static function fromInt(int $value): self {
-		return match ($value) {
-			1 => self::Medium,
-			2 => self::Large,
-			3 => self::ExtraLarge,
-			default => self::Small,
-		};
-	}
-}
-
 class User {
 	public ?Blob $avatar = null;
 	public Background $background;
 	public DateTime $birthDate;
 	public Color $color;
 	public DateTime $createdAt;
-	public FontSize $fontSize;
 
 	public function __construct(
 		public float   $id,
@@ -92,7 +75,6 @@ class User {
 		string         $createdAt,
 		string         $birthDate,
 		public ?string $display_name,
-		int            $fontSize,
 		int            $color,
 		int            $background,
 		public string  $gender,
@@ -102,7 +84,6 @@ class User {
 		$this->background = Background::fromInt($background);
 		$this->birthDate = date_create_from_format('Y-m-d', $birthDate);
 		$this->createdAt = date_create_from_format('Y-m-d H:i:s', $createdAt);
-		$this->fontSize = FontSize::fromInt($fontSize);
 		$this->color = Color::fromInt($color);
 		if ($avatar !== null) {
 			$this->avatar = new Blob($avatar);
@@ -232,7 +213,6 @@ class UserRepository {
 				color = :color,
 				display_name = :display_name,
 				email = :email,
-				fontsize = :font_size,
 				sexe = :gender,
 				password = :password,
 				username = :username
@@ -248,15 +228,11 @@ class UserRepository {
 			'color' => $user->color->value,
 			'display_name' => $user->display_name,
 			'email' => $user->email,
-			'font_size' => $user->fontSize->value,
 			'gender' => $user->gender,
 			'password' => $user->password,
 			'username' => $user->username,
 			'id' => $user->id,
 		]);
-
-		var_dump($result);
-
 
 		return $result === false ? throw new RuntimeException('Could not update user') : true;
 	}

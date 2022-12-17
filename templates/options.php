@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Controllers\Users\GetUser;
 use Models\Background;
 use Models\Color;
-use Models\FontSize;
 
 $user_controller = new GetUser();
 
@@ -227,25 +226,6 @@ require_once 'components/toolbar.php';
 				</div>
 
 				<form action="/update-preferences" class="options-group" method="post">
-					<h3>Police</h3>
-					<div class="font-options">
-						<p>aA</p>
-						<div class="font-size">
-							<input type="range" min="1" max="4" name="font-size" step="1" value="<?= $connected_user->fontSize->value ?>" list="font-steps">
-							<div class="font-size-rounds">
-								<?php
-								foreach (FontSize::cases() as $font) {
-									$selected = $font === $connected_user->fontSize ? ' selected' : '';
-									echo <<<HTML
-										<span class="font-size-round$selected"></span>
-									HTML;
-								}
-								?>
-							</div>
-						</div>
-						<p>aA</p>
-					</div>
-
 					<h3>Couleurs</h3>
 					<div class="color-options">
 						<?php

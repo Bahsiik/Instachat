@@ -163,56 +163,6 @@ button[type='submit']:hover {
 	justify-content: center;
 }
 
-.font-options {
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-}
-
-.font-options > p {
-	margin: 0;
-}
-
-.font-options > p:last-child {
-	font-size: 1.5rem;
-}
-
-.font-size {
-	align-items: center;
-	display: grid;
-	justify-items: center;
-	width: 80%;
-}
-
-.font-size > * {
-	grid-column-start: 1;
-	grid-row-start: 1;
-}
-
-.font-size > input {
-	color: var(--input-radio);
-	margin: 0;
-	width: 90%;
-}
-
-.font-size-rounds {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	pointer-events: none;
-	width: 82%;
-	z-index: 100;
-}
-
-.font-size-round {
-	--size: .9rem;
-	background-color: var(--input-radio);
-	border-radius: 50%;
-	height: var(--size);
-	user-select: none;
-	width: var(--size);
-}
-
 .color-options {
 	display: flex;
 	flex-direction: row;
