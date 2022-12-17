@@ -35,7 +35,7 @@ global $trends; ?>
 		if (count($trends) > 5) {
 			?>
 			<div class="show-more">
-				<button class="show-more-button" onclick="changeTrendsDisplay()">Afficher plus</button>
+				<button class="show-more-button">Afficher plus</button>
 			</div>
 			<?php
 		}

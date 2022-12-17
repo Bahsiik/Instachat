@@ -1,3 +1,6 @@
+const button = document.getElementsByClassName("show-more-button")[0];
+button.addEventListener("click", changeTrendsDisplay);
+
 function changeTrendsDisplay() {
 	const text = event.target.className;
 	switch (text) {
