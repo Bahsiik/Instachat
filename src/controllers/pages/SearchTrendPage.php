@@ -33,6 +33,6 @@ class SearchTrendPage {
 			}
 		}
 
-		require_once 'templates/searchtrend.php';
+		require_once 'templates/search-trend.php';
 	}
 }
