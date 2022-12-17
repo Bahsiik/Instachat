@@ -17,8 +17,8 @@ global $connected_user, $friend_list, $friend_requests, $sent_requests;
 	<main class="friends-tab-container tabbed-menu">
 		<div class="tabs">
 			<div class="tab friends selected"><p>Amis</p></div>
-			<div class="tab waitings"><p>Demandes</p></div>
-			<div class="tab requests"><p>Requêtes</p></div>
+			<div class="tab waitings"><p>Demandes reçues</p></div>
+			<div class="tab requests"><p>Demandes envoyés</p></div>
 		</div>
 		<div class="content">
 			<div class="friends-list selected">
