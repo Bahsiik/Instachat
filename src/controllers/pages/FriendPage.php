@@ -13,7 +13,15 @@ use Controllers\Friends\GetFriends;
 use Controllers\Friends\GetSentRequests;
 use Controllers\Posts\GetTrends;
 
+/**
+ * Class FriendPage is a controller that displays the friend page
+ * @package Controllers\Pages
+ */
 class FriendPage {
+	/**
+	 * execute is the function that displays the friend page
+	 * @return void - the friend page
+	 */
 	public function execute(): void {
 		global $connected_user, $friend_list, $friend_requests, $sent_requests, $trends;
 		$friend_list = (new GetFriends())->execute($connected_user);

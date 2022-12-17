@@ -9,14 +9,21 @@ use Controllers\Posts\GetPostContaining;
 require_once 'src/controllers/blocked/GetBlockedUsers.php';
 require_once 'src/controllers/posts/GetPostContaining.php';
 
+/**
+ * Class SearchTrendPage is a controller that displays the search trend page
+ * @package Controllers\Pages
+ */
 class SearchTrendPage {
+	/**
+	 * execute is the function that displays the search trend page
+	 * @return void - the search trend page
+	 */
 	public function execute(): void {
 		global $connected_user, $searched_posts, $blocked_users;
 
 		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
 
 		$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
-
 
 		foreach ($searched_posts as $key => $post) {
 			foreach ($blocked_users as $blocked_user) {
@@ -25,7 +32,6 @@ class SearchTrendPage {
 				}
 			}
 		}
-
 
 		require_once 'templates/searchtrend.php';
 	}

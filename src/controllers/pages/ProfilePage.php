@@ -18,12 +18,18 @@ use Controllers\Friends\GetFriendRequests;
 use Controllers\Friends\GetFriends;
 use Controllers\Friends\GetSentRequests;
 use Controllers\Posts\GetPostsByUser;
-
 use Controllers\Posts\GetTrends;
 use Controllers\Reaction\GetReactionsByAuthor;
 
-
+/**
+ * Class ProfilePage is a controller that displays the profile page
+ * @package Controllers\Pages
+ */
 class ProfilePage {
+	/**
+	 * execute is the function that displays the profile page
+	 * @return void - the profile page
+	 */
 	public function execute(): void {
 		global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $user_posts, $is_connected_user_blocked, $is_user_blocked, $friendship, $reactions_list, $trends;
 
