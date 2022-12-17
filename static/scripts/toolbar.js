@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const chatDialog = document.querySelector('.chat-dialog');
 	const chatDialogCloseBtn = document.querySelector('.close-chat-dialog-btn');
 
-	chatBtn.addEventListener('click', () => chatDialog.showModal());
-
-	chatDialogCloseBtn.addEventListener('click', () => chatDialog.close());
+	chatBtn?.addEventListener('click', () => chatDialog.showModal());
+	chatDialogCloseBtn?.addEventListener('click', () => chatDialog.close());
 });
