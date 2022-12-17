@@ -22,15 +22,16 @@ $has_up_voted = $has_voted && $current_user_vote->isUpvote;
 
 $comment_repository = new CommentRepository();
 $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_repository->getCommentsReplyingRecursively($comment->id)) : 0;
+$username = htmlspecialchars($comment_user->username);
 ?>
 <article class="comment-container" id="comment-<?= $comment->id ?>">
-	<div class="comment-avatar">
+	<a class="comment-avatar" href="/profile/<?= $username ?>">
 		<img alt="profile picture" src="<?= $comment_user->displayAvatar() ?>">
-	</div>
+	</a>
 	<div class="comment-main">
 		<div class="comment-info">
 			<p class="comment-display-name"><?= $comment_user->getDisplayOrUsername() ?></p>
-			<p class="comment-username">@<?= htmlspecialchars($comment_user->username) ?></p>
+			<a class="comment-username" href="/profile/<?= $username ?>">@<?= $username ?></a>
 			<p class="subtitle">·</p>
 			<div class="comment-date subtitle">
 				<span><?php
