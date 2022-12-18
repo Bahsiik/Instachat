@@ -85,6 +85,7 @@ use Controllers\Pages\SearchPage;
 use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
+use Controllers\Posts\GetPostsBySearch;
 use Controllers\Posts\GetPostsByUser;
 use Controllers\Posts\GetPostsReactedByUser;
 use Controllers\Posts\GetTrends;
@@ -94,6 +95,7 @@ use Controllers\Reactions\AddReaction;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
 use Controllers\Users\GetUserByUsername;
+use Controllers\Users\GetUsersBySearch;
 use Controllers\Users\LoginUser;
 use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
@@ -335,6 +337,15 @@ try {
 		case 'search':
 			redirect_if_method_not('GET', '/');
 			writeLog('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
+			$input_searched = $_GET['q'];
+
+			if (isset($_GET['offsetSearchedPosts'])) {
+				$posts_searched = (new GetPostsBySearch())->execute($input_searched);
+				global $post;
+				foreach ($posts_searched as $post) require 'templates/components/post-feed.php';
+				exit();
+			}
+
 
 			(new SearchPage())->execute();
 			break;

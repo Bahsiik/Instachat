@@ -7,6 +7,6 @@ use Models\PostRepository;
 
 class GetPostsBySearch {
 	public function execute(string $input): array {
-		return (new PostRepository())->getPostsBySearch($input);
+		return (new PostRepository())->getPostsBySearch($input, (int)($_GET['offsetSearchedPosts'] ?? 0));
 	}
 }

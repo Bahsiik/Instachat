@@ -4,9 +4,10 @@ declare(strict_types=1);
 global $connected_user, $users_searched, $posts_searched, $input_searched, $trends;
 
 $title = $input_searched;
-$css = ['search.css', 'navbar.css', 'reaction.css'];
-$js = ['posts.js', 'tabbed-menu.js'];
+$css = ['search.css', 'reaction.css', 'navbar.css'];
+$js = ['fetch-feed.js', 'search.js', 'posts.js', 'tabbed-menu.js'];
 
+//echo $_GET['q'];
 ob_start();
 require_once 'components/navbar.php';
 ?>

@@ -253,8 +253,8 @@ class PostRepository {
 	 * @param string $search - The word to search for.
 	 * @return array - The posts containing the given word.
 	 */
-	public function getPostsBySearch(string $search): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE ORDER BY creation_date DESC');
+	public function getPostsBySearch(string $search, int $offset): array {
+		$statement = $this->databaseConnection->prepare("SELECT * FROM posts WHERE content LIKE :content AND deleted = FALSE ORDER BY creation_date DESC LIMIT $offset, 5");
 		$statement->execute(['content' => "%$search%"]);
 		$posts = [];
 

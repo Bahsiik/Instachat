@@ -13,15 +13,12 @@ require_once 'src/controllers/posts/GetTrends.php';
 
 class SearchPage {
 	public function execute() {
-		global $connected_user, $users_searched, $posts_searched, $input_searched, $trends;
-
+		global $input_searched, $posts_searched, $users_searched, $trends;
 		$input_searched = $_GET['q'];
 
-		$users_searched = (new GetUsersBySearch())->execute($input_searched);
 		$posts_searched = (new GetPostsBySearch())->execute($input_searched);
-
+		$users_searched = (new GetUsersBySearch())->execute($input_searched);
 		$trends = (new GetTrends())->execute();
-
 
 		require_once 'templates/search.php';
 	}
