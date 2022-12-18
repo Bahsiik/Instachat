@@ -1,143 +1,119 @@
-create table users
+CREATE TABLE IF NOT EXISTS instachat.users
 (
-    id           bigint unsigned auto_increment
-        primary key,
-    username     varchar(20)                      not null,
-    password     varchar(64)                      not null,
-    avatar       mediumblob                       null,
-    created_date timestamp        default (now()) not null,
-    birth_date   date                             not null,
-    display_name varchar(30)                      null,
-    fontsize     tinyint unsigned default (0)     not null,
-    color        tinyint unsigned default (0)     not null,
-    background   tinyint unsigned default (0)     not null,
-    sexe         varchar(20)                      not null,
-    email        varchar(320)                     not null,
-    bio          varchar(200)                     null
-)
-    engine = InnoDB;
+	id           bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	username     varchar(20)                      NOT NULL,
+	password     varchar(64)                      NOT NULL,
+	avatar       mediumblob                       NULL,
+	created_date timestamp        DEFAULT (NOW()) NOT NULL,
+	birth_date   date                             NOT NULL,
+	display_name varchar(30)                      NULL,
+	color        tinyint UNSIGNED DEFAULT (0)     NOT NULL,
+	background   tinyint UNSIGNED DEFAULT '1'     NOT NULL,
+	sexe         varchar(20)                      NOT NULL,
+	email        varchar(320)                     NOT NULL,
+	bio          varchar(200)                     NULL
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
 
-create table blocked
+CREATE TABLE IF NOT EXISTS instachat.blocked
 (
-    blocker_id   bigint unsigned not null,
-    blocked_id   bigint unsigned null,
-    blocked_word varchar(100)    null,
-    constraint fk_blocked_user
-        foreign key (blocked_id) references users (id),
-    constraint fk_blocker_user
-        foreign key (blocker_id) references users (id)
-)
-    engine = InnoDB;
+	blocker_id   bigint UNSIGNED           NOT NULL,
+	blocked_id   bigint UNSIGNED           NULL,
+	blocked_word varchar(100)              NULL,
+	blocked_date timestamp DEFAULT (NOW()) NOT NULL,
+	CONSTRAINT fk_blocked_user FOREIGN KEY (blocked_id) REFERENCES instachat.users (id),
+	CONSTRAINT fk_blocker_user FOREIGN KEY (blocker_id) REFERENCES instachat.users (id)
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
 
-create index idx_blocked_blocked
-    on blocked (blocked_id);
+CREATE INDEX idx_blocked_blocked ON instachat.blocked (blocked_id);
 
-create table friends
+CREATE TABLE IF NOT EXISTS instachat.friends
 (
-    requested_id  bigint unsigned            not null,
-    accepted      tinyint(1) default (false) null comment 'null = not viewed, false = rejected, true = accepted',
-    send_date     timestamp  default (now()) not null,
-    response_date timestamp  default (now()) null,
-    requester_id  bigint unsigned            not null,
-    constraint fk_friends_users
-        foreign key (requester_id) references users (id),
-    constraint fk_friends_users_0
-        foreign key (requested_id) references users (id)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
+	requester_id  bigint UNSIGNED           NOT NULL PRIMARY KEY,
+	requested_id  bigint UNSIGNED           NOT NULL,
+	accepted      tinyint(1)                NULL COMMENT 'null = not viewed, false = rejected, true = accepted',
+	send_date     timestamp DEFAULT (NOW()) NOT NULL,
+	response_date timestamp DEFAULT (NOW()) NULL,
+	CONSTRAINT fk_friends_users FOREIGN KEY (requester_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_friends_users_0 FOREIGN KEY (requested_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
 
-create index idx_friends_requested
-    on friends (requested_id);
+CREATE INDEX idx_friends_requested ON instachat.friends (requested_id);
 
-create table posts
+CREATE TABLE IF NOT EXISTS instachat.posts
 (
-    id            bigint unsigned auto_increment
-        primary key,
-    content       varchar(400)               not null,
-    author_id     bigint unsigned            not null,
-    creation_date timestamp  default (now()) not null,
-    photo         mediumblob                 null,
-    emotion       smallint unsigned          not null,
-    deleted       tinyint(1) default 0       not null,
-    constraint fk_posts_users
-        foreign key (author_id) references users (id)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
+	id            bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	content       varchar(400)               NOT NULL,
+	author_id     bigint UNSIGNED            NOT NULL,
+	creation_date timestamp  DEFAULT (NOW()) NOT NULL,
+	photo         mediumblob                 NULL,
+	emotion       smallint UNSIGNED          NOT NULL,
+	deleted       tinyint(1) DEFAULT 0       NOT NULL,
+	CONSTRAINT fk_posts_users FOREIGN KEY (author_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
 
-create table comments
+CREATE TABLE IF NOT EXISTS instachat.comments
 (
-    id            bigint unsigned auto_increment
-        primary key,
-    content       varchar(120)                 not null,
-    upvotes       int unsigned default (0)     not null,
-    downvotes     int unsigned default (0)     not null,
-    reply_id      bigint unsigned              null,
-    post_id       bigint unsigned              not null,
-    creation_date timestamp    default (now()) not null,
-    author_id     bigint unsigned              not null,
-    deleted       tinyint(1)   default 0       not null,
-    constraint fk_comments_comments
-        foreign key (reply_id) references comments (id)
-            on update cascade on delete cascade,
-    constraint fk_comments_posts
-        foreign key (id) references posts (id)
-            on update cascade on delete cascade,
-    constraint fk_comments_users
-        foreign key (author_id) references users (id)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
+	id            bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	content       varchar(120)               NOT NULL,
+	reply_id      bigint UNSIGNED            NULL,
+	post_id       bigint UNSIGNED            NOT NULL,
+	creation_date timestamp  DEFAULT (NOW()) NOT NULL,
+	author_id     bigint UNSIGNED            NOT NULL,
+	deleted       tinyint(1) DEFAULT 0       NOT NULL,
+	CONSTRAINT fk_comments_comments FOREIGN KEY (reply_id) REFERENCES instachat.comments (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_comments_posts FOREIGN KEY (post_id) REFERENCES instachat.posts (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_comments_users FOREIGN KEY (author_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  COLLATE = utf8mb4_bin;
 
-create index idx_comments_post_id
-    on comments (post_id);
+CREATE INDEX idx_comments_post_id ON instachat.comments (post_id);
 
-create index idx_comments_reply_id
-    on comments (reply_id);
+CREATE INDEX idx_comments_reply_id ON instachat.comments (reply_id);
 
-create index idx_posts_author_id
-    on posts (author_id);
+CREATE INDEX idx_posts_author_id ON instachat.posts (author_id);
 
-create table reactions
+CREATE TABLE IF NOT EXISTS instachat.reactions
 (
-    id      bigint unsigned auto_increment
-        primary key,
-    post_id bigint unsigned not null,
-    emoji   varchar(2)      not null,
-    constraint fk_reactions_posts
-        foreign key (post_id) references posts (id)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
+	id      bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	post_id bigint UNSIGNED      NOT NULL,
+	emoji   text CHARSET utf8mb4 NULL,
+	CONSTRAINT fk_reactions_posts FOREIGN KEY (post_id) REFERENCES instachat.posts (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB;
 
-create table reaction_users
+CREATE TABLE IF NOT EXISTS instachat.reaction_users
 (
-    reaction_id bigint unsigned not null
-        primary key,
-    user_id     bigint unsigned not null,
-    constraint fk_reaction_users_reactions
-        foreign key (reaction_id) references reactions (id)
-            on update cascade on delete cascade,
-    constraint fk_reaction_users_users
-        foreign key (user_id) references users (id)
-            on update cascade on delete cascade
-)
-    engine = InnoDB;
+	reaction_id bigint UNSIGNED NOT NULL,
+	user_id     bigint UNSIGNED NOT NULL,
+	CONSTRAINT fk_reaction_users_reactions FOREIGN KEY (reaction_id) REFERENCES instachat.reactions (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_reaction_users_users FOREIGN KEY (user_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
 
-create index idx_reaction_users_user_id
-    on reaction_users (user_id);
+CREATE INDEX idx_reaction_users_reaction_id ON instachat.reaction_users (reaction_id);
 
-create index idx_reactions_post_id
-    on reactions (post_id);
+CREATE INDEX idx_reaction_users_user_id ON instachat.reaction_users (user_id);
 
-create table sessions
+CREATE INDEX idx_reactions_post_id ON instachat.reactions (post_id);
+
+CREATE TABLE IF NOT EXISTS instachat.sessions
 (
-    id            varchar(64)               not null
-        primary key,
-    user_id       bigint unsigned           not null,
-    creation_date timestamp default (now()) null,
-    constraint fk_user_id
-        foreign key (user_id) references users (id)
-)
-    engine = InnoDB;
+	id           varchar(64)               NOT NULL PRIMARY KEY,
+	user_id      bigint UNSIGNED           NOT NULL,
+	created_date timestamp DEFAULT (NOW()) NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS instachat.votes
+(
+	comment_id bigint UNSIGNED NOT NULL,
+	type       tinyint         NOT NULL,
+	user_id    bigint UNSIGNED NOT NULL,
+	CONSTRAINT fk_votes_comments FOREIGN KEY (comment_id) REFERENCES instachat.comments (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_votes_users FOREIGN KEY (user_id) REFERENCES instachat.users (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  CHARSET = utf8mb4;
