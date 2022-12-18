@@ -1,15 +1,44 @@
+/**
+ * @typedef {(elements: HTMLDivElement) => void} Script
+ */
+
 export default class FetchFeed {
+	/**
+	 * @type {string}
+	 */
 	url;
+	/**
+	 * @type {number}
+	 */
 	offset;
+	/**
+	 * @type {HTMLDivElement}
+	 */
 	feedContainer;
+	/**
+	 * @type {IntersectionObserver}
+	 */
 	observer;
+	/**
+	 * @type {Script[]}
+	 */
 	scripts = [];
+	/**
+	 * @type {Script[]}
+	 */
 	elementsScripts = [];
+	/**
+	 * @type {RequestInit}
+	 */
 	fetchOptions = {
 		credentials: 'include',
 		method: 'GET',
 	};
 
+	/**
+	 * @param url {string}
+	 * @param feedContainer {HTMLDivElement}
+	 */
 	constructor(url, feedContainer) {
 		if (!url) throw new Error('url is required');
 		if (!feedContainer) throw new Error('feedContainer is required');
@@ -24,14 +53,24 @@ export default class FetchFeed {
 		return this.feedContainer.lastElementChild;
 	}
 
+	/**
+	 * @param script {Script}
+	 */
 	addScripts(...script) {
 		this.scripts.push(...script);
 	}
 
+	/**
+	 * @param script {Script}
+	 */
 	addElementScripts(...script) {
 		this.elementsScripts.push(...script);
 	}
 
+	/**
+	 * @param entries {IntersectionObserverEntry[]}
+	 * @returns {void}
+	 */
 	async handleIntersect(entries) {
 		if (!entries[0].isIntersecting) return;
 		await this.fetchFeed();

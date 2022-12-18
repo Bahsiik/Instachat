@@ -52,6 +52,10 @@ async function getPicker() {
 	return picker;
 }
 
+/**
+ * @param btn {HTMLButtonElement}
+ * @returns {void}
+ */
 export async function pickEmoji(btn) {
 	await (await getPicker()).open({
 		referenceElement: btn,

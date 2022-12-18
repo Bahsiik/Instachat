@@ -1,4 +1,9 @@
 export default class RGB {
+	/**
+	 * @param r {number}
+	 * @param g {number}
+	 * @param b {number}
+	 */
 	constructor(r, g, b) {
 		this.r = r;
 		this.g = g;
@@ -6,9 +11,14 @@ export default class RGB {
 	}
 }
 
+/**
+ * @param text {string}
+ * @param textLengthDiv {HTMLDivElement}
+ * @param maxLength {number}
+ */
 export function updateCharacterCount(text, textLengthDiv, maxLength) {
 	const lengthParagraph = textLengthDiv.querySelector('span');
-	lengthParagraph.innerHTML = text.length;
+	lengthParagraph.innerHTML = text.length.toString();
 
 	if (text.length === 0) {
 		textLengthDiv.style.color = 'white';

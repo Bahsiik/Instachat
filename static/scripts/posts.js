@@ -2,6 +2,9 @@ import {pickEmoji} from "./emoji-picker.js";
 import FetchFeed from "./fetch-feed.js";
 import {showPopup} from "./popup.js";
 
+/**
+ * @param feedContainer {HTMLDivElement}
+ */
 function fetchPosts(feedContainer) {
 	const fetchFeed = new FetchFeed("/feed?offset=", feedContainer);
 	fetchFeed.addScripts(elements => {
@@ -46,6 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	postReactionBtn.forEach(btn => btn.addEventListener('click', async () => await pickEmoji(btn)));
 });
 
+/**
+ * @param buttons {NodeListOf<HTMLButtonElement>}
+ */
 function listenShare(buttons) {
 	buttons.forEach(btn =>
 		btn.addEventListener("click", async () => {
@@ -54,6 +60,10 @@ function listenShare(buttons) {
 		}));
 }
 
+/**
+ * @param value {string}
+ * @returns {void}
+ */
 async function copyToClipboard(value) {
 	const tempInput = document.createElement("input");
 	tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
@@ -66,6 +76,9 @@ async function copyToClipboard(value) {
 	showPopup("Lien copié !");
 }
 
+/**
+ * @param menu {HTMLButtonElement}
+ */
 function showMenu(menu) {
 	hideOthersMenu(menu);
 	const nextMenuContainer = menu.nextElementSibling;
@@ -84,6 +97,9 @@ function showMenu(menu) {
 	});
 }
 
+/**
+ * @param menu {HTMLButtonElement}
+ */
 function hideOthersMenu(menu) {
 	const postMenus = getPostMenus();
 	postMenus.forEach(e => {
@@ -97,6 +113,9 @@ function getPostMenus() {
 	return document.querySelectorAll('.post-menu');
 }
 
+/**
+ * @param post {HTMLDivElement}
+ */
 function addClickEvent(post) {
 	post.addEventListener('click', e => {
 		/**

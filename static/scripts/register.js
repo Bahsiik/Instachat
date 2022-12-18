@@ -1,5 +1,8 @@
 const rightPanelActive = 'right-panel-active';
 
+/**
+ * @param url {string}
+ */
 function changeRoute(url) {
 	window.history.pushState({}, '', url);
 }

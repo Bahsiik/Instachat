@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const button = document.getElementsByClassName("show-more-button")[0];
 	button?.addEventListener("click", changeTrendsDisplay);
 
+	/**
+	 * @param event {MouseEvent}
+	 */
 	function changeTrendsDisplay(event) {
 		const text = event.target.className;
 		switch (text) {
