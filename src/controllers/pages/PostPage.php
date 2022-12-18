@@ -31,7 +31,7 @@ class PostPage {
 		$is_connected_user_blocked = (new IsBlocked())->execute($post->authorId, $connected_user->id);
 		$is_user_blocked = (new IsBlocked())->execute($connected_user->id, $post->authorId);
 
-		if ($input['reply'] !== null) {
+		if (isset($input['reply'])) {
 			$reply_comment = (new CommentRepository())->getCommentById((float)$input['reply']);
 		}
 
