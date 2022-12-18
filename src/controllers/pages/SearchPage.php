@@ -11,8 +11,15 @@ require_once 'src/controllers/users/GetUsersBySearch.php';
 require_once 'src/controllers/posts/GetPostsBySearch.php';
 require_once 'src/controllers/posts/GetTrends.php';
 
+/**
+ * Class SearchPage is a controller that displays the search page
+ */
 class SearchPage {
-	public function execute() {
+	/**
+	 * execute is the function that displays the search page
+	 * @return void - the search page
+	 */
+	public function execute(): void {
 		global $input_searched, $posts_searched, $users_searched, $trends;
 		$input_searched = $_GET['q'];
 

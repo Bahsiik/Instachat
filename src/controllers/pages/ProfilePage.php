@@ -14,8 +14,7 @@ require_once 'src/controllers/reactions/GetReactionsByAuthor.php';
 require_once 'src/controllers/comments/GetCommentsByAuthor.php';
 
 
-use Controllers\Blocked\GetBlockedUsers;
-use Controllers\Blocked\GetBlockedWords;
+
 use Controllers\Blocked\IsBlocked;
 use Controllers\comments\GetCommentsByAuthor;
 use Controllers\Friends\GetFriendRequests;
