@@ -139,8 +139,6 @@
 	justify-content: center;
 }
 
-.trends-container {
-	margin-left: 100px !important;
-	margin-right: 0 !important;
+.right-bar {
 	margin-top: 0 !important;
 }
