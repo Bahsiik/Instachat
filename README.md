@@ -25,9 +25,9 @@ Instachat is a social network made in PHP and MySQL. It is a simple social netwo
 
 ## Requirements
 
-PHP 8.1
-MySQL 8.0
-Composer 2.4.4
+- PHP 8.1
+- MySQL 8.0
+- Composer 2.4.4
 
 ## Installation
 
