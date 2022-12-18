@@ -99,7 +99,7 @@ class CommentRepository {
 	 * @return Array<Comment> - the comments
 	 */
 	public function getCommentsByAuthor(float $author_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE author_id = :author_id AND deleted = FALSE');
+		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE author_id = :author_id AND deleted = FALSE ORDER BY creation_date DESC');
 		$statement->execute(compact('author_id'));
 		$comments = [];
 		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
