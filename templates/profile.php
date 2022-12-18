@@ -46,7 +46,7 @@ require_once 'components/navbar.php';
 		<div class="profile-info-right">
 			<div class="profile-bio">
 				<?php
-				if ($user->bio === null) {
+				if ($user->bio === null || $user->bio === '') {
 					echo $user->id === $connected_user->id ?
 						'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !' :
 						"Cet utilisateur n'a pas encore ajouté de bio.";
@@ -75,7 +75,7 @@ require_once 'components/navbar.php';
 			if ($connected_user->id === $user->id) {
 				?>
 				<form action="" method="post">
-					<button class="material-symbols-outlined cancel" type="submit">edit</button>
+
 				</form>
 				<?php
 			} else if ($friendship === 1) {

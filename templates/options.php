@@ -98,6 +98,16 @@ require_once 'components/navbar.php';
 							value="<?= htmlspecialchars($connected_user->email) ?>"
 						>
 					</label>
+					<label class="bio">Bio
+						<textarea
+							autocomplete="off"
+							maxlength="200"
+							minlength="4"
+							name="bio"
+							placeholder="Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !"
+							type="text"
+						><?=htmlspecialchars($connected_user->bio ?? '')?></textarea>
+					</label>
 
 					<h3>Création du compte</h3>
 					<p class="subtitle">

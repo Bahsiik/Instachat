@@ -113,7 +113,7 @@ label {
 	margin: .5rem 0;
 }
 
-input:not([hidden]) {
+input:not([hidden]), .bio > textarea {
 	-webkit-background-clip: padding-box;
 	background-color: var(--input-bg);
 	border: var(--input-border-width) solid var(--input-color);
@@ -133,25 +133,25 @@ input:not([hidden]) {
 
 input[type='text']::placeholder,
 input[type='password']::placeholder,
-input[type='email']::placeholder {
+input[type='email']::placeholder, .bio > textarea::placeholder {
 	color: var(--input-placeholder);
 }
 
 input[type='text']:valid:not(:placeholder-shown):not(:focus),
 input[type='password']:valid:not(:placeholder-shown):not(:focus),
-input[type='email']:valid:not(:placeholder-shown):not(:focus) {
+input[type='email']:valid:not(:placeholder-shown):not(:focus), .bio > textarea:valid:not(:placeholder-shown):not(:focus) {
 	border-color: var(--input-valid);
 }
 
 input[type='text']:invalid:not(:focus):is(:required:not(:placeholder-shown, :optional)),
 input[type='password']:invalid:not(:focus):is(:required:not(:placeholder-shown, :optional)),
-input[type='email']:invalid:not(:focus):is(:required:not(:placeholder-shown, :optional)) {
+input[type='email']:invalid:not(:focus):is(:required:not(:placeholder-shown, :optional)), .bio > textarea:invalid:not(:focus):is(:required:not(:placeholder-shown, :optional)) {
 	border-color: var(--input-invalid);
 }
 
 input[type='text']:focus,
 input[type='password']:focus,
-input[type='email']:focus {
+input[type='email']:focus, .bio > textarea:focus {
 	background: linear-gradient(var(--input-bg), var(--input-bg)), var(--gradient-v);
 	-webkit-background-clip: padding-box, border-box;
 	background-origin: border-box;
@@ -161,13 +161,13 @@ input[type='email']:focus {
 
 input[type='text']:focus legend,
 input[type='password']:focus legend,
-input[type='email']:focus legend {
+input[type='email']:focus legend, .bio > textarea:focus legend {
 	background: var(--input-bg);
 }
 
 input[type='text']:-webkit-autofill:hover,
 input[type='password']:-webkit-autofill:hover,
-input[type='email']:-webkit-autofill:hover {
+input[type='email']:-webkit-autofill:hover, .bio > textarea:-webkit-autofill:hover {
 	-webkit-box-shadow: 0 0 0 30px var(--bg-primary) inset;
 	-webkit-text-fill-color: var(--fg-primary) !important;
 }

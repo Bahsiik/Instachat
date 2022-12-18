@@ -86,6 +86,12 @@
 	margin-top: 1rem;
 }
 
+.bio > textarea {
+	height: 7.5rem;
+    width: 22rem;
+    resize: none;
+}
+
 .content {
 	background-color: var(--bg-quinternary);
 	border-radius: 0 0 16px 16px;
