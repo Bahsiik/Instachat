@@ -1,9 +1,31 @@
+.right-bar {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	margin: 50px;
+}
+
+
+.search-bar-container {
+	margin-bottom: 20px;
+	padding: 0.5rem;
+}
+
+.search-bar-container > form {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+input:not([hidden]) {
+	width: 18rem;
+}
+
 .trends-container {
 	background-color: var(--bg-secondary);
 	border-radius: 25px;
 	font-size: 0.85em;
 	height: fit-content;
-	margin: 50px;
 	min-width: 15rem;
 	padding: 1rem 2rem;
 }

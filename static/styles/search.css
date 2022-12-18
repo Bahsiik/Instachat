@@ -1,0 +1,75 @@
+.search-container {
+	width: 50rem;
+}
+
+.searched-container {
+	background-color: var(--bg-quinternary);
+	border-radius: 16px;
+}
+
+.post-container {
+	margin-top: 2rem;
+}
+
+.user {
+	border-bottom: 1px solid var(--border);
+
+}
+
+.user > a {
+	align-items: center;
+	display: flex;
+	justify-content: space-evenly;
+	padding: 2rem;
+}
+
+.user:last-child, .post-container:last-child {
+	border-bottom: none;
+}
+
+
+.left-part {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.name > .display-name > p {
+	color: var(--fg-primary);
+	font-size: 1.3rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.name > .username > p {
+	color: var(--fg-secondary);
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.user > a > .left-part > .avatar > img {
+	border-radius: 61px;
+	height: 60px;
+	object-fit: contain;
+	width: 60px;
+}
+
+.right-part > .bio {
+	color: var(--fg-secondary);
+	display: -webkit-box;
+	max-height: 5rem;
+	max-width: 20rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+.empty {
+	display: flex;
+	font-size: 1rem;
+	justify-content: center;
+	margin: 2rem;
+}

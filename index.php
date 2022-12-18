@@ -27,6 +27,7 @@ require_once 'src/controllers/pages/AuthentificationPage.php';
 require_once 'src/controllers/pages/FriendPage.php';
 require_once 'src/controllers/pages/HomePage.php';
 require_once 'src/controllers/pages/OptionsPage.php';
+require_once 'src/controllers/pages/SearchPage.php';
 require_once 'src/controllers/pages/SearchTrendPage.php';
 require_once 'src/controllers/pages/PostPage.php';
 require_once 'src/controllers/pages/ProfilePage.php';
@@ -79,6 +80,7 @@ use Controllers\Pages\HomePage;
 use Controllers\Pages\OptionsPage;
 use Controllers\Pages\PostPage;
 use Controllers\Pages\ProfilePage;
+use Controllers\Pages\SearchPage;
 use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
@@ -307,6 +309,20 @@ try {
 			writeLog('REMOVE-FRIEND', "[USER-ID:$connected_user->id] [REMOVED-USER-ID:{$_POST['friend_id']}]");
 
 			(new RemoveFriend())->execute($connected_user, $_POST);
+			break;
+
+		case 'get-search-value':
+			redirect_if_method_not('POST', '/');
+			writeLog('GET-SEARCH-VALUE', "[SEARCH-VALUE:{$_POST['search_value']}]");
+			$searched_value = $_POST['search-input'];
+			redirect("/search?q=$searched_value");
+
+
+		case 'search':
+			redirect_if_method_not('GET', '/');
+			writeLog('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
+
+			(new SearchPage())->execute();
 			break;
 
 		case 'search-trend':
