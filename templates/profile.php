@@ -4,10 +4,9 @@ declare(strict_types=1);
 $css = ['profile.css', 'comment.css', 'reaction.css', 'navbar.css'];
 $js = ['fetch-feed.js', 'profile.js', 'posts.js', 'comments.js', 'tabbed-menu.js'];
 
-global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $user_comments, $user_reactions, $posts_reacted, $is_connected_user_blocked, $is_user_blocked, $trends;
+global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $user_comments, $user_reactions, $posts_reacted, $is_connected_user_blocked, $is_user_blocked, $blocked_users, $blocked_words, $trends;
 
 $title = htmlspecialchars($user->username);
-
 ob_start();
 require_once 'components/navbar.php';
 ?>

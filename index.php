@@ -66,6 +66,7 @@ use Controllers\Blocked\BlockWord;
 use Controllers\Blocked\UnblockUser;
 use Controllers\Blocked\UnblockWord;
 use Controllers\comments\AddComment;
+use Controllers\comments\GetCommentsByAuthor;
 use Controllers\comments\UnVoteComment;
 use Controllers\comments\UpVoteComment;
 use Controllers\Delete;
@@ -85,6 +86,7 @@ use Controllers\Pages\SearchTrendPage;
 use Controllers\Posts\AddPost;
 use Controllers\Posts\GetFeed;
 use Controllers\Posts\GetPostsByUser;
+use Controllers\Posts\GetPostsReactedByUser;
 use Controllers\Posts\GetTrends;
 use Controllers\Reaction\CreateReaction;
 use Controllers\Reaction\UnReact;
@@ -286,6 +288,18 @@ try {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
 				global $post;
 				foreach ($user_posts as $post) require 'templates/components/post-feed.php';
+				exit();
+			}
+			if (isset($_GET['offsetComments'])) {
+				$user_comments = (new GetCommentsByAuthor())->execute($user->id);
+				global $post;
+				foreach ($user_comments as $comment) require 'templates/components/comment.php';
+				exit();
+			}
+			if (isset($_GET['offsetReactedPosts'])) {
+				$posts_reacted = (new GetPostsReactedByUser())->execute($user->id);
+				global $post;
+				foreach ($posts_reacted as $post) require 'templates/components/post-feed.php';
 				exit();
 			}
 
