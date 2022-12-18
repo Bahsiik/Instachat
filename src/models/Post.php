@@ -164,7 +164,7 @@ class PostRepository {
 
 	// i want a function that get post that were reacted by a user (based on the id of the user)
 	public function getPostsReactedByUser(float $user_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT p.* FROM posts p INNER JOIN reactions r ON p.id = r.post_id INNER JOIN reaction_users ru ON r.id = ru.reaction_id WHERE ru.user_id = :user_id ORDER BY p.creation_date DESC');
+		$statement = $this->databaseConnection->prepare('SELECT DISTINCT p.* FROM posts p INNER JOIN reactions r ON p.id = r.post_id INNER JOIN reaction_users ru ON r.id = ru.reaction_id WHERE ru.user_id = :user_id ORDER BY p.creation_date DESC');
 		$statement->execute(compact('user_id'));
 		$posts = [];
 
