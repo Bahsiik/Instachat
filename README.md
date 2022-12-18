@@ -88,5 +88,5 @@ Every tests are made manually, if you are contributing to Instachat, please make
 # Authors
 
 - [**@Ayfri**](https://github.com/Ayfri) - Lead developer
-- [**@antaww**](https://github.com/antaww) - Developer mainly on front-end
-- [**@Bahsiik**](https://github.com/Bahsiik) - Developer mainly on back-end
+- [**@antaww**](https://github.com/antaww) - Developer
+- [**@Bahsiik**](https://github.com/Bahsiik) - Developer
