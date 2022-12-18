@@ -236,4 +236,16 @@ class UserRepository {
 
 		return $result === false ? throw new RuntimeException('Could not update user') : true;
 	}
+
+	public function getUsersBySearch(string $search): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE username LIKE :search OR display_name LIKE :search');
+		$statement->execute(['search' => "%$search%"]);
+		$users = [];
+
+		while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$users[] = new User(...array_values($user));
+		}
+
+		return $users;
+	}
 }
