@@ -107,6 +107,11 @@ class BlockedRepository {
 	}
 
 
+	/**
+	 * getBlockers is the function that gets the users that block a user
+	 * @param float $blocked_id - the id of the user that is blocked
+	 * @return array - the users that block the user
+	 */
 	public function getBlockers(float $blocked_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocked_id = :blocked_id AND blocked_id IS NOT NULL');
 		$statement->execute(compact('blocked_id'));
@@ -152,6 +157,11 @@ class BlockedRepository {
 		return $statement->rowCount() > 0;
 	}
 
+	/**
+	 * getUsersThatBlocked is the function that gets the users that blocked a user
+	 * @param float $user_id - the id of the user
+	 * @return array - the users that blocked the user
+	 */
 	public function getUsersThatBlocked(float $user_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocked_id = :user_id AND blocked_id IS NOT NULL');
 		$statement->execute(compact('user_id'));
