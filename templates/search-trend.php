@@ -9,7 +9,7 @@ require_once 'components/navbar.php';
 
 global $searched_posts, $searched_trend;
 
-$title = "Instachat | Tendances - $searched_trend";
+$title = "Tendances : $searched_trend";
 ?>
 	<main class="searched-trend-container">
 		<div class="title">

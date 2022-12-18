@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Models\Emotion;
 use function Lib\Utils\display_icon;
 
-$title = 'Instachat';
+$title = 'Page d\'accueil';
 $css = ['homepage.css', 'reaction.css'];
 $js = ['posts.js'];
 

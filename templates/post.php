@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Src\Controllers\comments\GetCommentsFeed;
 
-$title = 'Post';
 $css = ['post-page.css', 'comment.css', 'reaction.css'];
 $js = ['anchors.js', 'posts.js', 'popup.js', 'fetch-feed.js', 'comments.js'];
 
@@ -11,6 +10,7 @@ ob_start();
 require_once 'components/navbar.php';
 
 global $post, $connected_user;
+$title = 'Post : ' . $post->content;
 $comments = (new GetCommentsFeed())->execute($post->id);
 ?>
 	<main class="post-page-container">

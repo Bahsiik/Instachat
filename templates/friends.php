@@ -5,7 +5,7 @@ use Controllers\Users\GetUser;
 
 $friend_controller = new GetUser();
 
-$title = 'Instachat | Amis';
+$title = 'Amis';
 $css = ['friends.css', 'navbar.css'];
 $js = ['tabbed-menu.js', 'friends.js'];
 

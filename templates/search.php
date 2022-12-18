@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 global $connected_user, $users_searched, $posts_searched, $input_searched, $trends;
 
-$title = $input_searched;
+$title = 'Recherche : ' . $input_searched;
 $css = ['search.css', 'reaction.css', 'navbar.css'];
 $js = ['fetch-feed.js', 'search.js', 'posts.js', 'tabbed-menu.js'];
 
