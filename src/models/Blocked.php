@@ -151,4 +151,18 @@ class BlockedRepository {
 		$statement->execute(compact('blocker_id', 'blocked_id'));
 		return $statement->rowCount() > 0;
 	}
+
+	public function getUsersThatBlocked(float $user_id): array {
+		$statement = $this->databaseConnection->prepare('SELECT * FROM blocked WHERE blocked_id = :user_id AND blocked_id IS NOT NULL');
+		$statement->execute(compact('user_id'));
+		while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$blocked[] = new Blocked(
+				$row['blocker_id'],
+				$row['blocked_id'],
+				$row['blocked_word'],
+				$row['blocked_date'],
+			);
+		}
+		return $blocked ?? [];
+	}
 }

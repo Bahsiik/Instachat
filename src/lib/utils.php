@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Lib\Utils;
 
+use Controllers\Blocked\GetBlockedUsers;
+use Controllers\Blocked\GetBlockedWords;
+use Controllers\Blocked\GetUsersThatBlocked;
 use Models\User;
 use function file_put_contents;
 use const FILE_APPEND;
@@ -65,3 +68,30 @@ function writeLog(string $page_name, string $extra_content = ''): void {
 	$data = "[$date] [$page_name] [$user:$ip_addr] : $method $uri $extra_content \n";
 	file_put_contents(LOG_FILE, $data, FILE_APPEND);
 }
+
+function filterBlockedPosts(User $connected_user, array $posts): array {
+		$blocked_words = (new GetBlockedWords())->execute($connected_user);
+		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
+		$users_that_blocked = (new GetUsersThatBlocked())->execute($connected_user);
+
+		foreach ($posts as $post) {
+			foreach ($blocked_words as $blocked_word) {
+				if ($post->authorId !== $connected_user->id && mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false) {
+					unset($posts[array_search($post, $posts, true)]);
+				}
+			}
+
+			foreach ($blocked_users as $blocked_user) {
+				if ($post->authorId === $blocked_user->blockedId) {
+					unset($posts[array_search($post, $posts, true)]);
+				}
+			}
+
+			foreach ($users_that_blocked as $user_that_blocked) {
+				if ($post->authorId === $user_that_blocked->blockerId) {
+					unset($posts[array_search($post, $posts, true)]);
+				}
+			}
+		}
+		return  $posts;
+	}

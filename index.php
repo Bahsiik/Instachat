@@ -6,6 +6,7 @@ require_once 'src/controllers/blocked/UnblockUser.php';
 require_once 'src/controllers/blocked/BlockWord.php';
 require_once 'src/controllers/blocked/UnblockWord.php';
 require_once 'src/controllers/blocked/GetBlockedUsers.php';
+require_once 'src/controllers/blocked/GetUsersThatBlocked.php';
 require_once 'src/controllers/blocked/IsBlocked.php';
 require_once 'src/controllers/comments/AddComment.php';
 require_once 'src/controllers/comments/CountComments.php';
