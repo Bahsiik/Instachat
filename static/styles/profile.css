@@ -142,3 +142,7 @@
 .right-bar {
 	margin-top: 0 !important;
 }
+
+.comment-container {
+	cursor: pointer;
+}

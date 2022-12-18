@@ -3,6 +3,7 @@
 namespace Controllers\Pages;
 
 use Controllers\Blocked\IsBlocked;
+use Models\CommentRepository;
 use Models\PostRepository;
 use Models\UserRepository;
 use Src\Controllers\Reactions\GetReactionsByPost;
@@ -22,14 +23,19 @@ class PostPage {
 		$post_id = $input['id'];
 		if ($post_id === null) redirect('/');
 
-		global $connected_user, $post, $post_reactions_list, $post_author, $is_connected_user_blocked, $is_user_blocked;
+		global $connected_user, $post, $post_reactions_list, $post_author, $is_connected_user_blocked, $is_user_blocked, $reply_comment;
+
 		$post = (new PostRepository())->getPost($post_id);
 		$post_reactions_list = (new GetReactionsByPost())->execute((float)$post_id);
 		$post_author = (new UserRepository())->getUserById($post->authorId);
 		$is_connected_user_blocked = (new IsBlocked())->execute($post->authorId, $connected_user->id);
 		$is_user_blocked = (new IsBlocked())->execute($connected_user->id, $post->authorId);
 
-		if ($is_connected_user_blocked || $is_user_blocked) redirect('/profile/' . $post_author->username);
+		if ($input['reply'] !== null) {
+			$reply_comment = (new CommentRepository())->getCommentById((float)$input['reply']);
+		}
+
+		if ($is_connected_user_blocked || $is_user_blocked) redirect("/profile/$post_author?->username");
 
 		require_once 'templates/post.php';
 	}

@@ -27,6 +27,6 @@ class UnVoteComment {
 		$comment = (new CommentRepository())->getCommentById($comment_id);
 		if (!$comment) redirect('/');
 
-		redirect($comment->getLink());
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 }

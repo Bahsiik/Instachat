@@ -4,13 +4,12 @@ import {updateCharacterCount} from "./RGB.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	const postId = document.querySelector('article.post-container').dataset.postId;
-	const fetchFeed = new FetchFeed(`/comments?post-id=${postId}&offset=`, document.querySelector('.comments'));
-
 	const commentChatArea = document.querySelector('.comment-chat-area');
-	const commentCharacterCount = document.querySelector('.comment-chat-count');
-	const commentChatButton = document.querySelector('.comment-chat-btn');
 
-	fetchFeed.addScripts(elements => twemoji.parse(elements));
+	if (document.querySelector('.comments')) {
+		const fetchFeed = new FetchFeed(`/comments?post-id=${postId}&offset=`, document.querySelector('.comments'));
+		fetchFeed.addScripts(elements => twemoji.parse(elements));
+	}
 
 	document.addEventListener('click', async e => {
 		const target = e.target;
@@ -19,31 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			await copyToClipboard(window.location.origin + link);
 		}
 
-		if (target.closest('.comment-replies.action-btn')) {
-			console.log('replies');
-			replyButton(target.closest('.comment-replies.action-btn'));
+		const replyBtn = target.closest('.comment-replies.action-btn');
+		if (replyBtn) {
+			if (!commentChatArea) {
+				const replyCommentId = replyBtn.closest('form').querySelector('input[name="comment-id"]').value;
+				const currentCommentId = target.closest('.comment-container').dataset.commentId;
+				window.location.href = `${window.location.origin}/post?id=${postId}&reply=${replyCommentId}#comment-${currentCommentId}`;
+			}
+			replyButton(replyBtn);
 		}
 	});
 
-	function updateChatButton() {
-		if (inputIsValid(commentChatArea)) commentChatButton.removeAttribute('disabled');
-		else commentChatButton.setAttribute('disabled', '');
+	if (commentChatArea) {
+		const commentCharacterCount = document.querySelector('.comment-chat-count');
+		const commentChatButton = document.querySelector('.comment-chat-btn');
+
+		commentChatArea.addEventListener('input', () => {
+			updateCharacterCount(commentChatArea.value, commentCharacterCount, 120);
+
+			if (inputIsValid(commentChatArea)) commentChatButton.removeAttribute('disabled');
+			else commentChatButton.setAttribute('disabled', '');
+		});
 	}
-
-	function inputIsValid(commentChatArea) {
-		const regex = /^(?=.*[A-Za-z0-9]{2,})[\s\S]*$/;
-		const text = commentChatArea.value.trim();
-		const hasTwoAlphanumericChars = regex.test(text);
-
-		if (!hasTwoAlphanumericChars) return false;
-
-		return commentChatArea.value.length >= 2;
-	}
-
-	commentChatArea.addEventListener('input', () => {
-		updateCharacterCount(commentChatArea.value, commentCharacterCount, 120);
-		updateChatButton()
-	});
 });
 
 /**
@@ -60,8 +56,7 @@ function replyButton(button) {
 	replySpan.innerHTML = `Répondre à <a class="create-comment-reply-author" href="#comment-${commentId}">${replyUsername}</a>`;
 
 	const deleteSymbol = document.createElement('span');
-	deleteSymbol.classList.add('material-symbols-outlined');
-	deleteSymbol.classList.add('chat-delete-image-symbol');
+	deleteSymbol.classList.add('material-symbols-outlined', 'chat-delete-image-symbol');
 	deleteSymbol.textContent = 'close';
 	deleteSymbol.addEventListener('click', () => reply.innerHTML = '');
 
@@ -78,4 +73,14 @@ function replyButton(button) {
 async function copyToClipboard(text) {
 	await navigator.clipboard.writeText(text);
 	showPopup("Lien copié !");
+}
+
+function inputIsValid(commentChatArea) {
+	const regex = /^(?=.*[A-Za-z0-9]{2,})[\s\S]*$/;
+	const text = commentChatArea.value.trim();
+	const hasTwoAlphanumericChars = regex.test(text);
+
+	if (!hasTwoAlphanumericChars) return false;
+
+	return commentChatArea.value.length >= 2;
 }

@@ -24,7 +24,7 @@ $comment_repository = new CommentRepository();
 $replies = $comment_repository->commentHasReply($comment->id) ? count($comment_repository->getCommentsReplyingRecursively($comment->id)) : 0;
 $username = htmlspecialchars($comment_user->username);
 ?>
-<article class="comment-container" id="comment-<?= $comment->id ?>">
+<article class="comment-container" id="comment-<?= $comment->id ?>" data-post-id="<?= $comment->postId ?>" data-comment-id="<?= $comment->id ?>">
 	<a class="comment-avatar" href="/profile/<?= $username ?>">
 		<img alt="profile picture" src="<?= $comment_user->displayAvatar() ?>">
 	</a>

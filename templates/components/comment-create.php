@@ -1,10 +1,21 @@
 <?php
 declare(strict_types=1);
 
+use Models\Comment;
+use Models\UserRepository;
 use function Lib\Utils\display_icon;
 
 global $post;
 global $connected_user;
+/**
+ * @var ?Comment $post
+ */
+global $reply_comment;
+
+$reply_author = null;
+if ($reply_comment !== null) {
+	$reply_author = (new UserRepository())->getUserById($reply_comment->authorId);
+}
 ?>
 
 <div class="comment-chat-container">
@@ -15,7 +26,18 @@ global $connected_user;
 	</div>
 	<div class="comment-chat-right">
 		<form action='/comment' class='create-comment' method='post'>
-			<span class='create-comment-reply'></span>
+			<span class='create-comment-reply'>
+				<?php
+				if ($reply_comment) {
+					?>
+					<span class='subtitle'>Répondre à
+						<a class='create-comment-reply-author' href="#comment-<?= $reply_comment->id ?>">@<?= htmlspecialchars($reply_author?->username) ?></a>
+					</span>
+					<input type="hidden" name="reply-to" value="<?= $reply_comment->id ?>">
+					<?php
+				}
+				?>
+			</span>
 			<input type="hidden" name="post-id" value="<?= $post->id ?>">
 			<textarea
 				class="comment-chat-area"
