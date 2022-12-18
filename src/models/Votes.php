@@ -49,20 +49,6 @@ class VotesRepository {
 	}
 
 	/**
-	 * getVoteByUserIdAndCommentId is the function that gets the vote by user id and comment id
-	 * @param float $comment_id - the id of the comment
-	 * @param float $user_id - the id of the user
-	 * @return ?Vote - the vote or null if it doesn't exist
-	 */
-	public function getVoteByUserIdAndCommentId(float $comment_id, float $user_id): ?Vote {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM votes WHERE comment_id = :comment_id AND user_id = :user_id');
-		$statement->execute(compact('comment_id', 'user_id'));
-		$vote = $statement->fetch(PDO::FETCH_ASSOC);
-		if ($vote === false) return null;
-		return new Vote(...array_values($vote));
-	}
-
-	/**
 	 * addVote is the function that adds a vote
 	 * @param float $comment_id - the id of the comment
 	 * @param float $user_id - the id of the user

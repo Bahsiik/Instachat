@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Models;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/lib/Blob.php');
+require_once 'src/lib/DatabaseConnection.php';
+require_once 'src/lib/Blob.php';
 
 use Database\DatabaseConnection;
 use DateTime;

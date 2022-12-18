@@ -205,22 +205,6 @@ class UserRepository {
 	}
 
 	/**
-	 * @param float $id
-	 * @return Array<User>
-	 */
-	public function getFriendsOfUser(float $id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM users WHERE id IN (SELECT requested_id FROM friends WHERE requester_id = :id)');
-		$statement->execute(compact('id'));
-		$users = [];
-
-		while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$users[] = new User(...array_values($user));
-		}
-
-		return $users;
-	}
-
-	/**
 	 * getUserById returns the user with the given id.
 	 * @param float $id - The id of the user to get.
 	 * @return User|null - The user with the given id, null if the user does not exist.

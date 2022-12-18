@@ -138,23 +138,6 @@ class CommentRepository {
 	}
 
 	/**
-	 * getCommentsByReply is the function that gets the comments by reply
-	 * @param float $reply_id - the id of the reply
-	 * @return Array<Comment> - the comments
-	 */
-	public function getCommentsByReply(float $reply_id): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE reply_id = :reply_id AND deleted = FALSE');
-		$statement->execute(compact('reply_id'));
-		$comments = [];
-
-		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$comments[] = new Comment(...array_values($comment));
-		}
-
-		return $comments;
-	}
-
-	/**
 	 * getCommentsReplyingRecursively is the function that gets the comments replying recursively
 	 * @param float $comment_id - the id of the comment
 	 * @return Array<Comment> - the comments
@@ -191,22 +174,5 @@ class CommentRepository {
 		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE reply_id = :comment_id AND deleted = FALSE');
 		$statement->execute(compact('comment_id'));
 		return $statement->fetch(PDO::FETCH_ASSOC) !== false;
-	}
-
-	/**
-	 * getCommentsContaining is the function that gets the comments containing a string
-	 * @param string $content - the string
-	 * @return Array<Comment> - the comments
-	 */
-	public function getCommentsContaining(string $content): array {
-		$statement = $this->databaseConnection->prepare('SELECT * FROM comments WHERE content LIKE :content AND deleted = FALSE');
-		$statement->execute(compact('content'));
-		$comments = [];
-
-		while ($comment = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$comments[] = new Comment(...array_values($comment));
-		}
-
-		return $comments;
 	}
 }
