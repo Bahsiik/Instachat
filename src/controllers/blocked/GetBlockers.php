@@ -5,6 +5,9 @@ namespace Controllers\Blocked;
 use Models\BlockedRepository;
 use Models\User;
 
+/**
+ * Class GetBlockers is a controller that gets the users that blocked a user
+ */
 class GetBlockers {
 	/**
 	 * execute is the function that gets the blockers of a user
