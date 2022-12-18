@@ -69,6 +69,12 @@ function write_log(string $page_name, string $extra_content = ''): void {
 	file_put_contents(LOG_FILE, $data, FILE_APPEND);
 }
 
+/**
+ * filter_blocked_posts is a function that filters the posts with the blocked words and users
+ * @param User $connected_user - the connected user
+ * @param array $posts - the posts to filter
+ * @return array - the filtered posts
+ */
 function filter_blocked_posts(User $connected_user, array $posts): array {
 		$blocked_words = (new GetBlockedWords())->execute($connected_user);
 		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
