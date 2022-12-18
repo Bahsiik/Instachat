@@ -106,13 +106,13 @@ class PostRepository {
 	 * addPost creates a new post in the database.
 	 * @param string $content - The content of the post.
 	 * @param float $author_id - The id of the author of the post.
-	 * @param string|null $photo - The photo of the post.
+	 * @param string|null $image - The photo of the post.
 	 * @param int $emotion - The emotion of the post.
 	 * @return void - This function does not return anything.
 	 */
-	public function addPost(string $content, float $author_id, ?string $photo, int $emotion): void {
-		$statement = $this->databaseConnection->prepare('INSERT INTO posts (content, author_id, photo, emotion) VALUES (:content, :author_id, :photo, :emotion)');
-		$statement->execute(compact('content', 'author_id', 'photo', 'emotion'));
+	public function addPost(string $content, float $author_id, ?string $image, int $emotion): void {
+		$statement = $this->databaseConnection->prepare('INSERT INTO posts (content, author_id, photo, emotion) VALUES (:content, :author_id, :image, :emotion)');
+		$statement->execute(compact('content', 'author_id', 'image', 'emotion'));
 	}
 
 	/**

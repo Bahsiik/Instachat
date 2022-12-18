@@ -5,7 +5,7 @@ $css = ['profile.css', 'comment.css', 'reaction.css', 'navbar.css'];
 $js = ['fetch-feed.js', 'profile.js', 'posts.js', 'comments.js', 'tabbed-menu.js'];
 
 global $connected_user, $user, $friend_list, $friend_requests, $sent_requests, $friendship, $user_posts, $user_comments, $user_reactions, $posts_reacted, $is_connected_user_blocked, $is_user_blocked, $blocked_users, $blocked_words, $trends;
-
+$is_current_user = $connected_user->id === $user->id;
 $title = htmlspecialchars($user->username);
 ob_start();
 require_once 'components/navbar.php';
@@ -16,147 +16,156 @@ require_once 'components/navbar.php';
 		</div>
 		<div class="profile-info-container">
 			<div class="profile-info">
-				<div class="profile-info-avatar">
-					<img src="../static/images/logo-<?= $user->color->lowercaseName() ?>.png" alt="avatar">
-				</div>
-				<div class="profile-info-middle">
-					<div class="profile-info-username">
-						<p class="display-name"><?= $user->getDisplayOrUsername() ?></p>
-						<p class="username">@<?= htmlspecialchars($user->username) ?></p>
-					</div>
-					<?php
-					if ($is_user_blocked) {
-					?>
-				</div>
-				<h2>Vous avez bloqué @<?= htmlspecialchars($user->username) ?>.</h2>
+				<<?= $is_current_user ? 'form action="/avatar" method="post" enctype="multipart/form-data"' : 'div' ?> class="profile-info-avatar">
+				<img src="<?= $user->displayAvatar() ?>" alt="avatar">
+				<input accept="image/*" hidden id="avatar-input" name="avatar" type="file">
 				<?php
-				} else if ($is_connected_user_blocked) {
+				if ($is_current_user) { ?>
+					<i class="edit-avatar fas fa-pen"></i>
+					<button type='submit' class='save-avatar' hidden>
+						<i class='fas fa-check'></i>
+					</button>
+					<?php
+				} ?>
+			</<?= $is_current_user ? 'form' : 'div' ?>>
+			<div class="profile-info-middle">
+				<div class="profile-info-username">
+					<p class="display-name"><?= $user->getDisplayOrUsername() ?></p>
+					<p class="username">@<?= htmlspecialchars($user->username) ?></p>
+				</div>
+				<?php
+				if ($is_user_blocked) {
 				?>
 			</div>
-			<h2>@<?= htmlspecialchars($user->username) ?> vous a bloqué.</h2>
+			<h2>Vous avez bloqué @<?= htmlspecialchars($user->username) ?>.</h2>
 			<?php
-			} else {
+			} else if ($is_connected_user_blocked) {
+			?>
+		</div>
+		<h2>@<?= htmlspecialchars($user->username) ?> vous a bloqué.</h2>
+		<?php
+		} else {
 			?>
 			<div class="profile-info-inscription-date">
 				<p class="inscription-date">Membre depuis le</p>
 				<p class="inscription-date"><?php
 					format_date_time($user->createdAt) ?></p>
 			</div>
-		</div>
-		<div class="profile-info-right">
-			<div class="profile-bio">
+			</div>
+			<div class="profile-info-right">
+				<div class="profile-bio">
+					<?php
+					if ($user->bio === null || $user->bio === '') {
+						echo $user->id === $connected_user->id ?
+							'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !' :
+							"Cet utilisateur n'a pas encore ajouté de bio.";
+					} else {
+						echo htmlspecialchars($user->bio);
+					} ?>
+				</div>
+				<div class="profile-info-data">
+					<div class="profile-info-data-content">
+						<p class="friends-number"><?= count($friend_list) ?> </p>
+						<p class="friends-text">ami<?= count($friend_list) > 1 ? 's' : '' ?> </p>
+					</div>
+					<div class="profile-info-data-content">
+						<p class="posts-number"> <?= count($user_posts) ?> </p>
+						<p class="posts-text">chat<?= count($user_posts) > 1 ? 's' : '' ?></p>
+					</div>
+					<div class="profile-info-data-content">
+						<p class="reactions-number"><?= count($user_reactions) ?></p>
+						<p class="reactions-text">réaction<?= count($user_reactions) > 1 ? 's' : '' ?></p>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="profile-actions">
 				<?php
-				if ($user->bio === null || $user->bio === '') {
-					echo $user->id === $connected_user->id ?
-						'Ajoutez une bio pour que les autres utilisateurs puissent en savoir plus sur vous !' :
-						"Cet utilisateur n'a pas encore ajouté de bio.";
-				} else {
-					echo htmlspecialchars($user->bio);
-				} ?>
-			</div>
-			<div class="profile-info-data">
-				<div class="profile-info-data-content">
-					<p class="friends-number"><?= count($friend_list) ?> </p>
-					<p class="friends-text">ami<?= count($friend_list) > 1 ? 's' : '' ?> </p>
-				</div>
-				<div class="profile-info-data-content">
-					<p class="posts-number"> <?= count($user_posts) ?> </p>
-					<p class="posts-text">chat<?= count($user_posts) > 1 ? 's' : '' ?></p>
-				</div>
-				<div class="profile-info-data-content">
-					<p class="reactions-number"><?= count($user_reactions) ?></p>
-					<p class="reactions-text">réaction<?= count($user_reactions) > 1 ? 's' : '' ?></p>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="profile-actions">
-			<?php
-			if ($connected_user->id === $user->id) {
-				?>
-				<form action="" method="post">
+				if ($connected_user->id === $user->id) {
+					?>
+					<form action="" method="post">
 
-				</form>
-				<?php
-			} else if ($friendship === 1) {
+					</form>
+					<?php
+				} else if ($friendship === 1) {
+					?>
+					<form action="/remove-friend" method="post">
+						<input type="hidden" name="friend_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Supprimer cet ami">
+							person_remove
+						</button>
+					</form>
+					<form action="/block-user" method="post">
+						<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
+							block
+						</button>
+					</form>
+					<?php
+				} else if ($friendship === 2) {
+					?>
+					<form action="/accept-friend" method="post">
+						<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Accepter la demande d'ami">
+							how_to_reg
+						</button>
+					</form>
+					<form action="/decline-friend" method="post">
+						<input type="hidden" name="requester_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined cancel" type="submit" title="Refuser la demande d'ami">
+							close
+						</button>
+					</form>
+					<form action="/block-user" method="post">
+						<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
+							block
+						</button>
+					</form>
+					<?php
+				} else if ($friendship === 3) {
+					?>
+					<form action="/cancel-friend" method="post">
+						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined cancel" title="Annuler votre demande d'ami" type="submit">
+							close
+						</button>
+					</form>
+					<form action="/block-user" method="post">
+						<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
+							block
+						</button>
+					</form>
+					<?php
+				} else {
+					?>
+					<form action="/send-friend-request" method="post">
+						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined cancel" title="Envoyer une demande d'ami" type="submit">
+							person_add
+						</button>
+					</form>
+					<form action="/block-user" method="post">
+						<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
+						<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
+						<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
+							block
+						</button>
+					</form>
+					<?php
+				}
 				?>
-				<form action="/remove-friend" method="post">
-					<input type="hidden" name="friend_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined cancel" type="submit" title="Supprimer cet ami">
-						person_remove
-					</button>
-				</form>
-				<form action="/block-user" method="post">
-					<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
-						block
-					</button>
-				</form>
-				<?php
-			} else if ($friendship === 2) {
-				?>
-				<form action="/accept-friend" method="post">
-					<input type="hidden" name="requester_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined cancel" type="submit" title="Accepter la demande d'ami">
-						how_to_reg
-					</button>
-				</form>
-				<form action="/decline-friend" method="post">
-					<input type="hidden" name="requester_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined cancel" type="submit" title="Refuser la demande d'ami">
-						close
-					</button>
-				</form>
-				<form action="/block-user" method="post">
-					<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
-						block
-					</button>
-				</form>
-				<?php
-			} else if ($friendship === 3) {
-				?>
-				<form action="/cancel-friend" method="post">
-					<input type="hidden" name="requested_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined cancel" title="Annuler votre demande d'ami" type="submit">
-						close
-					</button>
-				</form>
-				<form action="/block-user" method="post">
-					<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
-						block
-					</button>
-				</form>
-				<?php
-			} else {
-				?>
-				<form action="/send-friend-request" method="post">
-					<input type="hidden" name="requested_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined cancel" title="Envoyer une demande d'ami" type="submit">
-						person_add
-					</button>
-				</form>
-				<form action="/block-user" method="post">
-					<input type="hidden" name="blocked_id" value="<?= $user->id ?>">
-					<input type="hidden" name="redirect" value="/profile/<?= htmlspecialchars($user->username) ?>">
-					<button class="material-symbols-outlined block" type="submit" title="Bloquer cet utilisateur">
-						block
-					</button>
-				</form>
-				<?php
-			}
-			?>
-		</div>
-		<?php
+			</div>
+			<?php
 		}
 		?>
 		</div>

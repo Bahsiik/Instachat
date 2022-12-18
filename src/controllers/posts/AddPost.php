@@ -25,7 +25,7 @@ class AddPost {
 			$image_tmp = $image_src['image-content']['tmp_name'];
 			$image_base64 = base64_encode(file_get_contents($image_tmp));
 			$image_extension = pathinfo($image_src['image-content']['name'], PATHINFO_EXTENSION);
-			$image = 'data:image/' . $image_extension . ';base64,' . $image_base64;
+			$image = "data:image/$image_extension;base64,$image_base64";
 			if (!in_array($image_extension, ['png', 'jpeg', 'jpg'])) {
 				$image = null;
 			}

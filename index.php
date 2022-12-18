@@ -49,6 +49,7 @@ require_once 'src/controllers/users/GetConnectedUser.php';
 require_once 'src/controllers/users/GetUser.php';
 require_once 'src/controllers/users/GetUserByUsername.php';
 require_once 'src/controllers/users/LoginUser.php';
+require_once 'src/controllers/users/UpdateAvatar.php';
 require_once 'src/controllers/users/UpdatePassword.php';
 require_once 'src/controllers/users/UpdatePreferences.php';
 require_once 'src/controllers/users/UpdateUserInformation.php';
@@ -97,6 +98,7 @@ use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
 use Controllers\Users\GetUserByUsername;
 use Controllers\Users\LoginUser;
+use Controllers\Users\UpdateAvatar;
 use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
 use Controllers\Users\UpdateUserInformation;
@@ -146,6 +148,13 @@ try {
 			write_log('ACCEPT-FRIEND', "[USER-ID:$connected_user->id] [ACCEPTED-USER-ID:{$_POST['requester_id']}]");
 
 			(new AcceptRequest())->execute($connected_user, $_POST);
+			break;
+
+		case 'avatar':
+			redirect_if_method_not('POST', '/');
+			write_log('AVATAR', "[USER-ID:$connected_user->id]");
+
+			(new UpdateAvatar())->execute($connected_user, $_POST);
 			break;
 
 		case 'block-user':

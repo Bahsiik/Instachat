@@ -14,20 +14,4 @@ class Blob {
 	public function __construct(
 		public readonly string $data,
 	) {}
-
-	/**
-	 * toBase64 is the function that converts the blob to base64
-	 * @return string - the base64 of the blob
-	 */
-	public function toLink(): string {
-		return "data:image/png;base64,{$this->toBase64()}";
-	}
-
-	/**
-	 * toBase64 is the function that converts the blob to base64
-	 * @return string - the base64 of the blob
-	 */
-	public function toBase64(): string {
-		return base64_encode($this->data);
-	}
 }

@@ -150,7 +150,7 @@ class User {
 	 * @return string - The HTML code to display the avatar of the User.
 	 */
 	public function displayAvatar(): string {
-		return $this->avatar?->toLink() ?? display_icon($this);
+		return $this->avatar?->data ?? display_icon($this);
 	}
 }
 

@@ -19,4 +19,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.href = `/post?id=${postId}#comment-${commentId}`;
 		}
 	});
+
+	const editableAvatar = document.querySelector('form.profile-info-avatar');
+	if (!editableAvatar) return;
+
+	const avatar = editableAvatar.querySelector('img');
+	const saveButton = document.querySelector('.save-avatar');
+
+	avatar.addEventListener('click', e => {
+		const target = e.target;
+		if (target.closest('.profile-info-avatar')) {
+			const input = target.closest('.profile-info-avatar').querySelector('input');
+			const reader = new FileReader();
+			input.click();
+
+			input.addEventListener('change', async () => {
+				const file = input.files[0];
+				reader.readAsDataURL(file);
+				reader.onload = () => {
+					avatar.src = reader.result.toString();
+					saveButton.hidden = false;
+				}
+			});
+		}
+	});
 });

@@ -20,10 +20,48 @@
 	font-size: 3rem;
 }
 
+.profile-info-avatar {
+	position: relative;
+}
+
 .profile-info-avatar > img {
 	border-radius: 50%;
 	height: 150px;
 	width: 150px;
+}
+
+.edit-avatar {
+	bottom: 50%;
+	display: none !important;
+	font-size: 1.75rem;
+	pointer-events: none;
+	position: absolute;
+	right: 50%;
+	transform: translate(50%, 50%);
+}
+
+img:hover ~ .edit-avatar {
+	display: block !important;
+}
+
+form.profile-info-avatar > img {
+	cursor: pointer;
+	transition: opacity .2s ease-in-out;
+}
+
+form.profile-info-avatar > img:hover {
+	opacity: 0.6;
+}
+
+.save-avatar {
+	background: none;
+	border: none;
+	color: var(--fg-primary);
+	cursor: pointer;
+}
+
+.save-avatar:hover {
+	opacity: .8;
 }
 
 .profile-info-middle {
