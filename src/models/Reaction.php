@@ -8,6 +8,9 @@ require_once 'src/lib/DatabaseConnection.php';
 use Database\DatabaseConnection;
 use PDO;
 
+/**
+ * Class Reaction is a class that represents a reaction
+ */
 class Reaction {
 
 	/**
@@ -15,27 +18,55 @@ class Reaction {
 	 */
 	public array $users;
 
+	/**
+	 * __construct is the constructor of the class
+	 * @param float $id - the id of the reaction
+	 * @param float $postId - the id of the post
+	 * @param string $emoji - the emoji of the reaction
+	 * @param string|null $users - the users of the reaction
+	 */
 	public function __construct(public float $id, public float $postId, public string $emoji, ?string $users) {
 		$this->users = isset($users) ? array_map(static fn($u) => (float)$u, explode(',', $users)) : [];
 	}
 
+	/**
+	 * getCount is the function that gets the count of the reaction
+	 * @return int - the count
+	 */
 	public function getCount(): int {
 		return count($this->users);
 	}
 
+	/**
+	 * hasReacted is the function that checks if the user has reacted
+	 * @param float $user_id - the id of the user
+	 * @return bool - true if the user has reacted, false otherwise
+	 */
 	public function hasReacted(float $user_id): bool {
 		return in_array($user_id, $this->users, true);
 	}
 }
 
+/**
+ * ReactionsRepository is a class that represents a reactions repository
+ */
 class ReactionsRepository {
 	public PDO $databaseConnection;
 
+	/**
+	 * __construct is the constructor of the class
+	 */
 	public function __construct() {
 		$this->databaseConnection = (new DatabaseConnection())->getConnection();
 	}
 
-	public function addUserReaction(float $reaction_id, float $user_id) {
+	/**
+	 * addUserReaction is the function that adds a user reaction
+	 * @param float $reaction_id - the id of the reaction
+	 * @param float $user_id - the id of the user
+	 * @return bool - true if the user has reacted, false otherwise
+	 */
+	public function addUserReaction(float $reaction_id, float $user_id): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			INSERT INTO reaction_users (reaction_id, user_id)
 			VALUES (:reaction_id, :user_id);
@@ -44,6 +75,13 @@ class ReactionsRepository {
 		return $statement->execute(compact('reaction_id', 'user_id'));
 	}
 
+	/**
+	 * createReaction is the function that creates a reaction
+	 * @param float $post_id - the id of the post
+	 * @param string $emoji - the emoji of the reaction
+	 * @param float $user_id - the id of the user
+	 * @return bool - true if the reaction was created, false otherwise
+	 */
 	public function createReaction(float $post_id, string $emoji, float $user_id): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			INSERT INTO reactions (post_id, emoji)
@@ -59,7 +97,13 @@ class ReactionsRepository {
 		return $statement->execute(compact('post_id', 'emoji', 'user_id'));
 	}
 
-	public function removeUserReaction(float $reaction_id, float $user_id) {
+	/**
+	 * removeUserReaction is the function that removes a user reaction
+	 * @param float $reaction_id - the id of the reaction
+	 * @param float $user_id - the id of the user
+	 * @return bool - true if the user has reacted, false otherwise
+	 */
+	public function removeUserReaction(float $reaction_id, float $user_id): bool {
 		$statement = $this->databaseConnection->prepare(<<<SQL
 			DELETE FROM reaction_users
 			WHERE reaction_id = :reaction_id AND user_id = :user_id;
@@ -71,8 +115,9 @@ class ReactionsRepository {
 	}
 
 	/**
-	 * @param float $post_id
-	 * @return Array<Reaction>
+	 * getReactionsByPostId is the function that gets the reactions by post id
+	 * @param float $post_id - the id of the post
+	 * @return Array<Reaction> - the reactions
 	 */
 	public function getReactionsByPostId(float $post_id): array {
 		$statement = $this->databaseConnection->prepare('SELECT reactions.*, GROUP_CONCAT(reaction_users.user_id) AS users
@@ -87,8 +132,9 @@ class ReactionsRepository {
 	}
 
 	/**
-	 * @param float $author_id
-	 * @return Array<Reaction>
+	 * getReactionsByAuthorId is the function that gets the reactions by author id
+	 * @param float $author_id - the id of the author
+	 * @return Array<Reaction> - the reactions
 	 */
 	public function getReactionsByAuthorId(float $author_id): array {
 		$author = (string)$author_id;
