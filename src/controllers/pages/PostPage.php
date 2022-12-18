@@ -26,7 +26,7 @@ class PostPage {
 
 		global $connected_user, $post, $post_reactions_list, $post_author, $is_connected_user_blocked, $is_user_blocked, $reply_comment;
 
-		$post = (new PostRepository())->getPost($post_id);
+		$post = (new PostRepository())->getPost((float)$post_id);
 		$post_reactions_list = (new GetReactionsByPost())->execute((float)$post_id);
 		$post_author = (new UserRepository())->getUserById($post->authorId);
 		$is_connected_user_blocked = (new IsBlocked())->execute($post->authorId, $connected_user->id);
