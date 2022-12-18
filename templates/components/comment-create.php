@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Models\Comment;
 use Models\UserRepository;
-use function Lib\Utils\display_icon;
 
 global $post;
 global $connected_user;
@@ -21,7 +20,7 @@ if ($reply_comment !== null) {
 <div class="comment-chat-container">
 	<div class='comment-chat-avatar'>
 		<a class='user-avatar' href="/profile/<?= $connected_user->username ?>">
-			<img src="<?= display_icon($connected_user) ?>" alt='avatar'>
+			<img src="<?= $connected_user->displayAvatar() ?>" alt='avatar'>
 		</a>
 	</div>
 	<div class="comment-chat-right">

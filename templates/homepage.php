@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use Models\Emotion;
-use function Lib\Utils\display_icon;
 
 $title = 'Page d\'accueil';
 $css = ['homepage.css', 'reaction.css'];
@@ -20,7 +19,7 @@ global $posts; ?>
 		<div class="chat-container">
 			<div class="chat-avatar">
 				<a href="/profile/<?= $connected_user->username ?>">
-					<img src="<?= display_icon($connected_user) ?>" alt="avatar">
+					<img src="<?= $connected_user->displayAvatar() ?>" alt="avatar">
 				</a>
 			</div>
 			<div class="chat-right">

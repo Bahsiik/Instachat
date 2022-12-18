@@ -13,7 +13,7 @@ use const FILE_APPEND;
 const LOGO_LINK = '/static/images/logo-';
 
 /**
- * display_icon is a function that displays an icon
+ * display_icon is a function that displays the icon of the website depending on the user theme
  * @param ?User $user - the user
  * @return string - the link to the icon
  */
@@ -76,28 +76,28 @@ function write_log(string $page_name, string $extra_content = ''): void {
  * @return array - the filtered posts
  */
 function filter_blocked_posts(User $connected_user, array $posts): array {
-		$blocked_words = (new GetBlockedWords())->execute($connected_user);
-		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
-		$users_that_blocked = (new GetUsersThatBlocked())->execute($connected_user);
+	$blocked_words = (new GetBlockedWords())->execute($connected_user);
+	$blocked_users = (new GetBlockedUsers())->execute($connected_user);
+	$users_that_blocked = (new GetUsersThatBlocked())->execute($connected_user);
 
-		foreach ($posts as $post) {
-			foreach ($blocked_words as $blocked_word) {
-				if ($post->authorId !== $connected_user->id && mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false) {
-					unset($posts[array_search($post, $posts, true)]);
-				}
-			}
-
-			foreach ($blocked_users as $blocked_user) {
-				if ($post->authorId === $blocked_user->blockedId) {
-					unset($posts[array_search($post, $posts, true)]);
-				}
-			}
-
-			foreach ($users_that_blocked as $user_that_blocked) {
-				if ($post->authorId === $user_that_blocked->blockerId) {
-					unset($posts[array_search($post, $posts, true)]);
-				}
+	foreach ($posts as $post) {
+		foreach ($blocked_words as $blocked_word) {
+			if ($post->authorId !== $connected_user->id && mb_stripos(mb_strtolower($post->content), mb_strtolower($blocked_word->blockedWord)) !== false) {
+				unset($posts[array_search($post, $posts, true)]);
 			}
 		}
-		return  $posts;
+
+		foreach ($blocked_users as $blocked_user) {
+			if ($post->authorId === $blocked_user->blockedId) {
+				unset($posts[array_search($post, $posts, true)]);
+			}
+		}
+
+		foreach ($users_that_blocked as $user_that_blocked) {
+			if ($post->authorId === $user_that_blocked->blockerId) {
+				unset($posts[array_search($post, $posts, true)]);
+			}
+		}
 	}
+	return $posts;
+}

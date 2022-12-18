@@ -16,7 +16,7 @@ $username = htmlspecialchars($connected_user->username);
 <div class="toolbar-container">
 	<div class="toolbar-top-container">
 		<a class="logo-link" href="/">
-			<img src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="logo">
+			<img src="<?= display_icon($connected_user) ?>" alt="logo">
 		</a>
 		<a class="toolbar-item" href="/">
 			<span class="material-symbols-outlined <?= select_toolbar_item('/') ?>">home</span>
@@ -51,7 +51,7 @@ $username = htmlspecialchars($connected_user->username);
 				<div class="chat-content">
 					<div class='chat-avatar'>
 						<a href="/profile/<?= $username ?>">
-							<img src="<?= display_icon($connected_user) ?>" alt='avatar'>
+							<img src="<?= $connected_user->displayAvatar() ?>" alt='avatar'>
 						</a>
 					</div>
 					<div class='chat-right'>
@@ -97,7 +97,7 @@ $username = htmlspecialchars($connected_user->username);
 	</div>
 	<div class="user-info">
 		<a href="/profile/<?= $username ?>">
-			<img alt="avatar" class="user-avatar" src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png">
+			<img alt="avatar" class="user-avatar" src="<?= $connected_user->displayAvatar() ?>">
 		</a>
 		<div class="user-names-container">
 			<a href="/profile/<?= $username ?>" class="user-display-name">
