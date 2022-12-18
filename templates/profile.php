@@ -164,8 +164,8 @@ require_once 'components/navbar.php';
 		<div class="profile-bottom-container">
 			<?php
 			if ($is_user_blocked) { ?>
-				<h2>Vous avez bloqué @<?= htmlspecialchars($user->username) ?>. Par conséquent, vous ne voyez aucun contenu relatif à ce compte. Pour revoir le contenu de cet
-					utilisateur, débloquez le depuis les options.</h2>
+				<h2>Vous avez bloqué @<?= htmlspecialchars($user->username) ?>. Par conséquent, vous ne voyez aucun contenu relatif à ce compte. Pour revoir le
+					contenu de cet utilisateur, débloquez le depuis les options.</h2>
 				<?php
 			} else if ($is_connected_user_blocked) {
 				?>

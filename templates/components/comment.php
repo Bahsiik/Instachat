@@ -15,7 +15,8 @@ $comment_user = (new GetUser())->execute($comment->authorId);
 $votes = (new GetCommentVotes())->execute($comment->id);
 $up_votes = array_filter($votes, static fn($vote) => $vote->isUpvote);
 $down_votes = array_filter($votes, static fn($vote) => !$vote->isUpvote);
-$current_user_vote = array_filter($votes, static fn($vote) => $vote->userId === $connected_user->id)[0] ?? null;
+
+$current_user_vote = array_column($votes, null, 'userId')[$connected_user->id] ?? null;
 $has_voted = $current_user_vote !== null;
 $has_down_voted = $has_voted && !$current_user_vote->isUpvote;
 $has_up_voted = $has_voted && $current_user_vote->isUpvote;
