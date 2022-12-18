@@ -95,7 +95,6 @@ use Controllers\Reactions\AddReaction;
 use Controllers\Users\CreateUser;
 use Controllers\Users\GetConnectedUser;
 use Controllers\Users\GetUserByUsername;
-use Controllers\Users\GetUsersBySearch;
 use Controllers\Users\LoginUser;
 use Controllers\Users\UpdatePassword;
 use Controllers\Users\UpdatePreferences;
@@ -336,7 +335,6 @@ try {
 
 		case 'search':
 			redirect_if_method_not('GET', '/');
-			writeLog('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
 			$input_searched = $_GET['q'];
 
 			if (isset($_GET['offsetSearchedPosts'])) {
@@ -346,6 +344,7 @@ try {
 				exit();
 			}
 
+			writeLog('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
 
 			(new SearchPage())->execute();
 			break;

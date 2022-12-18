@@ -1,9 +1,6 @@
 import FetchFeed from "./fetch-feed.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-	const fetchSearchedPosts = new FetchFeed(`${window.location.pathname}&offsetSearchedPosts=`, document.querySelector('.found-posts'));
-	console.log(fetchSearchedPosts.url);
-
+	const fetchSearchedPosts = new FetchFeed(`${window.location.href}&offsetSearchedPosts=`, document.querySelector('.found-posts'));
 	fetchSearchedPosts.addScripts(elements => twemoji.parse(elements));
-	console.log(fetchSearchedPosts.url);
 });
