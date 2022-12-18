@@ -80,14 +80,7 @@ require_once 'components/navbar.php';
 			</div>
 			</div>
 			<div class="profile-actions">
-				<?php
-				if ($connected_user->id === $user->id) {
-					?>
-					<form action="" method="post">
-
-					</form>
-					<?php
-				} else if ($friendship === 1) {
+				<?php if ($friendship === 1) {
 					?>
 					<form action="/remove-friend" method="post">
 						<input type="hidden" name="friend_id" value="<?= $user->id ?>">
@@ -145,7 +138,7 @@ require_once 'components/navbar.php';
 						</button>
 					</form>
 					<?php
-				} else {
+				} else if ($connected_user->id !== $user->id) {
 					?>
 					<form action="/send-friend-request" method="post">
 						<input type="hidden" name="requested_id" value="<?= $user->id ?>">
