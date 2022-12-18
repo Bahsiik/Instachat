@@ -19,11 +19,11 @@ class SearchTrendPage {
 	 * @return void - the search trend page
 	 */
 	public function execute(): void {
-		global $connected_user, $posts;
+		global $connected_user, $searched_posts;
 
-		$posts = (new GetPostContaining())->execute($_GET['trend']);
+		$searched_posts = (new GetPostContaining())->execute($_GET['trend']);
 
-		$posts = filter_blocked_posts($connected_user, $posts);
+		$searched_posts = filter_blocked_posts($connected_user, $searched_posts);
 
 		require_once 'templates/search-trend.php';
 	}
