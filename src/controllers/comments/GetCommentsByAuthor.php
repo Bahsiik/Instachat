@@ -4,7 +4,7 @@ namespace Controllers\comments;
 
 use Controllers\Blocked\GetBlockedWords;
 use Models\CommentRepository;
-use function Lib\Utils\filterBlockedPosts;
+use function Lib\Utils\filter_blocked_posts;
 
 class GetCommentsByAuthor {
 
@@ -13,7 +13,7 @@ class GetCommentsByAuthor {
 		$offset = (int)($_GET['offsetComments'] ?? 0);
 		$comments = (new CommentRepository())->getCommentsByAuthor($author_id, $offset);
 
-		return filterBlockedPosts($connected_user, $comments);
+		return filter_blocked_posts($connected_user, $comments);
 	}
 
 }

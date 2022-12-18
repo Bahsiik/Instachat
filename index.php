@@ -106,7 +106,7 @@ use Src\Controllers\comments\DownVoteComment;
 use Src\Controllers\comments\GetCommentsFeed;
 use function Lib\Utils\redirect;
 use function Lib\Utils\redirect_if_method_not;
-use function Lib\Utils\writeLog;
+use function Lib\Utils\write_log;
 
 session_start();
 date_default_timezone_set('Europe/Paris');
@@ -138,32 +138,32 @@ try {
 			$trends = (new GetTrends())->execute();
 			(new HomePage())->execute();
 
-			writeLog('HOME-PAGE');
+			write_log('HOME-PAGE');
 			break;
 
 		case 'accept-friend':
 			redirect_if_method_not('POST', '/');
-			writeLog('ACCEPT-FRIEND', "[USER-ID:$connected_user->id] [ACCEPTED-USER-ID:{$_POST['requester_id']}]");
+			write_log('ACCEPT-FRIEND', "[USER-ID:$connected_user->id] [ACCEPTED-USER-ID:{$_POST['requester_id']}]");
 
 			(new AcceptRequest())->execute($connected_user, $_POST);
 			break;
 
 		case 'block-user':
 			redirect_if_method_not('POST', '/');
-			writeLog('BLOCK-USER', "[USER-ID:$connected_user->id] [BLOCKED-USER-ID:{$_POST['blocked_id']}]");
+			write_log('BLOCK-USER', "[USER-ID:$connected_user->id] [BLOCKED-USER-ID:{$_POST['blocked_id']}]");
 
 			(new BlockUser())->execute($connected_user, $_POST);
 			break;
 
 		case 'block-word':
 			redirect_if_method_not('POST', '/');
-			writeLog('BLOCK-WORD', "[USER-ID:$connected_user->id] [BLOCKED-WORD:{$_POST['blocked-word']}]");
+			write_log('BLOCK-WORD', "[USER-ID:$connected_user->id] [BLOCKED-WORD:{$_POST['blocked-word']}]");
 			(new BlockWord())->execute($connected_user, $_POST);
 			break;
 
 		case 'cancel-friend':
 			redirect_if_method_not('POST', '/');
-			writeLog('CANCEL-FRIEND', "[USER-ID:$connected_user->id] [CANCELED-USER-ID:{$_POST['requested_id']}]");
+			write_log('CANCEL-FRIEND', "[USER-ID:$connected_user->id] [CANCELED-USER-ID:{$_POST['requested_id']}]");
 
 			(new CancelRequest())->execute($connected_user, $_POST);
 			break;
@@ -172,14 +172,14 @@ try {
 			redirect_if_method_not('POST', '/');
 			$has_image = strlen($_FILES['image-content']['tmp_name']) > 0;
 			$has_image_str = $has_image ? 'true' : 'false';
-			writeLog('ADD-POST', "[USER:$connected_user->username] [POST-CONTENT:{$_POST['content']}, POST-IMAGE:$has_image_str]");
+			write_log('ADD-POST', "[USER:$connected_user->username] [POST-CONTENT:{$_POST['content']}, POST-IMAGE:$has_image_str]");
 
 			(new AddPost())->execute($connected_user, $_POST);
 			break;
 
 		case 'comment':
 			redirect_if_method_not('POST', '/');
-			writeLog('ADD-COMMENT', "[USER:$connected_user->username] [COMMENT-CONTENT:{$_POST['content']}]");
+			write_log('ADD-COMMENT', "[USER:$connected_user->username] [COMMENT-CONTENT:{$_POST['content']}]");
 
 			(new AddComment())->execute($connected_user, $_POST);
 			break;
@@ -196,21 +196,21 @@ try {
 
 		case 'create-reaction':
 			redirect_if_method_not('GET', '/');
-			writeLog('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:{$_GET['post-id']}] [EMOJI:{$_GET['emoji']}]");
+			write_log('ADD-REACTION', "[USER:$connected_user->username] [POST-ID:{$_GET['post-id']}] [EMOJI:{$_GET['emoji']}]");
 
 			(new CreateReaction())->execute($connected_user, $_GET);
 			break;
 
 		case 'create-user':
 			redirect_if_method_not('POST', '/');
-			writeLog('CREATE-USER', "[USER-USERNAME:{$_POST['username']}] [USER-EMAIL:{$_POST['email']}]");
+			write_log('CREATE-USER', "[USER-USERNAME:{$_POST['username']}] [USER-EMAIL:{$_POST['email']}]");
 
 			(new CreateUser())->execute($_POST);
 			break;
 
 		case 'decline-friend':
 			redirect_if_method_not('POST', '/');
-			writeLog('DECLINE-FRIEND', "[USER-ID:$connected_user->id] [DECLINED-USER-ID:{$_POST['requester_id']}]");
+			write_log('DECLINE-FRIEND', "[USER-ID:$connected_user->id] [DECLINED-USER-ID:{$_POST['requester_id']}]");
 
 			(new DeclineRequest())->execute($connected_user, $_POST);
 			break;
@@ -224,14 +224,14 @@ try {
 				'USER' => $connected_user->id,
 				default => null
 			};
-			writeLog("DELETE-$type", "[$type-ID:$id]");
+			write_log("DELETE-$type", "[$type-ID:$id]");
 
 			(new Delete())->execute($connected_user, $_POST, $type);
 			break;
 
 		case 'down-vote':
 			redirect_if_method_not('POST', '/');
-			writeLog('DOWN-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
+			write_log('DOWN-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
 
 			(new DownVoteComment())->execute($connected_user, $_POST);
 			break;
@@ -239,7 +239,7 @@ try {
 		case 'feed':
 			redirect_if_method_not('GET', '/');
 			$posts = (new GetFeed())->execute($connected_user);
-			writeLog('FEED-PAGE');
+			write_log('FEED-PAGE');
 
 			global $post;
 			foreach ($posts as $post) require 'templates/components/post-feed.php';
@@ -248,7 +248,7 @@ try {
 
 		case 'friends':
 			redirect_if_method_not('GET', '/');
-			writeLog('FRIENDS-PAGE');
+			write_log('FRIENDS-PAGE');
 
 			(new FriendPage())->execute();
 			break;
@@ -256,22 +256,22 @@ try {
 		case LOGIN_ROUTE:
 			if ($method === 'GET') {
 				if ($connected_user) redirect('/');
-				writeLog('CREATE-PAGE');
+				write_log('CREATE-PAGE');
 				(new AuthentificationPage())->execute();
 			} else {
-				writeLog('LOGIN-USER', "[USER:{$_POST['email']}]");
+				write_log('LOGIN-USER', "[USER:{$_POST['email']}]");
 				(new LoginUser())->execute($_POST);
 			}
 			break;
 
 		case 'logout':
-			writeLog('LOGOUT-USER', "[USER-NAME:$connected_user->username] [USER-EMAIL:$connected_user->email]");
+			write_log('LOGOUT-USER', "[USER-NAME:$connected_user->username] [USER-EMAIL:$connected_user->email]");
 			session_destroy();
 			redirect('/');
 
 		case 'post':
 			redirect_if_method_not('GET', '/');
-			writeLog('POST-PAGE', "[POST-ID:{$_GET['id']}]");
+			write_log('POST-PAGE', "[POST-ID:{$_GET['id']}]");
 
 			global $trends;
 			$trends = (new GetTrends())->execute();
@@ -285,7 +285,7 @@ try {
 			$user = (new GetUserByUsername())->execute($second_segment);
 			if ($user === null) redirect('/');
 
-			writeLog('PROFILE-PAGE', "[USERNAME:$user->username] [USER-ID:$user->id]");
+			write_log('PROFILE-PAGE', "[USERNAME:$user->username] [USER-ID:$user->id]");
 			if (isset($_GET['offset'])) {
 				$user_posts = (new GetPostsByUser())->execute($user->id);
 				global $post;
@@ -309,27 +309,27 @@ try {
 			break;
 
 		case 'options':
-			writeLog('OPTIONS-PAGE');
+			write_log('OPTIONS-PAGE');
 			(new OptionsPage())->execute();
 			break;
 
 		case 'react':
 			redirect_if_method_not('POST', '/');
-			writeLog('REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
+			write_log('REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
 
 			(new AddReaction())->execute($connected_user, (float)$_GET['id']);
 			redirect($_SERVER['HTTP_REFERER']);
 
 		case 'remove-friend':
 			redirect_if_method_not('POST', '/');
-			writeLog('REMOVE-FRIEND', "[USER-ID:$connected_user->id] [REMOVED-USER-ID:{$_POST['friend_id']}]");
+			write_log('REMOVE-FRIEND', "[USER-ID:$connected_user->id] [REMOVED-USER-ID:{$_POST['friend_id']}]");
 
 			(new RemoveFriend())->execute($connected_user, $_POST);
 			break;
 
 		case 'get-search-value':
 			redirect_if_method_not('POST', '/');
-			writeLog('GET-SEARCH-VALUE', "[SEARCH-VALUE:{$_POST['search_value']}]");
+			write_log('GET-SEARCH-VALUE', "[SEARCH-VALUE:{$_POST['search_value']}]");
 			$searched_value = $_POST['search-input'];
 			redirect("/search?q=$searched_value");
 
@@ -345,7 +345,7 @@ try {
 				exit();
 			}
 
-			writeLog('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
+			write_log('SEARCH-PAGE', "[SEARCH-VALUE:{$_GET['q']}]");
 
 			(new SearchPage())->execute();
 			break;
@@ -356,7 +356,7 @@ try {
 			global $searched_trend, $trends;
 			$searched_trend = $_GET['trend'];
 			$trends = (new GetTrends())->execute();
-			writeLog('SEARCH-TREND-PAGE', "[TREND:$searched_trend]");
+			write_log('SEARCH-TREND-PAGE', "[TREND:$searched_trend]");
 
 			if (isset($trends[$searched_trend])) (new SearchTrendPage())->execute();
 			else redirect('/');
@@ -364,62 +364,62 @@ try {
 
 		case 'send-friend-request':
 			redirect_if_method_not('POST', '/');
-			writeLog('SEND-FRIEND-REQUEST', "[FROM-USER-ID:$connected_user->id] [TO-USER-ID:{$_POST['requested_id']}]");
+			write_log('SEND-FRIEND-REQUEST', "[FROM-USER-ID:$connected_user->id] [TO-USER-ID:{$_POST['requested_id']}]");
 
 			(new SendRequest())->execute($connected_user, $_POST);
 			break;
 
 		case 'unblock-user':
 			redirect_if_method_not('POST', '/');
-			writeLog('UNBLOCK-USER', "[USER-ID:$connected_user->id] [UNBLOCKED-USER-ID:{$_POST['blocked_id']}]");
+			write_log('UNBLOCK-USER', "[USER-ID:$connected_user->id] [UNBLOCKED-USER-ID:{$_POST['blocked_id']}]");
 
 			(new UnblockUser())->execute($connected_user, $_POST);
 			break;
 
 		case 'unblock-word':
 			redirect_if_method_not('POST', '/');
-			writeLog('UNBLOCK-WORD', "[USER-ID:$connected_user->id] [UNBLOCKED-WORD:{$_POST['blocked-word']}]");
+			write_log('UNBLOCK-WORD', "[USER-ID:$connected_user->id] [UNBLOCKED-WORD:{$_POST['blocked-word']}]");
 			(new UnblockWord())->execute($connected_user, $_POST);
 			break;
 
 		case 'un-react':
 			redirect_if_method_not('POST', '/');
-			writeLog('UN-REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
+			write_log('UN-REACT', "[USER-ID:$connected_user->id] [REACTION:{$_GET['id']}]");
 
 			(new UnReact())->execute($connected_user, (float)$_GET['id']);
 			redirect($_SERVER['HTTP_REFERER']);
 
 		case 'un-vote':
 			redirect_if_method_not('POST', '/');
-			writeLog('UN-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
+			write_log('UN-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
 
 			(new UnVoteComment())->execute($connected_user, $_POST);
 			break;
 
 		case 'up-vote':
 			redirect_if_method_not('POST', '/');
-			writeLog('UP-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
+			write_log('UP-VOTE', "[USER-ID:$connected_user->id] [COMMENT-ID:{$_POST['comment-id']}]");
 
 			(new UpVoteComment())->execute($connected_user, $_POST);
 			break;
 
 		case 'update-password':
 			redirect_if_method_not('POST', '/options');
-			writeLog('UPDATE-PASSWORD');
+			write_log('UPDATE-PASSWORD');
 
 			(new UpdatePassword())->execute($connected_user, $_POST);
 			break;
 
 		case 'update-preferences':
 			redirect_if_method_not('POST', '/options');
-			writeLog('UPDATE-PREFERENCES');
+			write_log('UPDATE-PREFERENCES');
 
 			(new UpdatePreferences())->execute($connected_user, $_POST);
 			break;
 
 		case 'update-user-information':
 			redirect_if_method_not('POST', '/options');
-			writeLog('UPDATE-INFORMATIONS');
+			write_log('UPDATE-INFORMATIONS');
 
 			(new UpdateUserInformation())->execute($connected_user, $_POST);
 			break;
@@ -428,7 +428,7 @@ try {
 	$_SESSION['error'] = null;
 
 } catch (UserException $user_error) {
-	writeLog('CONTROLLER-EXCEPTION', "[MESSAGE:{$user_error->getMessage()}]");
+	write_log('CONTROLLER-EXCEPTION', "[MESSAGE:{$user_error->getMessage()}]");
 	$_SESSION['error'] = $user_error;
 	redirect($_SERVER['HTTP_REFERER']);
 

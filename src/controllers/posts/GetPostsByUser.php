@@ -6,7 +6,7 @@ namespace Controllers\Posts;
 use Controllers\Blocked\GetBlockedWords;
 use Models\Post;
 use Models\PostRepository;
-use function Lib\Utils\filterBlockedPosts;
+use function Lib\Utils\filter_blocked_posts;
 
 /**
  * Class GetPostsByUser is a controller that gets the posts of a user
@@ -20,6 +20,6 @@ class GetPostsByUser {
 	public function execute(float $id): array {
 		global $connected_user;
 		$posts = (new PostRepository())->getPostsByUser($id, (int)($_GET['offset'] ?? 0));
-		return filterBlockedPosts($connected_user, $posts);
+		return filter_blocked_posts($connected_user, $posts);
 	}
 }

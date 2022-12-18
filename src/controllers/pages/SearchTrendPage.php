@@ -5,7 +5,7 @@ namespace Controllers\Pages;
 
 
 use Controllers\Posts\GetPostContaining;
-use function Lib\Utils\filterBlockedPosts;
+use function Lib\Utils\filter_blocked_posts;
 
 require_once 'src/controllers/posts/GetPostContaining.php';
 
@@ -23,7 +23,7 @@ class SearchTrendPage {
 
 		$posts = (new GetPostContaining())->execute($_GET['trend']);
 
-		$posts = filterBlockedPosts($connected_user, $posts);
+		$posts = filter_blocked_posts($connected_user, $posts);
 
 		require_once 'templates/search-trend.php';
 	}

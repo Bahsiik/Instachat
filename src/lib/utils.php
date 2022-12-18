@@ -46,7 +46,7 @@ function redirect_if_method_not(string $method, string $url): void {
  * @param string $route - the route to check
  * @return string - the class of the item
  */
-function selectToolbarItem(string $route): string {
+function select_toolbar_item(string $route): string {
 	return $_SERVER['REQUEST_URI'] === $route ? 'toolbar-item-selected' : '';
 }
 
@@ -58,7 +58,7 @@ const LOG_FILE = 'log.txt';
  * @param string $extra_content - the extra content to write
  * @return void - writes the log
  */
-function writeLog(string $page_name, string $extra_content = ''): void {
+function write_log(string $page_name, string $extra_content = ''): void {
 	global $connected_user;
 	$user = $connected_user === null ? 'UNKNOWN' : $connected_user->username;
 	$date = date('Y-m-d H:i:s');
@@ -69,7 +69,7 @@ function writeLog(string $page_name, string $extra_content = ''): void {
 	file_put_contents(LOG_FILE, $data, FILE_APPEND);
 }
 
-function filterBlockedPosts(User $connected_user, array $posts): array {
+function filter_blocked_posts(User $connected_user, array $posts): array {
 		$blocked_words = (new GetBlockedWords())->execute($connected_user);
 		$blocked_users = (new GetBlockedUsers())->execute($connected_user);
 		$users_that_blocked = (new GetUsersThatBlocked())->execute($connected_user);

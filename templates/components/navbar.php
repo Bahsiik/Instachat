@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Models\Emotion;
 use function Lib\Utils\display_icon;
-use function Lib\Utils\selectToolbarItem;
+use function Lib\Utils\select_toolbar_item;
 
 $css[] = 'navbar.css';
 $css[] = 'chat-container.css';
@@ -19,24 +19,24 @@ $username = htmlspecialchars($connected_user->username);
 			<img src="/static/images/logo-<?= $connected_user->color->lowercaseName() ?>.png" alt="logo">
 		</a>
 		<a class="toolbar-item" href="/">
-			<span class="material-symbols-outlined <?= selectToolbarItem('/') ?>">home</span>
-			<span class="<?= selectToolbarItem('/') ?>">Accueil</span>
+			<span class="material-symbols-outlined <?= select_toolbar_item('/') ?>">home</span>
+			<span class="<?= select_toolbar_item('/') ?>">Accueil</span>
 		</a>
 		<?php
 		if (isset($connected_user)) { ?>
 		<a class="toolbar-item" href="/profile/<?= $connected_user->username ?>">
-			<span class="material-symbols-outlined <?= selectToolbarItem("/profile/$second_segment") ?>">person</span>
-			<span class="<?= selectToolbarItem("/profile/$second_segment") ?>">Profil</span>
+			<span class="material-symbols-outlined <?= select_toolbar_item("/profile/$second_segment") ?>">person</span>
+			<span class="<?= select_toolbar_item("/profile/$second_segment") ?>">Profil</span>
 		</a>
 
 		<a class="toolbar-item" href="/friends">
-			<span class="material-symbols-outlined <?= selectToolbarItem('/friends') ?>">group</span>
-			<span class="<?= selectToolbarItem('/friends') ?>">Amis</span>
+			<span class="material-symbols-outlined <?= select_toolbar_item('/friends') ?>">group</span>
+			<span class="<?= select_toolbar_item('/friends') ?>">Amis</span>
 		</a>
 
 		<a class="toolbar-item" href="/options">
-			<span class="material-symbols-outlined <?= selectToolbarItem('/options') ?>">pending</span>
-			<span class="<?= selectToolbarItem('/options') ?>">Options</span>
+			<span class="material-symbols-outlined <?= select_toolbar_item('/options') ?>">pending</span>
+			<span class="<?= select_toolbar_item('/options') ?>">Options</span>
 		</a>
 
 		<button class="toolbar-chat-btn">Chat</button>
